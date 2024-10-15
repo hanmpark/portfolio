@@ -21,7 +21,7 @@ const About = () => {
 						<img src="/assets/grid1.png" alt="grid-1" className="w-full sm:h-[276px] h-fit object-contain"/>
 						<div>
 							<p className="grid-headtext">Hi, I'm Hanmin</p>
-							<p className="grid-subtext">42 Nice student</p>
+							<p className="grid-subtext">As a 42 student, I'm passionate about learning, building, and bringing ideas to life with code</p>
 						</div>
 					</div>
 				</div>
@@ -31,7 +31,7 @@ const About = () => {
 						<img src="/assets/grid2.png" alt="grid-2" className="w-full sm:w-[276px] h-fit object-contain"/>
 						<div>
 							<p className="grid-headtext">Tech Stack</p>
-							<p className="grid-subtext">I specialize in Javascript/Typescript with a focus on React and Next.js ecosystems.</p>
+							<p className="grid-subtext">Building with a mix of tools and technologies as I grow in web and software development.</p>
 						</div>
 					</div>
 				</div>
