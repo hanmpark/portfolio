@@ -28,7 +28,7 @@ const About = () => {
 
 				<div className="col-span-1 xl:row-span-3">
 					<div className="grid-container">
-						<img src="/assets/grid2.png" alt="grid-2" className="w-full sm:w-[276px] h-fit object-contain"/>
+						<img src="/assets/grid2.png" alt="grid-2" className="w-full sm:h-[276px] h-fit object-contain"/>
 						<div>
 							<p className="grid-headtext">Tech Stack</p>
 							<p className="grid-subtext">Building with a mix of tools and technologies as I grow in web and software development.</p>
@@ -48,12 +48,6 @@ const About = () => {
 								showGraticules
 								globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
 								bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
-								// labelsData={[{
-								// 	lat: 40, lng: -100,
-								// 	text: "I'm here",
-								// 	color: "white",
-								// 	size: 20,
-								// }]}
 							/>
 						</div>
 						<div>
