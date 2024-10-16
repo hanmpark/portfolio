@@ -1,7 +1,7 @@
 import { PerspectiveCamera } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
 import CanvasLoader from "../components/CanvasLoader"
-import { Suspense } from "react"
+import { Suspense, useEffect, useRef } from "react"
 import { useMediaQuery } from "react-responsive"
 import { calculateSizes } from "../constants"
 import HeroCamera from "../components/HeroCamera"
@@ -12,7 +12,17 @@ const Hero = () => {
 	const isSmall = useMediaQuery({ maxWidth: 440 })
 	const isMobile = useMediaQuery({ maxWidth: 768 })
 
+	const rendererRef = useRef()
+
 	const sizes = calculateSizes(isSmall, isMobile)
+
+	useEffect(() => {
+		return () => {
+			if (rendererRef.current) {
+				rendererRef.current.dispose()
+			}
+		}
+	}, [])
 
 	return (
 		<section className="min-h-screen w-full flex flex-col relative" id="home">
@@ -22,7 +32,12 @@ const Hero = () => {
 			</div>
 
 			<div className="w-full h-full absolute inset-0">
-				<Canvas className="w-full h-full">
+				<Canvas
+					className="w-full h-full"
+					onCreated={(state) => {
+						rendererRef.current = state.gl
+					}}
+				>
 					<Suspense fallback={<CanvasLoader />}>
 						<PerspectiveCamera makeDefault position={[0, 0, 30]} />
 

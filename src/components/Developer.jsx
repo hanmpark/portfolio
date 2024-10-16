@@ -22,9 +22,15 @@ const Developer = ({ animationName = 'idle', ...props }) => {
   const { actions } = useAnimations([idleAnimation[0], saluteAnimation[0], clappingAnimation[0], victoryAnimation[0]], group);
 
   useEffect(() => {
-	actions[animationName].reset().fadeIn(0.5).play();
+	if (actions[animationName]) {
+		actions[animationName].reset().fadeIn(0.5).play();
+	}
 
-	return () => actions[animationName].fadeOut(0.5);
+	return () => {
+		if (actions[animationName]) {
+			actions[animationName].fadeOut(0.5)
+		}
+	};
   }, [animationName, actions])
 
   return (

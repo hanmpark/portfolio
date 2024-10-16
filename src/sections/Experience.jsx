@@ -1,12 +1,22 @@
 import { Canvas } from "@react-three/fiber";
 import { workExperiences } from "../constants/index";
 import { OrbitControls } from "@react-three/drei";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import CanvasLoader from "../components/CanvasLoader";
 import Developer from "../components/Developer";
 
 const Experience = () => {
 	const [animationName, setAnimationName] = useState('idle');
+
+	const rendererRef = useRef();
+
+	useEffect(() => {
+		return () => {
+			if (rendererRef.current) {
+				rendererRef.current.dispose();
+			}
+		}
+	}, [])
 
 	return (
 		<section className="c-space my-20">
@@ -15,7 +25,11 @@ const Experience = () => {
 
 				<div className="work-container">
 					<div className="work-canvas">
-						<Canvas>
+						<Canvas
+							onCreated={(state) => {
+								rendererRef.current = state.gl;
+							}}
+						>
 							<ambientLight intensity={7} />
 							<spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
 							<directionalLight position={[10, 10, 10]} intensity={1} />

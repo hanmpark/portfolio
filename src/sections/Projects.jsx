@@ -1,4 +1,4 @@
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { myProjects } from "../constants";
 import { Canvas } from "@react-three/fiber";
 import { Center, OrbitControls } from "@react-three/drei";
@@ -11,6 +11,8 @@ const Projects = () => {
 	const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
 	const currentProject = myProjects[selectedProjectIndex];
 
+	const rendererRef = useRef();
+
 	const handleNavigation = direction => {
 		setSelectedProjectIndex(prevIndex => {
 			if (direction === 'previous') {
@@ -20,6 +22,14 @@ const Projects = () => {
 			}
 		})
 	}
+
+	useEffect(() => {
+		return () => {
+			if (rendererRef.current) {
+				rendererRef.current.dispose();
+			}
+		}
+	}, [])
 
 	return (
 		<section className="c-space my-20" id="projects">
@@ -67,7 +77,11 @@ const Projects = () => {
 				</div>
 
 				<div className="border border-black-300 bg-black-200 rounded-lg h-96 md:h-full">
-					<Canvas>
+					<Canvas
+						onCreated={(state) => {
+							rendererRef.current = state.gl;
+						}}
+					>
 						<ambientLight intensity={Math.PI}/>
 						<directionalLight position={[10, 10, 5]}/>
 						<Center>
