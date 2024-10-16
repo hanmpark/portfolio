@@ -21,10 +21,11 @@ const Experience = () => {
 							<directionalLight position={[10, 10, 10]} intensity={1} />
 							<OrbitControls enableZoom={false} maxPolarAngle={Math.PI / 2}/>
 							<Suspense fallback={<CanvasLoader/>}>
-								<Developer position-y={-3} scale={3} animationName={animationName} />
+								<Developer position={[0, -3, -0.5]} scale={3} rotation={[0.1, 0, 0]} animationName={animationName} />
 							</Suspense>
 						</Canvas>
 					</div>
+
 					<div className="work-content">
 						<div className="sm:py-10 py-5 sm:px-5 px-2.5">
 							{workExperiences.map(({ id, name, pos, icon, duration, title, animation }) => (
