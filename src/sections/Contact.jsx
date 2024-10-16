@@ -19,8 +19,6 @@ const Contact = () => {
 		setForm({ ...form, [name]: value });
 	}
 
-	// service_4133enl
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setLoading(true);
@@ -85,6 +83,7 @@ const Contact = () => {
 								required
 								className="field-input"
 								placeholder="John Doe"
+								autoComplete="on"
 							/>
 						</label>
 
@@ -98,6 +97,7 @@ const Contact = () => {
 								required
 								className="field-input"
 								placeholder="johndoe@gmail.com"
+								autoComplete="on"
 							/>
 						</label>
 
