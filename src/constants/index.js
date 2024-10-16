@@ -249,7 +249,7 @@ export const navLinks = [
   export const calculateSizes = (isSmall, isMobile) => {
 	return {
 	  deskScale: isSmall ? 0.6 : isMobile ? 0.7 : 0.9,
-	  deskPosition: isMobile ? [0, -4, 0] : [0, -5.3,-5],
+	  deskPosition: isMobile ? [0, -4, 0] : [0, -6,-5],
 	};
   };
 
