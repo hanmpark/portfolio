@@ -1,63 +1,53 @@
-import { PerspectiveCamera } from "@react-three/drei"
-import { Canvas } from "@react-three/fiber"
-import CanvasLoader from "../components/CanvasLoader"
-import { Suspense, useEffect, useRef } from "react"
-import { useMediaQuery } from "react-responsive"
-import { calculateSizes } from "../constants"
-import HeroCamera from "../components/HeroCamera"
-import Button from "../components/Button"
-import HollowKnight from "../components/HollowKnight"
+import Navbar from '../components/Navbar.jsx'
+import { hero, heroCard, stats } from '../data/home.js'
 
 const Hero = () => {
-	const isSmall = useMediaQuery({ maxWidth: 440 })
-	const isMobile = useMediaQuery({ maxWidth: 768 })
+  return (
+    <header className="hero" id="top">
+      <Navbar />
 
-	const rendererRef = useRef()
+      <div className="hero-grid container">
+        <div className="hero-copy">
+          <span className="badge">{hero.availability}</span>
+          <h1 className="hero-title">{hero.title}</h1>
+          <p className="hero-lede">{hero.lede}</p>
+          <div className="hero-actions">
+            <a className="btn" href={hero.primaryCta.href}>
+              {hero.primaryCta.label}
+            </a>
+            <a className="btn ghost" href={hero.secondaryCta.href}>
+              {hero.secondaryCta.label}
+            </a>
+          </div>
+          <div className="stats">
+            {stats.map((stat) => (
+              <div className="stat" key={stat.label}>
+                <span className="stat-value">{stat.value}</span>
+                <span className="stat-label">{stat.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
 
-	const sizes = calculateSizes(isSmall, isMobile)
-
-	useEffect(() => {
-		return () => {
-			if (rendererRef.current) {
-				rendererRef.current.dispose()
-			}
-		}
-	}, [])
-
-	return (
-		<section className="min-h-screen w-full flex flex-col relative" id="home">
-			<div className="w-full mx-auto flex flex-col sm:mt-36 mt-20 c-space gap-3">
-				<p className="sm:text-3xl text-xl font-medium text-white text-center font-generalsans">Hi, I am Hanmin <span className="waving-hand">👋</span></p>
-				<p className="hero_tag text-gray_gradient">Coding my path forward</p>
-			</div>
-
-			<div className="w-full h-full absolute inset-0">
-				<Canvas
-					className="w-full h-full"
-					onCreated={(state) => {
-						rendererRef.current = state.gl
-					}}
-				>
-					<Suspense fallback={<CanvasLoader />}>
-						<PerspectiveCamera makeDefault position={[0, 0, 30]} />
-
-						<HeroCamera isMobile={isMobile}>
-							<HollowKnight scale={sizes.deskScale} position={sizes.deskPosition} rotation={[-Math.PI / 2, 0, 5.5]} />
-						</HeroCamera>
-
-						<ambientLight intensity={1} />
-						<directionalLight position={[10, 10, 10]} intensity={0.5} />
-					</Suspense>
-				</Canvas>
-			</div>
-
-			<div className="absolute bottom-7 left-0 right-0 w-full z-10 c-space">
-				<a href="#about" className="w-fit">
-					<Button name="Let's work together" isBeam containerClass="sm:w-fit w-full sm:min-w-96 hover:bg-black-500" />
-				</a>
-			</div>
-		</section>
-	)
+        <div className="hero-card">
+          <p className="eyebrow">{heroCard.eyebrow}</p>
+          <h3>{heroCard.title}</h3>
+          <p>{heroCard.description}</p>
+          <div className="hero-card-tags">
+            {heroCard.tags.map((tag) => (
+              <span className="pill" key={tag}>
+                {tag}
+              </span>
+            ))}
+          </div>
+          <div className="hero-card-footer">
+            <span>{heroCard.timelineLabel}</span>
+            <strong>{heroCard.timelineValue}</strong>
+          </div>
+        </div>
+      </div>
+    </header>
+  )
 }
 
 export default Hero
