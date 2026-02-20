@@ -1,4 +1,5 @@
 import { aboutNote, processSteps, sectionCopy, toolkit } from '../data/home.js'
+import './About.css'
 
 const About = () => {
   return (

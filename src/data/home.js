@@ -1,4 +1,5 @@
 export const navLinks = [
+  { label: 'Stack', href: '#tech-stack' },
   { label: 'Work', href: '#work' },
   { label: 'Services', href: '#services' },
   { label: 'About', href: '#about' },
@@ -31,6 +32,12 @@ export const heroCard = {
 }
 
 export const sectionCopy = {
+  stack: {
+    eyebrow: 'Tech stack',
+    title: 'Technologies I use to build and ship products.',
+    subtitle:
+      'A practical toolkit for fast iteration, clean architecture, and smooth user experiences.',
+  },
   work: {
     eyebrow: 'Selected work',
     title: 'Projects that balance craft and outcomes.',

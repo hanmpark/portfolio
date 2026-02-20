@@ -1,0 +1,131 @@
+.tech-stack {
+  z-index: 2;
+}
+
+.stack-carousel {
+  display: grid;
+  gap: 1rem;
+}
+
+.tech-stack-head {
+  margin-top: 1.7rem;
+}
+
+.stack-lane {
+  position: relative;
+  overflow: hidden;
+  border-radius: 999px;
+  padding: 0.2rem 0;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 9%, black 91%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 9%, black 91%, transparent);
+}
+
+.stack-track {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: max-content;
+  will-change: transform;
+  animation: stack-rtl 36s linear infinite;
+}
+
+.stack-lane-ltr .stack-track {
+  animation-name: stack-ltr;
+  animation-duration: 40s;
+}
+
+.stack-carousel:hover .stack-track {
+  animation-play-state: paused;
+}
+
+.stack-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.62rem;
+  white-space: nowrap;
+  padding: 0.56rem 1.06rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.74);
+  background: linear-gradient(145deg, rgba(249, 252, 255, 0.82), rgba(205, 216, 230, 0.52));
+  box-shadow: 0 9px 20px rgba(14, 20, 31, 0.12);
+  color: #172436;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.stack-icon-wrap {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(29, 42, 60, 0.12);
+  flex-shrink: 0;
+}
+
+.stack-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.stack-label {
+  line-height: 1;
+}
+
+@keyframes stack-rtl {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes stack-ltr {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 720px) {
+  .stack-pill {
+    gap: 0.42rem;
+    padding: 0.45rem 0.78rem;
+    font-size: 0.76rem;
+  }
+
+  .stack-icon-wrap {
+    width: 24px;
+    height: 24px;
+    border-radius: 7px;
+  }
+
+  .stack-icon {
+    width: 17px;
+    height: 17px;
+  }
+
+  .stack-track {
+    gap: 0.55rem;
+    animation-duration: 28s;
+  }
+
+  .stack-lane-ltr .stack-track {
+    animation-duration: 32s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stack-track,
+  .stack-lane-ltr .stack-track {
+    animation: none;
+  }
+}

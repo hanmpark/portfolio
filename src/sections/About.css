@@ -1,0 +1,48 @@
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 3.2rem;
+  align-items: start;
+}
+
+.process-list {
+  display: grid;
+  gap: 1.6rem;
+  margin-top: 2.6rem;
+}
+
+.process-item {
+  padding: 1.3rem 1.5rem;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--glass);
+  backdrop-filter: blur(var(--blur));
+}
+
+.process-item h3 {
+  margin: 0 0 0.4rem;
+}
+
+.about-card {
+  background: var(--glass-strong);
+  border-radius: 24px;
+  padding: 2.4rem;
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(calc(var(--blur) + 4px));
+  display: grid;
+  gap: 1.6rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.about-note {
+  padding: 1rem 1.2rem;
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.68), rgba(187, 197, 211, 0.52));
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 980px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+}

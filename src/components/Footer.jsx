@@ -1,4 +1,5 @@
 import { footerCopy, socialLinks } from '../data/home.js'
+import './Footer.css'
 
 const Footer = () => {
   return (

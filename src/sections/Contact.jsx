@@ -1,4 +1,5 @@
 import { contact, sectionCopy } from '../data/home.js'
+import './Contact.css'
 
 const Contact = () => {
   return (

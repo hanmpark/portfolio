@@ -1,0 +1,24 @@
+.contact-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: 2.6rem;
+  background: var(--glass-strong);
+  border-radius: 28px;
+  border: 1px solid var(--glass-border);
+  padding: 3rem;
+  backdrop-filter: blur(calc(var(--blur) + 4px));
+  box-shadow: var(--shadow-soft);
+}
+
+.contact-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+@media (max-width: 980px) {
+  .contact-card {
+    grid-template-columns: 1fr;
+  }
+}

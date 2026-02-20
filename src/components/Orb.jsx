@@ -1,5 +1,6 @@
 import { Canvas } from '@react-three/fiber'
 import { Float, MeshDistortMaterial } from '@react-three/drei'
+import './Orb.css'
 
 const Orb = () => {
   return (

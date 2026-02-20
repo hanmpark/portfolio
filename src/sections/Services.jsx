@@ -1,4 +1,5 @@
 import { sectionCopy, services } from '../data/home.js'
+import './Services.css'
 
 const Services = () => {
   return (

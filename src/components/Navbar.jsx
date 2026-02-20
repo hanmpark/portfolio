@@ -1,4 +1,5 @@
 import { navLinks } from '../data/home.js'
+import './Navbar.css'
 
 const Navbar = () => {
   return (

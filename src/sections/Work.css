@@ -1,0 +1,43 @@
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2.2rem;
+}
+
+.project-card {
+  display: grid;
+  gap: 1rem;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: rise 0.7s ease forwards;
+  animation-delay: var(--delay);
+}
+
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-weight: 600;
+}
+
+.project-title {
+  font-size: 1.1rem;
+}
+
+.project-year {
+  color: var(--muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

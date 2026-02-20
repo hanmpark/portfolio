@@ -1,4 +1,5 @@
 import { projects, sectionCopy } from '../data/home.js'
+import './Work.css'
 
 const Work = () => {
   return (
