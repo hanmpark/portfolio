@@ -17,18 +17,19 @@ const stackItems = [
 ]
 
 const StackLane = ({ items, direction }) => {
-  const loopedItems = [...items, ...items]
+  const loopedItems = [...items, ...items, ...items, ...items]
 
   return (
     <div className={`stack-lane stack-lane-${direction}`}>
       <div className="stack-track">
         {loopedItems.map((item, index) => (
-          <span className="stack-pill" key={`${direction}-${item.name}-${index}`}>
-            <span className="stack-icon-wrap">
-              <img className="stack-icon" src={item.icon} alt="" aria-hidden="true" />
-            </span>
-            <span className="stack-label">{item.name}</span>
-          </span>
+          <img
+            className="stack-icon"
+            src={item.icon}
+            alt={item.name}
+            key={`${direction}-${item.name}-${index}`}
+            title={item.name}
+          />
         ))}
       </div>
     </div>
@@ -36,14 +37,11 @@ const StackLane = ({ items, direction }) => {
 }
 
 const TechStack = () => {
-  const firstLane = stackItems.slice(0, 6)
-  const secondLane = stackItems.slice(6)
-
   return (
     <section className="section tech-stack" id="tech-stack">
       <div className="container stack-carousel">
-        <StackLane items={firstLane} direction="rtl" />
-        <StackLane items={secondLane} direction="ltr" />
+        <StackLane items={stackItems} direction="rtl" />
+        <StackLane items={stackItems} direction="ltr" />
       </div>
 
       <div className="container section-head tech-stack-head">
