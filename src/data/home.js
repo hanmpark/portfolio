@@ -1,6 +1,6 @@
 export const navLinks = [
-  { label: 'Stack', href: '#tech-stack' },
   { label: 'Work', href: '#work' },
+  { label: 'Stack', href: '#tech-stack' },
   { label: 'Services', href: '#services' },
   { label: 'About', href: '#about' },
   { label: 'Contact', href: '#contact' },
@@ -65,25 +65,33 @@ export const sectionCopy = {
 
 export const projects = [
   {
-    title: 'Citrine Market',
+    title: 'Mini Ray Tracer',
+    subtitle: 'Ray Tracing Engine in C',
     description:
-      'B2B commerce platform that shortens complex procurement flows into a 3-step purchase experience.',
-    tags: ['UX Strategy', 'Product Design', 'React'],
-    year: '2025',
+      'A minimal ray tracing engine implementing lighting, shadows, reflections, and 3D scene rendering from scratch. Built to explore computer graphics and mathematical rendering principles.',
+    previewImage: '/works/rt1.png',
+    tags: ['C', 'Ray Tracing', 'Computer Graphics'],
   },
   {
-    title: 'Northwind Studio',
+    title: 'Transcendence',
+    subtitle: 'Full-Stack Multiplayer Web Application',
     description:
-      'Brand + web refresh for a creative studio, featuring modular storytelling and live case study metrics.',
-    tags: ['Brand System', 'Frontend', 'Content'],
-    year: '2024',
+      'A real-time web platform featuring multiplayer gameplay, authentication, user management, and interactive UI. Designed with modern frontend architecture and scalable backend services.',
+    previewImage: '/works/transcendence-home.png',
   },
   {
-    title: 'Signal Rooms',
+    title: 'Tetris',
+    subtitle: 'Real-Time Multiplayer Game',
     description:
-      'Hybrid workspace finder that pairs on-site planning with real-time occupancy insights.',
-    tags: ['Research', 'UI Design', 'Data Viz'],
-    year: '2024',
+      'A competitive multiplayer Tetris game featuring real-time synchronization, state management, and networked gameplay architecture.',
+    previewImage: '/works/tetris-game.png',
+  },
+  {
+    title: 'so_long',
+    subtitle: '2D Game Engine in C',
+    description:
+      'A lightweight 2D game built in C using a custom rendering loop, sprite management, and event handling. Focused on memory control, game logic, and low-level graphics programming.',
+    previewImage: '/works/so_long.png',
   },
 ]
 

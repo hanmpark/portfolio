@@ -1,3 +1,15 @@
+@property --enter-x {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --enter-y {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
 .hero {
   --pointer-x: 0;
   --pointer-y: 0;
@@ -8,19 +20,13 @@
   position: relative;
   overflow: visible;
   isolation: isolate;
-  background:
-    radial-gradient(circle at 13% 22%, rgba(255, 255, 255, 0.66), transparent 42%),
-    radial-gradient(circle at 82% 16%, rgba(194, 212, 231, 0.26), transparent 38%),
-    linear-gradient(162deg, #edf1f7 0%, #dde5ef 46%, #ced8e4 100%);
 }
 
 .hero::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at 62% 54%, rgba(17, 29, 44, 0.12), transparent 50%),
-    radial-gradient(circle at 33% 80%, rgba(255, 255, 255, 0.3), transparent 44%);
+  background: none;
   z-index: 0;
 }
 
@@ -39,7 +45,8 @@
   justify-items: center;
   text-align: center;
   width: min(760px, 100%);
-  padding: clamp(1.5rem, 6vh, 3.4rem) clamp(1rem, 2.2vw, 2rem) clamp(2rem, 6vh, 4rem);
+  padding: clamp(1.5rem, 6vh, 3.4rem) clamp(1rem, 2.2vw, 2rem)
+    clamp(2rem, 6vh, 4rem);
 }
 
 .hero-kicker {
@@ -92,7 +99,8 @@
   line-height: 1.84;
   margin-top: 0.2rem;
   padding: 0;
-  text-wrap: balance;
+  text-align: center;
+  text-wrap: pretty;
 }
 
 .hero-template-lead {
@@ -113,18 +121,28 @@
 .hero-fig {
   position: absolute;
   max-width: none;
+  opacity: 0;
+  transform: translate3d(var(--enter-x, 0px), var(--enter-y, 0px), 0);
+  will-change: transform, opacity;
+  filter: grayscale(1) saturate(0) contrast(1.07) brightness(1.06)
+    drop-shadow(0 30px 52px rgba(8, 14, 25, 0.26));
+  animation: fig-enter 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-entered .hero-fig {
+  animation: none;
   opacity: 0.82;
-  transform:
-    translate3d(
+  transform: translate3d(
       calc(var(--pointer-x) * var(--fig-shift-x, 0px)),
       calc(var(--pointer-y) * var(--fig-shift-y, 0px)),
       0
     )
     rotate(calc(var(--pointer-x) * var(--fig-rotate, 0deg)));
-  transition: transform 220ms ease-out, opacity 220ms ease-out, filter 220ms ease-out;
-  will-change: transform;
-  filter: grayscale(1) saturate(0) contrast(1.07) brightness(1.06)
-    drop-shadow(0 30px 52px rgba(8, 14, 25, 0.26));
+  transition: transform 220ms ease-out;
+}
+
+.hero-entered.no-transition .hero-fig {
+  transition: none;
 }
 
 .hero-fig-1 {
@@ -135,6 +153,8 @@
   --fig-shift-x: 12px;
   --fig-shift-y: 8px;
   --fig-rotate: 5deg;
+  --enter-x: -120px;
+  --enter-y: -120px;
 }
 
 .hero-fig-2 {
@@ -145,6 +165,8 @@
   --fig-shift-x: -14px;
   --fig-shift-y: 9px;
   --fig-rotate: -1deg;
+  --enter-x: 120px;
+  --enter-y: -120px;
 }
 
 .hero-fig-3 {
@@ -155,6 +177,8 @@
   --fig-shift-x: 10px;
   --fig-shift-y: -10px;
   --fig-rotate: 0.7deg;
+  --enter-x: -120px;
+  --enter-y: 120px;
 }
 
 .hero-fig-4 {
@@ -165,10 +189,16 @@
   --fig-shift-x: -11px;
   --fig-shift-y: -8px;
   --fig-rotate: -0.8deg;
+  --enter-x: 120px;
+  --enter-y: 120px;
 }
 
 @media (max-width: 980px) {
   .hero-fig {
+    animation-name: fig-enter-tablet;
+  }
+
+  .hero-entered .hero-fig {
     opacity: 0.72;
   }
 
@@ -228,9 +258,13 @@
   }
 
   .hero-fig {
-    opacity: 0.6;
+    animation-name: fig-enter-mobile;
     filter: grayscale(1) saturate(0) contrast(1.05) brightness(1.04)
       drop-shadow(0 18px 34px rgba(8, 14, 25, 0.18));
+  }
+
+  .hero-entered .hero-fig {
+    opacity: 0.6;
   }
 
   .hero-fig-1 {
@@ -258,9 +292,38 @@
   }
 }
 
+@keyframes fig-enter {
+  to {
+    opacity: 0.82;
+    --enter-x: 0px;
+    --enter-y: 0px;
+  }
+}
+
+@keyframes fig-enter-tablet {
+  to {
+    opacity: 0.72;
+    --enter-x: 0px;
+    --enter-y: 0px;
+  }
+}
+
+@keyframes fig-enter-mobile {
+  to {
+    opacity: 0.6;
+    --enter-x: 0px;
+    --enter-y: 0px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-fig {
+    animation: none;
+    opacity: 0.82;
+  }
+
+  .hero-entered .hero-fig {
     transform: none;
-    transition: opacity 220ms ease-out, filter 220ms ease-out;
+    transition: none;
   }
 }

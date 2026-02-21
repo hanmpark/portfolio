@@ -1,51 +1,79 @@
-import { useEffect, useRef } from 'react'
-import Navbar from '../components/Navbar.jsx'
-import './Hero.css'
+import { useEffect, useRef, useCallback } from "react";
+import Navbar from "../components/Navbar.jsx";
+import "./Hero.css";
+
+const ENTER_DURATION = 1200; // ms – must match CSS animation duration
 
 const Hero = () => {
-  const heroRef = useRef(null)
-  const frameRef = useRef(0)
-  const pointerRef = useRef({ x: 0, y: 0 })
+  const heroRef = useRef(null);
+  const frameRef = useRef(0);
+  const pointerRef = useRef({ x: 0, y: 0 });
+  const readyRef = useRef(false);
 
   const flushPointer = () => {
-    frameRef.current = 0
+    frameRef.current = 0;
 
-    const hero = heroRef.current
-    if (!hero) return
+    const hero = heroRef.current;
+    if (!hero) return;
 
-    hero.style.setProperty('--pointer-x', pointerRef.current.x.toFixed(3))
-    hero.style.setProperty('--pointer-y', pointerRef.current.y.toFixed(3))
-  }
+    hero.style.setProperty("--pointer-x", pointerRef.current.x.toFixed(3));
+    hero.style.setProperty("--pointer-y", pointerRef.current.y.toFixed(3));
+  };
 
   const queuePointer = (x, y) => {
-    pointerRef.current = { x, y }
-    if (frameRef.current) return
-    frameRef.current = window.requestAnimationFrame(flushPointer)
-  }
+    pointerRef.current = { x, y };
+    if (frameRef.current) return;
+    frameRef.current = window.requestAnimationFrame(flushPointer);
+  };
 
   const handleMouseMove = (event) => {
-    const hero = heroRef.current
-    if (!hero) return
+    if (!readyRef.current) return;
 
-    const rect = hero.getBoundingClientRect()
-    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2
-    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2
+    const hero = heroRef.current;
+    if (!hero) return;
 
-    queuePointer(x, y)
-  }
+    const rect = hero.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+
+    queuePointer(x, y);
+  };
 
   const handleMouseLeave = () => {
-    queuePointer(0, 0)
-  }
+    if (!readyRef.current) return;
+    queuePointer(0, 0);
+  };
 
-  useEffect(
-    () => () => {
-      if (frameRef.current) {
-        window.cancelAnimationFrame(frameRef.current)
+  const enableParallax = useCallback(() => {
+    const hero = heroRef.current;
+    if (!hero || readyRef.current) return;
+    // Add no-transition to prevent a flash when switching from animation to static styles
+    hero.classList.add("hero-entered", "no-transition");
+    // Force a reflow so the browser applies the no-transition state first
+    hero.offsetHeight; // eslint-disable-line no-unused-expressions
+    hero.classList.remove("no-transition");
+    readyRef.current = true;
+  }, []);
+
+  const handleAnimationEnd = useCallback(
+    (e) => {
+      if (e.animationName.startsWith("fig-enter")) {
+        enableParallax();
       }
     },
-    []
-  )
+    [enableParallax],
+  );
+
+  useEffect(() => {
+    // Fallback: enable pointer tracking after the animation duration
+    const timer = setTimeout(enableParallax, ENTER_DURATION + 100);
+    return () => {
+      clearTimeout(timer);
+      if (frameRef.current) {
+        window.cancelAnimationFrame(frameRef.current);
+      }
+    };
+  }, []);
 
   return (
     <header
@@ -55,11 +83,31 @@ const Hero = () => {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="hero-figures" aria-hidden="true">
-        <img className="hero-fig hero-fig-1" src="/assets/premium/fig1.png" alt="" />
-        <img className="hero-fig hero-fig-2" src="/assets/premium/fig2.png" alt="" />
-        <img className="hero-fig hero-fig-3" src="/assets/premium/fig3.png" alt="" />
-        <img className="hero-fig hero-fig-4" src="/assets/premium/fig4.png" alt="" />
+      <div
+        className="hero-figures"
+        aria-hidden="true"
+        onAnimationEnd={handleAnimationEnd}
+      >
+        <img
+          className="hero-fig hero-fig-1"
+          src="/assets/premium/fig1.png"
+          alt=""
+        />
+        <img
+          className="hero-fig hero-fig-2"
+          src="/assets/premium/fig2.png"
+          alt=""
+        />
+        <img
+          className="hero-fig hero-fig-3"
+          src="/assets/premium/fig3.png"
+          alt=""
+        />
+        <img
+          className="hero-fig hero-fig-4"
+          src="/assets/premium/fig4.png"
+          alt=""
+        />
       </div>
 
       <Navbar />
@@ -72,13 +120,15 @@ const Hero = () => {
           </h1>
           <p className="hero-template">
             <span className="hero-template-lead">
-              I build reliable products from concept to production.
+              I design and build scalable web applications and intelligent
+              systems, from frontend interfaces to backend architecture, with a
+              focus on performance, clarity, and real-world impact.
             </span>
           </p>
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

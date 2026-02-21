@@ -12,8 +12,8 @@ const App = () => {
     <div className="app">
       <Hero />
       <main>
-        <TechStack />
         <Work />
+        <TechStack />
         <Services />
         <About />
         <Contact />
