@@ -36,6 +36,14 @@ const Work = () => {
         loading="lazy"
       />
 
+      <img
+        className="work-rocket work-rocket--left"
+        src="/assets/premium/space-rocket.png"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+      />
+
       <div className="container project-list" ref={listRef}>
         {projects.map((project, index) => (
           <article

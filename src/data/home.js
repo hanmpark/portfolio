@@ -1,7 +1,7 @@
 export const navLinks = [
   { label: 'Work', href: '#work' },
+  { label: 'Experience & Education', href: '#experience' },
   { label: 'Stack', href: '#tech-stack' },
-  { label: 'Services', href: '#services' },
   { label: 'About', href: '#about' },
   { label: 'Contact', href: '#contact' },
 ]
@@ -43,6 +43,12 @@ export const sectionCopy = {
     title: 'Projects that balance craft and outcomes.',
     subtitle:
       'End-to-end product engagements for teams in climate, commerce, and creative tech.',
+  },
+  experience: {
+    eyebrow: 'Experience & Education',
+    title: 'Experience and education',
+    subtitle:
+      'A scrollable timeline of professional experience and academic background, blending engineering practice with visual culture and storytelling.',
   },
   services: {
     eyebrow: 'Services',
@@ -92,6 +98,69 @@ export const projects = [
     description:
       'A lightweight 2D game built in C using a custom rendering loop, sprite management, and event handling. Focused on memory control, game logic, and low-level graphics programming.',
     previewImage: '/works/so_long.png',
+  },
+]
+
+export const experiences = [
+  {
+    category: 'Experience',
+    role: 'Software Engineer',
+    company: 'Alternance',
+    image: '/assets/experiences/amadeus.svg',
+    imageAlt: 'Amadeus logo',
+    focus:
+      'Description courte, impact réel.',
+    summary:
+      'Alternance as a software engineer with a focus on delivering concrete product impact through implementation quality and reliable execution.',
+    stack: ['Software Engineering', 'Product Impact'],
+  },
+  {
+    category: 'Experience',
+    role: 'Internship',
+    company: 'Proptexx',
+    image: '/assets/experiences/proptexx.webp',
+    imageAlt: 'Proptexx logo',
+    focus:
+      'Full-stack and ML workflow tooling.',
+    summary:
+      'Contributed to full-stack products and internal tools supporting machine-learning workflows, improving day-to-day iteration and team efficiency.',
+    stack: ['Full-stack', 'ML Workflow Tools'],
+  },
+  {
+    category: 'Education',
+    role: 'Project-Based Software Engineering Program',
+    company: '42 School',
+    image: '/assets/experiences/42logo.png',
+    imageAlt: '42 School logo',
+    focus:
+      'Intensive project-based training with a strong engineering mindset and collaborative problem solving.',
+    summary:
+      'Built a rigorous foundation through peer-driven, project-based software engineering with emphasis on systems thinking and practical implementation.',
+    stack: ['Systems Programming', 'Algorithms', 'Networking', 'Graphics'],
+  },
+  {
+    category: 'Education',
+    role: 'Cinema Studies',
+    company: 'Sorbonne Université',
+    image: '/assets/experiences/pantheon-sorbonne.svg',
+    imageAlt: 'Sorbonne logo',
+    focus:
+      'Focus on visual storytelling, analysis, and artistic direction.',
+    summary:
+      'Studied cinema with an emphasis on narrative construction, visual language, critical analysis, and direction sensibility.',
+    stack: ['Visual Storytelling', 'Analysis', 'Artistic Direction'],
+  },
+  {
+    category: 'Education',
+    role: 'International Curriculum',
+    company: 'Centre International de Valbonne',
+    image: '/assets/experiences/civlogo.png',
+    imageAlt: 'Centre International de Valbonne logo',
+    focus:
+      'International curriculum in a multicultural environment.',
+    summary:
+      'Developed academic and interpersonal foundations in an international setting shaped by multicultural collaboration and adaptability.',
+    stack: ['International Curriculum', 'Multicultural Environment'],
   },
 ]
 
