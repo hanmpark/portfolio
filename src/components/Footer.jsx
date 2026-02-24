@@ -7,7 +7,7 @@ const socials = [
     href: "https://www.linkedin.com",
     icon: "/assets/linkedinlogo.png",
   },
-  { label: "GitHub", href: "https://github.com", icon: "/assets/github.svg" },
+  { label: "GitHub", href: "https://github.com/", icon: "/assets/github.svg" },
 ];
 
 const Footer = () => (

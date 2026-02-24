@@ -6,9 +6,11 @@ const ENTER_DURATION = 1200; // ms – must match CSS animation duration
 
 const Hero = () => {
   const heroRef = useRef(null);
+  const figuresRef = useRef([]);
   const frameRef = useRef(0);
   const pointerRef = useRef({ x: 0, y: 0 });
   const readyRef = useRef(false);
+  const scrollRafRef = useRef(0);
 
   const flushPointer = () => {
     frameRef.current = 0;
@@ -44,6 +46,15 @@ const Hero = () => {
     queuePointer(0, 0);
   };
 
+  const handleScrollToBottom = (event) => {
+    event.preventDefault();
+    const root = document.scrollingElement ?? document.documentElement;
+    window.scrollTo({
+      top: root.scrollHeight,
+      behavior: "smooth",
+    });
+  };
+
   const enableParallax = useCallback(() => {
     const hero = heroRef.current;
     if (!hero || readyRef.current) return;
@@ -67,11 +78,48 @@ const Hero = () => {
   useEffect(() => {
     // Fallback: enable pointer tracking after the animation duration
     const timer = setTimeout(enableParallax, ENTER_DURATION + 100);
+
+    // Per-figure scroll parallax speeds (higher = moves faster)
+    const figSpeeds = [0.55, 0.7, 0.45, 0.85];
+    // The scroll range over which the figures fully disappear (px)
+    const SCROLL_RANGE = window.innerHeight * 0.7;
+
+    const handleScroll = () => {
+      if (scrollRafRef.current) return;
+      scrollRafRef.current = window.requestAnimationFrame(() => {
+        scrollRafRef.current = 0;
+        const scrollY = window.scrollY;
+
+        figuresRef.current.forEach((fig, i) => {
+          if (!fig) return;
+          const speed = figSpeeds[i] ?? 0.6;
+          // progress 0→1 over the scroll range
+          const t = Math.min(Math.max(scrollY / SCROLL_RANGE, 0), 1);
+          // ease-out curve for smoother motion
+          const ease = 1 - Math.pow(1 - t, 2.5);
+
+          const translateY = ease * -window.innerHeight * speed * 0.55;
+          const scale = 1 - ease * 0.25;
+          const opacity = 1 - ease;
+
+          // Use the individual `translate` property — it composes with
+          // the CSS `transform` (pointer-tracking) automatically.
+          fig.style.translate = `0 ${translateY}px`;
+          fig.style.scale = `${scale}`;
+          fig.style.opacity = `${opacity}`;
+        });
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
     return () => {
       clearTimeout(timer);
-      if (frameRef.current) {
-        window.cancelAnimationFrame(frameRef.current);
-      }
+      window.removeEventListener("scroll", handleScroll);
+      if (frameRef.current) window.cancelAnimationFrame(frameRef.current);
+      if (scrollRafRef.current)
+        window.cancelAnimationFrame(scrollRafRef.current);
     };
   }, []);
 
@@ -89,21 +137,25 @@ const Hero = () => {
         onAnimationEnd={handleAnimationEnd}
       >
         <img
+          ref={(el) => (figuresRef.current[0] = el)}
           className="hero-fig hero-fig-1"
           src="/assets/premium/fig1.png"
           alt=""
         />
         <img
+          ref={(el) => (figuresRef.current[1] = el)}
           className="hero-fig hero-fig-2"
           src="/assets/premium/fig2.png"
           alt=""
         />
         <img
+          ref={(el) => (figuresRef.current[2] = el)}
           className="hero-fig hero-fig-3"
           src="/assets/premium/fig3.png"
           alt=""
         />
         <img
+          ref={(el) => (figuresRef.current[3] = el)}
           className="hero-fig hero-fig-4"
           src="/assets/premium/fig4.png"
           alt=""
@@ -133,11 +185,21 @@ const Hero = () => {
             <a className="btn" href="#work">
               View work
             </a>
-            <a className="btn ghost" href="#contact">
+            <a
+              className="btn ghost"
+              href="#contact"
+              onClick={handleScrollToBottom}
+            >
               Get in touch
             </a>
           </div>
         </div>
+      </div>
+
+      <div className="container_mouse" aria-hidden="true">
+        <span className="mouse-btn" aria-hidden="true">
+          <span className="mouse-scroll" />
+        </span>
       </div>
     </header>
   );

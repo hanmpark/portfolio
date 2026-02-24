@@ -1,0 +1,116 @@
+.back-top {
+  position: fixed;
+  left: clamp(0.7rem, 1.8vw, 1.2rem);
+  bottom: clamp(0.9rem, 2.4vh, 1.4rem);
+  z-index: 110;
+  opacity: 0;
+  transform: translateX(-12px) translateY(6px);
+  pointer-events: none;
+  transition:
+    opacity 0.28s ease,
+    transform 0.32s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.back-top.is-visible {
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+  pointer-events: auto;
+}
+
+.back-top-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(14, 17, 23, 0.9);
+  border: 1px solid rgba(200, 215, 240, 0.14);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 0 4px rgba(200, 215, 240, 0.1),
+    0 8px 18px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(200, 215, 240, 0.05);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+  color: #e8ecf2;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.back-top-icon {
+  width: 12px;
+  transition-duration: 0.3s;
+  flex-shrink: 0;
+}
+
+.back-top-icon path {
+  fill: currentColor;
+}
+
+.back-top-button:hover {
+  width: 140px;
+  border-radius: 50px;
+  transition-duration: 0.3s;
+  background-color: rgba(32, 40, 54, 0.96);
+  border-color: rgba(200, 215, 240, 0.22);
+  box-shadow:
+    0 0 0 4px rgba(200, 215, 240, 0.12),
+    0 12px 26px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(200, 215, 240, 0.07);
+  align-items: center;
+}
+
+.back-top-button:hover .back-top-icon {
+  transition-duration: 0.3s;
+  transform: translateY(-200%);
+}
+
+.back-top-button::before {
+  position: absolute;
+  bottom: -20px;
+  content: "Back to Top";
+  color: #e8ecf2;
+  font-size: 0px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.back-top-button:hover::before {
+  font-size: 13px;
+  opacity: 1;
+  bottom: unset;
+  transition-duration: 0.3s;
+}
+
+.back-top-button:focus-visible {
+  outline: 2px solid rgba(200, 215, 240, 0.24);
+  outline-offset: 3px;
+}
+
+.back-top-button:active {
+  transform: translateY(1px) scale(0.985);
+}
+
+@media (max-width: 720px) {
+  .back-top {
+    left: 0.75rem;
+    bottom: 0.75rem;
+  }
+
+  .back-top-button:hover {
+    width: 50px;
+    border-radius: 50%;
+  }
+
+  .back-top-button:hover .back-top-icon {
+    transform: none;
+  }
+
+  .back-top-button:hover::before {
+    font-size: 0;
+  }
+}
+

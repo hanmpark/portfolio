@@ -12,13 +12,18 @@ const Card = ({ item, index }) => (
     <div className="exp-card-inner">
       <div className="exp-card-top">
         {item.image && (
-          <figure className="exp-logo">
+          <figure
+            className={`exp-logo${
+              item.logoVariant ? ` exp-logo--${item.logoVariant}` : ""
+            }`}
+          >
             <img src={item.image} alt={item.imageAlt ?? ""} loading="lazy" />
           </figure>
         )}
         <div>
           <p className="exp-role">{item.role}</p>
           <p className="exp-company">{item.company}</p>
+          {item.period ? <p className="exp-period">{item.period}</p> : null}
         </div>
       </div>
       <p className="exp-summary">{item.focus}</p>

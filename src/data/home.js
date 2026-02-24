@@ -1,9 +1,7 @@
 export const navLinks = [
   { label: "Work", href: "#work" },
   { label: "Experience & Education", href: "#experience" },
-  { label: "Stack", href: "#tech-stack" },
   { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
 ];
 
 export const hero = {
@@ -45,7 +43,7 @@ export const sectionCopy = {
   },
   experience: {
     eyebrow: "Experience & Education",
-    title: "Experience and education",
+    title: "A timeline of work and studies.",
     subtitle:
       "A scrollable timeline of professional experience and academic background, blending engineering practice with visual culture and storytelling.",
   },
@@ -63,9 +61,9 @@ export const sectionCopy = {
   },
   contact: {
     eyebrow: "Contact",
-    title: "Let's build something steady and bold.",
+    title: "Let's talk",
     subtitle:
-      "Share your timeline, product stage, and what success looks like. I'll follow up within 48 hours.",
+      "Whether you are looking to build a new website, improve your existing platform, or bring a unique project to life, I'm here to help.",
   },
 };
 
@@ -77,13 +75,9 @@ export const projects = [
       "A minimal ray tracing engine implementing lighting, shadows, reflections, and 3D scene rendering from scratch. Built to explore computer graphics and mathematical rendering principles.",
     previewImage: "/works/rt1.png",
     tags: ["C", "Ray Tracing", "Computer Graphics"],
-  },
-  {
-    title: "Transcendence",
-    subtitle: "Full-Stack Multiplayer Web Application",
-    description:
-      "A real-time web platform featuring multiplayer gameplay, authentication, user management, and interactive UI. Designed with modern frontend architecture and scalable backend services.",
-    previewImage: "/works/transcendence-home.png",
+    links: {
+      repo: "https://github.com/hanmpark/miniraytracer",
+    },
   },
   {
     title: "Tetris",
@@ -91,6 +85,11 @@ export const projects = [
     description:
       "A competitive multiplayer Tetris game featuring real-time synchronization, state management, and networked gameplay architecture.",
     previewImage: "/works/tetris-game.png",
+    tags: ["TypeScript", "Multiplayer", "WebSockets"],
+    links: {
+      repo: "https://github.com/okbrandon/red-tetris",
+      demo: "https://tetris.brandoncodes.dev/",
+    },
   },
   {
     title: "so_long",
@@ -98,14 +97,43 @@ export const projects = [
     description:
       "A lightweight 2D game built in C using a custom rendering loop, sprite management, and event handling. Focused on memory control, game logic, and low-level graphics programming.",
     previewImage: "/works/so_long.png",
+    tags: ["C", "2D Graphics", "Game Development"],
+    links: {
+      repo: "https://github.com/hanmpark/so_long",
+    },
+  },
+  {
+    title: "Scholarship Time Tracker",
+    subtitle: "Hour Tracking Tool for 42 Nice Students",
+    description:
+      "A tool that tracks and calculates cumulative hours for 42 Nice students, helping them log required monthly hours for scholarship eligibility. It automates hour tracking, reduces admin overhead, and gives a clear view of progress and time management.",
+    previewImage: "/works/42 Logtime.png",
+    tags: ["Time Tracking", "Productivity Tool", "42 Nice"],
+    links: {
+      repo: "https://github.com/hanmpark/scholarship_logtime",
+    },
   },
 ];
 
 export const experiences = [
   {
     category: "Experience",
+    role: "Freelance Software Engineer",
+    company: "The Good Cleaners",
+    period: "Feb 2026 - Present",
+    image: "/assets/experiences/thegoodcleaners.png",
+    imageAlt: "The Good Cleaners logo",
+    logoVariant: "square",
+    focus: "Freelance product and web development support.",
+    summary:
+      "Providing freelance engineering support for The Good Cleaners, helping build and refine reliable web experiences.",
+    stack: ["Freelance", "Web Development", "Product Support"],
+  },
+  {
+    category: "Experience",
     role: "Software Engineer",
     company: "Amadeus",
+    period: "Sep 2025 - Present",
     image: "/assets/experiences/amadeus.svg",
     imageAlt: "Amadeus logo",
     focus:
@@ -116,8 +144,9 @@ export const experiences = [
   },
   {
     category: "Experience",
-    role: "Internship",
+    role: "Machine Learning Engineer Intern",
     company: "Proptexx",
+    period: "Dec 2024 - Apr 2025",
     image: "/assets/experiences/proptexx.webp",
     imageAlt: "Proptexx logo",
     focus: "Full-stack and ML workflow tooling.",
@@ -128,9 +157,11 @@ export const experiences = [
   {
     category: "Education",
     role: "Project-Based Software Engineering Program",
-    company: "42 School",
+    company: "42 Nice",
+    period: "Nov 2022 - Present",
     image: "/assets/experiences/42logo.png",
     imageAlt: "42 School logo",
+    logoVariant: "square",
     focus:
       "Intensive project-based training with a strong engineering mindset and collaborative problem solving.",
     summary:
@@ -140,9 +171,11 @@ export const experiences = [
   {
     category: "Education",
     role: "Cinema Studies",
-    company: "Sorbonne Université",
+    company: "Pantheon-Sorbonne University",
+    period: "2019 - 2021",
     image: "/assets/experiences/pantheon-sorbonne.svg",
     imageAlt: "Sorbonne logo",
+    logoVariant: "square",
     focus: "Focus on visual storytelling, analysis, and artistic direction.",
     summary:
       "Studied cinema with an emphasis on narrative construction, visual language, critical analysis, and direction sensibility.",
@@ -152,6 +185,7 @@ export const experiences = [
     category: "Education",
     role: "International Curriculum",
     company: "Centre International de Valbonne",
+    period: "2016 - 2019",
     image: "/assets/experiences/civlogo.png",
     imageAlt: "Centre International de Valbonne logo",
     focus: "International curriculum in a multicultural environment.",
@@ -219,14 +253,11 @@ export const aboutNote = {
 };
 
 export const contact = {
-  email: "hello@hanmpark.com",
-  calendarUrl: "https://cal.com",
+  email: "hanmin@hpark.me",
 };
 
-export const footerCopy = "Copyright 2026 Hanm Park. All rights reserved.";
-
 export const socialLinks = [
-  { label: "LinkedIn", href: "https://www.linkedin.com" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/hanmin-park-83239718b/" },
   { label: "Dribbble", href: "https://dribbble.com" },
-  { label: "GitHub", href: "https://github.com" },
+  { label: "GitHub", href: "https://github.com/hanmpark" },
 ];

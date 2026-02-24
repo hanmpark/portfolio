@@ -64,31 +64,52 @@ const Work = () => {
               style={{ "--reveal-i": index }}
               key={project.title}
             >
-              <figure className="work-card-img">
-                <img
-                  src={project.previewImage}
-                  alt={`${project.title} preview`}
-                  loading="lazy"
-                />
-              </figure>
+              <a
+                className="work-card-main"
+                href={project.links?.repo}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open GitHub repository for ${project.title}`}
+              >
+                <figure className="work-card-img">
+                  <img
+                    src={project.previewImage}
+                    alt={`${project.title} preview`}
+                    loading="lazy"
+                  />
+                </figure>
 
-              <div className="work-card-body">
-                <span className="work-card-number">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3 className="work-card-title">{project.title}</h3>
-                <p className="work-card-subtitle">{project.subtitle}</p>
+                <div className="work-card-body">
+                  <span className="work-card-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="work-card-title">{project.title}</h3>
+                  <p className="work-card-subtitle">{project.subtitle}</p>
 
-                {project.tags?.length ? (
-                  <div className="tag-row">
-                    {project.tags.map((tag) => (
-                      <span className="pill" key={tag}>
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
+                  {project.tags?.length ? (
+                    <div className="tag-row">
+                      {project.tags.map((tag) => (
+                        <span className="pill" key={tag}>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              </a>
+
+              {project.links?.demo ? (
+                <div className="work-card-actions">
+                  <a
+                    className="btn small work-card-demo"
+                    href={project.links.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Demo
+                  </a>
+                </div>
+              ) : null}
             </article>
           ))}
         </div>

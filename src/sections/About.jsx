@@ -3,9 +3,9 @@ import useScrollReveal from "../hooks/useScrollReveal.js";
 import "./About.css";
 
 const aboutParagraphs = [
-  "I'm a software engineer focused on building robust, well-structured systems. My background at 42 shaped the way I approach problems: understanding how things work at a low level before abstracting them into clean architectures.",
-  "I've worked on projects ranging from systems programming and graphics to full-stack web applications and AI-driven image analysis. I care about performance, clarity, and writing code that lasts.",
-  "Beyond engineering, my background in cinema studies influences the way I think about structure, composition and user experience — combining technical depth with visual awareness.",
+  "I am Hanmin Park. I'm a software engineer who enjoys building reliable, well-structured products with a strong focus on clarity and long-term maintainability.",
+  "My background at 42 shaped the way I work: I like understanding systems deeply before abstracting them into clean architectures. I've worked across systems programming, graphics, full-stack web applications, and AI-driven tooling.",
+  "I also studied cinema, which influences how I think about composition, rhythm, and user experience. I bring that perspective into my engineering work to build products that feel both solid and thoughtful.",
 ];
 
 const About = () => {
@@ -59,7 +59,7 @@ const About = () => {
         <div className="abt-content">
           <p className="eyebrow reveal reveal-up">About</p>
           <h2 className="section-title abt-title reveal reveal-up">
-            Engineer with an eye for craft.
+            Hey there !
           </h2>
 
           <div

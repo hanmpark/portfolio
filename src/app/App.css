@@ -1,25 +1,72 @@
 .app {
+  --contact-reveal-space: 100vh;
   min-height: 100vh;
   background:
-    radial-gradient(
-      circle at 18% 6%,
-      rgba(255, 255, 255, 0.55),
-      transparent 42%
-    ),
-    radial-gradient(
-      circle at 80% 10%,
-      rgba(200, 208, 218, 0.2),
-      transparent 38%
-    ),
-    radial-gradient(circle at 58% 48%, rgba(18, 22, 29, 0.04), transparent 50%),
-    radial-gradient(
-      circle at 32% 78%,
-      rgba(255, 255, 255, 0.25),
-      transparent 44%
-    ),
-    linear-gradient(168deg, #eaecf0 0%, #e0e4ea 46%, #d5dae2 100%);
+    radial-gradient(circle at 18% 6%, rgba(30, 40, 60, 0.45), transparent 42%),
+    radial-gradient(circle at 80% 10%, rgba(40, 55, 80, 0.18), transparent 38%),
+    radial-gradient(circle at 58% 48%, rgba(10, 14, 22, 0.12), transparent 50%),
+    radial-gradient(circle at 32% 78%, rgba(25, 35, 55, 0.2), transparent 44%),
+    linear-gradient(168deg, #0e1117 0%, #121720 46%, #151b25 100%);
   position: relative;
-  overflow: hidden;
+}
+
+/* Main content slides over the fixed hero & covers contact */
+.app > main {
+  position: relative;
+  z-index: 2;
+  margin-top: 100vh;
+  padding-bottom: var(--contact-reveal-space);
+  pointer-events: none;
+}
+
+.app > main > .section {
+  pointer-events: auto;
+}
+
+/* Paint the main background only behind content, leaving the trailing
+   reveal padding transparent so the sticky contact can show underneath. */
+.app > main::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 var(--contact-reveal-space) 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 6%, rgba(30, 40, 60, 0.45), transparent 42%),
+    radial-gradient(circle at 80% 10%, rgba(40, 55, 80, 0.18), transparent 38%),
+    radial-gradient(circle at 58% 48%, rgba(10, 14, 22, 0.12), transparent 50%),
+    radial-gradient(circle at 32% 78%, rgba(25, 35, 55, 0.2), transparent 44%),
+    linear-gradient(168deg, #0e1117 0%, #121720 46%, #151b25 100%);
+}
+
+/* Contact reveal wrapper — sits behind main's padding, revealed on scroll */
+.contact-reveal {
+  position: relative;
+  margin-top: calc(-1 * var(--contact-reveal-space));
+  height: var(--contact-reveal-space);
+}
+
+.contact-reveal .ct-section {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 220ms ease;
+}
+
+.contact-reveal--front .ct-section {
+  z-index: 0;
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+}
+
+.app > footer {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(168deg, #0e1117 0%, #121720 46%, #151b25 100%);
 }
 
 .app::before,
@@ -31,8 +78,8 @@
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.4),
-    rgba(200, 208, 218, 0.06) 60%,
+    rgba(40, 60, 100, 0.18),
+    rgba(30, 45, 70, 0.06) 60%,
     transparent 72%
   );
   top: -320px;
@@ -51,8 +98,8 @@
   right: -240px;
   background: radial-gradient(
     circle,
-    rgba(180, 190, 204, 0.15),
-    rgba(200, 208, 218, 0.04) 60%,
+    rgba(35, 50, 80, 0.12),
+    rgba(30, 45, 70, 0.04) 60%,
     transparent 68%
   );
   animation-delay: -14s;

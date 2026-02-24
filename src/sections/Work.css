@@ -3,8 +3,9 @@
 .work-section {
   --section-scroll: 0;
   position: relative;
-  overflow: hidden;
-  perspective: 1200px;
+  overflow-x: clip;
+  overflow-y: visible;
+  perspective: 720px;
 }
 
 /* ── Floating accent images ───────────────────────── */
@@ -15,23 +16,34 @@
   z-index: 0;
   max-width: none;
   filter: grayscale(1) saturate(0) contrast(1.05) brightness(1.08);
-  opacity: 0.18;
+  opacity: 0.24;
   transition: transform 0.1s linear;
 }
 
 .work-accent--1 {
-  width: clamp(260px, 28vw, 420px);
-  top: -8%;
-  right: -6%;
-  transform: translateY(calc((0.5 - var(--section-scroll)) * 80px)) rotate(8deg);
+  width: clamp(340px, 36vw, 560px);
+  top: 1%;
+  right: -2%;
+  transform: translate3d(
+      0,
+      calc((0.5 - var(--section-scroll)) * 190px),
+      calc((0.5 - var(--section-scroll)) * 70px)
+    )
+    rotate(calc(8deg + (0.5 - var(--section-scroll)) * 8deg))
+    scale(calc(1.02 + (0.5 - var(--section-scroll)) * 0.08));
 }
 
 .work-accent--2 {
-  width: clamp(200px, 22vw, 340px);
-  bottom: -6%;
-  left: -4%;
-  transform: translateY(calc((var(--section-scroll) - 0.5) * 60px))
-    rotate(-6deg);
+  width: clamp(270px, 30vw, 470px);
+  bottom: 2%;
+  left: -2%;
+  transform: translate3d(
+      0,
+      calc((var(--section-scroll) - 0.5) * 170px),
+      calc((var(--section-scroll) - 0.5) * 60px)
+    )
+    rotate(calc(-8deg + (var(--section-scroll) - 0.5) * 7deg))
+    scale(calc(1 + (var(--section-scroll) - 0.5) * 0.08));
 }
 
 /* ── Inner layout ─────────────────────────────────── */
@@ -39,13 +51,19 @@
 .work-inner {
   position: relative;
   z-index: 1;
-  transform: rotateX(calc((0.5 - var(--section-scroll)) * 3deg));
-  transform-style: preserve-3d;
-  transition: transform 0.1s linear;
 }
 
 .work-head {
   margin-bottom: clamp(1.2rem, 2.5vh, 2rem);
+}
+
+/* Slower first-view reveal pacing for the Work section */
+.work-section .reveal {
+  transition-duration: 1.7s;
+}
+
+.work-grid.reveal-stagger > .reveal {
+  transition-delay: calc(var(--reveal-i, 0) * 0.22s);
 }
 
 /* ── Grid ─────────────────────────────────────────── */
@@ -59,19 +77,43 @@
 /* ── Card ─────────────────────────────────────────── */
 
 .work-card {
+  --card-hue: 215;
+  --card-sat: 40%;
   position: relative;
   border-radius: var(--radius, 20px);
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  background: var(--glass, rgba(255, 255, 255, 0.42));
+  border: 1px solid hsla(var(--card-hue), var(--card-sat), 60%, 0.22);
+  background:
+    linear-gradient(
+      135deg,
+      hsla(var(--card-hue), var(--card-sat), 50%, 0.14) 0%,
+      hsla(var(--card-hue), var(--card-sat), 40%, 0.04) 60%,
+      transparent 100%
+    ),
+    var(--glass, rgba(20, 26, 36, 0.55));
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  box-shadow: var(--shadow-soft, 0 8px 32px rgba(18, 22, 29, 0.08));
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    0 0 12px hsla(var(--card-hue), var(--card-sat), 50%, 0.06);
   transition:
+    opacity 1.7s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.55s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
     box-shadow 0.5s ease,
     border-color 0.35s ease;
   cursor: default;
+}
+
+.work-card-main {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Make the first reveal in the Work section more visible/slower */
+.work-card.reveal:not(.is-revealed) {
+  transform: translateY(72px) scale(0.985);
 }
 
 .work-card::before {
@@ -82,9 +124,9 @@
   padding: 1px;
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.6),
-    rgba(200, 208, 218, 0.3) 50%,
-    rgba(255, 255, 255, 0.5)
+    hsla(var(--card-hue), var(--card-sat), 65%, 0.35),
+    hsla(var(--card-hue), var(--card-sat), 50%, 0.1) 50%,
+    hsla(var(--card-hue), var(--card-sat), 65%, 0.3)
   );
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
@@ -99,13 +141,22 @@
   pointer-events: none;
 }
 
-.work-card:hover {
+.work-card:hover,
+.work-card:focus-within {
   transform: translateY(-8px) scale(1.01);
-  box-shadow: var(--shadow-lift, 0 20px 48px rgba(18, 22, 29, 0.12));
-  border-color: transparent;
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.25),
+    0 0 28px hsla(var(--card-hue), var(--card-sat), 50%, 0.15);
+  border-color: hsla(var(--card-hue), var(--card-sat), 65%, 0.35);
 }
 
-.work-card:hover::before {
+.work-card-main:focus-visible {
+  outline: 2px solid rgba(200, 215, 240, 0.18);
+  outline-offset: 3px;
+}
+
+.work-card:hover::before,
+.work-card:focus-within::before {
   opacity: 1;
 }
 
@@ -128,7 +179,8 @@
   filter: saturate(0.92);
 }
 
-.work-card:hover .work-card-img img {
+.work-card:hover .work-card-img img,
+.work-card:focus-within .work-card-img img {
   transform: scale(1.05);
   filter: saturate(1);
 }
@@ -146,7 +198,7 @@
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.14em;
-  color: var(--muted, #3a4452);
+  color: var(--muted, #8a95a5);
   opacity: 0.4;
 }
 
@@ -157,19 +209,30 @@
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.025em;
-  color: var(--ink, #0e1219);
+  color: var(--ink, #e8ecf2);
 }
 
 .work-card-subtitle {
   margin: 0;
   font-size: clamp(0.82rem, 0.92vw, 0.92rem);
-  color: var(--muted, #3a4452);
+  color: var(--muted, #8a95a5);
   line-height: 1.4;
   font-weight: 500;
 }
 
 .work-card .tag-row {
   margin-top: 0.25rem;
+}
+
+.work-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 clamp(0.75rem, 1.1vw, 0.95rem) clamp(0.75rem, 1vw, 0.9rem);
+}
+
+.work-card-demo {
+  position: relative;
+  z-index: 1;
 }
 
 /* ── Responsive ───────────────────────────────────── */
@@ -181,7 +244,12 @@
   }
 
   .work-card-img img {
-    height: clamp(140px, 40vw, 200px);
+    height: clamp(140px, 40vw, 220px);
+  }
+
+  .work-card:hover,
+  .work-card:focus-within {
+    transform: translateY(-4px) scale(1.005);
   }
 
   .work-accent {
@@ -190,6 +258,24 @@
 
   .work-inner {
     transform: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .work-card-body {
+    padding: 0.6rem 0.7rem;
+  }
+
+  .work-card-title {
+    font-size: clamp(1rem, 5vw, 1.2rem);
+  }
+
+  .work-card-subtitle {
+    font-size: 0.82rem;
+  }
+
+  .work-card-actions {
+    padding: 0 0.7rem 0.65rem;
   }
 }
 

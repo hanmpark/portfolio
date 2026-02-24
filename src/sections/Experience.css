@@ -4,7 +4,8 @@
   position: relative;
   padding-block: clamp(4rem, 8vh, 7rem);
   overflow-x: clip;
-  perspective: 1200px;
+  overflow-y: visible;
+  perspective: 720px;
 }
 
 /* ── Floating accent images ────────────────────── */
@@ -14,22 +15,34 @@
   z-index: 0;
   max-width: none;
   filter: grayscale(1) saturate(0) brightness(1.1);
-  opacity: 0.12;
+  opacity: 0.18;
   transition: transform 0.1s linear;
 }
 
 .exp-accent--1 {
-  width: clamp(180px, 22vw, 320px);
-  top: -4%;
-  right: -3%;
-  transform: translateY(calc((0.5 - var(--exp-scroll)) * 70px)) rotate(12deg);
+  width: clamp(280px, 30vw, 460px);
+  top: 3%;
+  right: -1%;
+  transform: translate3d(
+      0,
+      calc((0.5 - var(--exp-scroll)) * 180px),
+      calc((0.5 - var(--exp-scroll)) * 60px)
+    )
+    rotate(calc(12deg + (0.5 - var(--exp-scroll)) * 9deg))
+    scale(calc(1.02 + (0.5 - var(--exp-scroll)) * 0.06));
 }
 
 .exp-accent--2 {
-  width: clamp(140px, 18vw, 260px);
-  bottom: -2%;
-  left: -2%;
-  transform: translateY(calc((var(--exp-scroll) - 0.5) * 50px)) rotate(-8deg);
+  width: clamp(220px, 24vw, 360px);
+  bottom: 4%;
+  left: -1%;
+  transform: translate3d(
+      0,
+      calc((var(--exp-scroll) - 0.5) * 150px),
+      calc((var(--exp-scroll) - 0.5) * 48px)
+    )
+    rotate(calc(-10deg + (var(--exp-scroll) - 0.5) * 8deg))
+    scale(calc(1 + (var(--exp-scroll) - 0.5) * 0.06));
 }
 
 /* ── Inner layout ──────────────────────────────── */
@@ -39,11 +52,7 @@
   display: flex;
   flex-direction: column;
   gap: clamp(2rem, 4vh, 3rem);
-  max-width: 1100px;
-  /* Perspective-driven tilt on scroll */
-  transform: rotateX(calc((0.5 - var(--exp-scroll)) * 3deg));
-  transform-style: preserve-3d;
-  transition: transform 0.1s linear;
+  max-width: 1180px;
 }
 
 .exp-head {
@@ -58,11 +67,15 @@
 .exp-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(1.5rem, 3vw, 3rem);
+  gap: clamp(1.25rem, 2.4vw, 2.25rem);
   align-items: start;
 }
 
 .exp-col {
+  --exp-line-indent: 1.6rem;
+  --exp-marker-size: 10px;
+  --exp-line-width: 2px;
+  --exp-marker-top: 1.15rem;
   display: flex;
   flex-direction: column;
   gap: clamp(1rem, 2vh, 1.4rem);
@@ -71,11 +84,11 @@
 .exp-col-title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  font-size: clamp(1.06rem, 1.5vw, 1.28rem);
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: var(--ink, #0e1219);
-  padding-left: 1.6rem;
+  color: var(--ink, #e8ecf2);
+  padding-left: var(--exp-line-indent);
 }
 
 /* ── timeline list ─────────────────────────── */
@@ -83,135 +96,182 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: clamp(0.75rem, 1.5vh, 1.1rem);
-  padding-left: 1.6rem;
+  gap: clamp(0.9rem, 1.8vh, 1.2rem);
+  padding-left: var(--exp-line-indent);
 }
 
 /* vertical line */
 .exp-timeline::before {
   content: "";
   position: absolute;
-  left: 3px;
-  top: 0.7rem;
-  bottom: 0.7rem;
-  width: 2px;
+  left: calc((var(--exp-marker-size) - var(--exp-line-width)) / 2);
+  top: calc(var(--exp-marker-top) + (var(--exp-marker-size) / 2));
+  bottom: calc(var(--exp-marker-top) + (var(--exp-marker-size) / 2));
+  width: var(--exp-line-width);
   background: linear-gradient(
     180deg,
-    rgba(18, 22, 29, 0.1),
-    rgba(18, 22, 29, 0.04)
+    rgba(200, 215, 240, 0.1),
+    rgba(200, 215, 240, 0.04)
   );
   border-radius: 2px;
+  pointer-events: none;
 }
 
 /* ── markers ───────────────────────────── */
 .exp-marker {
   position: absolute;
-  left: -1.6rem;
-  top: 1.15rem;
-  width: 10px;
-  height: 10px;
+  left: calc(-1 * var(--exp-line-indent));
+  top: var(--exp-marker-top);
+  width: var(--exp-marker-size);
+  height: var(--exp-marker-size);
   border-radius: 50%;
-  background: rgba(18, 22, 29, 0.06);
-  border: 2px solid rgba(18, 22, 29, 0.1);
+  background: rgba(200, 215, 240, 0.06);
+  border: 2px solid rgba(200, 215, 240, 0.1);
   transition:
     background 0.35s,
     border-color 0.35s,
     box-shadow 0.35s,
     transform 0.35s;
   z-index: 2;
+  pointer-events: none;
 }
 
 .exp-card:hover .exp-marker {
-  background: var(--accent, #2a333f);
-  border-color: var(--accent, #2a333f);
-  box-shadow: 0 0 8px rgba(18, 22, 29, 0.15);
+  background: hsla(var(--card-hue), var(--card-sat), 55%, 0.8);
+  border-color: hsla(var(--card-hue), var(--card-sat), 55%, 0.8);
+  box-shadow: 0 0 10px hsla(var(--card-hue), var(--card-sat), 50%, 0.25);
   transform: scale(1.15);
 }
 
 /* ── card ───────────────────────────────── */
 .exp-card {
+  --card-hue: 215;
+  --card-sat: 40%;
   position: relative;
-  border-radius: 18px;
-  background: var(--glass, rgba(255, 255, 255, 0.42));
-  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.72));
+  opacity: 0;
+  border-radius: 20px;
+  background:
+    linear-gradient(
+      135deg,
+      hsla(var(--card-hue), var(--card-sat), 50%, 0.06) 0%,
+      transparent 60%
+    ),
+    var(--glass, rgba(20, 26, 36, 0.55));
+  border: 1px solid hsla(var(--card-hue), var(--card-sat), 60%, 0.12);
   backdrop-filter: blur(16px);
   transition:
     background 0.35s,
     border-color 0.35s,
     box-shadow 0.4s,
     transform 0.45s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
-  /* CSS-only staggered entrance */
-  animation: exp-card-enter 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: calc(var(--card-i, 0) * 0.1s + 0.2s);
-}
-
-@keyframes exp-card-enter {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  /* Fade on card container so hover transform remains independent */
+  animation: exp-card-fade 1.05s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--card-i, 0) * 0.14s + 0.28s);
 }
 
 .exp-card:hover {
-  background: var(--glass-strong, rgba(255, 255, 255, 0.62));
-  box-shadow: var(--shadow-soft, 0 8px 32px rgba(18 22 29 / 0.08));
+  background:
+    linear-gradient(
+      135deg,
+      hsla(var(--card-hue), var(--card-sat), 50%, 0.1) 0%,
+      transparent 60%
+    ),
+    var(--glass-strong, rgba(30, 38, 52, 0.7));
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    0 0 20px hsla(var(--card-hue), var(--card-sat), 50%, 0.06);
   transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.85);
+  border-color: hsla(var(--card-hue), var(--card-sat), 65%, 0.22);
+  z-index: 3;
+}
+
+@keyframes exp-card-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .exp-card-inner {
-  padding: clamp(0.7rem, 1.3vh, 1rem) clamp(0.8rem, 1.5vw, 1.1rem);
+  translate: 0 0;
+  padding: clamp(0.9rem, 1.8vh, 1.2rem) clamp(0.95rem, 1.8vw, 1.3rem);
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: 0.55rem;
+  animation: exp-card-slide 1.05s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--card-i, 0) * 0.14s + 0.28s);
+}
+
+@keyframes exp-card-slide {
+  from {
+    translate: 0 28px;
+  }
+  to {
+    translate: 0 0;
+  }
 }
 
 /* top row */
 .exp-card-top {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.9rem;
 }
 
 .exp-logo {
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  overflow: hidden;
-  background: rgba(18 22 29 / 0.04);
+  width: clamp(74px, 8vw, 96px);
+  height: clamp(52px, 5.8vw, 64px);
+  border-radius: 12px;
+  overflow: visible;
+  background: rgba(20, 26, 36, 0.35);
   display: grid;
   place-items: center;
-  padding: 4px;
+  padding: 4px 6px;
 }
+
+.exp-logo--square {
+  width: clamp(60px, 6.2vw, 74px);
+  height: clamp(60px, 6.2vw, 74px);
+  border-radius: 12px;
+  padding: 5px;
+}
+
 .exp-logo img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  object-position: center;
 }
 
 .exp-role {
   font-family: var(--font-display);
-  font-size: clamp(0.82rem, 1.1vw, 0.95rem);
+  font-size: clamp(0.94rem, 1.2vw, 1.08rem);
   font-weight: 600;
-  color: var(--ink, #0e1219);
+  color: var(--ink, #e8ecf2);
   line-height: 1.25;
 }
 
 .exp-company {
-  font-size: 0.72rem;
-  color: var(--muted, #3a4452);
+  font-size: clamp(0.78rem, 0.9vw, 0.86rem);
+  color: var(--muted, #8a95a5);
   letter-spacing: 0.02em;
 }
 
+.exp-period {
+  margin: 0.08rem 0 0;
+  font-size: clamp(0.73rem, 0.82vw, 0.8rem);
+  color: var(--muted, #8a95a5);
+  opacity: 0.72;
+  letter-spacing: 0.01em;
+}
+
 .exp-summary {
-  font-size: clamp(0.7rem, 0.9vw, 0.78rem);
-  color: var(--muted, #3a4452);
-  line-height: 1.5;
+  font-size: clamp(0.8rem, 0.98vw, 0.9rem);
+  color: var(--muted, #8a95a5);
+  line-height: 1.55;
 }
 
 .exp-tags {
@@ -220,12 +280,42 @@
   gap: 0.3rem;
 }
 .exp-tags .pill {
-  font-size: 0.58rem;
-  padding: 0.15em 0.5em;
+  font-size: 0.64rem;
+  padding: 0.2em 0.58em;
+}
+
+/* ── Per-card accent hues ──────────────────────── */
+.exp-timeline > :nth-child(1) {
+  --card-hue: 210;
+  --card-sat: 50%;
+}
+.exp-timeline > :nth-child(2) {
+  --card-hue: 280;
+  --card-sat: 34%;
+}
+.exp-timeline > :nth-child(3) {
+  --card-hue: 340;
+  --card-sat: 38%;
+}
+.exp-timeline > :nth-child(4) {
+  --card-hue: 160;
+  --card-sat: 40%;
+}
+.exp-timeline > :nth-child(5) {
+  --card-hue: 40;
+  --card-sat: 45%;
+}
+.exp-timeline > :nth-child(6) {
+  --card-hue: 190;
+  --card-sat: 42%;
 }
 
 /* ── responsive ─────────────────────── */
 @media (max-width: 768px) {
+  .exp-col {
+    --exp-line-indent: 1.2rem;
+  }
+
   .exp-inner {
     transform: none;
   }
@@ -239,16 +329,47 @@
     text-align: center;
   }
 
-  .exp-timeline {
-    padding-left: 1.2rem;
-  }
-
-  .exp-col-title {
-    padding-left: 1.2rem;
-  }
-
   .exp-accent {
     display: none;
+  }
+
+  .exp-card:hover {
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 480px) {
+  .exp-card-inner {
+    padding: 0.75rem 0.8rem;
+    gap: 0.4rem;
+  }
+
+  .exp-card-top {
+    gap: 0.65rem;
+  }
+
+  .exp-logo {
+    width: clamp(52px, 14vw, 68px);
+    height: clamp(40px, 10vw, 52px);
+    border-radius: 10px;
+  }
+
+  .exp-logo--square {
+    width: clamp(44px, 12vw, 56px);
+    height: clamp(44px, 12vw, 56px);
+  }
+
+  .exp-role {
+    font-size: clamp(0.86rem, 4vw, 0.96rem);
+  }
+
+  .exp-summary {
+    font-size: clamp(0.78rem, 3.5vw, 0.88rem);
+  }
+
+  .exp-tags .pill {
+    font-size: 0.6rem;
+    padding: 0.18em 0.5em;
   }
 }
 
@@ -260,6 +381,9 @@
     transform: none !important;
   }
   .exp-card {
+    animation: none !important;
+  }
+  .exp-card-inner {
     animation: none !important;
   }
 }

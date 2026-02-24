@@ -3,8 +3,9 @@
   --section-scroll: 0;
   position: relative;
   padding-block: clamp(4rem, 8vh, 7rem);
-  overflow: hidden;
-  perspective: 1000px;
+  overflow-x: clip;
+  overflow-y: visible;
+  perspective: 640px;
 }
 
 /* Floating accent */
@@ -12,13 +13,18 @@
   position: absolute;
   pointer-events: none;
   z-index: 0;
-  width: clamp(200px, 26vw, 380px);
+  width: clamp(320px, 36vw, 560px);
   top: 50%;
-  right: -6%;
-  transform: translateY(calc(-50% + (var(--section-scroll) - 0.5) * 80px))
-    rotate(6deg);
+  right: -3%;
+  transform: translate3d(
+      0,
+      calc(-50% + (var(--section-scroll) - 0.5) * 210px),
+      calc((var(--section-scroll) - 0.5) * 70px)
+    )
+    rotate(calc(8deg + (var(--section-scroll) - 0.5) * 10deg))
+    scale(calc(1.02 + (var(--section-scroll) - 0.5) * 0.08));
   filter: grayscale(1) saturate(0) brightness(1.1);
-  opacity: 0.08;
+  opacity: 0.14;
   transition: transform 0.1s linear;
 }
 
@@ -31,16 +37,18 @@
   grid-template-columns: 1fr 0.7fr;
   gap: clamp(2rem, 5vw, 4rem);
   align-items: center;
-  /* Perspective tilt */
-  transform: rotateX(calc((0.5 - var(--section-scroll)) * 2deg));
-  transform-style: preserve-3d;
-  transition: transform 0.1s linear;
 }
 
 .abt-content {
   display: flex;
   flex-direction: column;
   gap: clamp(1rem, 2vh, 1.6rem);
+}
+
+/* Slower first-view reveal pacing for the About section */
+.abt-section .reveal {
+  transition-duration: 1.85s;
+  transition-delay: calc(var(--reveal-i, 0) * 0.24s);
 }
 
 .abt-title {
@@ -73,11 +81,11 @@
 .abt-prose p {
   font-size: clamp(0.88rem, 1.1vw, 1rem);
   line-height: 1.75;
-  color: var(--muted, #3a4452);
+  color: var(--muted, #8a95a5);
 }
 
 .abt-prose p:first-child {
-  color: var(--ink, #0e1219);
+  color: var(--ink, #e8ecf2);
   font-size: clamp(0.92rem, 1.2vw, 1.05rem);
   font-weight: 500;
 }
@@ -89,9 +97,9 @@
   border-radius: var(--radius-lg, 28px);
   overflow: hidden;
   aspect-ratio: 3 / 4;
-  background: var(--glass, rgba(255, 255, 255, 0.42));
-  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.72));
-  box-shadow: var(--shadow-soft, 0 8px 32px rgba(18, 22, 29, 0.08));
+  background: var(--glass, rgba(20, 26, 36, 0.55));
+  border: 1px solid var(--glass-border, rgba(200, 215, 240, 0.1));
+  box-shadow: var(--shadow-soft, 0 8px 32px rgba(0, 0, 0, 0.2));
 }
 
 .abt-portrait::before {
@@ -102,9 +110,9 @@
   padding: 1px;
   background: linear-gradient(
     160deg,
-    rgba(255, 255, 255, 0.5),
-    rgba(200, 208, 218, 0.2) 50%,
-    rgba(255, 255, 255, 0.45)
+    rgba(200, 215, 240, 0.12),
+    rgba(120, 150, 200, 0.06) 50%,
+    rgba(200, 215, 240, 0.1)
   );
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
@@ -137,7 +145,6 @@
   .abt-inner {
     grid-template-columns: 1fr;
     text-align: center;
-    transform: none;
   }
   .abt-content {
     align-items: center;
@@ -148,6 +155,20 @@
   .abt-portrait {
     max-width: 320px;
     margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .abt-portrait {
+    max-width: 260px;
+  }
+
+  .abt-prose p {
+    font-size: clamp(0.84rem, 3.8vw, 0.94rem);
+  }
+
+  .abt-prose p:first-child {
+    font-size: clamp(0.88rem, 4vw, 0.98rem);
   }
 }
 

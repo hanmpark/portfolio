@@ -7,9 +7,9 @@
   opacity: 0;
   will-change: transform, opacity;
   transition:
-    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ── Variants ──────────────────────────────────────── */
@@ -52,7 +52,7 @@
 /* child auto-gets increasing delay via --reveal-i.     */
 
 .reveal-stagger > .reveal {
-  transition-delay: calc(var(--reveal-i, 0) * 0.09s);
+  transition-delay: calc(var(--reveal-i, 0) * 0.14s);
 }
 
 .reveal-stagger > .reveal:nth-child(1) {
@@ -133,11 +133,11 @@
   transform: scaleX(var(--scroll-progress, 0));
   background: linear-gradient(
     90deg,
-    rgba(90, 98, 112, 0.6),
-    rgba(120, 131, 143, 0.8) 50%,
-    rgba(90, 98, 112, 0.6)
+    rgba(138, 149, 165, 0.4),
+    rgba(160, 175, 195, 0.65) 50%,
+    rgba(138, 149, 165, 0.4)
   );
-  box-shadow: 0 0 6px rgba(90, 98, 112, 0.15);
+  box-shadow: 0 0 6px rgba(138, 149, 165, 0.15);
   transition: transform 0.12s linear;
 }
 
@@ -151,9 +151,9 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.52) 24%,
-    rgba(124, 155, 199, 0.32) 50%,
-    rgba(255, 255, 255, 0.52) 76%,
+    rgba(200, 215, 240, 0.1) 24%,
+    rgba(120, 150, 200, 0.15) 50%,
+    rgba(200, 215, 240, 0.1) 76%,
     transparent
   );
 }
