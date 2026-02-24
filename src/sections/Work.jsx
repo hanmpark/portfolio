@@ -1,87 +1,93 @@
-import { useEffect, useRef } from "react";
-import { projects } from "../data/home.js";
-import "./Work.css";
+import { useEffect, useRef } from 'react'
+import { projects } from '../data/home.js'
+import useScrollReveal from '../hooks/useScrollReveal.js'
+import './Work.css'
 
 const Work = () => {
-  const listRef = useRef(null);
+  const sectionRef = useRef(null)
+  const headRef = useScrollReveal({ threshold: 0.15, selector: '.reveal' })
 
+  /* Scroll-driven parallax on accent images */
   useEffect(() => {
-    const cards = listRef.current?.querySelectorAll(".project-card");
-    if (!cards?.length) return;
+    const el = sectionRef.current
+    if (!el) return
+    let raf = 0
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          entry.target.classList.toggle("is-visible", entry.isIntersecting);
-        });
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
-    );
+    const update = () => {
+      raf = 0
+      const rect = el.getBoundingClientRect()
+      const vh = window.innerHeight || 1
+      const progress = Math.min(Math.max((vh - rect.top) / (rect.height + vh), 0), 1)
+      el.style.setProperty('--section-scroll', progress.toFixed(4))
+    }
 
-    cards.forEach((card) => observer.observe(card));
-    return () => observer.disconnect();
-  }, []);
+    const schedule = () => { if (!raf) raf = requestAnimationFrame(update) }
+    update()
+    window.addEventListener('scroll', schedule, { passive: true })
+    return () => {
+      if (raf) cancelAnimationFrame(raf)
+      window.removeEventListener('scroll', schedule)
+    }
+  }, [])
 
   return (
-    <section className="section work-section" id="work">
-      <div className="container work-head">
-        <h2 className="section-title">Selected works</h2>
-      </div>
-
+    <section className="section work-section" id="work" ref={sectionRef}>
+      {/* Floating accent images */}
       <img
-        className="work-rocket"
-        src="/assets/premium/space-rocket.png"
+        className="work-accent work-accent--1"
+        src="/assets/premium/fig5.png"
         alt=""
         aria-hidden="true"
-        loading="lazy"
       />
-
       <img
-        className="work-rocket work-rocket--left"
-        src="/assets/premium/space-rocket.png"
+        className="work-accent work-accent--2"
+        src="/assets/premium/fig6.png"
         alt=""
         aria-hidden="true"
-        loading="lazy"
       />
 
-      <div className="container project-list" ref={listRef}>
-        {projects.map((project, index) => (
-          <article
-            className={`project-card${index % 2 !== 0 ? " project-card--reverse" : ""}`}
-            style={{ "--index": index }}
-            key={project.title}
-          >
-            <figure className="project-preview">
-              <img
-                src={project.previewImage}
-                alt={`${project.title} preview`}
-                loading="lazy"
-              />
-            </figure>
+      <div className="container work-inner" ref={headRef}>
+        <header className="work-head">
+          <p className="eyebrow reveal reveal-up">Selected work</p>
+          <h2 className="section-title reveal reveal-up">Projects</h2>
+        </header>
 
-            <div className="project-content">
-              <span className="project-number">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <h3 className="project-title">{project.title}</h3>
-              <p className="project-subtitle">{project.subtitle}</p>
-              <p className="project-description">{project.description}</p>
+        <div className="work-grid reveal-stagger">
+          {projects.map((project, index) => (
+            <article
+              className="work-card reveal reveal-up"
+              style={{ '--reveal-i': index }}
+              key={project.title}
+            >
+              <figure className="work-card-img">
+                <img
+                  src={project.previewImage}
+                  alt={`${project.title} preview`}
+                  loading="lazy"
+                />
+              </figure>
 
-              {project.tags?.length ? (
-                <div className="tag-row">
-                  {project.tags.map((tag) => (
-                    <span className="pill" key={tag}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              ) : null}
-            </div>
-          </article>
-        ))}
+              <div className="work-card-body">
+                <span className="work-card-number">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <h3 className="work-card-title">{project.title}</h3>
+                <p className="work-card-subtitle">{project.subtitle}</p>
+
+                {project.tags?.length ? (
+                  <div className="tag-row">
+                    {project.tags.map((tag) => (
+                      <span className="pill" key={tag}>{tag}</span>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Work;
+export default Work

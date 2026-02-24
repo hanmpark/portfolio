@@ -51,11 +51,12 @@
 
 .hero-kicker {
   margin: 0;
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(33, 47, 63, 0.78);
+  color: var(--muted, #3a4452);
+  opacity: 0.6;
 }
 
 .hero-title {
@@ -75,19 +76,33 @@
   font-family: var(--font-body);
   font-size: clamp(0.8rem, 1.05vw, 0.96rem);
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(33, 47, 63, 0.78);
+  color: var(--muted, #3a4452);
+  opacity: 0.6;
 }
 
 .hero-title-role {
   font-size: clamp(3.4rem, 7.4vw, 6.5rem);
   font-weight: 700;
-  background: linear-gradient(128deg, #0f1a28 0%, #243852 42%, #5f7da5 100%);
+  background: linear-gradient(
+    128deg,
+    #0e1219 0%,
+    #1e252e 30%,
+    #3a4452 55%,
+    #6b7685 100%
+  );
+  background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   padding-bottom: 2rem;
+  animation: gradient-shift 8s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 100% center; }
 }
 
 .hero-template {
@@ -95,7 +110,7 @@
   max-width: 54ch;
   width: min(100%, 620px);
   font-size: clamp(1rem, 1.08vw, 1.1rem);
-  color: #2f3a4a;
+  color: var(--muted, #3a4452);
   line-height: 1.84;
   margin-top: 0.2rem;
   padding: 0;
@@ -107,8 +122,17 @@
   display: block;
   margin-bottom: 0.22rem;
   font-size: 1.03em;
-  font-weight: 700;
-  color: #192739;
+  font-weight: 600;
+  color: var(--ink, #0e1219);
+}
+
+/* CTA row in hero */
+.hero-actions {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .hero-figures {

@@ -5,11 +5,13 @@ import Experience from '../sections/Experience.jsx'
 import About from '../sections/About.jsx'
 import Contact from '../sections/Contact.jsx'
 import Footer from '../components/Footer.jsx'
+import ScrollProgress from '../components/ScrollProgress.jsx'
 import './App.css'
 
 const App = () => {
   return (
     <div className="app">
+      <ScrollProgress />
       <Hero />
       <main>
         <Work />

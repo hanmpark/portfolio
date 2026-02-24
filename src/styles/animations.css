@@ -1,0 +1,151 @@
+/* ── Scroll-reveal animation utilities ────────────── */
+/* Apply `.reveal` + a variant class on elements, then   */
+/* `is-revealed` is toggled by useScrollReveal.          */
+
+/* Base hidden state */
+.reveal {
+  opacity: 0;
+  will-change: transform, opacity;
+  transition:
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Variants ──────────────────────────────────────── */
+
+.reveal.reveal-up {
+  transform: translateY(52px);
+}
+
+.reveal.reveal-down {
+  transform: translateY(-40px);
+}
+
+.reveal.reveal-left {
+  transform: translateX(60px);
+}
+
+.reveal.reveal-right {
+  transform: translateX(-60px);
+}
+
+.reveal.reveal-scale {
+  transform: scale(0.92);
+}
+
+.reveal.reveal-blur {
+  filter: blur(8px);
+  transform: translateY(24px);
+}
+
+/* ── Revealed state ────────────────────────────────── */
+
+.reveal.is-revealed {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+  filter: blur(0);
+}
+
+/* ── Stagger children ─────────────────────────────── */
+/* Add `reveal-stagger` on a parent. Each `.reveal`     */
+/* child auto-gets increasing delay via --reveal-i.     */
+
+.reveal-stagger > .reveal {
+  transition-delay: calc(var(--reveal-i, 0) * 0.09s);
+}
+
+.reveal-stagger > .reveal:nth-child(1)  { --reveal-i: 0; }
+.reveal-stagger > .reveal:nth-child(2)  { --reveal-i: 1; }
+.reveal-stagger > .reveal:nth-child(3)  { --reveal-i: 2; }
+.reveal-stagger > .reveal:nth-child(4)  { --reveal-i: 3; }
+.reveal-stagger > .reveal:nth-child(5)  { --reveal-i: 4; }
+.reveal-stagger > .reveal:nth-child(6)  { --reveal-i: 5; }
+.reveal-stagger > .reveal:nth-child(7)  { --reveal-i: 6; }
+.reveal-stagger > .reveal:nth-child(8)  { --reveal-i: 7; }
+.reveal-stagger > .reveal:nth-child(9)  { --reveal-i: 8; }
+.reveal-stagger > .reveal:nth-child(10) { --reveal-i: 9; }
+
+/* ── Hero reveal keyframes ─────────────────────────── */
+
+@keyframes text-reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(36px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.hero-reveal {
+  opacity: 0;
+  animation: text-reveal-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-reveal-d1 { animation-delay: 0.15s; }
+.hero-reveal-d2 { animation-delay: 0.35s; }
+.hero-reveal-d3 { animation-delay: 0.55s; }
+.hero-reveal-d4 { animation-delay: 0.75s; }
+
+/* ── Scroll progress bar ──────────────────────────── */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 9999;
+  pointer-events: none;
+  transform-origin: left;
+  transform: scaleX(var(--scroll-progress, 0));
+  background: linear-gradient(
+    90deg,
+    rgba(90, 98, 112, 0.6),
+    rgba(120, 131, 143, 0.8) 50%,
+    rgba(90, 98, 112, 0.6)
+  );
+  box-shadow: 0 0 6px rgba(90, 98, 112, 0.15);
+  transition: transform 0.12s linear;
+}
+
+/* ── Section divider line ─────────────────────────── */
+
+.section-divider {
+  width: min(860px, 80vw);
+  margin: 0 auto;
+  height: 1px;
+  border: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.52) 24%,
+    rgba(124, 155, 199, 0.32) 50%,
+    rgba(255, 255, 255, 0.52) 76%,
+    transparent
+  );
+}
+
+/* ── Reduced-motion override ──────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+
+  .hero-reveal {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+
+  .scroll-progress {
+    display: none;
+  }
+}

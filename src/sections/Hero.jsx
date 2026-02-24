@@ -115,16 +115,20 @@ const Hero = () => {
       <div className="hero-grid container">
         <div className="hero-copy">
           <h1 className="hero-title">
-            <span className="hero-title-name">Hanmin Park</span>
-            <span className="hero-title-role">Software Engineer</span>
+            <span className="hero-title-name hero-reveal hero-reveal-d1">Hanmin Park</span>
+            <span className="hero-title-role hero-reveal hero-reveal-d2">Software Engineer</span>
           </h1>
-          <p className="hero-template">
+          <p className="hero-template hero-reveal hero-reveal-d3">
             <span className="hero-template-lead">
               I design and build scalable web applications and intelligent
               systems, from frontend interfaces to backend architecture, with a
               focus on performance, clarity, and real-world impact.
             </span>
           </p>
+          <div className="hero-actions hero-reveal hero-reveal-d4">
+            <a className="btn" href="#work">View work</a>
+            <a className="btn ghost" href="#contact">Get in touch</a>
+          </div>
         </div>
       </div>
     </header>

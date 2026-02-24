@@ -1,49 +1,33 @@
 import { contact, sectionCopy } from '../data/home.js'
+import useScrollReveal from '../hooks/useScrollReveal.js'
 import './Contact.css'
 
 const Contact = () => {
+  const sectionRef = useScrollReveal({ threshold: 0.15 })
+
   return (
-    <section className="section contact-section" id="contact">
-      <div className="container contact-shell">
-        <div className="contact-copy">
-          <p className="eyebrow">{sectionCopy.contact.eyebrow}</p>
-          <h2 className="section-title">{sectionCopy.contact.title}</h2>
-          <p className="section-subtitle">{sectionCopy.contact.subtitle}</p>
+    <section className="section ct-section" id="contact" ref={sectionRef}>
+      <div className="container ct-inner">
+        <p className="eyebrow reveal reveal-up">{sectionCopy.contact.eyebrow}</p>
+        <h2 className="section-title ct-title reveal reveal-up">
+          {sectionCopy.contact.title}
+        </h2>
+        <p className="ct-sub reveal reveal-up" style={{ '--reveal-i': 1 }}>
+          {sectionCopy.contact.subtitle}
+        </p>
+
+        <div className="ct-actions reveal reveal-up" style={{ '--reveal-i': 2 }}>
+          <a className="btn ct-btn" href={`mailto:${contact.email}`}>
+            Send an email
+          </a>
+          <a className="btn ghost ct-btn" href={contact.calendarUrl}>
+            Book a call
+          </a>
         </div>
 
-        <div className="contact-panel" aria-label="Contact actions">
-          <div className="contact-panel-top">
-            <span className="contact-status-dot" aria-hidden="true" />
-            <p>Open to internships, junior roles, and project collaborations</p>
-          </div>
-
-          <div className="contact-primary">
-            <p className="contact-label">Email</p>
-            <a className="contact-email" href={`mailto:${contact.email}`}>
-              {contact.email}
-            </a>
-          </div>
-
-          <div className="contact-actions">
-            <a className="btn contact-btn" href={`mailto:${contact.email}`}>
-              Send an email
-            </a>
-            <a className="btn ghost contact-btn-secondary" href={contact.calendarUrl}>
-              Book a call
-            </a>
-          </div>
-
-          <div className="contact-meta-grid" aria-hidden="true">
-            <div className="contact-meta-item">
-              <span>Response</span>
-              <strong>Within 48h</strong>
-            </div>
-            <div className="contact-meta-item">
-              <span>Format</span>
-              <strong>Remote / Hybrid</strong>
-            </div>
-          </div>
-        </div>
+        <a className="ct-email reveal reveal-up" href={`mailto:${contact.email}`} style={{ '--reveal-i': 3 }}>
+          {contact.email}
+        </a>
       </div>
     </section>
   )

@@ -1,26 +1,55 @@
+/* ── Footer ─────────────────────────────────────── */
 .footer {
-  position: relative;
-  z-index: 1;
-  padding: 3rem 0 4rem;
-  border-top: 1px solid rgba(18, 22, 29, 0.14);
+  padding: clamp(1.4rem, 3vh, 2.2rem) 0;
+  border-top: 1px solid var(--line, rgba(18, 22, 29, 0.08));
 }
 
 .footer-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   flex-wrap: wrap;
-  font-size: 0.95rem;
-  color: var(--muted);
 }
 
-.footer-links {
+.footer-copy {
+  font-size: 0.7rem;
+  color: var(--muted, #3a4452);
+  opacity: 0.5;
+}
+
+.footer-socials {
   display: flex;
-  gap: 1.2rem;
-  font-weight: 600;
+  align-items: center;
+  gap: 1rem;
 }
 
-.footer-links a:hover {
-  color: var(--ink);
+.footer-socials a {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  opacity: 0.4;
+  transition:
+    opacity 0.3s ease,
+    transform 0.35s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.footer-socials a:hover {
+  opacity: 0.85;
+  transform: translateY(-3px);
+}
+
+.footer-socials img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 480px) {
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.6rem;
+  }
 }

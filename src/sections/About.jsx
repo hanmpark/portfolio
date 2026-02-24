@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react'
+import useScrollReveal from '../hooks/useScrollReveal.js'
 import './About.css'
 
 const aboutParagraphs = [
@@ -7,19 +9,59 @@ const aboutParagraphs = [
 ]
 
 const About = () => {
+  const sectionRef = useRef(null)
+  const revealRef = useScrollReveal({ threshold: 0.12 })
+
+  /* Scroll-driven parallax */
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    let raf = 0
+    const update = () => {
+      raf = 0
+      const rect = el.getBoundingClientRect()
+      const vh = window.innerHeight || 1
+      const progress = Math.min(Math.max((vh - rect.top) / (rect.height + vh), 0), 1)
+      el.style.setProperty('--section-scroll', progress.toFixed(4))
+    }
+    const schedule = () => { if (!raf) raf = requestAnimationFrame(update) }
+    update()
+    window.addEventListener('scroll', schedule, { passive: true })
+    return () => {
+      if (raf) cancelAnimationFrame(raf)
+      window.removeEventListener('scroll', schedule)
+    }
+  }, [])
+
   return (
-    <section className="section about-section" id="about">
-      <div className="container about-shell">
-        <div className="about-head">
-          <p className="eyebrow">About</p>
-          <h2 className="section-title">About</h2>
+    <section
+      className="section abt-section"
+      id="about"
+      ref={(node) => {
+        sectionRef.current = node
+        revealRef.current = node
+      }}
+    >
+      {/* Floating accent */}
+      <img className="abt-accent" src="/assets/premium/fig4.png" alt="" aria-hidden="true" />
+
+      <div className="container abt-inner">
+        <div className="abt-content">
+          <p className="eyebrow reveal reveal-up">About</p>
+          <h2 className="section-title abt-title reveal reveal-up">
+            Engineer with an eye for craft.
+          </h2>
+
+          <div className="abt-prose reveal reveal-up" style={{ '--reveal-i': 1 }}>
+            {aboutParagraphs.map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
+          </div>
         </div>
 
-        <div className="about-prose" aria-label="About description">
-          {aboutParagraphs.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-        </div>
+        <figure className="abt-portrait reveal reveal-scale" style={{ '--reveal-i': 2 }}>
+          <img src="/assets/self_image.jpg" alt="Hanmin Park" loading="lazy" />
+        </figure>
       </div>
     </section>
   )

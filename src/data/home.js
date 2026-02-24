@@ -105,11 +105,11 @@ export const experiences = [
   {
     category: 'Experience',
     role: 'Software Engineer',
-    company: 'Alternance',
+    company: 'Amadeus',
     image: '/assets/experiences/amadeus.svg',
     imageAlt: 'Amadeus logo',
     focus:
-      'Description courte, impact réel.',
+      'Building internal tooling to streamline developer workflows across the team and beyond.',
     summary:
       'Alternance as a software engineer with a focus on delivering concrete product impact through implementation quality and reliable execution.',
     stack: ['Software Engineering', 'Product Impact'],
