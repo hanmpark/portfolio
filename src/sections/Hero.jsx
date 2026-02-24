@@ -115,8 +115,12 @@ const Hero = () => {
       <div className="hero-grid container">
         <div className="hero-copy">
           <h1 className="hero-title">
-            <span className="hero-title-name hero-reveal hero-reveal-d1">Hanmin Park</span>
-            <span className="hero-title-role hero-reveal hero-reveal-d2">Software Engineer</span>
+            <span className="hero-title-name hero-reveal hero-reveal-d1">
+              Hanmin Park
+            </span>
+            <span className="hero-title-role hero-reveal hero-reveal-d2">
+              Software Engineer
+            </span>
           </h1>
           <p className="hero-template hero-reveal hero-reveal-d3">
             <span className="hero-template-lead">
@@ -126,8 +130,12 @@ const Hero = () => {
             </span>
           </p>
           <div className="hero-actions hero-reveal hero-reveal-d4">
-            <a className="btn" href="#work">View work</a>
-            <a className="btn ghost" href="#contact">Get in touch</a>
+            <a className="btn" href="#work">
+              View work
+            </a>
+            <a className="btn ghost" href="#contact">
+              Get in touch
+            </a>
           </div>
         </div>
       </div>

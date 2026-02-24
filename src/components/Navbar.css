@@ -51,7 +51,7 @@
 
 .nav::before,
 .nav::after {
-  content: '';
+  content: "";
   position: absolute;
   pointer-events: none;
   border-radius: inherit;

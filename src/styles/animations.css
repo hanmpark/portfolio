@@ -55,16 +55,36 @@
   transition-delay: calc(var(--reveal-i, 0) * 0.09s);
 }
 
-.reveal-stagger > .reveal:nth-child(1)  { --reveal-i: 0; }
-.reveal-stagger > .reveal:nth-child(2)  { --reveal-i: 1; }
-.reveal-stagger > .reveal:nth-child(3)  { --reveal-i: 2; }
-.reveal-stagger > .reveal:nth-child(4)  { --reveal-i: 3; }
-.reveal-stagger > .reveal:nth-child(5)  { --reveal-i: 4; }
-.reveal-stagger > .reveal:nth-child(6)  { --reveal-i: 5; }
-.reveal-stagger > .reveal:nth-child(7)  { --reveal-i: 6; }
-.reveal-stagger > .reveal:nth-child(8)  { --reveal-i: 7; }
-.reveal-stagger > .reveal:nth-child(9)  { --reveal-i: 8; }
-.reveal-stagger > .reveal:nth-child(10) { --reveal-i: 9; }
+.reveal-stagger > .reveal:nth-child(1) {
+  --reveal-i: 0;
+}
+.reveal-stagger > .reveal:nth-child(2) {
+  --reveal-i: 1;
+}
+.reveal-stagger > .reveal:nth-child(3) {
+  --reveal-i: 2;
+}
+.reveal-stagger > .reveal:nth-child(4) {
+  --reveal-i: 3;
+}
+.reveal-stagger > .reveal:nth-child(5) {
+  --reveal-i: 4;
+}
+.reveal-stagger > .reveal:nth-child(6) {
+  --reveal-i: 5;
+}
+.reveal-stagger > .reveal:nth-child(7) {
+  --reveal-i: 6;
+}
+.reveal-stagger > .reveal:nth-child(8) {
+  --reveal-i: 7;
+}
+.reveal-stagger > .reveal:nth-child(9) {
+  --reveal-i: 8;
+}
+.reveal-stagger > .reveal:nth-child(10) {
+  --reveal-i: 9;
+}
 
 /* ── Hero reveal keyframes ─────────────────────────── */
 
@@ -86,10 +106,18 @@
   animation: text-reveal-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.hero-reveal-d1 { animation-delay: 0.15s; }
-.hero-reveal-d2 { animation-delay: 0.35s; }
-.hero-reveal-d3 { animation-delay: 0.55s; }
-.hero-reveal-d4 { animation-delay: 0.75s; }
+.hero-reveal-d1 {
+  animation-delay: 0.15s;
+}
+.hero-reveal-d2 {
+  animation-delay: 0.35s;
+}
+.hero-reveal-d3 {
+  animation-delay: 0.55s;
+}
+.hero-reveal-d4 {
+  animation-delay: 0.75s;
+}
 
 /* ── Scroll progress bar ──────────────────────────── */
 

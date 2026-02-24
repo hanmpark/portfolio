@@ -22,18 +22,14 @@
   width: clamp(180px, 22vw, 320px);
   top: -4%;
   right: -3%;
-  transform:
-    translateY(calc((0.5 - var(--exp-scroll)) * 70px))
-    rotate(12deg);
+  transform: translateY(calc((0.5 - var(--exp-scroll)) * 70px)) rotate(12deg);
 }
 
 .exp-accent--2 {
   width: clamp(140px, 18vw, 260px);
   bottom: -2%;
   left: -2%;
-  transform:
-    translateY(calc((var(--exp-scroll) - 0.5) * 50px))
-    rotate(-8deg);
+  transform: translateY(calc((var(--exp-scroll) - 0.5) * 50px)) rotate(-8deg);
 }
 
 /* ── Inner layout ──────────────────────────────── */
@@ -93,7 +89,7 @@
 
 /* vertical line */
 .exp-timeline::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 3px;
   top: 0.7rem;
@@ -117,7 +113,11 @@
   border-radius: 50%;
   background: rgba(18, 22, 29, 0.06);
   border: 2px solid rgba(18, 22, 29, 0.1);
-  transition: background 0.35s, border-color 0.35s, box-shadow 0.35s, transform 0.35s;
+  transition:
+    background 0.35s,
+    border-color 0.35s,
+    box-shadow 0.35s,
+    transform 0.35s;
   z-index: 2;
 }
 

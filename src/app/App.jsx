@@ -1,12 +1,12 @@
-import Hero from '../sections/Hero.jsx'
-import TechStack from '../sections/TechStack.jsx'
-import Work from '../sections/Work.jsx'
-import Experience from '../sections/Experience.jsx'
-import About from '../sections/About.jsx'
-import Contact from '../sections/Contact.jsx'
-import Footer from '../components/Footer.jsx'
-import ScrollProgress from '../components/ScrollProgress.jsx'
-import './App.css'
+import Hero from "../sections/Hero.jsx";
+import TechStack from "../sections/TechStack.jsx";
+import Work from "../sections/Work.jsx";
+import Experience from "../sections/Experience.jsx";
+import About from "../sections/About.jsx";
+import Contact from "../sections/Contact.jsx";
+import Footer from "../components/Footer.jsx";
+import ScrollProgress from "../components/ScrollProgress.jsx";
+import "./App.css";
 
 const App = () => {
   return (
@@ -22,7 +22,7 @@ const App = () => {
       </main>
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

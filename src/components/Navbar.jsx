@@ -1,39 +1,39 @@
-import { useEffect, useRef, useState } from 'react'
-import { navLinks } from '../data/home.js'
-import './Navbar.css'
+import { useEffect, useRef, useState } from "react";
+import { navLinks } from "../data/home.js";
+import "./Navbar.css";
 
 const Navbar = () => {
-  const navRef = useRef(null)
-  const [scrolled, setScrolled] = useState(false)
-  const [hidden, setHidden] = useState(false)
-  const lastY = useRef(0)
+  const navRef = useRef(null);
+  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const lastY = useRef(0);
 
   useEffect(() => {
-    let raf = 0
+    let raf = 0;
 
     const update = () => {
-      raf = 0
-      const y = window.scrollY
-      setScrolled(y > 60)
-      setHidden(y > 300 && y > lastY.current)
-      lastY.current = y
-    }
+      raf = 0;
+      const y = window.scrollY;
+      setScrolled(y > 60);
+      setHidden(y > 300 && y > lastY.current);
+      lastY.current = y;
+    };
 
     const schedule = () => {
-      if (!raf) raf = requestAnimationFrame(update)
-    }
+      if (!raf) raf = requestAnimationFrame(update);
+    };
 
-    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener("scroll", schedule, { passive: true });
     return () => {
-      if (raf) cancelAnimationFrame(raf)
-      window.removeEventListener('scroll', schedule)
-    }
-  }, [])
+      if (raf) cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", schedule);
+    };
+  }, []);
 
   return (
     <nav
       ref={navRef}
-      className={`nav container${scrolled ? ' nav--scrolled' : ''}${hidden ? ' nav--hidden' : ''}`}
+      className={`nav container${scrolled ? " nav--scrolled" : ""}${hidden ? " nav--hidden" : ""}`}
       aria-label="Primary"
     >
       <a className="logo" href="#top">
@@ -50,7 +50,7 @@ const Navbar = () => {
         Let&apos;s talk
       </a>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

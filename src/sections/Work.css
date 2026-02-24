@@ -30,7 +30,8 @@
   width: clamp(200px, 22vw, 340px);
   bottom: -6%;
   left: -4%;
-  transform: translateY(calc((var(--section-scroll) - 0.5) * 60px)) rotate(-6deg);
+  transform: translateY(calc((var(--section-scroll) - 0.5) * 60px))
+    rotate(-6deg);
 }
 
 /* ── Inner layout ─────────────────────────────────── */
@@ -74,7 +75,7 @@
 }
 
 .work-card::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: -1px;
   border-radius: inherit;
@@ -85,8 +86,12 @@
     rgba(200, 208, 218, 0.3) 50%,
     rgba(255, 255, 255, 0.5)
   );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   opacity: 0;

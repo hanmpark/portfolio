@@ -22,8 +22,7 @@
   width: clamp(160px, 20vw, 280px);
   top: -5%;
   left: -4%;
-  transform:
-    translateY(calc((0.5 - var(--section-scroll)) * 60px))
+  transform: translateY(calc((0.5 - var(--section-scroll)) * 60px))
     rotate(-10deg);
 }
 
@@ -31,8 +30,7 @@
   width: clamp(80px, 10vw, 140px);
   bottom: 6%;
   right: 2%;
-  transform:
-    translateY(calc((var(--section-scroll) - 0.5) * 90px))
+  transform: translateY(calc((var(--section-scroll) - 0.5) * 90px))
     rotate(15deg);
 }
 
@@ -91,7 +89,7 @@
 }
 
 .ts-icon::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: -1px;
   border-radius: inherit;
@@ -102,8 +100,12 @@
     rgba(200, 208, 218, 0.3) 50%,
     rgba(255, 255, 255, 0.5)
   );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   opacity: 0;
