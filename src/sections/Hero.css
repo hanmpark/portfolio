@@ -428,12 +428,13 @@
 
   .hero-fig-2 {
     width: 320px;
-    right: -15%;
+    right: -30%;
   }
 
   .hero-fig-3 {
     width: 320px;
-    left: -10%;
+    left: -20%;
+    bottom: -20%;
   }
 
   .hero-fig-4 {
