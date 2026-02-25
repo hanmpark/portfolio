@@ -423,21 +423,23 @@
   .hero-fig-1 {
     width: 160px;
     left: -38%;
+    display: none;
   }
 
   .hero-fig-2 {
-    width: 180px;
-    right: -38%;
+    width: 320px;
+    right: -15%;
   }
 
   .hero-fig-3 {
-    width: 160px;
-    left: -40%;
+    width: 320px;
+    left: -10%;
   }
 
   .hero-fig-4 {
     width: 140px;
     right: -32%;
+    display: none;
   }
 }
 
