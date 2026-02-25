@@ -50,7 +50,7 @@ const About = () => {
       {/* Floating accent */}
       <img
         className="abt-accent"
-        src="/assets/premium/fig4.png"
+        src="https://assets.hpark.me/premium/fig4.png"
         alt=""
         aria-hidden="true"
       />

@@ -82,13 +82,13 @@ const Experience = () => {
       {/* Floating accent images */}
       <img
         className="exp-accent exp-accent--1"
-        src="/assets/premium/fig1.png"
+        src="https://assets.hpark.me/premium/fig1.png"
         alt=""
         aria-hidden="true"
       />
       <img
         className="exp-accent exp-accent--2"
-        src="/assets/premium/fig2.png"
+        src="https://assets.hpark.me/premium/fig2.png"
         alt=""
         aria-hidden="true"
       />

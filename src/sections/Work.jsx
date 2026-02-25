@@ -41,13 +41,13 @@ const Work = () => {
       {/* Floating accent images */}
       <img
         className="work-accent work-accent--1"
-        src="/assets/premium/fig5.png"
+        src="https://assets.hpark.me/premium/fig5.png"
         alt=""
         aria-hidden="true"
       />
       <img
         className="work-accent work-accent--2"
-        src="/assets/premium/fig6.png"
+        src="https://assets.hpark.me/premium/fig6.png"
         alt=""
         aria-hidden="true"
       />

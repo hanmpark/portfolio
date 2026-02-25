@@ -139,25 +139,25 @@ const Hero = () => {
         <img
           ref={(el) => (figuresRef.current[0] = el)}
           className="hero-fig hero-fig-1"
-          src="/assets/premium/fig1.png"
+          src="https://assets.hpark.me/premium/fig1.png"
           alt=""
         />
         <img
           ref={(el) => (figuresRef.current[1] = el)}
           className="hero-fig hero-fig-2"
-          src="/assets/premium/fig2.png"
+          src="https://assets.hpark.me/premium/fig2.png"
           alt=""
         />
         <img
           ref={(el) => (figuresRef.current[2] = el)}
           className="hero-fig hero-fig-3"
-          src="/assets/premium/fig3.png"
+          src="https://assets.hpark.me/premium/fig3.png"
           alt=""
         />
         <img
           ref={(el) => (figuresRef.current[3] = el)}
           className="hero-fig hero-fig-4"
-          src="/assets/premium/fig4.png"
+          src="https://assets.hpark.me/premium/fig4.png"
           alt=""
         />
       </div>

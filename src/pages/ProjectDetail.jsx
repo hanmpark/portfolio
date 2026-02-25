@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { projectDetails } from "../data/projectDetails.js";
 import "./ProjectDetail.css";
@@ -35,10 +35,26 @@ const InfoIcon = () => (
 const ProjectDetail = () => {
   const { slug } = useParams();
   const project = projectDetails[slug];
+  const [lightbox, setLightbox] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
+
+  /* Close lightbox on Escape */
+  const closeLightbox = useCallback(() => setLightbox(null), []);
+  useEffect(() => {
+    if (lightbox === null) return;
+    const onKey = (e) => {
+      if (e.key === "Escape") closeLightbox();
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [lightbox, closeLightbox]);
 
   if (!project) return <Navigate to="/" replace />;
 
@@ -140,7 +156,16 @@ const ProjectDetail = () => {
                     />
                   </div>
                 ) : (
-                  <div className="pj-gallery-item" key={i}>
+                  <div
+                    className="pj-gallery-item pj-gallery-item--image"
+                    key={i}
+                    onClick={() => setLightbox(item.src)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") setLightbox(item.src);
+                    }}
+                  >
                     <img
                       src={item.src}
                       alt={item.alt || `Screenshot ${i + 1}`}
@@ -153,6 +178,35 @@ const ProjectDetail = () => {
           </section>
         ) : null}
       </div>
+
+      {/* Lightbox */}
+      {lightbox !== null && (
+        <div className="pj-lightbox" onClick={closeLightbox}>
+          <button
+            className="pj-lightbox-close"
+            onClick={closeLightbox}
+            aria-label="Close preview"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M18 6L6 18" />
+              <path d="M6 6l12 12" />
+            </svg>
+          </button>
+          <img
+            className="pj-lightbox-img"
+            src={lightbox}
+            alt="Preview"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 };

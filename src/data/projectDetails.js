@@ -56,7 +56,7 @@ export const projectDetails = {
     gallery: [
       {
         type: "video",
-        src: "/works/so_long.mp4",
+        src: "https://assets.hpark.me/premium/so_long.mp4",
         alt: "so_long gameplay demo",
       },
     ],
@@ -103,6 +103,11 @@ export const projectDetails = {
         src: "/works/rt3.png",
         alt: "RT rendered objects showcase",
       },
+      {
+        type: "video",
+        src: "https://assets.hpark.me/premium/rt.mp4",
+        alt: "RT rendering demo",
+      },
     ],
   },
   tetris: {
@@ -148,7 +153,7 @@ export const projectDetails = {
       },
       {
         type: "video",
-        src: "/works/tetris-multiplayer.mp4",
+        src: "https://assets.hpark.me/premium/tetris-multiplayer.mp4",
         alt: "Tetris multiplayer gameplay",
       },
     ],
