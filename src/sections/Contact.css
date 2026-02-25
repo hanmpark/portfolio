@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(1.5rem, 5vw, 3rem) clamp(1.5rem, 6vw, 4rem);
+  padding: clamp(2rem, 6vw, 4rem) clamp(2rem, 8vw, 5rem);
   overflow: hidden;
   isolation: isolate;
   background:
@@ -97,7 +97,7 @@
 .ct-inner {
   width: min(1080px, 100%);
   margin: 0 auto;
-  padding-inline: clamp(1.5rem, 6vw, 3rem);
+  padding-inline: clamp(2rem, 7vw, 4rem);
   position: relative;
   z-index: 1;
   display: grid;
@@ -651,7 +651,7 @@
 /* ── Responsive: Phone ───────────────────────────── */
 @media (max-width: 640px) {
   .ct-section {
-    padding: 1.5rem 1.5rem;
+    padding: 2rem 1.75rem;
     height: auto;
     min-height: 100svh;
     align-items: center;
@@ -659,7 +659,7 @@
 
   .ct-inner {
     gap: 1.2rem;
-    padding-inline: 0.75rem;
+    padding-inline: 1rem;
   }
 
   /* Center the info panel */
@@ -786,11 +786,12 @@
 /* ── Responsive: Small phone ─────────────────────── */
 @media (max-width: 380px) {
   .ct-section {
-    padding: 1.25rem 1.25rem;
+    padding: 1.5rem 1.5rem;
   }
 
   .ct-inner {
     gap: 1rem;
+    padding-inline: 0.75rem;
   }
 
   .ct-title {
