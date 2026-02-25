@@ -39,6 +39,7 @@ html {
 
 body {
   margin: 0;
+  overflow-x: hidden;
   font-family: var(--font-body);
   color: var(--ink);
   background: var(--paper);

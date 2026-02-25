@@ -171,7 +171,7 @@ const Hero = () => {
               Hanmin Park
             </span>
             <span className="hero-title-role hero-reveal hero-reveal-d2">
-              Software Engineer
+              Software Developer
             </span>
           </h1>
           <p className="hero-template hero-reveal hero-reveal-d3">

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { projects } from "../data/home.js";
 import useScrollReveal from "../hooks/useScrollReveal.js";
 import "./Work.css";
@@ -58,60 +59,74 @@ const Work = () => {
         </header>
 
         <div className="work-grid reveal-stagger">
-          {projects.map((project, index) => (
-            <article
-              className="work-card reveal reveal-up"
-              style={{ "--reveal-i": index }}
-              key={project.title}
-            >
-              <a
-                className="work-card-main"
-                href={project.links?.repo}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Open GitHub repository for ${project.title}`}
+          {projects.map((project, index) => {
+            const isInternal = Boolean(project.slug);
+            const CardLink = isInternal ? Link : "a";
+            const linkProps = isInternal
+              ? { to: `/project/${project.slug}` }
+              : {
+                  href: project.links?.repo,
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                };
+
+            return (
+              <article
+                className="work-card reveal reveal-up"
+                style={{ "--reveal-i": index }}
+                key={project.title}
               >
-                <figure className="work-card-img">
-                  <img
-                    src={project.previewImage}
-                    alt={`${project.title} preview`}
-                    loading="lazy"
-                  />
-                </figure>
+                <CardLink
+                  className="work-card-main"
+                  aria-label={
+                    isInternal
+                      ? `View ${project.title} project`
+                      : `Open GitHub repository for ${project.title}`
+                  }
+                  {...linkProps}
+                >
+                  <figure className="work-card-img">
+                    <img
+                      src={project.previewImage}
+                      alt={`${project.title} preview`}
+                      loading="lazy"
+                    />
+                  </figure>
 
-                <div className="work-card-body">
-                  <span className="work-card-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="work-card-title">{project.title}</h3>
-                  <p className="work-card-subtitle">{project.subtitle}</p>
+                  <div className="work-card-body">
+                    <span className="work-card-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="work-card-title">{project.title}</h3>
+                    <p className="work-card-subtitle">{project.subtitle}</p>
 
-                  {project.tags?.length ? (
-                    <div className="tag-row">
-                      {project.tags.map((tag) => (
-                        <span className="pill" key={tag}>
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  ) : null}
-                </div>
-              </a>
+                    {project.tags?.length ? (
+                      <div className="tag-row">
+                        {project.tags.map((tag) => (
+                          <span className="pill" key={tag}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
+                </CardLink>
 
-              {project.links?.demo ? (
-                <div className="work-card-actions">
-                  <a
-                    className="btn small work-card-demo"
-                    href={project.links.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Demo
-                  </a>
-                </div>
-              ) : null}
-            </article>
-          ))}
+                {project.links?.demo && !isInternal ? (
+                  <div className="work-card-actions">
+                    <a
+                      className="btn small work-card-demo"
+                      href={project.links.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Demo
+                    </a>
+                  </div>
+                ) : null}
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

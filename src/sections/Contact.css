@@ -67,15 +67,18 @@
 .ct-inner {
   width: min(760px, 100%);
   margin: 0 auto;
+  padding-inline: clamp(1.25rem, 5vw, 2.5rem);
   position: relative;
   z-index: 1;
-  display: grid;
-  gap: clamp(1rem, 2vh, 1.25rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 1.8vh, 1.25rem);
 }
 
 .ct-copy {
-  display: grid;
-  gap: 0.55rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 .ct-title {
@@ -109,14 +112,18 @@
 }
 
 .ct-form {
-  display: grid;
-  gap: 0.9rem;
-  margin-top: 0.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+  flex: 1;
+  min-height: 0;
 }
 
 .ct-field {
-  display: grid;
-  gap: 0.38rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
 .ct-field > span {
@@ -157,8 +164,21 @@
 }
 
 .ct-textarea {
-  min-height: 160px;
+  min-height: 80px;
+  flex: 1 1 auto;
   resize: vertical;
+}
+
+/* The textarea field should grow to fill remaining form space */
+.ct-field:has(.ct-textarea) {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ct-field:has(.ct-textarea) .ct-textarea {
+  flex: 1;
 }
 
 .ct-form-footer {
@@ -312,42 +332,128 @@
   }
 }
 
+@media (max-width: 768px) {
+  .ct-section {
+    padding: clamp(1rem, 3vw, 1.5rem) clamp(1.25rem, 4vw, 2rem);
+    align-items: center;
+  }
+
+  .ct-inner {
+    gap: clamp(0.5rem, 1.2vh, 0.8rem);
+  }
+
+  .ct-form {
+    gap: 0.6rem;
+  }
+
+  .ct-textarea {
+    min-height: 60px;
+  }
+
+  .ct-input {
+    padding: 0.7rem 0.85rem;
+  }
+}
+
 @media (max-width: 640px) {
   .ct-section {
-    padding: 1rem;
-    align-items: flex-start;
-    padding-top: clamp(3rem, 12vh, 5rem);
+    padding: 0.75rem 1.25rem;
+    align-items: stretch;
+    overflow: hidden;
+  }
+
+  .ct-inner {
+    height: 100%;
+    gap: clamp(0.4rem, 1vh, 0.65rem);
+  }
+
+  .ct-copy {
+    gap: 0.25rem;
+  }
+
+  .ct-title {
+    max-width: none;
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+    margin-top: 0;
+  }
+
+  .ct-sub {
+    max-width: none;
+    font-size: clamp(0.8rem, 3.2vw, 0.9rem);
+    line-height: 1.45;
+  }
+
+  .ct-form {
+    gap: 0.5rem;
+    margin-top: 0.1rem;
+  }
+
+  .ct-field {
+    gap: 0.2rem;
+  }
+
+  .ct-field > span {
+    font-size: 0.62rem;
+  }
+
+  .ct-input {
+    padding: 0.6rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
+
+  .ct-textarea {
+    min-height: 50px;
   }
 
   .ct-form-footer {
     grid-template-columns: 1fr;
     align-items: stretch;
-    gap: 0.6rem;
+    gap: 0.4rem;
   }
 
   .ct-submit {
     width: 100%;
-    padding: 0.92rem 1.2rem;
-    font-size: 0.92rem;
+    padding: 0.7rem 1rem;
+    font-size: 0.86rem;
   }
 
-  .ct-title,
+  .ct-footnote {
+    text-align: center;
+    font-size: 0.7rem;
+  }
+
+  .ct-config-note {
+    font-size: 0.66rem;
+  }
+
+  .ct-status {
+    font-size: 0.72rem;
+    min-height: 0.9rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .ct-section {
+    padding: 0.5rem 1rem;
+  }
+
+  .ct-title {
+    font-size: clamp(1.4rem, 8vw, 1.8rem);
+  }
+
   .ct-sub {
-    max-width: none;
+    font-size: clamp(0.76rem, 3vw, 0.86rem);
   }
 
   .ct-input {
-    padding: 0.78rem 0.85rem;
-    font-size: 1rem; /* prevent iOS zoom */
-    border-radius: 12px;
+    padding: 0.5rem 0.65rem;
+    border-radius: 8px;
   }
 
-  .ct-textarea {
-    min-height: 120px;
-  }
-
-  .ct-sub {
-    font-size: clamp(0.86rem, 3.6vw, 0.96rem);
+  .ct-submit {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.82rem;
   }
 }
 

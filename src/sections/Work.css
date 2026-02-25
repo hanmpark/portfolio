@@ -172,7 +172,7 @@
   width: 100%;
   height: clamp(130px, 18vh, 220px);
   object-fit: cover;
-  object-position: top center;
+  object-position: center center;
   border-radius: 14px;
   display: block;
   transition: transform 0.6s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));

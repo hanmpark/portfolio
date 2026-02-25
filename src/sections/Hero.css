@@ -253,7 +253,7 @@
   width: clamp(330px, 27vw, 470px);
   width: 35vw;
   top: -5%;
-  right: -5%;
+  right: -7%;
   --fig-shift-x: -14px;
   --fig-shift-y: 9px;
   --fig-rotate: -1deg;
@@ -277,7 +277,7 @@
   width: clamp(280px, 22vw, 360px);
   width: 27vw;
   bottom: -15%;
-  right: 13%;
+  right: 5%;
   --fig-shift-x: -11px;
   --fig-shift-y: -8px;
   --fig-rotate: -0.8deg;
@@ -295,27 +295,27 @@
   }
 
   .hero-fig-1 {
-    width: 280px;
-    top: -2%;
-    left: -25%;
+    width: 380px;
+    top: -5%;
+    left: -10%;
   }
 
   .hero-fig-2 {
-    width: 320px;
-    top: 20%;
-    right: -24%;
+    width: 420px;
+    top: -10%;
+    right: -15%;
   }
 
   .hero-fig-3 {
-    width: 300px;
-    bottom: -14%;
-    left: -27%;
+    width: 400px;
+    bottom: -10%;
+    left: -13%;
   }
 
   .hero-fig-4 {
-    width: 250px;
-    bottom: 15%;
-    right: -12%;
+    width: 350px;
+    bottom: 0%;
+    right: -10%;
   }
 }
 
@@ -371,25 +371,24 @@
   .hero-fig-1 {
     width: 220px;
     top: 8%;
-    left: -31%;
+    left: -7%;
+    display: none;
   }
 
   .hero-fig-2 {
-    width: 240px;
-    top: 25%;
-    right: -31%;
+    width: 400px;
+    top: -12%;
+    right: -20%;
   }
 
   .hero-fig-3 {
-    width: 220px;
+    width: 400px;
     bottom: -10%;
-    left: -33%;
+    left: -20%;
   }
 
   .hero-fig-4 {
-    width: 190px;
-    bottom: 22%;
-    right: -26%;
+    display: none;
   }
 }
 

@@ -1,0 +1,313 @@
+/* ── Project Detail Page ─────────────────────────── */
+.pj {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 18% 6%, rgba(30, 40, 60, 0.45), transparent 42%),
+    radial-gradient(circle at 80% 10%, rgba(40, 55, 80, 0.18), transparent 38%),
+    radial-gradient(circle at 58% 48%, rgba(10, 14, 22, 0.12), transparent 50%),
+    linear-gradient(168deg, #0e1117 0%, #121720 46%, #151b25 100%);
+  overflow-x: clip;
+}
+
+/* ── Back nav ────────────────────────────────────── */
+.pj-back {
+  position: fixed;
+  top: clamp(1.25rem, 3vh, 2rem);
+  left: clamp(1.25rem, 3vw, 2.5rem);
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border, rgba(200, 215, 240, 0.1));
+  background: var(--glass, rgba(20, 26, 36, 0.55));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  color: var(--ink, #e8ecf2);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform 0.28s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+    background 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.28s var(--ease-out);
+}
+
+.pj-back:hover {
+  transform: translateY(-2px);
+  background: var(--glass-strong, rgba(20, 26, 36, 0.72));
+  border-color: rgba(200, 215, 240, 0.16);
+  box-shadow: var(--shadow-lift);
+}
+
+.pj-back svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ── Hero banner ─────────────────────────────────── */
+.pj-hero {
+  position: relative;
+  width: 100%;
+  height: clamp(260px, 40vh, 440px);
+  overflow: hidden;
+}
+
+.pj-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  filter: saturate(0.92) brightness(0.95);
+}
+
+.pj-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(14, 17, 23, 0.6) 70%,
+    #0e1117 100%
+  );
+  pointer-events: none;
+}
+
+/* ── Main content ────────────────────────────────── */
+.pj-content {
+  position: relative;
+  z-index: 1;
+  width: min(960px, 92vw);
+  margin: -3rem auto 0;
+  padding-bottom: clamp(3rem, 6vh, 5rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 5vh, 4rem);
+}
+
+/* ── Header ──────────────────────────────────────── */
+.pj-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pj-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  background: linear-gradient(
+    128deg,
+    #e8ecf2 0%,
+    #c8d0dc 30%,
+    #8a95a5 55%,
+    #6b7888 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-bottom: 1.2rem;
+}
+
+.pj-subtitle {
+  margin: 0;
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  color: var(--muted, #8a95a5);
+  font-weight: 500;
+}
+
+.pj-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.pj-links {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+}
+
+/* ── Description ─────────────────────────────────── */
+.pj-desc {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pj-desc h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.6vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink, #e8ecf2);
+}
+
+.pj-desc p {
+  margin: 0;
+  font-size: clamp(0.9rem, 1.05vw, 1rem);
+  line-height: 1.75;
+  color: var(--muted, #8a95a5);
+  max-width: 72ch;
+}
+
+.pj-desc p strong {
+  color: var(--ink, #e8ecf2);
+  font-weight: 600;
+}
+
+.pj-features {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.pj-features li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: clamp(0.86rem, 1vw, 0.95rem);
+  line-height: 1.65;
+  color: var(--muted, #8a95a5);
+}
+
+.pj-features li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(200, 215, 240, 0.2);
+}
+
+/* ── Gallery ─────────────────────────────────────── */
+.pj-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.pj-gallery h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.6vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink, #e8ecf2);
+}
+
+.pj-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.pj-gallery-item {
+  border-radius: var(--radius, 20px);
+  overflow: hidden;
+  border: 1px solid var(--glass-border, rgba(200, 215, 240, 0.1));
+  background: var(--glass, rgba(20, 26, 36, 0.55));
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform 0.45s var(--ease-out),
+    box-shadow 0.4s ease;
+}
+
+.pj-gallery-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lift);
+}
+
+.pj-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pj-gallery-item--video {
+  grid-column: 1 / -1;
+}
+
+.pj-gallery-item video {
+  width: 100%;
+  display: block;
+  border-radius: inherit;
+}
+
+/* ── Demo notice ─────────────────────────────────── */
+.pj-demo-notice {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.75rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(200, 215, 240, 0.08);
+  background: rgba(20, 26, 36, 0.45);
+  color: var(--muted, #8a95a5);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  backdrop-filter: blur(8px);
+}
+
+.pj-demo-notice svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  opacity: 0.6;
+}
+
+/* ── Responsive ──────────────────────────────────── */
+@media (max-width: 768px) {
+  .pj-hero {
+    height: clamp(200px, 32vh, 300px);
+  }
+
+  .pj-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pj-content {
+    gap: clamp(2rem, 4vh, 3rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .pj-back {
+    padding: 0.48rem 0.9rem;
+    font-size: 0.78rem;
+  }
+
+  .pj-hero {
+    height: clamp(180px, 28vh, 240px);
+  }
+
+  .pj-content {
+    margin-top: -2rem;
+  }
+
+  .pj-links {
+    flex-direction: column;
+  }
+
+  .pj-links .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

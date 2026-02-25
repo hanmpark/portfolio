@@ -191,8 +191,26 @@
 }
 
 @media (max-width: 720px) {
+  .nav {
+    flex-wrap: wrap;
+    align-items: center;
+    border-radius: 20px;
+    padding: 0.6rem 1rem;
+    gap: 0;
+  }
+
+  .nav--scrolled {
+    border-radius: 20px;
+  }
+
+  .logo {
+    order: 1;
+    line-height: 28px; /* match burger height for vertical alignment */
+  }
+
   /* Hamburger visible */
   .nav-burger {
+    order: 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -233,6 +251,7 @@
 
   /* Drawer */
   .nav-drawer {
+    order: 3;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
@@ -248,10 +267,7 @@
   .nav--open .nav-drawer {
     max-height: 400px;
     opacity: 1;
-  }
-
-  .nav--open {
-    flex-wrap: wrap;
+    margin-top: 0.6rem;
   }
 
   .nav-links {
@@ -283,5 +299,10 @@
   .nav-social {
     padding: 0.34rem 0.64rem;
     font-size: 0.74rem;
+  }
+
+  .nav .btn.small {
+    padding: 0.42rem 0.85rem;
+    font-size: 0.82rem;
   }
 }

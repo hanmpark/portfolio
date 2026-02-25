@@ -1,6 +1,6 @@
 export const navLinks = [
   { label: "Work", href: "#work" },
-  { label: "Experience & Education", href: "#experience" },
+  { label: "Experience", href: "#experience" },
   { label: "About", href: "#about" },
 ];
 
@@ -71,6 +71,7 @@ export const projects = [
   {
     title: "Mini Ray Tracer",
     subtitle: "Ray Tracing Engine in C",
+    slug: "miniraytracer",
     description:
       "A minimal ray tracing engine implementing lighting, shadows, reflections, and 3D scene rendering from scratch. Built to explore computer graphics and mathematical rendering principles.",
     previewImage: "/works/rt1.png",
@@ -82,6 +83,7 @@ export const projects = [
   {
     title: "Tetris",
     subtitle: "Real-Time Multiplayer Game",
+    slug: "tetris",
     description:
       "A competitive multiplayer Tetris game featuring real-time synchronization, state management, and networked gameplay architecture.",
     previewImage: "/works/tetris-game.png",
@@ -94,6 +96,7 @@ export const projects = [
   {
     title: "so_long",
     subtitle: "2D Game Engine in C",
+    slug: "so_long",
     description:
       "A lightweight 2D game built in C using a custom rendering loop, sprite management, and event handling. Focused on memory control, game logic, and low-level graphics programming.",
     previewImage: "/works/so_long.png",
@@ -105,6 +108,7 @@ export const projects = [
   {
     title: "Scholarship Time Tracker",
     subtitle: "Hour Tracking Tool for 42 Nice Students",
+    slug: "scholarship-logtime",
     description:
       "A tool that tracks and calculates cumulative hours for 42 Nice students, helping them log required monthly hours for scholarship eligibility. It automates hour tracking, reduces admin overhead, and gives a clear view of progress and time management.",
     previewImage: "/works/42 Logtime.png",
@@ -118,7 +122,7 @@ export const projects = [
 export const experiences = [
   {
     category: "Experience",
-    role: "Freelance Software Engineer",
+    role: "Freelance Software Developer",
     company: "The Good Cleaners",
     period: "Feb 2026 - Present",
     image: "/assets/experiences/thegoodcleaners.png",
@@ -126,12 +130,12 @@ export const experiences = [
     logoVariant: "square",
     focus: "Freelance product and web development support.",
     summary:
-      "Providing freelance engineering support for The Good Cleaners, helping build and refine reliable web experiences.",
+      "Providing freelance support for The Good Cleaners, helping build and refine reliable web experiences.",
     stack: ["Freelance", "Web Development", "Product Support"],
   },
   {
     category: "Experience",
-    role: "Software Engineer",
+    role: "Software Developer",
     company: "Amadeus",
     period: "Sep 2025 - Present",
     image: "/assets/experiences/amadeus.svg",
@@ -139,12 +143,12 @@ export const experiences = [
     focus:
       "Building internal tooling to streamline developer workflows across the team and beyond.",
     summary:
-      "Alternance as a software engineer with a focus on delivering concrete product impact through implementation quality and reliable execution.",
+      "Apprenticeship focused on delivering tangible product impact through high-quality implementation and reliable execution.",
     stack: ["Software Engineering", "Product Impact"],
   },
   {
     category: "Experience",
-    role: "Machine Learning Engineer Intern",
+    role: "Machine Learning Intern",
     company: "Proptexx",
     period: "Dec 2024 - Apr 2025",
     image: "/assets/experiences/proptexx.webp",
@@ -257,7 +261,10 @@ export const contact = {
 };
 
 export const socialLinks = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/hanmin-park-83239718b/" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/hanmin-park-83239718b/",
+  },
   { label: "Dribbble", href: "https://dribbble.com" },
   { label: "GitHub", href: "https://github.com/hanmpark" },
 ];
