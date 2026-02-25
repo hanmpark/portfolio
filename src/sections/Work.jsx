@@ -38,6 +38,8 @@ const Work = () => {
 
   return (
     <section className="section work-section" id="work" ref={sectionRef}>
+      {/* Noise texture */}
+      <div className="noise-overlay" aria-hidden="true" />
       {/* Floating accent images */}
       <img
         className="work-accent work-accent--1"

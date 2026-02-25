@@ -6,6 +6,82 @@
   overflow-x: clip;
   overflow-y: visible;
   perspective: 720px;
+  isolation: isolate;
+}
+
+/* ── Ambient background ───────────────────────────── */
+.work-section::before {
+  content: "";
+  position: absolute;
+  inset: -15%;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 60% 50% at 15% 20%,
+      rgba(40, 60, 120, 0.12),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 50% 45% at 85% 75%,
+      rgba(80, 60, 140, 0.08),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 40% 35% at 55% 10%,
+      rgba(30, 50, 90, 0.06),
+      transparent 50%
+    );
+  filter: blur(60px) saturate(70%);
+  animation: work-bg-drift 18s ease-in-out infinite alternate;
+}
+
+/* Subtle dot grid overlay */
+.work-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: radial-gradient(
+    circle 1px,
+    rgba(200, 215, 240, 0.4) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
+  mask-image: radial-gradient(
+    ellipse 70% 60% at 50% 50%,
+    black 0%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 70% 60% at 50% 50%,
+    black 0%,
+    transparent 100%
+  );
+  animation: work-dots-shift 20s linear infinite;
+}
+
+@keyframes work-bg-drift {
+  0% {
+    transform: translate3d(-1%, -1%, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(2%, 1.5%, 0) scale(1.06) rotate(3deg);
+  }
+  100% {
+    transform: translate3d(-1%, 2%, 0) scale(1.02) rotate(-2deg);
+  }
+}
+
+@keyframes work-dots-shift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 28px 28px;
+  }
 }
 
 /* ── Floating accent images ───────────────────────── */
@@ -285,5 +361,9 @@
   }
   .work-inner {
     transform: none !important;
+  }
+  .work-section::before,
+  .work-section::after {
+    animation: none;
   }
 }

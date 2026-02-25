@@ -6,6 +6,87 @@
   overflow-x: clip;
   overflow-y: visible;
   perspective: 720px;
+  isolation: isolate;
+}
+
+/* ── Ambient aurora background ─────────────────── */
+.exp-section::before {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 55% 45% at 80% 15%,
+      rgba(90, 60, 160, 0.1),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 50% 40% at 20% 80%,
+      rgba(40, 80, 140, 0.09),
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 45% 50% at 60% 55%,
+      rgba(60, 40, 120, 0.05),
+      transparent 45%
+    );
+  filter: blur(55px) saturate(65%);
+  animation: exp-aurora 16s ease-in-out infinite alternate;
+}
+
+/* Faint crosshatch grid */
+.exp-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image:
+    linear-gradient(rgba(200, 215, 240, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 215, 240, 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(
+    ellipse 65% 55% at 50% 45%,
+    black 0%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 65% 55% at 50% 45%,
+    black 0%,
+    transparent 100%
+  );
+  animation: exp-grid-move 24s linear infinite;
+}
+
+@keyframes exp-aurora {
+  0% {
+    transform: translate3d(-1.5%, -0.5%, 0) scale(1) rotate(0deg);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(2%, 1%, 0) scale(1.07) rotate(4deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-0.5%, 2%, 0) scale(1.03) rotate(-3deg);
+    opacity: 0.88;
+  }
+}
+
+@keyframes exp-grid-move {
+  0% {
+    background-position:
+      0 0,
+      0 0;
+  }
+  100% {
+    background-position:
+      40px 40px,
+      40px 40px;
+  }
 }
 
 /* ── Floating accent images ────────────────────── */
@@ -386,5 +467,9 @@
   }
   .exp-card-inner {
     animation: none !important;
+  }
+  .exp-section::before,
+  .exp-section::after {
+    animation: none;
   }
 }

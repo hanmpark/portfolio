@@ -79,6 +79,8 @@ const Experience = () => {
         revealRef.current = node;
       }}
     >
+      {/* Noise texture */}
+      <div className="noise-overlay" aria-hidden="true" />
       {/* Floating accent images */}
       <img
         className="exp-accent exp-accent--1"

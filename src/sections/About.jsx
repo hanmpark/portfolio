@@ -47,6 +47,8 @@ const About = () => {
         revealRef.current = node;
       }}
     >
+      {/* Noise texture */}
+      <div className="noise-overlay" aria-hidden="true" />
       {/* Floating accent */}
       <img
         className="abt-accent"
