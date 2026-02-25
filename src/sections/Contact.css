@@ -1,4 +1,4 @@
-/* ── Contact ────────────────────────────────────── */
+/* ── Contact — Redesigned ──────────────────────────── */
 .ct-section {
   position: sticky;
   top: 0;
@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(1.25rem, 4vw, 2.25rem);
+  padding: clamp(1.5rem, 5vw, 3rem) clamp(1.5rem, 6vw, 4rem);
   overflow: hidden;
   isolation: isolate;
   background:
@@ -17,6 +17,7 @@
     linear-gradient(168deg, #0e1117 0%, #121720 46%, #151b25 100%);
 }
 
+/* ── Ambient grid background ─────────────────────── */
 .ct-section::before,
 .ct-section::after {
   content: "";
@@ -46,9 +47,6 @@
     linear-gradient(rgba(200, 215, 240, 0.08) 1px, transparent 1px),
     linear-gradient(90deg, rgba(200, 215, 240, 0.08) 1px, transparent 1px);
   background-size: 32px 32px;
-  background-position:
-    0 0,
-    0 0;
   mask-image: radial-gradient(
     circle at 50% 45%,
     rgba(0, 0, 0, 0.95) 0%,
@@ -64,26 +62,66 @@
   animation: ct-grid-drift 12s linear infinite;
 }
 
+/* ── Decorative glow blobs ───────────────────────── */
+.ct-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+  z-index: 0;
+}
+
+.ct-glow--1 {
+  width: 420px;
+  height: 420px;
+  top: -8%;
+  left: -6%;
+  background: radial-gradient(circle, rgba(56, 90, 160, 0.14), transparent 70%);
+  animation: ct-float-1 16s ease-in-out infinite alternate;
+}
+
+.ct-glow--2 {
+  width: 340px;
+  height: 340px;
+  bottom: -10%;
+  right: -4%;
+  background: radial-gradient(
+    circle,
+    rgba(100, 140, 200, 0.1),
+    transparent 70%
+  );
+  animation: ct-float-2 18s ease-in-out infinite alternate;
+}
+
+/* ── Two-column layout ───────────────────────────── */
 .ct-inner {
-  width: min(760px, 100%);
+  width: min(1080px, 100%);
   margin: 0 auto;
-  padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+  padding-inline: clamp(1.5rem, 6vw, 3rem);
   position: relative;
   z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+/* ── Left column: Info panel ─────────────────────── */
+.ct-info {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.75rem, 1.8vh, 1.25rem);
+  gap: clamp(1.5rem, 3vh, 2.25rem);
 }
 
 .ct-copy {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.5rem;
 }
 
 .ct-title {
   margin-top: 0.1rem;
-  max-width: 10ch;
+  max-width: 12ch;
   background: linear-gradient(
     128deg,
     #e8ecf2 0%,
@@ -105,25 +143,238 @@
 
 .ct-sub {
   margin: 0;
-  max-width: 58ch;
+  max-width: 40ch;
   font-size: clamp(0.92rem, 1vw, 1rem);
-  line-height: 1.65;
+  line-height: 1.7;
   color: var(--muted, #8a95a5);
 }
 
+/* ── Availability badge ──────────────────────────── */
+.ct-availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.9rem 0.45rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(74, 222, 128, 0.15);
+  background: rgba(74, 222, 128, 0.06);
+  width: fit-content;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.ct-availability__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 8px rgba(74, 222, 128, 0.5);
+  animation: ct-pulse 2.4s ease-in-out infinite;
+}
+
+.ct-availability__text {
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(74, 222, 128, 0.85);
+}
+
+/* ── Quick-connect channels ──────────────────────── */
+.ct-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.ct-channel {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 0.95rem;
+  border-radius: 14px;
+  border: 1px solid var(--glass-border, rgba(200, 215, 240, 0.1));
+  background: var(--glass, rgba(20, 26, 36, 0.55));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  text-decoration: none;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.3s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+    box-shadow 0.25s ease;
+}
+
+.ct-channel:hover {
+  background: rgba(30, 38, 52, 0.65);
+  border-color: rgba(200, 215, 240, 0.16);
+  transform: translateX(4px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.ct-channel__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(200, 215, 240, 0.06);
+  color: var(--muted, #8a95a5);
+  flex-shrink: 0;
+}
+
+.ct-channel__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.ct-channel__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.ct-channel__label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted, #8a95a5);
+  opacity: 0.7;
+}
+
+.ct-channel__value {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--ink, #e8ecf2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ct-channel__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: var(--muted, #8a95a5);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.ct-channel__arrow svg {
+  width: 16px;
+  height: 16px;
+}
+
+.ct-channel:hover .ct-channel__arrow {
+  opacity: 0.7;
+  transform: translateX(0);
+}
+
+/* ── Right column: Form card ─────────────────────── */
+.ct-form-card {
+  background: rgba(20, 26, 36, 0.5);
+  border: 1px solid var(--glass-border, rgba(200, 215, 240, 0.1));
+  border-radius: var(--radius-lg, 28px);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.2),
+    0 2px 8px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(200, 215, 240, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle animated border shimmer */
+.ct-form-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(200, 215, 240, 0.08) 25%,
+    transparent 50%,
+    rgba(200, 215, 240, 0.05) 75%,
+    transparent 100%
+  );
+  background-size: 300% 300%;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: ct-border-shimmer 6s linear infinite;
+}
+
+.ct-form-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: clamp(1rem, 2vh, 1.5rem);
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(200, 215, 240, 0.06);
+}
+
+.ct-form-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: rgba(200, 215, 240, 0.06);
+  color: var(--muted, #8a95a5);
+}
+
+.ct-form-card__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.ct-form-card__heading {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink, #e8ecf2);
+  letter-spacing: -0.01em;
+}
+
+/* ── Form ────────────────────────────────────────── */
 .ct-form {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 0.25rem;
-  flex: 1;
-  min-height: 0;
+  gap: 0.85rem;
+}
+
+.ct-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
 }
 
 .ct-field {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
+}
+
+.ct-field--grow {
+  flex: 1;
 }
 
 .ct-field > span {
@@ -137,13 +388,14 @@
 
 .ct-input {
   width: 100%;
-  border: 1px solid rgba(200, 215, 240, 0.1);
-  background: rgba(20, 26, 36, 0.5);
+  border: 1px solid rgba(200, 215, 240, 0.08);
+  background: rgba(14, 18, 26, 0.6);
   color: var(--ink, #e8ecf2);
-  border-radius: 14px;
-  padding: 0.85rem 0.95rem;
+  border-radius: 12px;
+  padding: 0.75rem 0.9rem;
   font: inherit;
-  line-height: 1.35;
+  font-size: 0.92rem;
+  line-height: 1.5;
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease,
@@ -151,84 +403,79 @@
 }
 
 .ct-input::placeholder {
-  color: rgba(138, 149, 165, 0.62);
+  color: rgba(138, 149, 165, 0.5);
 }
 
 .ct-input:focus {
   outline: none;
   border-color: rgba(200, 215, 240, 0.2);
   box-shadow:
-    0 0 0 3px rgba(20, 26, 36, 0.5),
-    0 0 0 5px rgba(200, 215, 240, 0.08);
-  background: rgba(20, 26, 36, 0.7);
+    0 0 0 3px rgba(20, 26, 36, 0.6),
+    0 0 0 5px rgba(200, 215, 240, 0.06);
+  background: rgba(14, 18, 26, 0.8);
 }
 
 .ct-textarea {
-  min-height: 80px;
-  flex: 1 1 auto;
+  min-height: 100px;
   resize: vertical;
 }
 
-/* The textarea field should grow to fill remaining form space */
-.ct-field:has(.ct-textarea) {
-  flex: 1 1 auto;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.ct-field:has(.ct-textarea) .ct-textarea {
-  flex: 1;
-}
-
+/* ── Form footer ─────────────────────────────────── */
 .ct-form-footer {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.8rem;
+  display: flex;
   align-items: center;
-  margin-top: 0.1rem;
+  gap: 1rem;
+  margin-top: 0.25rem;
 }
 
 .ct-submit {
   appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   border: 1px solid rgba(200, 215, 240, 0.12);
-  background: rgba(20, 26, 36, 0.6);
+  background: rgba(200, 215, 240, 0.08);
   color: var(--ink, #e8ecf2);
   border-radius: 999px;
-  padding: 0.82rem 1.2rem;
+  padding: 0.75rem 1.4rem;
   font: inherit;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 700;
   cursor: pointer;
+  white-space: nowrap;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow:
     inset 0 1px 0 rgba(200, 215, 240, 0.06),
-    0 4px 14px rgba(0, 0, 0, 0.2),
-    0 10px 22px rgba(0, 0, 0, 0.15);
+    0 4px 14px rgba(0, 0, 0, 0.2);
   transition:
     transform 0.28s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
     box-shadow 0.28s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
     background-color 0.22s ease,
-    border-color 0.22s ease,
-    opacity 0.2s ease;
+    border-color 0.22s ease;
+}
+
+.ct-submit__icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.28s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
 }
 
 .ct-submit:hover:not(:disabled) {
-  transform: translateY(-2px) scale(1.01);
-  background: rgba(30, 38, 52, 0.75);
-  border-color: rgba(200, 215, 240, 0.18);
+  transform: translateY(-2px);
+  background: rgba(200, 215, 240, 0.13);
+  border-color: rgba(200, 215, 240, 0.2);
   box-shadow:
     inset 0 1px 0 rgba(200, 215, 240, 0.08),
-    0 8px 20px rgba(0, 0, 0, 0.28),
-    0 16px 28px rgba(0, 0, 0, 0.2);
+    0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.ct-submit:hover:not(:disabled) .ct-submit__icon {
+  transform: translateX(2px);
 }
 
 .ct-submit:active:not(:disabled) {
   transform: translateY(0) scale(0.985);
-  box-shadow:
-    inset 0 1px 0 rgba(200, 215, 240, 0.05),
-    0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 .ct-submit:focus-visible {
@@ -238,44 +485,19 @@
 
 .ct-submit:disabled {
   cursor: wait;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
-.ct-footnote {
-  margin: 0;
-  font-size: 0.78rem;
-  line-height: 1.5;
-  color: var(--muted, #8a95a5);
-}
-
-.ct-footnote a {
-  color: inherit;
-  text-decoration: underline;
-  text-decoration-color: rgba(200, 215, 240, 0.22);
-  text-underline-offset: 0.14em;
-}
-
-.ct-config-note {
-  margin: 0;
-  font-size: 0.74rem;
-  line-height: 1.5;
-  color: var(--muted, #8a95a5);
-  opacity: 0.88;
-}
-
-.ct-config-note code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.92em;
-  background: rgba(200, 215, 240, 0.06);
-  border-radius: 6px;
-  padding: 0.08em 0.35em;
-}
-
+/* ── Status & config notes ───────────────────────── */
 .ct-status {
-  min-height: 1.15rem;
   margin: 0;
   font-size: 0.8rem;
   color: var(--muted, #8a95a5);
+  min-height: 1rem;
+}
+
+.ct-status:empty {
+  display: none;
 }
 
 .ct-status--success {
@@ -286,6 +508,23 @@
   color: #f87171;
 }
 
+.ct-config-note {
+  margin: 0;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--muted, #8a95a5);
+  opacity: 0.88;
+}
+
+.ct-config-note code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  background: rgba(200, 215, 240, 0.06);
+  border-radius: 5px;
+  padding: 0.08em 0.3em;
+}
+
+/* ── Keyframes ───────────────────────────────────── */
 @keyframes ct-aurora-drift {
   0% {
     transform: translate3d(-2%, -1%, 0) scale(1) rotate(0deg);
@@ -332,64 +571,182 @@
   }
 }
 
-@media (max-width: 768px) {
-  .ct-section {
-    padding: clamp(1rem, 3vw, 1.5rem) clamp(1.25rem, 4vw, 2rem);
-    align-items: center;
+@keyframes ct-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 6px rgba(74, 222, 128, 0.4);
   }
-
-  .ct-inner {
-    gap: clamp(0.5rem, 1.2vh, 0.8rem);
-  }
-
-  .ct-form {
-    gap: 0.6rem;
-  }
-
-  .ct-textarea {
-    min-height: 60px;
-  }
-
-  .ct-input {
-    padding: 0.7rem 0.85rem;
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
   }
 }
 
-@media (max-width: 640px) {
-  .ct-section {
-    padding: 0.75rem 1.25rem;
-    align-items: stretch;
-    overflow: hidden;
+@keyframes ct-float-1 {
+  0% {
+    transform: translate(0, 0) scale(1);
   }
+  100% {
+    transform: translate(30px, 20px) scale(1.12);
+  }
+}
 
+@keyframes ct-float-2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(-25px, -18px) scale(1.08);
+  }
+}
+
+@keyframes ct-border-shimmer {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 300% 300%;
+  }
+}
+
+/* ── Responsive: Tablet ──────────────────────────── */
+@media (max-width: 900px) {
   .ct-inner {
-    height: 100%;
-    gap: clamp(0.4rem, 1vh, 0.65rem);
+    grid-template-columns: 1fr;
+    gap: clamp(1.25rem, 3vh, 2rem);
+    max-width: 560px;
   }
 
-  .ct-copy {
-    gap: 0.25rem;
+  .ct-info {
+    gap: 1rem;
   }
 
   .ct-title {
     max-width: none;
-    font-size: clamp(1.6rem, 7vw, 2.2rem);
-    margin-top: 0;
   }
 
   .ct-sub {
     max-width: none;
-    font-size: clamp(0.8rem, 3.2vw, 0.9rem);
-    line-height: 1.45;
+  }
+
+  /* Channels become a compact horizontal row */
+  .ct-channels {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .ct-channel {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0.6rem 0.75rem;
+    border-radius: 12px;
+  }
+
+  .ct-channel__arrow {
+    display: none;
+  }
+}
+
+/* ── Responsive: Phone ───────────────────────────── */
+@media (max-width: 640px) {
+  .ct-section {
+    padding: 1.5rem 1.5rem;
+    height: auto;
+    min-height: 100svh;
+    align-items: center;
+  }
+
+  .ct-inner {
+    gap: 1.2rem;
+    padding-inline: 0.75rem;
+  }
+
+  /* Center the info panel */
+  .ct-info {
+    gap: 0.75rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  .ct-copy {
+    gap: 0.3rem;
+    align-items: center;
+  }
+
+  .ct-title {
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+    text-align: center;
+  }
+
+  /* Shorten subtitle on mobile */
+  .ct-sub {
+    font-size: clamp(0.82rem, 3.2vw, 0.9rem);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  /* Compact availability */
+  .ct-availability {
+    padding: 0.3rem 0.7rem 0.3rem 0.55rem;
+  }
+
+  .ct-availability__text {
+    font-size: 0.68rem;
+  }
+
+  /* Icon-only channel row — centered */
+  .ct-channels {
+    flex-direction: row;
+    gap: 0.45rem;
+    justify-content: center;
+  }
+
+  .ct-channel {
+    flex: 0 0 auto;
+    padding: 0.55rem;
+    border-radius: 12px;
+    justify-content: center;
+  }
+
+  .ct-channel__body {
+    display: none;
+  }
+
+  .ct-channel__icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: transparent;
+  }
+
+  .ct-channel__icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Compact form card */
+  .ct-form-card {
+    border-radius: var(--radius, 20px);
+    padding: clamp(1.1rem, 4vw, 1.5rem);
+  }
+
+  .ct-form-card__header {
+    margin-bottom: 0.7rem;
+    padding-bottom: 0.6rem;
+  }
+
+  .ct-form__row {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
   }
 
   .ct-form {
-    gap: 0.5rem;
-    margin-top: 0.1rem;
-  }
-
-  .ct-field {
-    gap: 0.2rem;
+    gap: 0.55rem;
   }
 
   .ct-field > span {
@@ -398,57 +755,71 @@
 
   .ct-input {
     padding: 0.6rem 0.75rem;
-    font-size: 1rem;
+    font-size: 0.95rem;
     border-radius: 10px;
   }
 
   .ct-textarea {
-    min-height: 50px;
+    min-height: 70px;
   }
 
   .ct-form-footer {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     align-items: stretch;
     gap: 0.4rem;
+    margin-top: 0.1rem;
   }
 
   .ct-submit {
     width: 100%;
-    padding: 0.7rem 1rem;
-    font-size: 0.86rem;
-  }
-
-  .ct-footnote {
-    text-align: center;
-    font-size: 0.7rem;
-  }
-
-  .ct-config-note {
-    font-size: 0.66rem;
+    justify-content: center;
+    padding: 0.68rem 1.1rem;
+    font-size: 0.85rem;
   }
 
   .ct-status {
+    text-align: center;
     font-size: 0.72rem;
-    min-height: 0.9rem;
   }
 }
 
+/* ── Responsive: Small phone ─────────────────────── */
 @media (max-width: 380px) {
   .ct-section {
-    padding: 0.5rem 1rem;
+    padding: 1.25rem 1.25rem;
+  }
+
+  .ct-inner {
+    gap: 1rem;
   }
 
   .ct-title {
-    font-size: clamp(1.4rem, 8vw, 1.8rem);
+    font-size: clamp(1.5rem, 9vw, 2rem);
   }
 
+  /* Hide subtitle entirely on very small screens */
   .ct-sub {
-    font-size: clamp(0.76rem, 3vw, 0.86rem);
+    display: none;
+  }
+
+  /* Hide form card header to save space */
+  .ct-form-card__header {
+    display: none;
+  }
+
+  .ct-form-card {
+    padding: 0.85rem;
+    border-radius: 16px;
   }
 
   .ct-input {
     padding: 0.5rem 0.65rem;
     border-radius: 8px;
+    font-size: 0.92rem;
+  }
+
+  .ct-textarea {
+    min-height: 60px;
   }
 
   .ct-submit {
@@ -457,10 +828,14 @@
   }
 }
 
+/* ── Reduced motion ──────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .ct-section::before,
   .ct-section::after,
-  .ct-title {
+  .ct-title,
+  .ct-glow,
+  .ct-form-card::before,
+  .ct-availability__dot {
     animation: none;
   }
 }

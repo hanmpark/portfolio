@@ -12,10 +12,10 @@ export const sectionCopy = {
       "A scrollable timeline of professional experience and academic background, blending engineering practice with visual culture and storytelling.",
   },
   contact: {
-    eyebrow: "Contact",
+    eyebrow: "Get in touch",
     title: "Let's talk",
     subtitle:
-      "Whether you are looking to build a new website, improve your existing platform, or bring a unique project to life, I'm here to help.",
+      "Have a project in mind or just want to connect? Drop me a message or reach out through any of the channels below.",
   },
 };
 
