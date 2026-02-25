@@ -45,10 +45,10 @@
   gap: clamp(1rem, 2vh, 1.6rem);
 }
 
-/* Slower first-view reveal pacing for the About section */
+/* Reveal pacing for the About section */
 .abt-section .reveal {
-  transition-duration: 1.85s;
-  transition-delay: calc(var(--reveal-i, 0) * 0.24s);
+  transition-duration: 0.5s;
+  transition-delay: calc(var(--reveal-i, 0) * 0.06s);
 }
 
 .abt-title {

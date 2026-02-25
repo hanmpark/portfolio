@@ -222,21 +222,22 @@
 
 .exp-logo {
   flex-shrink: 0;
-  width: clamp(74px, 8vw, 96px);
-  height: clamp(52px, 5.8vw, 64px);
+  width: clamp(90px, 10vw, 120px);
+  height: clamp(64px, 7.2vw, 80px);
   border-radius: 12px;
   overflow: visible;
-  background: rgba(20, 26, 36, 0.35);
+  background: rgba(235, 240, 250, 0.92);
+  border: 1px solid rgba(200, 215, 240, 0.15);
   display: grid;
   place-items: center;
-  padding: 4px 6px;
+  padding: 8px 10px;
 }
 
 .exp-logo--square {
-  width: clamp(60px, 6.2vw, 74px);
-  height: clamp(60px, 6.2vw, 74px);
+  width: clamp(72px, 7.8vw, 90px);
+  height: clamp(72px, 7.8vw, 90px);
   border-radius: 12px;
-  padding: 5px;
+  padding: 8px;
 }
 
 .exp-logo img {
@@ -349,14 +350,14 @@
   }
 
   .exp-logo {
-    width: clamp(52px, 14vw, 68px);
-    height: clamp(40px, 10vw, 52px);
+    width: clamp(60px, 16vw, 80px);
+    height: clamp(48px, 12vw, 64px);
     border-radius: 10px;
   }
 
   .exp-logo--square {
-    width: clamp(44px, 12vw, 56px);
-    height: clamp(44px, 12vw, 56px);
+    width: clamp(52px, 14vw, 68px);
+    height: clamp(52px, 14vw, 68px);
   }
 
   .exp-role {

@@ -11,8 +11,8 @@ import { useEffect, useRef } from "react";
  * @returns {React.RefObject}
  */
 export default function useScrollReveal({
-  threshold = 0.12,
-  rootMargin = "0px 0px -60px 0px",
+  threshold = 0.05,
+  rootMargin = "0px 0px -20px 0px",
   once = true,
   selector = ".reveal",
 } = {}) {

@@ -57,13 +57,13 @@
   margin-bottom: clamp(1.2rem, 2.5vh, 2rem);
 }
 
-/* Slower first-view reveal pacing for the Work section */
+/* Reveal pacing for the Work section */
 .work-section .reveal {
-  transition-duration: 1.7s;
+  transition-duration: 0.5s;
 }
 
 .work-grid.reveal-stagger > .reveal {
-  transition-delay: calc(var(--reveal-i, 0) * 0.22s);
+  transition-delay: calc(var(--reveal-i, 0) * 0.07s);
 }
 
 /* ── Grid ─────────────────────────────────────────── */
@@ -97,8 +97,8 @@
     0 8px 32px rgba(0, 0, 0, 0.2),
     0 0 12px hsla(var(--card-hue), var(--card-sat), 50%, 0.06);
   transition:
-    opacity 1.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.55s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.5s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)),
     box-shadow 0.5s ease,
     border-color 0.35s ease;
   cursor: default;
@@ -111,9 +111,9 @@
   cursor: pointer;
 }
 
-/* Make the first reveal in the Work section more visible/slower */
+/* Initial hidden state for work cards */
 .work-card.reveal:not(.is-revealed) {
-  transform: translateY(72px) scale(0.985);
+  transform: translateY(32px) scale(0.985);
 }
 
 .work-card::before {
