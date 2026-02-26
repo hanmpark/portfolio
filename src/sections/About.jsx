@@ -45,7 +45,7 @@ const About = () => {
         </div>
 
         <figure
-          className="abt-portrait reveal reveal-scale"
+          className="abt-portrait reveal reveal-up"
           style={{ "--reveal-i": 3 }}
         >
           <div className="abt-portrait-glow" aria-hidden="true" />

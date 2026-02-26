@@ -22,10 +22,10 @@
   gap: clamp(1rem, 2vh, 1.6rem);
 }
 
-/* Reveal pacing */
+/* Reveal pacing — match Work section */
 .abt-section .reveal {
   transition-duration: 0.5s;
-  transition-delay: calc(var(--reveal-i, 0) * 0.08s);
+  transition-delay: calc(var(--reveal-i, 0) * 0.1s);
 }
 
 .abt-title {

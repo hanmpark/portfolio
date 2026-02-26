@@ -7,7 +7,10 @@ const workItems = experiences.filter((e) => e.category === "Experience");
 const eduItems = experiences.filter((e) => e.category === "Education");
 
 const Card = ({ item, index, l }) => (
-  <article className="exp-card" style={{ "--card-i": index }}>
+  <article
+    className="exp-card reveal reveal-up"
+    style={{ "--reveal-i": index, "--card-i": index }}
+  >
     <div className="exp-card-accent" aria-hidden="true" />
     <span className="exp-marker" aria-hidden="true">
       <span className="exp-marker-ping" />
@@ -59,14 +62,14 @@ const Experience = () => {
           </h2>
         </header>
 
-        <div className="exp-columns">
+        <div className="exp-columns reveal-stagger">
           {/* Experience column */}
-          <div className="exp-col reveal reveal-up">
-            <h3 className="exp-col-title">
+          <div className="exp-col">
+            <h3 className="exp-col-title reveal reveal-up">
               <span className="exp-col-icon">💼</span>
               {t("experience.experienceCol")}
             </h3>
-            <div className="exp-timeline">
+            <div className="exp-timeline reveal-stagger">
               {workItems.map((item, i) => (
                 <Card
                   item={item}
@@ -79,12 +82,12 @@ const Experience = () => {
           </div>
 
           {/* Education column */}
-          <div className="exp-col reveal reveal-up" style={{ "--reveal-i": 1 }}>
-            <h3 className="exp-col-title">
+          <div className="exp-col">
+            <h3 className="exp-col-title reveal reveal-up">
               <span className="exp-col-icon">🎓</span>
               {t("experience.educationCol")}
             </h3>
-            <div className="exp-timeline">
+            <div className="exp-timeline reveal-stagger">
               {eduItems.map((item, i) => (
                 <Card
                   item={item}
