@@ -50,7 +50,11 @@ const Card = ({ item, index, l }) => (
 
 const Experience = () => {
   const { t, l } = useLanguage();
-  const revealRef = useScrollReveal({ threshold: 0.1, selector: ".reveal" });
+  const revealRef = useScrollReveal({
+    threshold: 0.05,
+    rootMargin: "0px 0px 100px 0px",
+    selector: ".reveal",
+  });
 
   return (
     <section className="section exp-section" id="experience" ref={revealRef}>

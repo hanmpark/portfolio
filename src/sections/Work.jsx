@@ -6,7 +6,11 @@ import "./Work.css";
 
 const Work = () => {
   const { t, l } = useLanguage();
-  const headRef = useScrollReveal({ threshold: 0.15, selector: ".reveal" });
+  const headRef = useScrollReveal({
+    threshold: 0.05,
+    rootMargin: "0px 0px 100px 0px",
+    selector: ".reveal",
+  });
 
   return (
     <section className="section work-section" id="work">

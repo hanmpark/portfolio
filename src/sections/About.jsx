@@ -11,7 +11,10 @@ const highlightKeys = [
 
 const About = () => {
   const { t } = useLanguage();
-  const revealRef = useScrollReveal({ threshold: 0.12 });
+  const revealRef = useScrollReveal({
+    threshold: 0.05,
+    rootMargin: "0px 0px 100px 0px",
+  });
   const paragraphs = t("about.paragraphs");
 
   return (

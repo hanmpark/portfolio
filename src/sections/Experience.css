@@ -345,6 +345,12 @@
   transition-delay: calc(var(--reveal-i, 0) * 0.07s);
 }
 
+@media (max-width: 768px) {
+  .exp-card.reveal:not(.is-revealed) {
+    transform: translateY(20px) scale(0.99);
+  }
+}
+
 /* ── Responsive ─────────────────────── */
 @media (max-width: 768px) {
   .exp-col {
