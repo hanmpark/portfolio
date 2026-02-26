@@ -182,6 +182,20 @@ const Contact = () => {
       <div className="ct-glow ct-glow--1" aria-hidden="true" />
       <div className="ct-glow ct-glow--2" aria-hidden="true" />
 
+      {/* Decorative corner figures (Hero-style) */}
+      <div className="ct-figures" aria-hidden="true">
+        <img
+          className="ct-fig ct-fig--left"
+          src="https://assets.hpark.me/premium/fig5.png"
+          alt=""
+        />
+        <img
+          className="ct-fig ct-fig--right"
+          src="https://assets.hpark.me/premium/fig6.png"
+          alt=""
+        />
+      </div>
+
       <div className="ct-inner">
         {/* ── Left column: info panel ──────────────────── */}
         <div className="ct-info">

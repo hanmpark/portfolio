@@ -1,58 +1,15 @@
-import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { projects } from "../data/home.js";
 import useScrollReveal from "../hooks/useScrollReveal.js";
 import "./Work.css";
 
 const Work = () => {
-  const sectionRef = useRef(null);
   const headRef = useScrollReveal({ threshold: 0.15, selector: ".reveal" });
 
-  /* Scroll-driven parallax on accent images */
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    let raf = 0;
-
-    const update = () => {
-      raf = 0;
-      const rect = el.getBoundingClientRect();
-      const vh = window.innerHeight || 1;
-      const progress = Math.min(
-        Math.max((vh - rect.top) / (rect.height + vh), 0),
-        1,
-      );
-      el.style.setProperty("--section-scroll", progress.toFixed(4));
-    };
-
-    const schedule = () => {
-      if (!raf) raf = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener("scroll", schedule, { passive: true });
-    return () => {
-      if (raf) cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", schedule);
-    };
-  }, []);
-
   return (
-    <section className="section work-section" id="work" ref={sectionRef}>
+    <section className="section work-section" id="work">
       {/* Noise texture */}
       <div className="noise-overlay" aria-hidden="true" />
-      {/* Floating accent images */}
-      <img
-        className="work-accent work-accent--1"
-        src="https://assets.hpark.me/premium/fig5.png"
-        alt=""
-        aria-hidden="true"
-      />
-      <img
-        className="work-accent work-accent--2"
-        src="https://assets.hpark.me/premium/fig6.png"
-        alt=""
-        aria-hidden="true"
-      />
 
       <div className="container work-inner" ref={headRef}>
         <header className="work-head">
@@ -87,6 +44,11 @@ const Work = () => {
                   }
                   {...linkProps}
                 >
+                  <span className="work-card-cue" aria-hidden="true">
+                    {isInternal ? "View project" : "Open repo"}
+                    <span className="work-card-cue-arrow">{"->"}</span>
+                  </span>
+
                   <figure className="work-card-img">
                     <img
                       src={project.previewImage}

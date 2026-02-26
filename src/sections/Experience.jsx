@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { experiences, sectionCopy } from "../data/home.js";
 import useScrollReveal from "../hooks/useScrollReveal.js";
 import "./Experience.css";
@@ -41,59 +40,12 @@ const Card = ({ item, index }) => (
 );
 
 const Experience = () => {
-  const sectionRef = useRef(null);
   const revealRef = useScrollReveal({ threshold: 0.1, selector: ".reveal" });
 
-  /* Scroll-driven parallax */
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    let raf = 0;
-    const update = () => {
-      raf = 0;
-      const rect = el.getBoundingClientRect();
-      const vh = window.innerHeight || 1;
-      const progress = Math.min(
-        Math.max((vh - rect.top) / (rect.height + vh), 0),
-        1,
-      );
-      el.style.setProperty("--exp-scroll", progress.toFixed(4));
-    };
-    const schedule = () => {
-      if (!raf) raf = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener("scroll", schedule, { passive: true });
-    return () => {
-      if (raf) cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", schedule);
-    };
-  }, []);
-
   return (
-    <section
-      className="section exp-section"
-      id="experience"
-      ref={(node) => {
-        sectionRef.current = node;
-        revealRef.current = node;
-      }}
-    >
+    <section className="section exp-section" id="experience" ref={revealRef}>
       {/* Noise texture */}
       <div className="noise-overlay" aria-hidden="true" />
-      {/* Floating accent images */}
-      <img
-        className="exp-accent exp-accent--1"
-        src="https://assets.hpark.me/premium/fig1.png"
-        alt=""
-        aria-hidden="true"
-      />
-      <img
-        className="exp-accent exp-accent--2"
-        src="https://assets.hpark.me/premium/fig2.png"
-        alt=""
-        aria-hidden="true"
-      />
 
       <div className="container exp-inner">
         <header className="exp-head">

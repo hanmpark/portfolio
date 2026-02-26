@@ -11,6 +11,8 @@
 
 /* ── Back nav ────────────────────────────────────── */
 .pj-back {
+  appearance: none;
+  -webkit-appearance: none;
   position: fixed;
   top: clamp(1.25rem, 3vh, 2rem);
   left: clamp(1.25rem, 3vw, 2.5rem);
@@ -24,9 +26,12 @@
   background: var(--glass, rgba(20, 26, 36, 0.55));
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
+  cursor: pointer;
   color: var(--ink, #e8ecf2);
+  font: inherit;
   font-size: 0.84rem;
   font-weight: 600;
+  line-height: 1;
   letter-spacing: 0.01em;
   text-decoration: none;
   box-shadow: var(--shadow-soft);

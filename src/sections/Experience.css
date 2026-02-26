@@ -1,11 +1,9 @@
 /* ── Experience ─────────────────────────────────── */
 .exp-section {
-  --exp-scroll: 0;
   position: relative;
   padding-block: clamp(4rem, 8vh, 7rem);
   overflow-x: clip;
   overflow-y: visible;
-  perspective: 720px;
   isolation: isolate;
 }
 
@@ -33,7 +31,6 @@
       transparent 45%
     );
   filter: blur(55px) saturate(65%);
-  animation: exp-aurora 16s ease-in-out infinite alternate;
 }
 
 /* Faint crosshatch grid */
@@ -58,72 +55,6 @@
     black 0%,
     transparent 100%
   );
-  animation: exp-grid-move 24s linear infinite;
-}
-
-@keyframes exp-aurora {
-  0% {
-    transform: translate3d(-1.5%, -0.5%, 0) scale(1) rotate(0deg);
-    opacity: 0.85;
-  }
-  50% {
-    transform: translate3d(2%, 1%, 0) scale(1.07) rotate(4deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translate3d(-0.5%, 2%, 0) scale(1.03) rotate(-3deg);
-    opacity: 0.88;
-  }
-}
-
-@keyframes exp-grid-move {
-  0% {
-    background-position:
-      0 0,
-      0 0;
-  }
-  100% {
-    background-position:
-      40px 40px,
-      40px 40px;
-  }
-}
-
-/* ── Floating accent images ────────────────────── */
-.exp-accent {
-  position: absolute;
-  pointer-events: none;
-  z-index: 0;
-  max-width: none;
-  filter: grayscale(1) saturate(0) brightness(1.1);
-  opacity: 0.18;
-  transition: transform 0.1s linear;
-}
-
-.exp-accent--1 {
-  width: clamp(280px, 30vw, 460px);
-  top: 3%;
-  right: -1%;
-  transform: translate3d(
-      0,
-      calc((0.5 - var(--exp-scroll)) * 180px),
-      calc((0.5 - var(--exp-scroll)) * 60px)
-    )
-    rotate(calc(12deg + (0.5 - var(--exp-scroll)) * 9deg))
-    scale(calc(1.02 + (0.5 - var(--exp-scroll)) * 0.06));
-}
-
-.exp-accent--2 {
-  width: clamp(220px, 24vw, 360px);
-  bottom: 4%;
-  left: -1%;
-  transform: translate3d(
-      0,
-      calc((var(--exp-scroll) - 0.5) * 150px),
-      calc((var(--exp-scroll) - 0.5) * 48px)
-    )
-    rotate(calc(-10deg + (var(--exp-scroll) - 0.5) * 8deg))
-    scale(calc(1 + (var(--exp-scroll) - 0.5) * 0.06));
 }
 
 /* ── Inner layout ──────────────────────────────── */
@@ -411,10 +342,6 @@
     text-align: center;
   }
 
-  .exp-accent {
-    display: none;
-  }
-
   .exp-card:hover {
     transform: translateY(-2px);
   }
@@ -459,17 +386,10 @@
   .exp-inner {
     transform: none !important;
   }
-  .exp-accent {
-    transform: none !important;
-  }
   .exp-card {
     animation: none !important;
   }
   .exp-card-inner {
     animation: none !important;
-  }
-  .exp-section::before,
-  .exp-section::after {
-    animation: none;
   }
 }

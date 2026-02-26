@@ -93,6 +93,37 @@
   animation: ct-float-2 18s ease-in-out infinite alternate;
 }
 
+/* ── Decorative corner figures (Hero-style) ─────── */
+.ct-figures {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ct-fig {
+  position: absolute;
+  max-width: none;
+  opacity: 0.18;
+  filter: grayscale(1) saturate(0) contrast(1.06) brightness(1.08)
+    drop-shadow(0 24px 40px rgba(8, 14, 25, 0.24));
+  user-select: none;
+}
+
+.ct-fig--left {
+  width: clamp(260px, 22vw, 380px);
+  top: 1%;
+  left: 0%;
+  transform: rotate(-10deg);
+}
+
+.ct-fig--right {
+  width: clamp(280px, 24vw, 420px);
+  bottom: -2%;
+  right: -1%;
+  transform: rotate(9deg);
+}
+
 /* ── Two-column layout ───────────────────────────── */
 .ct-inner {
   width: min(1080px, 100%);
@@ -612,6 +643,10 @@
 
 /* ── Responsive: Tablet ──────────────────────────── */
 @media (max-width: 900px) {
+  .ct-figures {
+    display: none;
+  }
+
   .ct-inner {
     grid-template-columns: 1fr;
     gap: clamp(1.25rem, 3vh, 2rem);

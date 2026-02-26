@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import useScrollReveal from "../hooks/useScrollReveal.js";
 import "./About.css";
 
@@ -9,53 +8,12 @@ const aboutParagraphs = [
 ];
 
 const About = () => {
-  const sectionRef = useRef(null);
   const revealRef = useScrollReveal({ threshold: 0.12 });
 
-  /* Scroll-driven parallax */
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    let raf = 0;
-    const update = () => {
-      raf = 0;
-      const rect = el.getBoundingClientRect();
-      const vh = window.innerHeight || 1;
-      const progress = Math.min(
-        Math.max((vh - rect.top) / (rect.height + vh), 0),
-        1,
-      );
-      el.style.setProperty("--section-scroll", progress.toFixed(4));
-    };
-    const schedule = () => {
-      if (!raf) raf = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener("scroll", schedule, { passive: true });
-    return () => {
-      if (raf) cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", schedule);
-    };
-  }, []);
-
   return (
-    <section
-      className="section abt-section"
-      id="about"
-      ref={(node) => {
-        sectionRef.current = node;
-        revealRef.current = node;
-      }}
-    >
+    <section className="section abt-section" id="about" ref={revealRef}>
       {/* Noise texture */}
       <div className="noise-overlay" aria-hidden="true" />
-      {/* Floating accent */}
-      <img
-        className="abt-accent"
-        src="https://assets.hpark.me/premium/fig4.png"
-        alt=""
-        aria-hidden="true"
-      />
 
       <div className="container abt-inner">
         <div className="abt-content">

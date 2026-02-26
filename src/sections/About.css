@@ -1,11 +1,9 @@
 /* ── About ──────────────────────────────────────── */
 .abt-section {
-  --section-scroll: 0;
   position: relative;
   padding-block: clamp(4rem, 8vh, 7rem);
   overflow-x: clip;
   overflow-y: visible;
-  perspective: 640px;
   isolation: isolate;
 }
 
@@ -29,7 +27,6 @@
     ),
     radial-gradient(circle at 50% 50%, rgba(30, 45, 80, 0.04), transparent 40%);
   filter: blur(50px) saturate(60%);
-  animation: abt-glow-drift 20s ease-in-out infinite alternate;
 }
 
 /* Subtle diagonal lines overlay */
@@ -57,41 +54,6 @@
     black 0%,
     transparent 100%
   );
-}
-
-@keyframes abt-glow-drift {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: translate3d(1.5%, -1%, 0) scale(1.05) rotate(2deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translate3d(-1%, 1.5%, 0) scale(1.02) rotate(-1deg);
-    opacity: 0.85;
-  }
-}
-
-/* Floating accent */
-.abt-accent {
-  position: absolute;
-  pointer-events: none;
-  z-index: 0;
-  width: clamp(320px, 36vw, 560px);
-  top: 50%;
-  right: -3%;
-  transform: translate3d(
-      0,
-      calc(-50% + (var(--section-scroll) - 0.5) * 210px),
-      calc((var(--section-scroll) - 0.5) * 70px)
-    )
-    rotate(calc(8deg + (var(--section-scroll) - 0.5) * 10deg))
-    scale(calc(1.02 + (var(--section-scroll) - 0.5) * 0.08));
-  filter: grayscale(1) saturate(0) brightness(1.1);
-  opacity: 0.14;
-  transition: transform 0.1s linear;
 }
 
 .abt-inner {
@@ -205,9 +167,6 @@
 }
 
 @media (max-width: 768px) {
-  .abt-accent {
-    display: none;
-  }
   .abt-inner {
     grid-template-columns: 1fr;
     text-align: center;
@@ -241,11 +200,5 @@
 @media (prefers-reduced-motion: reduce) {
   .abt-inner {
     transform: none !important;
-  }
-  .abt-accent {
-    transform: none !important;
-  }
-  .abt-section::before {
-    animation: none;
   }
 }

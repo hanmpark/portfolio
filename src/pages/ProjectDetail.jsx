@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { Link, useParams, Navigate } from "react-router-dom";
+import { useParams, Navigate, useNavigate } from "react-router-dom";
 import { projectDetails } from "../data/projectDetails.js";
 import "./ProjectDetail.css";
 
@@ -34,6 +34,7 @@ const InfoIcon = () => (
 
 const ProjectDetail = () => {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const project = projectDetails[slug];
   const [lightbox, setLightbox] = useState(null);
 
@@ -60,10 +61,10 @@ const ProjectDetail = () => {
 
   return (
     <div className="pj">
-      <Link to="/" className="pj-back">
+      <button type="button" className="pj-back" onClick={() => navigate(-1)}>
         <ArrowLeft />
         Back
-      </Link>
+      </button>
 
       <div className="pj-hero">
         <img src={project.heroImage} alt={`${project.title} hero`} />
