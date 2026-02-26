@@ -106,6 +106,10 @@
 
 .hero-reveal {
   opacity: 0;
+  animation: none;
+}
+
+.app--loaded .hero-reveal {
   animation: text-reveal-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -171,7 +175,8 @@
     transition: none !important;
   }
 
-  .hero-reveal {
+  .hero-reveal,
+  .app--loaded .hero-reveal {
     opacity: 1 !important;
     animation: none !important;
   }

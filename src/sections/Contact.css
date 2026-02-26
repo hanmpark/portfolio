@@ -687,15 +687,9 @@
     text-align: center;
   }
 
-  /* Shorten subtitle on mobile */
+  /* Hide subtitle on mobile */
   .ct-sub {
-    font-size: clamp(0.82rem, 3.2vw, 0.9rem);
-    line-height: 1.5;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-align: center;
+    display: none;
   }
 
   /* Compact availability */
@@ -804,11 +798,6 @@
 
   .ct-title {
     font-size: clamp(1.5rem, 9vw, 2rem);
-  }
-
-  /* Hide subtitle entirely on very small screens */
-  .ct-sub {
-    display: none;
   }
 
   /* Hide form card header to save space */

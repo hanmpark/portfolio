@@ -59,7 +59,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="app">
+    <div className={`app${loaded ? " app--loaded" : ""}`}>
       <PageLoader onReady={handleReady} />
       <ScrollProgress />
       <BackToTopButton />
