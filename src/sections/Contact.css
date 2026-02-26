@@ -2,12 +2,13 @@
 .ct-section {
   position: sticky;
   top: 0;
-  height: 100vh;
+  height: 100svh;
   min-height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(2rem, 6vw, 4rem) clamp(2rem, 8vw, 5rem);
+  padding: clamp(2rem, 6vw, 4rem) clamp(2rem, 8vw, 5rem)
+    calc(clamp(2rem, 6vw, 4rem) + env(safe-area-inset-bottom, 0px));
   overflow: hidden;
   isolation: isolate;
   background:
@@ -628,10 +629,40 @@
 /* ── Responsive: Phone ───────────────────────────── */
 @media (max-width: 640px) {
   .ct-section {
-    padding: 2rem 1.75rem;
+    padding: 2rem 1.75rem calc(2rem + env(safe-area-inset-bottom, 0px));
     height: auto;
     min-height: 100svh;
     align-items: center;
+  }
+
+  /* Disable heavy GPU effects on mobile */
+  .ct-section::before {
+    filter: none;
+    opacity: 0.04;
+  }
+
+  .ct-glow {
+    filter: blur(40px);
+    opacity: 0.5;
+  }
+
+  .ct-form-card {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .ct-form-card::before {
+    animation: none;
+  }
+
+  .ct-channel {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .ct-availability {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .ct-inner {
@@ -763,7 +794,7 @@
 /* ── Responsive: Small phone ─────────────────────── */
 @media (max-width: 380px) {
   .ct-section {
-    padding: 1.5rem 1.5rem;
+    padding: 1.5rem 1.5rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
   }
 
   .ct-inner {

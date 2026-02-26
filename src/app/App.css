@@ -1,9 +1,9 @@
 .app {
-  --contact-reveal-space: 100vh;
+  --contact-reveal-space: 100svh;
   --z-layer-hero: 10;
   --z-layer-contact: 20;
   --z-layer-main: 30;
-  min-height: 100vh;
+  min-height: 100svh;
   overflow-x: clip;
   background:
     radial-gradient(circle at 18% 6%, rgba(30, 40, 60, 0.45), transparent 42%),
@@ -18,7 +18,7 @@
 .app > main {
   position: relative;
   z-index: var(--z-layer-main);
-  margin-top: 100vh;
+  margin-top: 100svh;
   padding-bottom: var(--contact-reveal-space);
   pointer-events: none;
   overflow: clip;
@@ -144,7 +144,7 @@
 @media (max-width: 720px) {
   .app::before,
   .app::after {
-    opacity: 0.5;
+    display: none;
   }
 }
 

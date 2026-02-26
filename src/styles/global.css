@@ -138,6 +138,8 @@ img {
   .btn {
     padding: 0.72rem 1.4rem;
     font-size: 0.88rem;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
 
   .btn.small {

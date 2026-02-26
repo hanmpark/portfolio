@@ -310,6 +310,11 @@
     gap: 0.85rem;
   }
 
+  .work-card {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
   .work-card--featured {
     grid-column: 1;
   }
