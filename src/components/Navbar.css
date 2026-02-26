@@ -17,12 +17,12 @@
     0 8px 32px rgba(0, 0, 0, 0.2),
     0 1px 2px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(200, 215, 240, 0.06);
-  overflow: hidden;
   transition:
     transform 0.45s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
     background 0.4s ease,
     box-shadow 0.4s ease,
-    border-color 0.4s ease;
+    border-color 0.4s ease,
+    border-radius 0.3s ease;
 }
 
 .nav--scrolled {
@@ -116,19 +116,23 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.38rem 0.72rem;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
   border-radius: 999px;
   border: 1px solid rgba(200, 215, 240, 0.08);
   background: rgba(200, 215, 240, 0.03);
   color: rgba(232, 236, 242, 0.9);
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
   transition:
     transform 0.25s ease,
     background 0.25s ease,
     border-color 0.25s ease,
     color 0.25s ease;
+}
+
+.nav-social svg {
+  width: 14px;
+  height: 14px;
 }
 
 .nav-social:hover {
@@ -228,6 +232,11 @@
 
 @media (max-width: 720px) {
   .nav {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1280px, 92vw);
     flex-wrap: wrap;
     align-items: center;
     border-radius: 20px;
@@ -235,6 +244,16 @@
     gap: 0;
     -webkit-backdrop-filter: blur(16px) saturate(140%);
     backdrop-filter: blur(16px) saturate(140%);
+    z-index: 100;
+  }
+
+  .nav--hidden {
+    transform: translateX(-50%) translateY(calc(-100% - 2rem));
+  }
+
+  .nav--open {
+    border-radius: 20px;
+    overflow: hidden;
   }
 
   .nav--scrolled {
@@ -298,14 +317,18 @@
     overflow: hidden;
     opacity: 0;
     transition:
-      max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-      opacity 0.25s ease;
+      max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.3s ease,
+      padding 0.3s ease;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .nav--open .nav-drawer {
-    max-height: 400px;
+    max-height: 600px;
     opacity: 1;
-    margin-top: 0.6rem;
+    padding-top: 0.6rem;
+    padding-bottom: 0.2rem;
   }
 
   .nav-links {
@@ -325,9 +348,11 @@
 
   .nav-actions {
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 0.5rem;
     padding-top: 0.25rem;
     border-top: 1px solid rgba(200, 215, 240, 0.06);
+    align-items: center;
   }
 
   .nav-socials {
@@ -335,11 +360,12 @@
   }
 
   .nav-social {
-    padding: 0.34rem 0.64rem;
-    font-size: 0.74rem;
+    width: 1.85rem;
+    height: 1.85rem;
   }
 
   .nav .btn.small {
+    margin-left: auto;
     padding: 0.42rem 0.85rem;
     font-size: 0.82rem;
   }
