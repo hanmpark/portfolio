@@ -185,3 +185,16 @@
     display: none;
   }
 }
+
+/* ── Mobile: disable scroll-reveal hidden state ───── */
+/* IntersectionObserver can lag during fast scrolling   */
+/* on mobile, causing content to stay invisible. Show   */
+/* everything immediately instead.                     */
+@media (max-width: 768px) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
