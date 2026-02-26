@@ -150,6 +150,7 @@ const Contact = () => {
             subject: "Portfolio contact form submission",
             message: form.message,
             to_email: contact.email,
+            year: new Date().getFullYear(),
           },
         }),
       });
