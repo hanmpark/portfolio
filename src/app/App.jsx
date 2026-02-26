@@ -48,9 +48,18 @@ const App = () => {
       <BackToTopButton />
       <Hero />
       <main>
-        <Work />
-        <Experience />
-        <About />
+        <div className="main-content-bg">
+          {/* Unified background elements contained within content sections */}
+          <div className="main-orb main-orb--1" aria-hidden="true" />
+          <div className="main-orb main-orb--2" aria-hidden="true" />
+          <div className="main-orb main-orb--3" aria-hidden="true" />
+          <div className="main-orb main-orb--4" aria-hidden="true" />
+          <div className="main-noise" aria-hidden="true" />
+
+          <Work />
+          <Experience />
+          <About />
+        </div>
       </main>
       <div
         className={`contact-reveal${contactInFront ? " contact-reveal--front" : ""}`}

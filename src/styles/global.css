@@ -59,7 +59,7 @@ img {
 }
 
 .container {
-  width: min(1040px, 92vw);
+  width: min(1280px, 92vw);
   margin: 0 auto;
 }
 
@@ -147,10 +147,8 @@ img {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
+  html {
+    scroll-behavior: auto;
   }
 }
 

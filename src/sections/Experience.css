@@ -2,59 +2,6 @@
 .exp-section {
   position: relative;
   padding-block: clamp(4rem, 8vh, 7rem);
-  overflow-x: clip;
-  overflow-y: visible;
-  isolation: isolate;
-}
-
-/* ── Ambient aurora background ─────────────────── */
-.exp-section::before {
-  content: "";
-  position: absolute;
-  inset: -12%;
-  z-index: -2;
-  pointer-events: none;
-  background:
-    radial-gradient(
-      ellipse 55% 45% at 80% 15%,
-      rgba(90, 60, 160, 0.1),
-      transparent 55%
-    ),
-    radial-gradient(
-      ellipse 50% 40% at 20% 80%,
-      rgba(40, 80, 140, 0.09),
-      transparent 50%
-    ),
-    radial-gradient(
-      ellipse 45% 50% at 60% 55%,
-      rgba(60, 40, 120, 0.05),
-      transparent 45%
-    );
-  filter: blur(55px) saturate(65%);
-}
-
-/* Faint crosshatch grid */
-.exp-section::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.035;
-  background-image:
-    linear-gradient(rgba(200, 215, 240, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(200, 215, 240, 0.06) 1px, transparent 1px);
-  background-size: 40px 40px;
-  mask-image: radial-gradient(
-    ellipse 65% 55% at 50% 45%,
-    black 0%,
-    transparent 100%
-  );
-  -webkit-mask-image: radial-gradient(
-    ellipse 65% 55% at 50% 45%,
-    black 0%,
-    transparent 100%
-  );
 }
 
 /* ── Inner layout ──────────────────────────────── */
@@ -64,7 +11,7 @@
   display: flex;
   flex-direction: column;
   gap: clamp(2rem, 4vh, 3rem);
-  max-width: 1180px;
+  max-width: 1280px;
 }
 
 .exp-head {
@@ -79,13 +26,13 @@
 .exp-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(1.25rem, 2.4vw, 2.25rem);
+  gap: clamp(1.5rem, 2.8vw, 2.5rem);
   align-items: start;
 }
 
 .exp-col {
   --exp-line-indent: 1.6rem;
-  --exp-marker-size: 10px;
+  --exp-marker-size: 12px;
   --exp-line-width: 2px;
   --exp-marker-top: 1.15rem;
   display: flex;
@@ -101,9 +48,17 @@
   letter-spacing: -0.02em;
   color: var(--ink, #e8ecf2);
   padding-left: var(--exp-line-indent);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* ── timeline list ─────────────────────────── */
+.exp-col-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* ── Timeline list ─────────────────────────── */
 .exp-timeline {
   position: relative;
   display: flex;
@@ -112,7 +67,7 @@
   padding-left: var(--exp-line-indent);
 }
 
-/* vertical line */
+/* Glowing vertical line */
 .exp-timeline::before {
   content: "";
   position: absolute;
@@ -122,14 +77,16 @@
   width: var(--exp-line-width);
   background: linear-gradient(
     180deg,
-    rgba(200, 215, 240, 0.1),
-    rgba(200, 215, 240, 0.04)
+    rgba(200, 215, 240, 0.16),
+    rgba(200, 215, 240, 0.08),
+    rgba(200, 215, 240, 0.03)
   );
   border-radius: 2px;
   pointer-events: none;
+  box-shadow: 0 0 8px rgba(200, 215, 240, 0.04);
 }
 
-/* ── markers ───────────────────────────── */
+/* ── Markers with ping ─────────────────────── */
 .exp-marker {
   position: absolute;
   left: calc(-1 * var(--exp-line-indent));
@@ -138,7 +95,7 @@
   height: var(--exp-marker-size);
   border-radius: 50%;
   background: rgba(200, 215, 240, 0.06);
-  border: 2px solid rgba(200, 215, 240, 0.1);
+  border: 2px solid rgba(200, 215, 240, 0.14);
   transition:
     background 0.35s,
     border-color 0.35s,
@@ -146,55 +103,167 @@
     transform 0.35s;
   z-index: 2;
   pointer-events: none;
+  display: grid;
+  place-items: center;
+}
+
+.exp-marker-ping {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(200, 215, 240, 0.12);
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
 .exp-card:hover .exp-marker {
-  background: hsla(var(--card-hue), var(--card-sat), 55%, 0.8);
-  border-color: hsla(var(--card-hue), var(--card-sat), 55%, 0.8);
-  box-shadow: 0 0 10px hsla(var(--card-hue), var(--card-sat), 50%, 0.25);
-  transform: scale(1.15);
+  background: hsla(var(--card-hue), var(--card-sat), 55%, 0.9);
+  border-color: hsla(var(--card-hue), var(--card-sat), 55%, 0.9);
+  box-shadow: 0 0 14px hsla(var(--card-hue), var(--card-sat), 50%, 0.35);
+  transform: scale(1.2);
 }
 
-/* ── card ───────────────────────────────── */
+.exp-card:hover .exp-marker-ping {
+  opacity: 1;
+  animation: exp-ping 1.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes exp-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Per-card color accents */
+.exp-card:nth-child(1) {
+  --card-hue: 330;
+  --card-sat: 55%;
+}
+.exp-card:nth-child(2) {
+  --card-hue: 250;
+  --card-sat: 50%;
+}
+.exp-card:nth-child(3) {
+  --card-hue: 200;
+  --card-sat: 55%;
+}
+.exp-card:nth-child(4) {
+  --card-hue: 160;
+  --card-sat: 50%;
+}
+.exp-card:nth-child(5) {
+  --card-hue: 35;
+  --card-sat: 55%;
+}
+.exp-card:nth-child(6) {
+  --card-hue: 280;
+  --card-sat: 50%;
+}
+
+/* ── Card ───────────────────────────────── */
 .exp-card {
   --card-hue: 215;
-  --card-sat: 40%;
+  --card-sat: 24%;
   position: relative;
   opacity: 0;
   border-radius: 20px;
-  background:
-    linear-gradient(
-      135deg,
-      hsla(var(--card-hue), var(--card-sat), 50%, 0.06) 0%,
-      transparent 60%
-    ),
-    var(--glass, rgba(20, 26, 36, 0.55));
-  border: 1px solid hsla(var(--card-hue), var(--card-sat), 60%, 0.12);
+  overflow: hidden;
+  background: var(--glass, rgba(20, 26, 36, 0.55));
+  border: 1px solid rgba(148, 163, 184, 0.08);
   backdrop-filter: blur(16px);
   transition:
-    background 0.35s,
     border-color 0.35s,
     box-shadow 0.4s,
+    background 0.4s,
     transform 0.45s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
-  /* Fade on card container so hover transform remains independent */
   animation: exp-card-fade 1.05s cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: calc(var(--card-i, 0) * 0.14s + 0.28s);
 }
 
+/* Gradient top accent bar */
+.exp-card-accent {
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    hsla(var(--card-hue), var(--card-sat), 70%, 0.22),
+    hsla(var(--card-hue), var(--card-sat), 72%, 0.1),
+    hsla(var(--card-hue), var(--card-sat), 70%, 0.22)
+  );
+  transition:
+    opacity 0.35s,
+    height 0.35s,
+    background 0.35s;
+}
+
+.exp-card:hover .exp-card-accent {
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    hsla(var(--card-hue), var(--card-sat), 65%, 0.45),
+    hsla(var(--card-hue), var(--card-sat), 70%, 0.25),
+    hsla(var(--card-hue), var(--card-sat), 65%, 0.45)
+  );
+}
+
 .exp-card:hover {
-  background:
-    linear-gradient(
-      135deg,
-      hsla(var(--card-hue), var(--card-sat), 50%, 0.1) 0%,
-      transparent 60%
-    ),
-    var(--glass-strong, rgba(30, 38, 52, 0.7));
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.2),
-    0 0 20px hsla(var(--card-hue), var(--card-sat), 50%, 0.06);
-  transform: translateY(-4px);
-  border-color: hsla(var(--card-hue), var(--card-sat), 65%, 0.22);
-  z-index: 3;
+    0 16px 48px rgba(0, 0, 0, 0.3),
+    0 0 30px hsla(var(--card-hue), var(--card-sat), 55%, 0.1);
+  transform: translateY(-6px) scale(1.008);
+  border-color: hsla(var(--card-hue), var(--card-sat), 70%, 0.2);
+  background: rgba(20, 26, 36, 0.65);
+}
+
+/* Animated spinning gradient border on hover */
+@property --exp-border-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.exp-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--exp-border-angle, 0deg),
+    hsla(var(--card-hue), var(--card-sat), 60%, 0.35),
+    transparent 25%,
+    transparent 50%,
+    hsla(var(--card-hue), var(--card-sat), 60%, 0.25) 75%,
+    hsla(var(--card-hue), var(--card-sat), 60%, 0.35)
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.exp-card:hover::before {
+  opacity: 1;
+  animation: exp-border-spin 4s linear infinite;
+}
+
+@keyframes exp-border-spin {
+  to {
+    --exp-border-angle: 360deg;
+  }
 }
 
 @keyframes exp-card-fade {
@@ -257,6 +326,11 @@
   height: 100%;
   object-fit: contain;
   object-position: center;
+  transition: transform 0.4s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.exp-card:hover .exp-logo img {
+  transform: scale(1.06);
 }
 
 .exp-role {
@@ -265,6 +339,11 @@
   font-weight: 600;
   color: var(--ink, #e8ecf2);
   line-height: 1.25;
+  transition: color 0.3s;
+}
+
+.exp-card:hover .exp-role {
+  color: hsla(var(--card-hue), var(--card-sat), 80%, 0.95);
 }
 
 .exp-company {
@@ -295,35 +374,27 @@
 .exp-tags .pill {
   font-size: 0.64rem;
   padding: 0.2em 0.58em;
+  border-color: rgba(200, 215, 240, 0.1);
+  color: var(--muted, #8a95a5);
+  transition:
+    border-color 0.3s,
+    color 0.3s,
+    background 0.3s;
 }
 
-/* ── Per-card accent hues ──────────────────────── */
-.exp-timeline > :nth-child(1) {
-  --card-hue: 210;
-  --card-sat: 50%;
-}
-.exp-timeline > :nth-child(2) {
-  --card-hue: 280;
-  --card-sat: 34%;
-}
-.exp-timeline > :nth-child(3) {
-  --card-hue: 340;
-  --card-sat: 38%;
-}
-.exp-timeline > :nth-child(4) {
-  --card-hue: 160;
-  --card-sat: 40%;
-}
-.exp-timeline > :nth-child(5) {
-  --card-hue: 40;
-  --card-sat: 45%;
-}
-.exp-timeline > :nth-child(6) {
-  --card-hue: 190;
-  --card-sat: 42%;
+.exp-tags .pill:hover {
+  border-color: rgba(200, 215, 240, 0.16);
+  background: rgba(200, 215, 240, 0.06);
 }
 
-/* ── responsive ─────────────────────── */
+.exp-card:hover .exp-tags .pill {
+  border-color: hsla(var(--card-hue), var(--card-sat), 55%, 0.22);
+  color: hsla(var(--card-hue), var(--card-sat), 75%, 0.85);
+}
+
+/* Keep a single restrained accent palette across all cards */
+
+/* ── Responsive ─────────────────────── */
 @media (max-width: 768px) {
   .exp-col {
     --exp-line-indent: 1.2rem;
@@ -343,7 +414,7 @@
   }
 
   .exp-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1);
   }
 }
 
@@ -390,6 +461,9 @@
     animation: none !important;
   }
   .exp-card-inner {
+    animation: none !important;
+  }
+  .exp-marker-ping {
     animation: none !important;
   }
 }

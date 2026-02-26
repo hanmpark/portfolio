@@ -7,7 +7,10 @@ const eduItems = experiences.filter((e) => e.category === "Education");
 
 const Card = ({ item, index }) => (
   <article className="exp-card" style={{ "--card-i": index }}>
-    <span className="exp-marker" aria-hidden="true" />
+    <div className="exp-card-accent" aria-hidden="true" />
+    <span className="exp-marker" aria-hidden="true">
+      <span className="exp-marker-ping" />
+    </span>
     <div className="exp-card-inner">
       <div className="exp-card-top">
         {item.image && (
@@ -44,9 +47,6 @@ const Experience = () => {
 
   return (
     <section className="section exp-section" id="experience" ref={revealRef}>
-      {/* Noise texture */}
-      <div className="noise-overlay" aria-hidden="true" />
-
       <div className="container exp-inner">
         <header className="exp-head">
           <p className="eyebrow reveal reveal-up">
@@ -60,7 +60,10 @@ const Experience = () => {
         <div className="exp-columns">
           {/* Experience column */}
           <div className="exp-col reveal reveal-up">
-            <h3 className="exp-col-title">Experience</h3>
+            <h3 className="exp-col-title">
+              <span className="exp-col-icon">💼</span>
+              Experience
+            </h3>
             <div className="exp-timeline">
               {workItems.map((item, i) => (
                 <Card
@@ -74,7 +77,10 @@ const Experience = () => {
 
           {/* Education column */}
           <div className="exp-col reveal reveal-up" style={{ "--reveal-i": 1 }}>
-            <h3 className="exp-col-title">Education</h3>
+            <h3 className="exp-col-title">
+              <span className="exp-col-icon">🎓</span>
+              Education
+            </h3>
             <div className="exp-timeline">
               {eduItems.map((item, i) => (
                 <Card

@@ -46,6 +46,18 @@ export const projects = [
     },
   },
   {
+    title: "Scholarship Time Tracker",
+    subtitle: "Hour Tracking Tool for 42 Nice Students",
+    slug: "scholarship-logtime",
+    description:
+    "A tool that tracks and calculates cumulative hours for 42 Nice students, helping them log required monthly hours for scholarship eligibility. It automates hour tracking, reduces admin overhead, and gives a clear view of progress and time management.",
+    previewImage: "/works/42 Logtime.webp",
+    tags: ["Time Tracking", "Productivity Tool", "42 Nice"],
+    links: {
+      repo: "https://github.com/hanmpark/scholarship_logtime",
+    },
+  },
+  {
     title: "so_long",
     subtitle: "2D Game Engine in C",
     slug: "so_long",
@@ -55,18 +67,6 @@ export const projects = [
     tags: ["C", "2D Graphics", "Game Development"],
     links: {
       repo: "https://github.com/hanmpark/so_long",
-    },
-  },
-  {
-    title: "Scholarship Time Tracker",
-    subtitle: "Hour Tracking Tool for 42 Nice Students",
-    slug: "scholarship-logtime",
-    description:
-      "A tool that tracks and calculates cumulative hours for 42 Nice students, helping them log required monthly hours for scholarship eligibility. It automates hour tracking, reduces admin overhead, and gives a clear view of progress and time management.",
-    previewImage: "/works/42 Logtime.webp",
-    tags: ["Time Tracking", "Productivity Tool", "42 Nice"],
-    links: {
-      repo: "https://github.com/hanmpark/scholarship_logtime",
     },
   },
 ];

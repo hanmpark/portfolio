@@ -1,62 +1,7 @@
-/* ── Work section — minimalist 2×2 grid ───────────── */
+/* ── Work section — bento grid ─────────────────────── */
 
 .work-section {
   position: relative;
-  overflow-x: clip;
-  overflow-y: visible;
-  isolation: isolate;
-}
-
-/* ── Ambient background ───────────────────────────── */
-.work-section::before {
-  content: "";
-  position: absolute;
-  inset: -15%;
-  z-index: -2;
-  pointer-events: none;
-  background:
-    radial-gradient(
-      ellipse 60% 50% at 15% 20%,
-      rgba(40, 60, 120, 0.12),
-      transparent 60%
-    ),
-    radial-gradient(
-      ellipse 50% 45% at 85% 75%,
-      rgba(80, 60, 140, 0.08),
-      transparent 55%
-    ),
-    radial-gradient(
-      ellipse 40% 35% at 55% 10%,
-      rgba(30, 50, 90, 0.06),
-      transparent 50%
-    );
-  filter: blur(60px) saturate(70%);
-}
-
-/* Subtle dot grid overlay */
-.work-section::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.04;
-  background-image: radial-gradient(
-    circle 1px,
-    rgba(200, 215, 240, 0.4) 1px,
-    transparent 1px
-  );
-  background-size: 28px 28px;
-  mask-image: radial-gradient(
-    ellipse 70% 60% at 50% 50%,
-    black 0%,
-    transparent 100%
-  );
-  -webkit-mask-image: radial-gradient(
-    ellipse 70% 60% at 50% 50%,
-    black 0%,
-    transparent 100%
-  );
 }
 
 /* ── Inner layout ─────────────────────────────────── */
@@ -79,7 +24,7 @@
   transition-delay: calc(var(--reveal-i, 0) * 0.07s);
 }
 
-/* ── Grid ─────────────────────────────────────────── */
+/* ── Grid — bento style ───────────────────────────── */
 
 .work-grid {
   display: grid;
@@ -87,28 +32,40 @@
   gap: clamp(0.75rem, 1.2vw, 1rem);
 }
 
+/* Featured card spans full width */
+.work-card--featured {
+  grid-column: 1 / -1;
+}
+
+/* Per-card color accents */
+.work-card:nth-child(1) {
+  --wc-hue: 187;
+  --wc-sat: 80%;
+}
+.work-card:nth-child(2) {
+  --wc-hue: 258;
+  --wc-sat: 65%;
+}
+.work-card:nth-child(3) {
+  --wc-hue: 152;
+  --wc-sat: 60%;
+}
+.work-card:nth-child(4) {
+  --wc-hue: 38;
+  --wc-sat: 70%;
+}
+
 /* ── Card ─────────────────────────────────────────── */
 
 .work-card {
-  --card-hue: 215;
-  --card-sat: 40%;
   position: relative;
   border-radius: var(--radius, 20px);
   overflow: hidden;
-  border: 1px solid hsla(var(--card-hue), var(--card-sat), 60%, 0.22);
-  background:
-    linear-gradient(
-      135deg,
-      hsla(var(--card-hue), var(--card-sat), 50%, 0.14) 0%,
-      hsla(var(--card-hue), var(--card-sat), 40%, 0.04) 60%,
-      transparent 100%
-    ),
-    var(--glass, rgba(20, 26, 36, 0.55));
+  border: 1px solid rgba(148, 163, 184, 0.08);
+  background: var(--glass, rgba(20, 26, 36, 0.55));
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.2),
-    0 0 12px hsla(var(--card-hue), var(--card-sat), 50%, 0.06);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
   transition:
     opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.5s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)),
@@ -130,17 +87,20 @@
   transform: translateY(32px) scale(0.985);
 }
 
+/* Animated gradient border on hover */
 .work-card::before {
   content: "";
   position: absolute;
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(
-    135deg,
-    hsla(var(--card-hue), var(--card-sat), 65%, 0.35),
-    hsla(var(--card-hue), var(--card-sat), 50%, 0.1) 50%,
-    hsla(var(--card-hue), var(--card-sat), 65%, 0.3)
+  background: conic-gradient(
+    from var(--wc-border-angle, 0deg),
+    hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 55%, 0.4),
+    transparent 25%,
+    transparent 50%,
+    hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 55%, 0.3) 75%,
+    hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 55%, 0.4)
   );
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
@@ -151,8 +111,27 @@
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.5s ease;
   pointer-events: none;
+  z-index: 2;
+}
+
+@property --wc-border-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.work-card:hover::before,
+.work-card:focus-within::before {
+  opacity: 1;
+  animation: wc-border-spin 4s linear infinite;
+}
+
+@keyframes wc-border-spin {
+  to {
+    --wc-border-angle: 360deg;
+  }
 }
 
 .work-card:hover,
@@ -160,8 +139,8 @@
   transform: translateY(-8px) scale(1.01);
   box-shadow:
     0 20px 48px rgba(0, 0, 0, 0.25),
-    0 0 28px hsla(var(--card-hue), var(--card-sat), 50%, 0.15);
-  border-color: hsla(var(--card-hue), var(--card-sat), 65%, 0.35);
+    0 0 40px hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 50%, 0.08);
+  border-color: hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 55%, 0.2);
 }
 
 .work-card-main:focus-visible {
@@ -169,16 +148,13 @@
   outline-offset: 3px;
 }
 
-.work-card:hover::before,
-.work-card:focus-within::before {
-  opacity: 1;
-}
+/* ── Cue badge ────────────────────────────────────── */
 
 .work-card-cue {
   position: absolute;
   top: clamp(0.65rem, 1vw, 0.8rem);
   right: clamp(0.65rem, 1vw, 0.8rem);
-  z-index: 2;
+  z-index: 3;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -216,7 +192,7 @@
 .work-card:focus-within .work-card-cue {
   opacity: 1;
   transform: translateY(-1px);
-  border-color: rgba(200, 215, 240, 0.2);
+  border-color: hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 55%, 0.3);
   background: rgba(16, 21, 31, 0.8);
 }
 
@@ -232,6 +208,8 @@
   margin: 0;
   padding: clamp(0.5rem, 0.8vw, 0.65rem);
   padding-bottom: 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .work-card-img img {
@@ -241,14 +219,43 @@
   object-position: center center;
   border-radius: 14px;
   display: block;
-  transition: transform 0.6s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
-  filter: saturate(0.92);
+  transition:
+    transform 0.6s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+    filter 0.6s ease;
+  filter: saturate(0.85) brightness(0.95);
+}
+
+/* Featured card gets taller image */
+.work-card--featured .work-card-img img {
+  height: clamp(180px, 28vh, 320px);
+}
+
+/* Color overlay on image */
+.work-card-img-overlay {
+  position: absolute;
+  inset: clamp(0.5rem, 0.8vw, 0.65rem);
+  inset-bottom: 0;
+  border-radius: 14px;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 30%, 0.15),
+    transparent 60%
+  );
+  opacity: 1;
+  transition: opacity 0.4s ease;
 }
 
 .work-card:hover .work-card-img img,
 .work-card:focus-within .work-card-img img {
   transform: scale(1.05);
-  filter: saturate(1);
+  filter: saturate(1.1) brightness(1.02);
+}
+
+.work-card:hover .work-card-img-overlay,
+.work-card:focus-within .work-card-img-overlay {
+  opacity: 0;
 }
 
 /* ── Card body ────────────────────────────────────── */
@@ -257,6 +264,11 @@
   padding: clamp(0.65rem, 1vw, 0.85rem) clamp(0.75rem, 1.1vw, 0.95rem);
   display: grid;
   gap: 0.2rem;
+  transition: transform 0.45s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.work-card:hover .work-card-body {
+  transform: translateY(-2px);
 }
 
 .work-card-number {
@@ -264,8 +276,19 @@
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.14em;
-  color: var(--muted, #8a95a5);
-  opacity: 0.4;
+  background: linear-gradient(
+    90deg,
+    hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 65%, 0.8),
+    hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 45%, 0.5)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: filter 0.3s;
+}
+
+.work-card:hover .work-card-number {
+  filter: brightness(1.4);
 }
 
 .work-card-title {
@@ -276,6 +299,16 @@
   line-height: 1.15;
   letter-spacing: -0.025em;
   color: var(--ink, #e8ecf2);
+  transition: color 0.3s;
+}
+
+.work-card:hover .work-card-title {
+  color: hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 85%, 0.95);
+}
+
+/* Featured card bigger title */
+.work-card--featured .work-card-title {
+  font-size: clamp(1.3rem, 2.2vw, 1.8rem);
 }
 
 .work-card-subtitle {
@@ -290,6 +323,16 @@
   margin-top: 0.25rem;
 }
 
+.work-card .pill {
+  border-color: hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 50%, 0.15);
+  transition: all 0.25s;
+}
+
+.work-card:hover .pill {
+  border-color: hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 50%, 0.25);
+  color: hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 75%, 0.9);
+}
+
 .work-card-actions {
   display: flex;
   justify-content: flex-end;
@@ -298,7 +341,7 @@
 
 .work-card-demo {
   position: relative;
-  z-index: 1;
+  z-index: 3;
 }
 
 /* ── Responsive ───────────────────────────────────── */
@@ -307,6 +350,14 @@
   .work-grid {
     grid-template-columns: 1fr;
     gap: 0.85rem;
+  }
+
+  .work-card--featured {
+    grid-column: 1;
+  }
+
+  .work-card--featured .work-card-img img {
+    height: clamp(140px, 40vw, 220px);
   }
 
   .work-card-img img {
@@ -332,6 +383,10 @@
     font-size: clamp(1rem, 5vw, 1.2rem);
   }
 
+  .work-card--featured .work-card-title {
+    font-size: clamp(1.1rem, 5.5vw, 1.3rem);
+  }
+
   .work-card-subtitle {
     font-size: 0.82rem;
   }
@@ -350,5 +405,8 @@
 @media (prefers-reduced-motion: reduce) {
   .work-inner {
     transform: none !important;
+  }
+  .work-card::before {
+    animation: none !important;
   }
 }

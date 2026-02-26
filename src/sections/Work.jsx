@@ -8,9 +8,6 @@ const Work = () => {
 
   return (
     <section className="section work-section" id="work">
-      {/* Noise texture */}
-      <div className="noise-overlay" aria-hidden="true" />
-
       <div className="container work-inner" ref={headRef}>
         <header className="work-head">
           <p className="eyebrow reveal reveal-up">Selected work</p>
@@ -28,11 +25,12 @@ const Work = () => {
                   target: "_blank",
                   rel: "noopener noreferrer",
                 };
+            const isFeatured = index === 0;
 
             return (
               <article
-                className="work-card reveal reveal-up"
-                style={{ "--reveal-i": index }}
+                className={`work-card${isFeatured ? " work-card--featured" : ""} reveal reveal-up`}
+                style={{ "--reveal-i": index, "--card-index": index }}
                 key={project.title}
               >
                 <CardLink
@@ -50,6 +48,7 @@ const Work = () => {
                   </span>
 
                   <figure className="work-card-img">
+                    <div className="work-card-img-overlay" aria-hidden="true" />
                     <img
                       src={project.previewImage}
                       alt={`${project.title} preview`}

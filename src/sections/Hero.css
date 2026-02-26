@@ -23,7 +23,7 @@
   flex-direction: column;
   overflow: visible;
   isolation: isolate;
-  z-index: 0;
+  z-index: var(--z-layer-hero, 10);
 }
 
 .hero::before {

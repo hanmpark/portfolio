@@ -7,14 +7,18 @@ const aboutParagraphs = [
   "I also studied cinema, which influences how I think about composition, rhythm, and user experience. I bring that perspective into my engineering work to build products that feel both solid and thoughtful.",
 ];
 
+const highlights = [
+  { label: "Systems", icon: "⚙️" },
+  { label: "Full-Stack", icon: "🌐" },
+  { label: "Graphics", icon: "🎨" },
+  { label: "AI Tooling", icon: "🤖" },
+];
+
 const About = () => {
   const revealRef = useScrollReveal({ threshold: 0.12 });
 
   return (
     <section className="section abt-section" id="about" ref={revealRef}>
-      {/* Noise texture */}
-      <div className="noise-overlay" aria-hidden="true" />
-
       <div className="container abt-inner">
         <div className="abt-content">
           <p className="eyebrow reveal reveal-up">About</p>
@@ -30,12 +34,25 @@ const About = () => {
               <p key={i}>{p}</p>
             ))}
           </div>
+
+          <div
+            className="abt-highlights reveal reveal-up"
+            style={{ "--reveal-i": 2 }}
+          >
+            {highlights.map((h) => (
+              <span className="abt-chip" key={h.label}>
+                <span className="abt-chip-icon">{h.icon}</span>
+                {h.label}
+              </span>
+            ))}
+          </div>
         </div>
 
         <figure
           className="abt-portrait reveal reveal-scale"
-          style={{ "--reveal-i": 2 }}
+          style={{ "--reveal-i": 3 }}
         >
+          <div className="abt-portrait-glow" aria-hidden="true" />
           <img src="/assets/self_image.jpg" alt="Hanmin Park" loading="lazy" />
         </figure>
       </div>

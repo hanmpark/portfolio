@@ -25,10 +25,10 @@
   line-height: 0.95;
   background: linear-gradient(
     135deg,
-    #e8ecf2 0%,
-    #c8d0dc 35%,
-    #8a95a5 60%,
-    #6b7888 100%
+    #f1f5f9 0%,
+    #e2e8f0 25%,
+    #94a3b8 55%,
+    #64748b 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
