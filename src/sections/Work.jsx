@@ -71,6 +71,12 @@ const Work = () => {
                       {l(project, "subtitle")}
                     </p>
 
+                    {project.description && (
+                      <p className="work-card-desc">
+                        {l(project, "description")}
+                      </p>
+                    )}
+
                     {project.tags?.length ? (
                       <div className="tag-row">
                         {project.tags.map((tag) => (

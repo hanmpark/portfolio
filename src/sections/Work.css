@@ -276,6 +276,23 @@
   font-weight: 500;
 }
 
+.work-card-desc {
+  margin: 0.25rem 0 0;
+  font-size: clamp(0.78rem, 0.85vw, 0.86rem);
+  color: rgba(200, 215, 240, 0.4);
+  line-height: 1.5;
+  font-weight: 400;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.work-card--featured .work-card-desc {
+  -webkit-line-clamp: 3;
+}
+
 .work-card .tag-row {
   margin-top: 0.25rem;
 }
