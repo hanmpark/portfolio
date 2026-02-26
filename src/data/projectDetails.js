@@ -3,7 +3,7 @@ export const projectDetails = {
     title: "Scholarship Logtime",
     subtitle:
       "A CLI tool for 42 Nice GEN scholarship students that calculates cumulative logtime from the 27th to the 26th, including bonus hours carried over from the previous month.",
-    heroImage: "/works/logtime1.png",
+    heroImage: "/works/logtime1.webp",
     tags: ["C", "Shell", "42 API", "CLI", "Productivity"],
     repo: "https://github.com/hanmpark/scholarship_logtime",
     demo: null,
@@ -25,7 +25,7 @@ export const projectDetails = {
     gallery: [
       {
         type: "image",
-        src: "/works/logtime2.png",
+        src: "/works/logtime2.webp",
         alt: "Scholarship Logtime output",
       },
     ],
@@ -34,7 +34,7 @@ export const projectDetails = {
     title: "so_long",
     subtitle:
       "A 2D tile-based game built in C for the 42 Common Core — the first graphical project introducing window management, event handling, and texture rendering with the MLX42 library.",
-    heroImage: "/works/so_long.png",
+    heroImage: "/works/so_long.webp",
     tags: ["C", "2D Graphics", "Game Development", "MLX42", "Tile-Based"],
     repo: "https://github.com/hanmpark/so_long",
     demo: null,
@@ -65,7 +65,7 @@ export const projectDetails = {
     title: "RT",
     subtitle:
       "A CPU ray tracer written in C for the 42 RT project — rendering spheres, planes, cylinders, and cones with lighting, shadows, reflections, and procedural textures.",
-    heroImage: "/works/rt1.png",
+    heroImage: "/works/rt1.webp",
     tags: [
       "C",
       "Ray Tracing",
@@ -95,12 +95,12 @@ export const projectDetails = {
     gallery: [
       {
         type: "image",
-        src: "/works/rt2.png",
+        src: "/works/rt2.webp",
         alt: "RT rendered scene with reflections",
       },
       {
         type: "image",
-        src: "/works/rt3.png",
+        src: "/works/rt3.webp",
         alt: "RT rendered objects showcase",
       },
       {
@@ -114,7 +114,7 @@ export const projectDetails = {
     title: "Red Tetris",
     subtitle:
       "A multiplayer-first Tetris game built with real-time Socket.IO networking, a React/Vite frontend, and persistent player history backed by MongoDB.",
-    heroImage: "/works/tetris-game.png",
+    heroImage: "/works/tetris-game.webp",
     tags: [
       "TypeScript",
       "React",
@@ -143,12 +143,12 @@ export const projectDetails = {
     gallery: [
       {
         type: "image",
-        src: "/works/tetris-lobby.png",
+        src: "/works/tetris-lobby.webp",
         alt: "Tetris lobby screen",
       },
       {
         type: "image",
-        src: "/works/tetris-history.png",
+        src: "/works/tetris-history.webp",
         alt: "Tetris game history",
       },
       {

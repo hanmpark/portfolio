@@ -26,7 +26,7 @@ export const projects = [
     slug: "miniraytracer",
     description:
       "A minimal ray tracing engine implementing lighting, shadows, reflections, and 3D scene rendering from scratch. Built to explore computer graphics and mathematical rendering principles.",
-    previewImage: "/works/rt1.png",
+    previewImage: "/works/rt1.webp",
     tags: ["C", "Ray Tracing", "Computer Graphics"],
     links: {
       repo: "https://github.com/hanmpark/miniraytracer",
@@ -38,7 +38,7 @@ export const projects = [
     slug: "tetris",
     description:
       "A competitive multiplayer Tetris game featuring real-time synchronization, state management, and networked gameplay architecture.",
-    previewImage: "/works/tetris-game.png",
+    previewImage: "/works/tetris-game.webp",
     tags: ["TypeScript", "Multiplayer", "WebSockets"],
     links: {
       repo: "https://github.com/okbrandon/red-tetris",
@@ -51,7 +51,7 @@ export const projects = [
     slug: "so_long",
     description:
       "A lightweight 2D game built in C using a custom rendering loop, sprite management, and event handling. Focused on memory control, game logic, and low-level graphics programming.",
-    previewImage: "/works/so_long.png",
+    previewImage: "/works/so_long.webp",
     tags: ["C", "2D Graphics", "Game Development"],
     links: {
       repo: "https://github.com/hanmpark/so_long",
@@ -63,7 +63,7 @@ export const projects = [
     slug: "scholarship-logtime",
     description:
       "A tool that tracks and calculates cumulative hours for 42 Nice students, helping them log required monthly hours for scholarship eligibility. It automates hour tracking, reduces admin overhead, and gives a clear view of progress and time management.",
-    previewImage: "/works/42 Logtime.png",
+    previewImage: "/works/42 Logtime.webp",
     tags: ["Time Tracking", "Productivity Tool", "42 Nice"],
     links: {
       repo: "https://github.com/hanmpark/scholarship_logtime",
