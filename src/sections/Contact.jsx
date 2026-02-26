@@ -186,12 +186,12 @@ const Contact = () => {
       <div className="ct-figures" aria-hidden="true">
         <img
           className="ct-fig ct-fig--left"
-          src="https://assets.hpark.me/premium/fig5.png"
+          src="https://assets.hpark.me/premium/fig5.webp"
           alt=""
         />
         <img
           className="ct-fig ct-fig--right"
-          src="https://assets.hpark.me/premium/fig6.png"
+          src="https://assets.hpark.me/premium/fig6.webp"
           alt=""
         />
       </div>

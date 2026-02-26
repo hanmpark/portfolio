@@ -37,7 +37,6 @@
     radial-gradient(circle at 24% 72%, rgba(5, 7, 10, 0.18), transparent 42%);
   filter: blur(56px) saturate(60%);
   transform-origin: 50% 50%;
-  animation: ct-aurora-drift 14s ease-in-out infinite alternate;
 }
 
 .ct-section::after {
@@ -59,7 +58,6 @@
     rgba(0, 0, 0, 0.85) 52%,
     transparent 100%
   );
-  animation: ct-grid-drift 12s linear infinite;
 }
 
 /* ── Decorative glow blobs ───────────────────────── */
@@ -77,7 +75,6 @@
   top: -8%;
   left: -6%;
   background: radial-gradient(circle, rgba(56, 90, 160, 0.14), transparent 70%);
-  animation: ct-float-1 16s ease-in-out infinite alternate;
 }
 
 .ct-glow--2 {
@@ -90,7 +87,6 @@
     rgba(100, 140, 200, 0.1),
     transparent 70%
   );
-  animation: ct-float-2 18s ease-in-out infinite alternate;
 }
 
 /* ── Decorative corner figures (Hero-style) ─────── */
@@ -556,42 +552,6 @@
 }
 
 /* ── Keyframes ───────────────────────────────────── */
-@keyframes ct-aurora-drift {
-  0% {
-    transform: translate3d(-2%, -1%, 0) scale(1) rotate(0deg);
-    opacity: 0.82;
-  }
-  50% {
-    transform: translate3d(3%, 2%, 0) scale(1.08) rotate(7deg);
-    opacity: 0.96;
-  }
-  100% {
-    transform: translate3d(-2%, 4%, 0) scale(1.04) rotate(-5deg);
-    opacity: 0.86;
-  }
-}
-
-@keyframes ct-grid-drift {
-  0% {
-    background-position:
-      0 0,
-      0 0;
-    opacity: 0.08;
-  }
-  50% {
-    background-position:
-      18px 22px,
-      22px 18px;
-    opacity: 0.13;
-  }
-  100% {
-    background-position:
-      36px 32px,
-      32px 36px;
-    opacity: 0.09;
-  }
-}
-
 @keyframes ct-title-shift {
   0%,
   100% {
@@ -611,24 +571,6 @@
   50% {
     opacity: 0.5;
     box-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
-  }
-}
-
-@keyframes ct-float-1 {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  100% {
-    transform: translate(30px, 20px) scale(1.12);
-  }
-}
-
-@keyframes ct-float-2 {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  100% {
-    transform: translate(-25px, -18px) scale(1.08);
   }
 }
 
