@@ -1,10 +1,12 @@
 import { useEffect, useRef, useCallback } from "react";
 import Navbar from "../components/Navbar.jsx";
+import { useLanguage } from "../i18n/useLanguage.js";
 import "./Hero.css";
 
 const ENTER_DURATION = 1200; // ms – must match CSS animation duration
 
 const Hero = () => {
+  const { t } = useLanguage();
   const heroRef = useRef(null);
   const figuresRef = useRef([]);
   const frameRef = useRef(0);
@@ -171,26 +173,22 @@ const Hero = () => {
               Hanmin Park
             </span>
             <span className="hero-title-role hero-reveal hero-reveal-d2">
-              Software Developer
+              {t("hero.role")}
             </span>
           </h1>
           <p className="hero-template hero-reveal hero-reveal-d3">
-            <span className="hero-template-lead">
-              I design and build scalable web applications and intelligent
-              systems, from frontend interfaces to backend architecture, with a
-              focus on performance, clarity, and real-world impact.
-            </span>
+            <span className="hero-template-lead">{t("hero.description")}</span>
           </p>
           <div className="hero-actions hero-reveal hero-reveal-d4">
             <a className="btn" href="#work">
-              View work
+              {t("hero.viewWork")}
             </a>
             <a
               className="btn ghost"
               href="#contact"
               onClick={handleScrollToBottom}
             >
-              Get in touch
+              {t("hero.getInTouch")}
             </a>
           </div>
         </div>

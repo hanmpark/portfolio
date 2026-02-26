@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { useLanguage } from "../i18n/useLanguage.js";
 import "./PageLoader.css";
 
 /**
@@ -40,6 +41,7 @@ function preloadImage(src) {
 }
 
 const PageLoader = ({ onReady }) => {
+  const { t } = useLanguage();
   const [hidden, setHidden] = useState(false);
 
   const load = useCallback(async () => {
@@ -57,7 +59,7 @@ const PageLoader = ({ onReady }) => {
   return (
     <div className={`page-loader${hidden ? " page-loader--hidden" : ""}`}>
       <div className="page-loader__spinner" />
-      <span className="page-loader__label">Loading</span>
+      <span className="page-loader__label">{t("loader.loading")}</span>
     </div>
   );
 };

@@ -1,17 +1,19 @@
 import { Link } from "react-router-dom";
 import { projects } from "../data/home.js";
+import { useLanguage } from "../i18n/useLanguage.js";
 import useScrollReveal from "../hooks/useScrollReveal.js";
 import "./Work.css";
 
 const Work = () => {
+  const { t, l } = useLanguage();
   const headRef = useScrollReveal({ threshold: 0.15, selector: ".reveal" });
 
   return (
     <section className="section work-section" id="work">
       <div className="container work-inner" ref={headRef}>
         <header className="work-head">
-          <p className="eyebrow reveal reveal-up">Selected work</p>
-          <h2 className="section-title reveal reveal-up">Projects</h2>
+          <p className="eyebrow reveal reveal-up">{t("work.eyebrow")}</p>
+          <h2 className="section-title reveal reveal-up">{t("work.title")}</h2>
         </header>
 
         <div className="work-grid reveal-stagger">
@@ -43,7 +45,7 @@ const Work = () => {
                   {...linkProps}
                 >
                   <span className="work-card-cue" aria-hidden="true">
-                    {isInternal ? "View project" : "Open repo"}
+                    {isInternal ? t("work.viewProject") : t("work.openRepo")}
                     <span className="work-card-cue-arrow">{"->"}</span>
                   </span>
 
@@ -61,7 +63,9 @@ const Work = () => {
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <h3 className="work-card-title">{project.title}</h3>
-                    <p className="work-card-subtitle">{project.subtitle}</p>
+                    <p className="work-card-subtitle">
+                      {l(project, "subtitle")}
+                    </p>
 
                     {project.tags?.length ? (
                       <div className="tag-row">
@@ -83,7 +87,7 @@ const Work = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Demo
+                      {t("work.demo")}
                     </a>
                   </div>
                 ) : null}

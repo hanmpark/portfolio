@@ -1,0 +1,77 @@
+const fr = {
+  nav: {
+    work: "Projets",
+    experience: "Expérience",
+    about: "À propos",
+    letsTalk: "Discutons",
+  },
+  hero: {
+    role: "Développeur Logiciel",
+    description:
+      "Je conçois et développe des applications web évolutives et des systèmes intelligents, des interfaces frontend à l'architecture backend, en mettant l'accent sur la performance, la clarté et l'impact concret.",
+    viewWork: "Voir mes projets",
+    getInTouch: "Me contacter",
+  },
+  work: {
+    eyebrow: "Projets sélectionnés",
+    title: "Projets",
+    viewProject: "Voir le projet",
+    openRepo: "Ouvrir le dépôt",
+    demo: "Démo",
+  },
+  experience: {
+    eyebrow: "Expérience & Formation",
+    title: "Parcours professionnel et académique",
+    experienceCol: "Expérience",
+    educationCol: "Formation",
+  },
+  about: {
+    eyebrow: "À propos",
+    title: "Salut !",
+    paragraphs: [
+      "Je m'appelle Hanmin Park, développeur logiciel passionné par la conception de produits fiables et bien structurés, avec un souci constant de clarté et de maintenabilité à long terme.",
+      "Mon parcours à 42 a façonné ma façon de travailler : j'aime comprendre les systèmes en profondeur avant de les abstraire en architectures propres. J'ai travaillé en programmation système, programmation graphique, applications web full-stack et outils basés sur l'IA.",
+      "J'ai également étudié le cinéma, ce qui influence ma façon de penser la composition, le rythme et l'expérience utilisateur. J'apporte cette perspective dans mon travail d'ingénierie pour créer des produits à la fois solides et réfléchis.",
+    ],
+    highlights: {
+      systems: "Systèmes",
+      fullStack: "Full-Stack",
+      graphics: "Programmation graphique",
+      aiTooling: "Outils IA",
+    },
+  },
+  contact: {
+    eyebrow: "Me contacter",
+    title: "Discutons",
+    subtitle:
+      "Vous avez un projet en tête ou souhaitez simplement échanger ? Envoyez-moi un message ou contactez-moi via l'un des canaux ci-dessous.",
+    available: "Disponible pour de nouveaux projets",
+    sendMessage: "Envoyer un message",
+    fullName: "Nom complet",
+    email: "Email",
+    yourMessage: "Votre message",
+    namePlaceholder: "Jean Dupont",
+    emailPlaceholder: "vous@exemple.com",
+    messagePlaceholder:
+      "Parlez-moi de votre projet, de vos besoins et de vos objectifs...",
+    send: "Envoyer le message",
+    sending: "Envoi en cours...",
+    success: "Message envoyé ! Je vous répondrai dès que possible.",
+    error:
+      "Impossible d'envoyer votre message pour le moment. Veuillez réessayer ou utiliser le lien email direct.",
+  },
+  projectDetail: {
+    back: "Retour",
+    github: "GitHub",
+    liveDemo: "Démo en ligne",
+    aboutProject: "À propos du projet",
+    keyFeatures: "Fonctionnalités clés",
+    gallery: "Galerie",
+  },
+  loader: {
+    loading: "Chargement",
+  },
+  backToTop: "Retour en haut",
+};
+
+export default fr;

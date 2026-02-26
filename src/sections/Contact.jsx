@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { contact, socialLinks, sectionCopy } from "../data/home.js";
+import { contact, socialLinks } from "../data/home.js";
+import { useLanguage } from "../i18n/useLanguage.js";
 import "./Contact.css";
 
 const EMAILJS_ENDPOINT = "https://api.emailjs.com/api/v1.0/email/send";
@@ -83,6 +84,7 @@ const connectChannels = [
 ];
 
 const Contact = () => {
+  const { t } = useLanguage();
   const [form, setForm] = useState(initialForm);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitState, setSubmitState] = useState({
@@ -162,14 +164,13 @@ const Contact = () => {
       setForm(initialForm);
       setSubmitState({
         type: "success",
-        message: "Message sent! I'll get back to you soon.",
+        message: t("contact.success"),
       });
     } catch (error) {
       console.error(error);
       setSubmitState({
         type: "error",
-        message:
-          "Could not send your message right now. Please try again or use the direct email link.",
+        message: t("contact.error"),
       });
     } finally {
       setIsSubmitting(false);
@@ -200,18 +201,16 @@ const Contact = () => {
         {/* ── Left column: info panel ──────────────────── */}
         <div className="ct-info">
           <div className="ct-copy">
-            <p className="eyebrow">{sectionCopy.contact.eyebrow}</p>
-            <h2 className="section-title ct-title">
-              {sectionCopy.contact.title}
-            </h2>
-            <p className="ct-sub">{sectionCopy.contact.subtitle}</p>
+            <p className="eyebrow">{t("contact.eyebrow")}</p>
+            <h2 className="section-title ct-title">{t("contact.title")}</h2>
+            <p className="ct-sub">{t("contact.subtitle")}</p>
           </div>
 
           {/* Availability badge */}
           <div className="ct-availability">
             <span className="ct-availability__dot" />
             <span className="ct-availability__text">
-              Available for new projects
+              {t("contact.available")}
             </span>
           </div>
 
@@ -240,13 +239,15 @@ const Contact = () => {
         <div className="ct-form-card">
           <div className="ct-form-card__header">
             <span className="ct-form-card__icon">{icons.send}</span>
-            <span className="ct-form-card__heading">Send a message</span>
+            <span className="ct-form-card__heading">
+              {t("contact.sendMessage")}
+            </span>
           </div>
 
           <form className="ct-form" onSubmit={handleSubmit}>
             <div className="ct-form__row">
               <label className="ct-field">
-                <span>Full name</span>
+                <span>{t("contact.fullName")}</span>
                 <input
                   className="ct-input"
                   type="text"
@@ -255,12 +256,12 @@ const Contact = () => {
                   onChange={handleChange}
                   autoComplete="name"
                   required
-                  placeholder="John Doe"
+                  placeholder={t("contact.namePlaceholder")}
                 />
               </label>
 
               <label className="ct-field">
-                <span>Email</span>
+                <span>{t("contact.email")}</span>
                 <input
                   className="ct-input"
                   type="email"
@@ -269,20 +270,20 @@ const Contact = () => {
                   onChange={handleChange}
                   autoComplete="email"
                   required
-                  placeholder="you@example.com"
+                  placeholder={t("contact.emailPlaceholder")}
                 />
               </label>
             </div>
 
             <label className="ct-field ct-field--grow">
-              <span>Your message</span>
+              <span>{t("contact.yourMessage")}</span>
               <textarea
                 className="ct-input ct-textarea"
                 name="message"
                 value={form.message}
                 onChange={handleChange}
                 required
-                placeholder="Tell me about your project, what you need, and your goals..."
+                placeholder={t("contact.messagePlaceholder")}
                 rows={5}
               />
             </label>
@@ -293,7 +294,9 @@ const Contact = () => {
                 type="submit"
                 disabled={isSubmitting}
               >
-                <span>{isSubmitting ? "Sending..." : "Send message"}</span>
+                <span>
+                  {isSubmitting ? t("contact.sending") : t("contact.send")}
+                </span>
                 {!isSubmitting && (
                   <svg
                     className="ct-submit__icon"

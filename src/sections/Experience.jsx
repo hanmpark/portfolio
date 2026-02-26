@@ -1,11 +1,12 @@
-import { experiences, sectionCopy } from "../data/home.js";
+import { experiences } from "../data/home.js";
+import { useLanguage } from "../i18n/useLanguage.js";
 import useScrollReveal from "../hooks/useScrollReveal.js";
 import "./Experience.css";
 
 const workItems = experiences.filter((e) => e.category === "Experience");
 const eduItems = experiences.filter((e) => e.category === "Education");
 
-const Card = ({ item, index }) => (
+const Card = ({ item, index, l }) => (
   <article className="exp-card" style={{ "--card-i": index }}>
     <div className="exp-card-accent" aria-hidden="true" />
     <span className="exp-marker" aria-hidden="true">
@@ -23,12 +24,14 @@ const Card = ({ item, index }) => (
           </figure>
         )}
         <div>
-          <p className="exp-role">{item.role}</p>
+          <p className="exp-role">{l(item, "role")}</p>
           <p className="exp-company">{item.company}</p>
-          {item.period ? <p className="exp-period">{item.period}</p> : null}
+          {item.period ? (
+            <p className="exp-period">{l(item, "period")}</p>
+          ) : null}
         </div>
       </div>
-      <p className="exp-summary">{item.focus}</p>
+      <p className="exp-summary">{l(item, "focus")}</p>
       {item.stack?.length ? (
         <div className="tag-row exp-tags">
           {item.stack.map((tag) => (
@@ -43,17 +46,16 @@ const Card = ({ item, index }) => (
 );
 
 const Experience = () => {
+  const { t, l } = useLanguage();
   const revealRef = useScrollReveal({ threshold: 0.1, selector: ".reveal" });
 
   return (
     <section className="section exp-section" id="experience" ref={revealRef}>
       <div className="container exp-inner">
         <header className="exp-head">
-          <p className="eyebrow reveal reveal-up">
-            {sectionCopy.experience.eyebrow}
-          </p>
+          <p className="eyebrow reveal reveal-up">{t("experience.eyebrow")}</p>
           <h2 className="section-title reveal reveal-up">
-            {sectionCopy.experience.title}
+            {t("experience.title")}
           </h2>
         </header>
 
@@ -62,13 +64,14 @@ const Experience = () => {
           <div className="exp-col reveal reveal-up">
             <h3 className="exp-col-title">
               <span className="exp-col-icon">💼</span>
-              Experience
+              {t("experience.experienceCol")}
             </h3>
             <div className="exp-timeline">
               {workItems.map((item, i) => (
                 <Card
                   item={item}
                   index={i}
+                  l={l}
                   key={`${item.company}-${item.role}`}
                 />
               ))}
@@ -79,13 +82,14 @@ const Experience = () => {
           <div className="exp-col reveal reveal-up" style={{ "--reveal-i": 1 }}>
             <h3 className="exp-col-title">
               <span className="exp-col-icon">🎓</span>
-              Education
+              {t("experience.educationCol")}
             </h3>
             <div className="exp-timeline">
               {eduItems.map((item, i) => (
                 <Card
                   item={item}
                   index={i + workItems.length}
+                  l={l}
                   key={`${item.company}-${item.role}`}
                 />
               ))}

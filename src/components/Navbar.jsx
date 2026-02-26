@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { navLinks, socialLinks } from "../data/home.js";
+import { useLanguage } from "../i18n/useLanguage.js";
 import "./Navbar.css";
 
 const navbarSocials = socialLinks.filter(
@@ -7,6 +8,7 @@ const navbarSocials = socialLinks.filter(
 );
 
 const Navbar = () => {
+  const { lang, setLang, t } = useLanguage();
   const navRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
@@ -80,8 +82,8 @@ const Navbar = () => {
       <div className="nav-drawer">
         <div className="nav-links">
           {navLinks.map((link) => (
-            <a href={link.href} key={link.label} onClick={closeMenu}>
-              {link.label}
+            <a href={link.href} key={link.key} onClick={closeMenu}>
+              {t(`nav.${link.key}`)}
             </a>
           ))}
         </div>
@@ -99,12 +101,27 @@ const Navbar = () => {
               </a>
             ))}
           </div>
+          <button
+            className="lang-toggle"
+            onClick={() => setLang(lang === "en" ? "fr" : "en")}
+            aria-label={
+              lang === "en" ? "Passer en français" : "Switch to English"
+            }
+          >
+            <span className={lang === "en" ? "lang-toggle__active" : ""}>
+              EN
+            </span>
+            <span className="lang-toggle__sep">/</span>
+            <span className={lang === "fr" ? "lang-toggle__active" : ""}>
+              FR
+            </span>
+          </button>
           <a
             className="btn small"
             href="#contact"
             onClick={handleScrollToBottom}
           >
-            Let&apos;s talk
+            {t("nav.letsTalk")}
           </a>
         </div>
       </div>

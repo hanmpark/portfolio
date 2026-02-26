@@ -3,6 +3,8 @@ export const projectDetails = {
     title: "Scholarship Logtime",
     subtitle:
       "A CLI tool for 42 Nice GEN scholarship students that calculates cumulative logtime from the 27th to the 26th, including bonus hours carried over from the previous month.",
+    subtitle_fr:
+      "Un outil CLI pour les étudiants boursiers GEN de 42 Nice qui calcule le logtime cumulé du 27 au 26, incluant les heures bonus reportées du mois précédent.",
     heroImage: "/works/logtime1.webp",
     tags: ["C", "Shell", "42 API", "CLI", "Productivity"],
     repo: "https://github.com/hanmpark/scholarship_logtime",
@@ -13,6 +15,11 @@ export const projectDetails = {
       "The program gives students a clear picture of their progress: <strong>time remaining</strong> until the deadline, <strong>days left</strong> (accounting for planned days off), and a <strong>daily target</strong> so they can pace their hours intelligently. It even factors in up to 70 bonus hours earned in the preceding month.",
       "Public holidays automatically add 7 hours to the logtime counter, and any additional time spent on-site stacks on top. With 17 stars on GitHub and contributions from <strong>Leo Fresnay</strong>, the tool has become a go-to utility for scholarship students managing their monthly hour requirements.",
     ],
+    description_fr: [
+      "scholarship_logtime est un <strong>outil en ligne de commande</strong> développé en C et Shell, conçu exclusivement pour les étudiants boursiers GEN de 42 Nice. Il calcule le logtime cumulé du 27 d'un mois au 26 du suivant, en se connectant à l'<strong>API 42</strong> pour récupérer les données de session réelles.",
+      "Le programme offre aux étudiants une vue claire de leur progression : <strong>temps restant</strong> avant la date limite, <strong>jours restants</strong> (en tenant compte des jours d'absence prévus) et un <strong>objectif journalier</strong> pour gérer leurs heures. Il prend même en compte jusqu'à 70 heures bonus du mois précédent.",
+      "Les jours fériés ajoutent automatiquement 7 heures au compteur, et tout temps supplémentaire passé sur place s'y ajoute. Avec 17 étoiles sur GitHub et les contributions de <strong>Leo Fresnay</strong>, l'outil est devenu incontournable pour les étudiants boursiers gérant leurs heures mensuelles.",
+    ],
     features: [
       "Calculates cumulative logtime from the 27th to the 26th using the 42 API.",
       "Shows time remaining and days left until the monthly deadline.",
@@ -21,6 +28,15 @@ export const projectDetails = {
       "Public holidays automatically credited with 7 base hours.",
       "Optional date display with the -s flag for detailed breakdowns.",
       "Runs from any directory after initial setup with init_sslog.",
+    ],
+    features_fr: [
+      "Calcule le logtime cumulé du 27 au 26 via l'API 42.",
+      "Affiche le temps restant et les jours restants avant la date limite.",
+      "Calcule un objectif journalier en tenant compte des jours d'absence prévus.",
+      "Reporte jusqu'à 70 heures bonus du mois précédent.",
+      "Jours fériés automatiquement crédités de 7 heures de base.",
+      "Affichage optionnel des dates avec le flag -s pour des détails.",
+      "Fonctionne depuis n'importe quel répertoire après la configuration initiale avec init_sslog.",
     ],
     gallery: [
       {
@@ -34,6 +50,8 @@ export const projectDetails = {
     title: "so_long",
     subtitle:
       "A 2D tile-based game built in C for the 42 Common Core — the first graphical project introducing window management, event handling, and texture rendering with the MLX42 library.",
+    subtitle_fr:
+      "Un jeu 2D en tuiles développé en C pour le tronc commun de 42 — le premier projet graphique introduisant la gestion de fenêtres, les événements (clavier et souris) et le rendu de textures avec la bibliothèque MLX42.",
     heroImage: "/works/so_long.webp",
     tags: ["C", "2D Graphics", "Game Development", "MLX42", "Tile-Based"],
     repo: "https://github.com/hanmpark/so_long",
@@ -44,6 +62,11 @@ export const projectDetails = {
       "The player navigates a map filled with <strong>walls, collectibles, and an exit</strong>. A simple enemy AI patrols left to right, and collision with an enemy triggers a Game Over. The game parses and validates <code>.ber</code> map files to ensure correct layout before rendering.",
       "Under the hood the project exercises <strong>low-level graphics programming</strong> in C — sprite management, a custom rendering loop, memory control, and efficient event-driven game logic, all without a high-level engine.",
     ],
+    description_fr: [
+      "so_long est un <strong>jeu 2D en tuiles</strong> écrit en C comme premier projet graphique du tronc commun de 42. Il introduit les fondamentaux de la gestion de fenêtres, la gestion des événements (clavier et souris) et le rendu de couleurs et textures avec la bibliothèque MLX42.",
+      "Le joueur navigue sur une carte remplie de <strong>murs, objets à collecter et une sortie</strong>. Une IA ennemie simple patrouille de gauche à droite, et la collision avec un ennemi déclenche un Game Over. Le jeu analyse et valide les fichiers de carte <code>.ber</code> pour assurer la cohérence avant le rendu.",
+      "En coulisses, le projet met en pratique la <strong>programmation graphique bas niveau</strong> en C — gestion des sprites, boucle de rendu personnalisée, contrôle mémoire et logique de jeu événementielle, le tout sans moteur haut niveau.",
+    ],
     features: [
       "2D tile-based map rendering with walls, collectibles, player, and exit.",
       "Simple enemy AI that patrols left to right across the map.",
@@ -52,6 +75,15 @@ export const projectDetails = {
       "Keyboard controls for player movement.",
       "Sprite and texture management using the MLX42 library.",
       "Custom rendering loop with frame-rate control.",
+    ],
+    features_fr: [
+      "Rendu de carte 2D en tuiles avec murs, objets, joueur et sortie.",
+      "IA ennemie simple qui patrouille de gauche à droite sur la carte.",
+      "Détection de collision : toucher un ennemi met fin à la partie.",
+      "Analyse et validation des fichiers .ber avant le gameplay.",
+      "Contrôles clavier pour le déplacement du joueur.",
+      "Gestion des sprites et textures avec la bibliothèque MLX42.",
+      "Boucle de rendu personnalisée avec contrôle du framerate.",
     ],
     gallery: [
       {
@@ -65,6 +97,8 @@ export const projectDetails = {
     title: "RT",
     subtitle:
       "A CPU ray tracer written in C for the 42 RT project — rendering spheres, planes, cylinders, and cones with lighting, shadows, reflections, and procedural textures.",
+    subtitle_fr:
+      "Un ray tracer CPU écrit en C pour le projet RT de 42 — rendu de sphères, plans, cylindres et cônes avec éclairage, ombres, réflexions et textures procédurales.",
     heroImage: "/works/rt1.webp",
     tags: [
       "C",
@@ -82,6 +116,12 @@ export const projectDetails = {
       "A fast preview mode disables AA and specular calculations so you can <strong>interactively move the camera</strong> with WASD + arrow keys, then switch back to full quality for a final render. MiniLibX handles the display window on both Linux and macOS.",
       "Built collaboratively with <a href='https://github.com/YounesBouhlel' target='_blank'><strong>Younes Bouhlel</strong></a>, <a href='https://github.com/Shazway' target='_blank'><strong>Shazway</strong></a>, and <a href='https://github.com/evnsh' target='_blank'><strong>evnsh</strong></a> as part of the 42 curriculum.",
     ],
+    description_fr: [
+      "RT est un <strong>ray tracer CPU</strong> écrit en C qui analyse des fichiers de scène <code>.rt</code> et effectue le rendu de scènes 3D complètes à partir de zéro. Il prend en charge les sphères, plans, cylindres et cônes avec couleur diffuse, reflets spéculaires, réflexions et texture procédurale en damier.",
+      "Le moteur de rendu inclut un <strong>éclairage ambiant plus plusieurs lumières ponctuelles colorées</strong>, des ombres dures et des réflexions récursives avec profondeur configurable. Un antialiasing 2×2 (4 échantillons par pixel) assure des bords lisses, tandis que le rendu multithreadé maintient des temps de calcul pratiques.",
+      "Un mode aperçu rapide désactive l'AA et les calculs spéculaires pour <strong>déplacer interactivement la caméra</strong> avec WASD + flèches, puis repasser en qualité complète pour un rendu final. MiniLibX gère la fenêtre d'affichage sous Linux et macOS.",
+      "Réalisé en collaboration avec <a href='https://github.com/YounesBouhlel' target='_blank'><strong>Younes Bouhlel</strong></a>, <a href='https://github.com/Shazway' target='_blank'><strong>Shazway</strong></a> et <a href='https://github.com/evnsh' target='_blank'><strong>evnsh</strong></a> dans le cadre du cursus 42.",
+    ],
     features: [
       "Shapes: sphere, plane, cylinder (with end caps), and cone.",
       "Materials: diffuse color, specular highlights, reflections, and procedural checker pattern.",
@@ -91,6 +131,16 @@ export const projectDetails = {
       "Interactive fast-preview mode for real-time camera movement.",
       "Multithreaded rendering for faster frame computation.",
       "Progressive refresh and render-time logging per frame.",
+    ],
+    features_fr: [
+      "Formes : sphère, plan, cylindre (avec bouchons) et cône.",
+      "Matériaux : couleur diffuse, reflets spéculaires, réflexions et motif en damier procédural.",
+      "Lumière ambiante plus plusieurs lumières ponctuelles colorées avec ombres dures.",
+      "Réflexions récursives avec profondeur configurable et biais d'ombre.",
+      "Antialiasing 2×2 (4 échantillons par pixel) pour des bords lisses.",
+      "Mode aperçu rapide interactif pour le déplacement de la caméra en temps réel.",
+      "Rendu multithreadé pour un calcul plus rapide des images.",
+      "Rafraîchissement progressif et journalisation du temps de rendu par image.",
     ],
     gallery: [
       {
@@ -114,6 +164,8 @@ export const projectDetails = {
     title: "Red Tetris",
     subtitle:
       "A multiplayer-first Tetris game built with real-time Socket.IO networking, a React/Vite frontend, and persistent player history backed by MongoDB.",
+    subtitle_fr:
+      "Un Tetris pensé pour le multijoueur : réseau temps réel avec Socket.IO, frontend React/Vite et historique des joueurs persistant via MongoDB.",
     heroImage: "/works/tetris-game.webp",
     tags: [
       "TypeScript",
@@ -127,10 +179,17 @@ export const projectDetails = {
     demo: "https://tetris.brandoncodes.dev/",
     demoNotice:
       "The live demo is designed for desktop browsers only and is not optimized for mobile devices.",
+    demoNotice_fr:
+      "La démo en ligne est conçue pour les navigateurs de bureau uniquement et n'est pas optimisée pour les appareils mobiles.",
     description: [
       'Red Tetris is a <strong>full-stack remake</strong> of the classic game with a strong focus on social play. Players can spin up private lobbies, spectate friends, or speed-run solo "journeys." The backend implements the game engine, line-clear logic, and a persistence layer, while the Vite/React frontend handles routing, lobby UX, notifications, and the arena views.',
       "MongoDB stores the latest five results per player so the <strong>history view</strong> can recap recent runs. The project is built as a 42 School project and is still evolving, but the gameplay loop, lobby flow, stats storage, and CI checks are already in place.",
       "Built collaboratively with <a href='https://github.com/okbrandon' target='_blank'><strong>okbrandon</strong></a> — combining real-time game networking, state management, and polished UI/UX into a cohesive multiplayer experience.",
+    ],
+    description_fr: [
+      "Red Tetris est un <strong>remake full-stack</strong> du jeu classique avec un fort accent sur le jeu entre amis. Les joueurs peuvent créer des lobbies privés, assister aux parties de tes amis ou faire des runs en solo. Le backend implémente le moteur de jeu, la logique de suppression de lignes et une couche de persistance, tandis que le frontend Vite/React gère le routage, l'UX du lobby, les notifications et les vues d'arène.",
+      "MongoDB stocke les cinq derniers résultats par joueur pour que la <strong>vue historique</strong> récapitule les parties récentes. Le projet est réalisé dans le cadre de 42 et continue d'évoluer, mais la boucle de gameplay, le flux de lobby, le stockage des statistiques et les vérifications CI sont déjà en place.",
+      "Réalisé en collaboration avec <a href='https://github.com/okbrandon' target='_blank'><strong>okbrandon</strong></a> — combinant réseau de jeu en temps réel, gestion d'état et UI/UX soignée en une expérience multijoueur cohérente.",
     ],
     features: [
       "Real-time multiplayer powered by Socket.IO rooms with owner hand-offs and configurable game modes (classic, fast-paced, invisible pieces, morph pieces).",
@@ -139,6 +198,14 @@ export const projectDetails = {
       "Spectator view and specter columns so eliminated players can keep watching opponents.",
       "Persistent player history stored in MongoDB and surfaced through Redux slices.",
       "Full CI pipeline with GitHub Actions, Docker Compose stack, and automated release workflows.",
+    ],
+    features_fr: [
+      "Multijoueur en temps réel alimenté par des rooms Socket.IO avec transfert de propriété et modes de jeu configurables (classique, rapide, pièces invisibles, pièces changeantes).",
+      "Mode Journey solo qui lance automatiquement une arène privée avec la difficulté choisie.",
+      "Gestion de lobby avec contrôles réservés au propriétaire, aperçus des modes et système de notifications animées.",
+      "Vue spectateur et colonnes spectre pour que les joueurs éliminés puissent continuer à regarder.",
+      "Historique joueur persistant stocké dans MongoDB et exposé via des slices Redux.",
+      "Pipeline CI complet avec GitHub Actions, stack via Docker Compose et workflows de release automatisés.",
     ],
     gallery: [
       {

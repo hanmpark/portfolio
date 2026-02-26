@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams, Navigate, useNavigate } from "react-router-dom";
 import { projectDetails } from "../data/projectDetails.js";
+import { useLanguage } from "../i18n/useLanguage.js";
 import "./ProjectDetail.css";
 
 const ArrowLeft = () => (
@@ -35,6 +36,7 @@ const InfoIcon = () => (
 const ProjectDetail = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const { t, l } = useLanguage();
   const project = projectDetails[slug];
   const [lightbox, setLightbox] = useState(null);
 
@@ -63,7 +65,7 @@ const ProjectDetail = () => {
     <div className="pj">
       <button type="button" className="pj-back" onClick={() => navigate(-1)}>
         <ArrowLeft />
-        Back
+        {t("projectDetail.back")}
       </button>
 
       <div className="pj-hero">
@@ -74,7 +76,7 @@ const ProjectDetail = () => {
         {/* Header */}
         <header className="pj-header">
           <h1 className="pj-title">{project.title}</h1>
-          <p className="pj-subtitle">{project.subtitle}</p>
+          <p className="pj-subtitle">{l(project, "subtitle")}</p>
 
           {project.tags?.length ? (
             <div className="pj-tags">
@@ -94,7 +96,7 @@ const ProjectDetail = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                GitHub
+                {t("projectDetail.github")}
               </a>
             ) : null}
             {project.demo ? (
@@ -104,7 +106,7 @@ const ProjectDetail = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Live Demo
+                {t("projectDetail.liveDemo")}
               </a>
             ) : null}
           </div>
@@ -112,23 +114,23 @@ const ProjectDetail = () => {
           {project.demoNotice ? (
             <div className="pj-demo-notice">
               <InfoIcon />
-              <span>{project.demoNotice}</span>
+              <span>{l(project, "demoNotice")}</span>
             </div>
           ) : null}
         </header>
 
         {/* Description */}
         <section className="pj-desc">
-          <h3>About the project</h3>
-          {project.description.map((para, i) => (
+          <h3>{t("projectDetail.aboutProject")}</h3>
+          {(l(project, "description") ?? project.description).map((para, i) => (
             <p key={i} dangerouslySetInnerHTML={{ __html: para }} />
           ))}
 
-          {project.features?.length ? (
+          {(l(project, "features") ?? project.features)?.length ? (
             <>
-              <h3>Key features</h3>
+              <h3>{t("projectDetail.keyFeatures")}</h3>
               <ul className="pj-features">
-                {project.features.map((feat, i) => (
+                {(l(project, "features") ?? project.features).map((feat, i) => (
                   <li key={i}>{feat}</li>
                 ))}
               </ul>
@@ -139,7 +141,7 @@ const ProjectDetail = () => {
         {/* Gallery */}
         {project.gallery?.length ? (
           <section className="pj-gallery">
-            <h3>Gallery</h3>
+            <h3>{t("projectDetail.gallery")}</h3>
             <div className="pj-gallery-grid">
               {project.gallery.map((item, i) =>
                 item.type === "video" ? (
