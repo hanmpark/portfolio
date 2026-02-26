@@ -51,164 +51,17 @@
 }
 
 /* ── Unified background for Work + Experience + About ─── */
-/* Wrapper that clips all background effects to the content area */
 .main-content-bg {
   position: relative;
+  z-index: 1;
   overflow: clip;
   isolation: isolate;
-  z-index: 1;
 }
 
 /* Ensure the scroll sections stay above Hero and Contact fixed layers */
 .main-content-bg > .section {
   position: relative;
-  z-index: 1;
-}
-
-/* Single dot-grid texture across all content sections */
-.main-content-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.035;
-  background-image: radial-gradient(
-    circle 1px,
-    rgba(148, 163, 184, 0.45) 1px,
-    transparent 1px
-  );
-  background-size: 36px 36px;
-}
-
-/* Shared noise overlay */
-.main-noise {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.025;
-  background-image: var(--noise-texture);
-  background-size: 200px 200px;
-  background-repeat: repeat;
-  mix-blend-mode: overlay;
-}
-
-/* Large unified orbs that float across all sections */
-.main-orb {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-  filter: blur(100px);
-  will-change: transform;
-}
-
-.main-orb--1 {
-  width: clamp(500px, 55vw, 900px);
-  height: clamp(500px, 55vw, 900px);
-  top: -5%;
-  left: -10%;
-  background: radial-gradient(
-    circle,
-    rgba(99, 102, 241, 0.07),
-    transparent 70%
-  );
-  animation: main-float-1 28s ease-in-out infinite;
-}
-
-.main-orb--2 {
-  width: clamp(450px, 50vw, 800px);
-  height: clamp(450px, 50vw, 800px);
-  top: 30%;
-  right: -12%;
-  background: radial-gradient(
-    circle,
-    rgba(14, 165, 233, 0.06),
-    transparent 70%
-  );
-  animation: main-float-2 34s ease-in-out infinite;
-}
-
-.main-orb--3 {
-  width: clamp(400px, 45vw, 750px);
-  height: clamp(400px, 45vw, 750px);
-  bottom: 10%;
-  left: 20%;
-  background: radial-gradient(
-    circle,
-    rgba(168, 85, 247, 0.05),
-    transparent 70%
-  );
-  animation: main-float-3 30s ease-in-out infinite;
-}
-
-.main-orb--4 {
-  width: clamp(350px, 40vw, 650px);
-  height: clamp(350px, 40vw, 650px);
-  top: 60%;
-  right: 5%;
-  background: radial-gradient(
-    circle,
-    rgba(34, 211, 238, 0.04),
-    transparent 70%
-  );
-  animation: main-float-4 26s ease-in-out infinite;
-}
-
-@keyframes main-float-1 {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  25% {
-    transform: translate(40px, 30px) scale(1.05);
-  }
-  50% {
-    transform: translate(-20px, 60px) scale(0.97);
-  }
-  75% {
-    transform: translate(30px, -20px) scale(1.03);
-  }
-}
-
-@keyframes main-float-2 {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(-35px, -25px) scale(1.06);
-  }
-  66% {
-    transform: translate(25px, 35px) scale(0.96);
-  }
-}
-
-@keyframes main-float-3 {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  25% {
-    transform: translate(-30px, 20px) scale(1.04);
-  }
-  50% {
-    transform: translate(20px, -30px) scale(0.98);
-  }
-  75% {
-    transform: translate(10px, 40px) scale(1.02);
-  }
-}
-
-@keyframes main-float-4 {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(-40px, -20px) scale(1.08);
-  }
+  z-index: 2;
 }
 
 /* Contact reveal wrapper — sits behind main's padding, revealed on scroll */
@@ -293,14 +146,7 @@
   .app::after {
     opacity: 0.5;
   }
-
-  .main-orb {
-    opacity: 0.6;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .main-orb {
-    animation: none !important;
-  }
 }

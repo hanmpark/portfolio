@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Hero from "../sections/Hero.jsx";
 import Work from "../sections/Work.jsx";
 import Experience from "../sections/Experience.jsx";
@@ -6,10 +6,26 @@ import About from "../sections/About.jsx";
 import Contact from "../sections/Contact.jsx";
 import ScrollProgress from "../components/ScrollProgress.jsx";
 import BackToTopButton from "../components/BackToTopButton.jsx";
+import PageLoader from "../components/PageLoader.jsx";
 import "./App.css";
 
 const App = () => {
+  const [loaded, setLoaded] = useState(false);
   const [contactInFront, setContactInFront] = useState(false);
+
+  const handleReady = useCallback(() => setLoaded(true), []);
+
+  // Lock scrolling while loading
+  useEffect(() => {
+    if (!loaded) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [loaded]);
 
   useEffect(() => {
     let raf = 0;
@@ -44,18 +60,12 @@ const App = () => {
 
   return (
     <div className="app">
+      <PageLoader onReady={handleReady} />
       <ScrollProgress />
       <BackToTopButton />
       <Hero />
       <main>
         <div className="main-content-bg">
-          {/* Unified background elements contained within content sections */}
-          <div className="main-orb main-orb--1" aria-hidden="true" />
-          <div className="main-orb main-orb--2" aria-hidden="true" />
-          <div className="main-orb main-orb--3" aria-hidden="true" />
-          <div className="main-orb main-orb--4" aria-hidden="true" />
-          <div className="main-noise" aria-hidden="true" />
-
           <Work />
           <Experience />
           <About />

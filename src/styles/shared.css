@@ -24,11 +24,11 @@
   letter-spacing: -0.04em;
   line-height: 0.95;
   background: linear-gradient(
-    135deg,
-    #f1f5f9 0%,
-    #e2e8f0 25%,
-    #94a3b8 55%,
-    #64748b 100%
+    128deg,
+    #e8ecf2 0%,
+    #c8d0dc 30%,
+    #8a95a5 60%,
+    #6b7888 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -62,20 +62,22 @@
 .pill {
   padding: 0.22rem 0.6rem;
   border-radius: 999px;
-  border: 1px solid rgba(200, 215, 240, 0.1);
-  background: rgba(20, 26, 36, 0.45);
+  border: 1px solid rgba(200, 215, 240, 0.07);
+  background: rgba(200, 215, 240, 0.03);
   font-size: 0.78rem;
   font-weight: 600;
   color: var(--muted, #8a95a5);
   backdrop-filter: blur(6px);
   transition:
     background 0.25s,
-    border-color 0.25s;
+    border-color 0.25s,
+    color 0.25s;
 }
 
 .pill:hover {
-  background: rgba(30, 38, 52, 0.6);
-  border-color: rgba(200, 215, 240, 0.16);
+  background: rgba(200, 215, 240, 0.06);
+  border-color: rgba(200, 215, 240, 0.12);
+  color: rgba(200, 215, 240, 0.8);
 }
 
 @media (max-width: 720px) {

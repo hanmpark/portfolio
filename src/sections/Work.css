@@ -1,4 +1,4 @@
-/* ── Work section — bento grid ─────────────────────── */
+/* ── Work section ──────────────────────────────────── */
 
 .work-section {
   position: relative;
@@ -12,10 +12,10 @@
 }
 
 .work-head {
-  margin-bottom: clamp(1.2rem, 2.5vh, 2rem);
+  margin-bottom: clamp(1.6rem, 3vh, 2.8rem);
 }
 
-/* Reveal pacing for the Work section */
+/* Reveal pacing */
 .work-section .reveal {
   transition-duration: 0.5s;
 }
@@ -24,7 +24,7 @@
   transition-delay: calc(var(--reveal-i, 0) * 0.07s);
 }
 
-/* ── Grid — bento style ───────────────────────────── */
+/* ── Grid ─────────────────────────────────────────── */
 
 .work-grid {
   display: grid;
@@ -32,27 +32,8 @@
   gap: clamp(0.75rem, 1.2vw, 1rem);
 }
 
-/* Featured card spans full width */
 .work-card--featured {
   grid-column: 1 / -1;
-}
-
-/* Per-card color accents */
-.work-card:nth-child(1) {
-  --wc-hue: 187;
-  --wc-sat: 80%;
-}
-.work-card:nth-child(2) {
-  --wc-hue: 258;
-  --wc-sat: 65%;
-}
-.work-card:nth-child(3) {
-  --wc-hue: 152;
-  --wc-sat: 60%;
-}
-.work-card:nth-child(4) {
-  --wc-hue: 38;
-  --wc-sat: 70%;
 }
 
 /* ── Card ─────────────────────────────────────────── */
@@ -61,16 +42,17 @@
   position: relative;
   border-radius: var(--radius, 20px);
   overflow: hidden;
-  border: 1px solid rgba(148, 163, 184, 0.08);
-  background: var(--glass, rgba(20, 26, 36, 0.55));
+  border: 1px solid rgba(200, 215, 240, 0.06);
+  background: rgba(16, 20, 28, 0.5);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
   transition:
     opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.5s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)),
     box-shadow 0.5s ease,
-    border-color 0.35s ease;
+    border-color 0.4s ease,
+    background 0.4s ease;
   cursor: pointer;
 }
 
@@ -82,25 +64,24 @@
   cursor: pointer;
 }
 
-/* Initial hidden state for work cards */
+/* Initial hidden state */
 .work-card.reveal:not(.is-revealed) {
   transform: translateY(32px) scale(0.985);
 }
 
-/* Animated gradient border on hover */
+/* Subtle border glow on hover */
 .work-card::before {
   content: "";
   position: absolute;
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: conic-gradient(
-    from var(--wc-border-angle, 0deg),
-    hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 55%, 0.4),
-    transparent 25%,
-    transparent 50%,
-    hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 55%, 0.3) 75%,
-    hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 55%, 0.4)
+  background: linear-gradient(
+    135deg,
+    rgba(200, 215, 240, 0.12),
+    rgba(200, 215, 240, 0.04) 40%,
+    transparent 60%,
+    rgba(200, 215, 240, 0.08)
   );
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
@@ -116,35 +97,23 @@
   z-index: 2;
 }
 
-@property --wc-border-angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
+.work-card:hover,
+.work-card:focus-within {
+  transform: translateY(-6px) scale(1.008);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.22),
+    0 0 1px rgba(200, 215, 240, 0.1);
+  border-color: rgba(200, 215, 240, 0.1);
+  background: rgba(18, 23, 32, 0.65);
 }
 
 .work-card:hover::before,
 .work-card:focus-within::before {
   opacity: 1;
-  animation: wc-border-spin 4s linear infinite;
-}
-
-@keyframes wc-border-spin {
-  to {
-    --wc-border-angle: 360deg;
-  }
-}
-
-.work-card:hover,
-.work-card:focus-within {
-  transform: translateY(-8px) scale(1.01);
-  box-shadow:
-    0 20px 48px rgba(0, 0, 0, 0.25),
-    0 0 40px hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 50%, 0.08);
-  border-color: hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 55%, 0.2);
 }
 
 .work-card-main:focus-visible {
-  outline: 2px solid rgba(200, 215, 240, 0.18);
+  outline: 2px solid rgba(200, 215, 240, 0.14);
   outline-offset: 3px;
 }
 
@@ -160,40 +129,40 @@
   gap: 0.35rem;
   padding: 0.32rem 0.55rem;
   border-radius: 999px;
-  border: 1px solid rgba(200, 215, 240, 0.12);
-  background: rgba(12, 16, 24, 0.66);
-  color: rgba(232, 236, 242, 0.86);
+  border: 1px solid rgba(200, 215, 240, 0.08);
+  background: rgba(10, 14, 22, 0.7);
+  color: rgba(200, 215, 240, 0.65);
   font-size: 0.67rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
-  opacity: 0.78;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  opacity: 0.7;
   transform: translateY(0);
   transition:
-    opacity 0.24s ease,
-    transform 0.28s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
-    border-color 0.24s ease,
-    background 0.24s ease;
+    opacity 0.3s ease,
+    transform 0.3s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+    border-color 0.3s ease,
+    color 0.3s ease;
   pointer-events: none;
 }
 
 .work-card-cue-arrow {
   display: inline-block;
-  opacity: 0.8;
+  opacity: 0.6;
   transition:
-    transform 0.28s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
-    opacity 0.24s ease;
+    transform 0.3s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+    opacity 0.3s ease;
 }
 
 .work-card:hover .work-card-cue,
 .work-card:focus-within .work-card-cue {
   opacity: 1;
   transform: translateY(-1px);
-  border-color: hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 55%, 0.3);
-  background: rgba(16, 21, 31, 0.8);
+  border-color: rgba(200, 215, 240, 0.14);
+  color: rgba(232, 236, 242, 0.9);
 }
 
 .work-card:hover .work-card-cue-arrow,
@@ -222,15 +191,14 @@
   transition:
     transform 0.6s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
     filter 0.6s ease;
-  filter: saturate(0.85) brightness(0.95);
+  filter: saturate(0.7) brightness(0.88) contrast(1.05);
 }
 
-/* Featured card gets taller image */
 .work-card--featured .work-card-img img {
   height: clamp(180px, 28vh, 320px);
 }
 
-/* Color overlay on image */
+/* Subtle dark overlay on image */
 .work-card-img-overlay {
   position: absolute;
   inset: clamp(0.5rem, 0.8vw, 0.65rem);
@@ -238,24 +206,20 @@
   border-radius: 14px;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(
-    135deg,
-    hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 30%, 0.15),
-    transparent 60%
-  );
+  background: linear-gradient(180deg, transparent 50%, rgba(14, 17, 23, 0.3));
   opacity: 1;
   transition: opacity 0.4s ease;
 }
 
 .work-card:hover .work-card-img img,
 .work-card:focus-within .work-card-img img {
-  transform: scale(1.05);
-  filter: saturate(1.1) brightness(1.02);
+  transform: scale(1.04);
+  filter: saturate(0.85) brightness(0.95) contrast(1.05);
 }
 
 .work-card:hover .work-card-img-overlay,
 .work-card:focus-within .work-card-img-overlay {
-  opacity: 0;
+  opacity: 0.4;
 }
 
 /* ── Card body ────────────────────────────────────── */
@@ -268,7 +232,7 @@
 }
 
 .work-card:hover .work-card-body {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .work-card-number {
@@ -276,19 +240,13 @@
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.14em;
-  background: linear-gradient(
-    90deg,
-    hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 65%, 0.8),
-    hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 45%, 0.5)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  transition: filter 0.3s;
+  color: var(--muted, #8a95a5);
+  opacity: 0.5;
+  transition: opacity 0.3s;
 }
 
 .work-card:hover .work-card-number {
-  filter: brightness(1.4);
+  opacity: 0.8;
 }
 
 .work-card-title {
@@ -303,10 +261,9 @@
 }
 
 .work-card:hover .work-card-title {
-  color: hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 85%, 0.95);
+  color: #fff;
 }
 
-/* Featured card bigger title */
 .work-card--featured .work-card-title {
   font-size: clamp(1.3rem, 2.2vw, 1.8rem);
 }
@@ -324,13 +281,14 @@
 }
 
 .work-card .pill {
-  border-color: hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 50%, 0.15);
-  transition: all 0.25s;
+  border-color: rgba(200, 215, 240, 0.06);
+  background: rgba(200, 215, 240, 0.03);
+  transition: all 0.3s;
 }
 
 .work-card:hover .pill {
-  border-color: hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 50%, 0.25);
-  color: hsla(var(--wc-hue, 215), var(--wc-sat, 60%), 75%, 0.9);
+  border-color: rgba(200, 215, 240, 0.1);
+  color: rgba(200, 215, 240, 0.75);
 }
 
 .work-card-actions {
@@ -366,7 +324,7 @@
 
   .work-card:hover,
   .work-card:focus-within {
-    transform: translateY(-4px) scale(1.005);
+    transform: translateY(-3px) scale(1.003);
   }
 
   .work-inner {
@@ -405,8 +363,5 @@
 @media (prefers-reduced-motion: reduce) {
   .work-inner {
     transform: none !important;
-  }
-  .work-card::before {
-    animation: none !important;
   }
 }

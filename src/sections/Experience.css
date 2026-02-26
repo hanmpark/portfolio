@@ -32,9 +32,9 @@
 
 .exp-col {
   --exp-line-indent: 1.6rem;
-  --exp-marker-size: 12px;
-  --exp-line-width: 2px;
-  --exp-marker-top: 1.15rem;
+  --exp-marker-size: 10px;
+  --exp-line-width: 1px;
+  --exp-marker-top: 1.2rem;
   display: flex;
   flex-direction: column;
   gap: clamp(1rem, 2vh, 1.4rem);
@@ -67,7 +67,7 @@
   padding-left: var(--exp-line-indent);
 }
 
-/* Glowing vertical line */
+/* Subtle vertical line */
 .exp-timeline::before {
   content: "";
   position: absolute;
@@ -77,16 +77,15 @@
   width: var(--exp-line-width);
   background: linear-gradient(
     180deg,
-    rgba(200, 215, 240, 0.16),
-    rgba(200, 215, 240, 0.08),
-    rgba(200, 215, 240, 0.03)
+    rgba(200, 215, 240, 0.1),
+    rgba(200, 215, 240, 0.05),
+    rgba(200, 215, 240, 0.02)
   );
   border-radius: 2px;
   pointer-events: none;
-  box-shadow: 0 0 8px rgba(200, 215, 240, 0.04);
 }
 
-/* ── Markers with ping ─────────────────────── */
+/* ── Markers ───────────────────────────────── */
 .exp-marker {
   position: absolute;
   left: calc(-1 * var(--exp-line-indent));
@@ -95,7 +94,7 @@
   height: var(--exp-marker-size);
   border-radius: 50%;
   background: rgba(200, 215, 240, 0.06);
-  border: 2px solid rgba(200, 215, 240, 0.14);
+  border: 1.5px solid rgba(200, 215, 240, 0.12);
   transition:
     background 0.35s,
     border-color 0.35s,
@@ -111,72 +110,45 @@
   position: absolute;
   inset: -3px;
   border-radius: 50%;
-  border: 1.5px solid rgba(200, 215, 240, 0.12);
+  border: 1px solid rgba(200, 215, 240, 0.08);
   opacity: 0;
   transition: opacity 0.3s;
 }
 
 .exp-card:hover .exp-marker {
-  background: hsla(var(--card-hue), var(--card-sat), 55%, 0.9);
-  border-color: hsla(var(--card-hue), var(--card-sat), 55%, 0.9);
-  box-shadow: 0 0 14px hsla(var(--card-hue), var(--card-sat), 50%, 0.35);
-  transform: scale(1.2);
+  background: rgba(200, 215, 240, 0.35);
+  border-color: rgba(200, 215, 240, 0.4);
+  box-shadow: 0 0 10px rgba(200, 215, 240, 0.12);
+  transform: scale(1.15);
 }
 
 .exp-card:hover .exp-marker-ping {
   opacity: 1;
-  animation: exp-ping 1.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  animation: exp-ping 1.4s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
 @keyframes exp-ping {
   0% {
     transform: scale(1);
-    opacity: 0.6;
+    opacity: 0.5;
   }
   75%,
   100% {
-    transform: scale(2);
+    transform: scale(2.2);
     opacity: 0;
   }
 }
 
-/* Per-card color accents */
-.exp-card:nth-child(1) {
-  --card-hue: 330;
-  --card-sat: 55%;
-}
-.exp-card:nth-child(2) {
-  --card-hue: 250;
-  --card-sat: 50%;
-}
-.exp-card:nth-child(3) {
-  --card-hue: 200;
-  --card-sat: 55%;
-}
-.exp-card:nth-child(4) {
-  --card-hue: 160;
-  --card-sat: 50%;
-}
-.exp-card:nth-child(5) {
-  --card-hue: 35;
-  --card-sat: 55%;
-}
-.exp-card:nth-child(6) {
-  --card-hue: 280;
-  --card-sat: 50%;
-}
-
 /* ── Card ───────────────────────────────── */
 .exp-card {
-  --card-hue: 215;
-  --card-sat: 24%;
   position: relative;
   opacity: 0;
   border-radius: 20px;
   overflow: hidden;
-  background: var(--glass, rgba(20, 26, 36, 0.55));
-  border: 1px solid rgba(148, 163, 184, 0.08);
+  background: rgba(16, 20, 28, 0.5);
+  border: 1px solid rgba(200, 215, 240, 0.06);
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   transition:
     border-color 0.35s,
     box-shadow 0.4s,
@@ -186,60 +158,49 @@
   animation-delay: calc(var(--card-i, 0) * 0.14s + 0.28s);
 }
 
-/* Gradient top accent bar */
+/* Thin top accent line */
 .exp-card-accent {
-  height: 3px;
+  height: 1px;
   background: linear-gradient(
     90deg,
-    hsla(var(--card-hue), var(--card-sat), 70%, 0.22),
-    hsla(var(--card-hue), var(--card-sat), 72%, 0.1),
-    hsla(var(--card-hue), var(--card-sat), 70%, 0.22)
+    transparent,
+    rgba(200, 215, 240, 0.08),
+    transparent
   );
-  transition:
-    opacity 0.35s,
-    height 0.35s,
-    background 0.35s;
+  transition: background 0.4s;
 }
 
 .exp-card:hover .exp-card-accent {
-  height: 4px;
   background: linear-gradient(
     90deg,
-    hsla(var(--card-hue), var(--card-sat), 65%, 0.45),
-    hsla(var(--card-hue), var(--card-sat), 70%, 0.25),
-    hsla(var(--card-hue), var(--card-sat), 65%, 0.45)
+    transparent,
+    rgba(200, 215, 240, 0.16),
+    transparent
   );
 }
 
 .exp-card:hover {
   box-shadow:
-    0 16px 48px rgba(0, 0, 0, 0.3),
-    0 0 30px hsla(var(--card-hue), var(--card-sat), 55%, 0.1);
-  transform: translateY(-6px) scale(1.008);
-  border-color: hsla(var(--card-hue), var(--card-sat), 70%, 0.2);
-  background: rgba(20, 26, 36, 0.65);
+    0 12px 36px rgba(0, 0, 0, 0.2),
+    0 0 1px rgba(200, 215, 240, 0.08);
+  transform: translateY(-5px) scale(1.006);
+  border-color: rgba(200, 215, 240, 0.1);
+  background: rgba(18, 23, 32, 0.65);
 }
 
-/* Animated spinning gradient border on hover */
-@property --exp-border-angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-
+/* Subtle border gradient on hover */
 .exp-card::before {
   content: "";
   position: absolute;
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: conic-gradient(
-    from var(--exp-border-angle, 0deg),
-    hsla(var(--card-hue), var(--card-sat), 60%, 0.35),
-    transparent 25%,
-    transparent 50%,
-    hsla(var(--card-hue), var(--card-sat), 60%, 0.25) 75%,
-    hsla(var(--card-hue), var(--card-sat), 60%, 0.35)
+  background: linear-gradient(
+    135deg,
+    rgba(200, 215, 240, 0.1),
+    transparent 40%,
+    transparent 60%,
+    rgba(200, 215, 240, 0.06)
   );
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
@@ -257,13 +218,6 @@
 
 .exp-card:hover::before {
   opacity: 1;
-  animation: exp-border-spin 4s linear infinite;
-}
-
-@keyframes exp-border-spin {
-  to {
-    --exp-border-angle: 360deg;
-  }
 }
 
 @keyframes exp-card-fade {
@@ -308,10 +262,15 @@
   border-radius: 12px;
   overflow: visible;
   background: rgba(235, 240, 250, 0.92);
-  border: 1px solid rgba(200, 215, 240, 0.15);
+  border: 1px solid rgba(200, 215, 240, 0.1);
   display: grid;
   place-items: center;
   padding: 8px 10px;
+  transition: border-color 0.3s;
+}
+
+.exp-card:hover .exp-logo {
+  border-color: rgba(200, 215, 240, 0.18);
 }
 
 .exp-logo--square {
@@ -330,7 +289,7 @@
 }
 
 .exp-card:hover .exp-logo img {
-  transform: scale(1.06);
+  transform: scale(1.04);
 }
 
 .exp-role {
@@ -343,7 +302,7 @@
 }
 
 .exp-card:hover .exp-role {
-  color: hsla(var(--card-hue), var(--card-sat), 80%, 0.95);
+  color: #fff;
 }
 
 .exp-company {
@@ -356,7 +315,7 @@
   margin: 0.08rem 0 0;
   font-size: clamp(0.73rem, 0.82vw, 0.8rem);
   color: var(--muted, #8a95a5);
-  opacity: 0.72;
+  opacity: 0.6;
   letter-spacing: 0.01em;
 }
 
@@ -371,10 +330,12 @@
   flex-wrap: wrap;
   gap: 0.3rem;
 }
+
 .exp-tags .pill {
   font-size: 0.64rem;
   padding: 0.2em 0.58em;
-  border-color: rgba(200, 215, 240, 0.1);
+  border-color: rgba(200, 215, 240, 0.06);
+  background: rgba(200, 215, 240, 0.03);
   color: var(--muted, #8a95a5);
   transition:
     border-color 0.3s,
@@ -383,16 +344,14 @@
 }
 
 .exp-tags .pill:hover {
-  border-color: rgba(200, 215, 240, 0.16);
-  background: rgba(200, 215, 240, 0.06);
+  border-color: rgba(200, 215, 240, 0.12);
+  background: rgba(200, 215, 240, 0.05);
 }
 
 .exp-card:hover .exp-tags .pill {
-  border-color: hsla(var(--card-hue), var(--card-sat), 55%, 0.22);
-  color: hsla(var(--card-hue), var(--card-sat), 75%, 0.85);
+  border-color: rgba(200, 215, 240, 0.1);
+  color: rgba(200, 215, 240, 0.7);
 }
-
-/* Keep a single restrained accent palette across all cards */
 
 /* ── Responsive ─────────────────────── */
 @media (max-width: 768px) {
