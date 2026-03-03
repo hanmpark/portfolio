@@ -54,7 +54,7 @@
 .main-content-bg {
   position: relative;
   z-index: 1;
-  overflow: clip;
+  overflow-x: clip;
   isolation: isolate;
 }
 

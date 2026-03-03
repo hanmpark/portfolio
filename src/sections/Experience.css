@@ -2,6 +2,7 @@
 .exp-section {
   position: relative;
   padding-block: clamp(4rem, 8vh, 7rem);
+  overflow: visible;
 }
 
 /* ── Inner layout ──────────────────────────────── */
@@ -420,4 +421,108 @@
   .exp-marker-ping {
     animation: none !important;
   }
+}
+
+/* ── Path timeline (desktop ≥ 1024 px) ──────────── */
+.exp-path-wrap {
+  position: relative;
+}
+
+.exp-path-wrap--overflow {
+  overflow: visible;
+}
+
+/* SVG lives behind the cards, centered in the grid */
+.exp-path-svg {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+
+/* 3-column grid: card | node | card */
+.exp-path-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 100px 1fr;
+  row-gap: clamp(1.4rem, 2.5vh, 2rem);
+  padding-block: 0.5rem;
+}
+
+.exp-path-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+}
+
+.exp-path-item--left {
+  grid-column: 1;
+  justify-content: flex-end;
+}
+
+.exp-path-item--right {
+  grid-column: 3;
+  justify-content: flex-start;
+}
+
+.exp-path-item .exp-card {
+  width: 100%;
+}
+
+/* Center-column node (category icon) */
+.exp-path-node {
+  grid-column: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 1.1rem;
+  z-index: 2;
+}
+
+.exp-path-icon {
+  font-size: 1rem;
+  line-height: 1;
+  background: rgba(16, 20, 28, 0.92);
+  border: 1px solid rgba(200, 215, 240, 0.1);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition:
+    border-color 0.35s,
+    background 0.35s,
+    box-shadow 0.35s;
+}
+
+/* Light up the node when its neighbour card is hovered */
+.exp-path-item:hover ~ .exp-path-node .exp-path-icon,
+.exp-path-node:has(~ .exp-path-item:hover) .exp-path-icon {
+  border-color: rgba(200, 215, 240, 0.22);
+  background: rgba(20, 26, 38, 0.95);
+  box-shadow: 0 0 14px rgba(200, 215, 240, 0.08);
+}
+
+/* ── Desktop reveal overrides — slide from each side ── */
+.exp-path-item--left .exp-card.reveal:not(.is-revealed) {
+  transform: translateX(-40px) scale(0.985);
+}
+
+.exp-path-item--right .exp-card.reveal:not(.is-revealed) {
+  transform: translateX(40px) scale(0.985);
+}
+
+/* Stagger delay for path grid cards */
+.exp-path-grid .exp-card.reveal {
+  transition-delay: calc(var(--reveal-i, 0) * 0.1s);
+}
+
+.exp-path-grid .exp-path-node.reveal {
+  transition-delay: calc(var(--reveal-i, 0) * 0.1s + 0.06s);
 }
