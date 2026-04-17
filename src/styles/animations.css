@@ -1,6 +1,4 @@
 /* ── Scroll-reveal animation utilities ────────────── */
-/* Apply `.reveal` + a variant class on elements, then   */
-/* `is-revealed` is toggled by useScrollReveal.          */
 
 /* Base hidden state */
 .reveal {
@@ -14,28 +12,28 @@
 /* ── Variants ──────────────────────────────────────── */
 
 .reveal.reveal-up {
-  transform: translateY(32px);
+  transform: translateY(28px);
 }
 
 .reveal.reveal-down {
-  transform: translateY(-28px);
+  transform: translateY(-24px);
 }
 
 .reveal.reveal-left {
-  transform: translateX(36px);
+  transform: translateX(32px);
 }
 
 .reveal.reveal-right {
-  transform: translateX(-36px);
+  transform: translateX(-32px);
 }
 
 .reveal.reveal-scale {
-  transform: scale(0.95);
+  transform: scale(0.96);
 }
 
 .reveal.reveal-blur {
-  filter: blur(6px);
-  transform: translateY(16px);
+  filter: blur(5px);
+  transform: translateY(14px);
   transition:
     opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
@@ -51,51 +49,29 @@
 }
 
 /* ── Stagger children ─────────────────────────────── */
-/* Add `reveal-stagger` on a parent. Each `.reveal`     */
-/* child auto-gets increasing delay via --reveal-i.     */
 
 .reveal-stagger > .reveal {
   transition-delay: calc(var(--reveal-i, 0) * 0.06s);
 }
 
-.reveal-stagger > .reveal:nth-child(1) {
-  --reveal-i: 0;
-}
-.reveal-stagger > .reveal:nth-child(2) {
-  --reveal-i: 1;
-}
-.reveal-stagger > .reveal:nth-child(3) {
-  --reveal-i: 2;
-}
-.reveal-stagger > .reveal:nth-child(4) {
-  --reveal-i: 3;
-}
-.reveal-stagger > .reveal:nth-child(5) {
-  --reveal-i: 4;
-}
-.reveal-stagger > .reveal:nth-child(6) {
-  --reveal-i: 5;
-}
-.reveal-stagger > .reveal:nth-child(7) {
-  --reveal-i: 6;
-}
-.reveal-stagger > .reveal:nth-child(8) {
-  --reveal-i: 7;
-}
-.reveal-stagger > .reveal:nth-child(9) {
-  --reveal-i: 8;
-}
-.reveal-stagger > .reveal:nth-child(10) {
-  --reveal-i: 9;
-}
+.reveal-stagger > .reveal:nth-child(1) { --reveal-i: 0; }
+.reveal-stagger > .reveal:nth-child(2) { --reveal-i: 1; }
+.reveal-stagger > .reveal:nth-child(3) { --reveal-i: 2; }
+.reveal-stagger > .reveal:nth-child(4) { --reveal-i: 3; }
+.reveal-stagger > .reveal:nth-child(5) { --reveal-i: 4; }
+.reveal-stagger > .reveal:nth-child(6) { --reveal-i: 5; }
+.reveal-stagger > .reveal:nth-child(7) { --reveal-i: 6; }
+.reveal-stagger > .reveal:nth-child(8) { --reveal-i: 7; }
+.reveal-stagger > .reveal:nth-child(9) { --reveal-i: 8; }
+.reveal-stagger > .reveal:nth-child(10) { --reveal-i: 9; }
 
 /* ── Hero reveal keyframes ─────────────────────────── */
 
 @keyframes text-reveal-up {
   from {
     opacity: 0;
-    transform: translateY(36px);
-    filter: blur(4px);
+    transform: translateY(32px);
+    filter: blur(3px);
   }
   to {
     opacity: 1;
@@ -113,18 +89,10 @@
   animation: text-reveal-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.hero-reveal-d1 {
-  animation-delay: 0.15s;
-}
-.hero-reveal-d2 {
-  animation-delay: 0.35s;
-}
-.hero-reveal-d3 {
-  animation-delay: 0.55s;
-}
-.hero-reveal-d4 {
-  animation-delay: 0.75s;
-}
+.hero-reveal-d1 { animation-delay: 0.15s; }
+.hero-reveal-d2 { animation-delay: 0.35s; }
+.hero-reveal-d3 { animation-delay: 0.55s; }
+.hero-reveal-d4 { animation-delay: 0.75s; }
 
 /* ── Scroll progress bar ──────────────────────────── */
 
@@ -133,18 +101,18 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 2px;
+  height: 1px;
   z-index: 9999;
   pointer-events: none;
   transform-origin: left;
   transform: scaleX(var(--scroll-progress, 0));
   background: linear-gradient(
     90deg,
-    rgba(138, 149, 165, 0.4),
-    rgba(160, 175, 195, 0.65) 50%,
-    rgba(138, 149, 165, 0.4)
+    rgba(120, 120, 128, 0.35),
+    rgba(210, 210, 220, 0.7) 50%,
+    rgba(120, 120, 128, 0.35)
   );
-  box-shadow: 0 0 6px rgba(138, 149, 165, 0.15);
+  box-shadow: 0 0 8px rgba(200, 200, 212, 0.12);
   transition: transform 0.12s linear;
 }
 
@@ -158,9 +126,9 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(200, 215, 240, 0.1) 24%,
-    rgba(120, 150, 200, 0.15) 50%,
-    rgba(200, 215, 240, 0.1) 76%,
+    rgba(224, 224, 236, 0.08) 24%,
+    rgba(180, 180, 192, 0.12) 50%,
+    rgba(224, 224, 236, 0.08) 76%,
     transparent
   );
 }
@@ -187,9 +155,6 @@
 }
 
 /* ── Mobile: disable scroll-reveal hidden state ───── */
-/* IntersectionObserver can lag during fast scrolling   */
-/* on mobile, causing content to stay invisible. Show   */
-/* everything immediately instead.                     */
 @media (max-width: 768px) {
   .reveal {
     opacity: 1 !important;

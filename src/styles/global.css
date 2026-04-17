@@ -1,30 +1,30 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap");
 
 :root {
   color-scheme: dark;
-  --paper: #0e1117;
-  --ink: #e8ecf2;
-  --muted: #8a95a5;
-  --accent: #b0bac8;
-  --accent-2: #7a889a;
-  --accent-3: #151a22;
-  --accent-subtle: #6b7888;
-  --accent-soft: #556070;
-  --line: rgba(200, 215, 240, 0.08);
-  --glass: rgba(20, 26, 36, 0.55);
-  --glass-strong: rgba(20, 26, 36, 0.72);
-  --glass-border: rgba(200, 215, 240, 0.1);
-  --glass-hover: rgba(200, 215, 240, 0.12);
-  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.25), 0 2px 6px rgba(0, 0, 0, 0.15);
-  --shadow-lift: 0 20px 48px rgba(0, 0, 0, 0.32), 0 4px 12px rgba(0, 0, 0, 0.2);
-  --shadow-strong: 0 24px 58px rgba(0, 0, 0, 0.4);
+  --paper: #080809;
+  --ink: #f0f0f3;
+  --muted: #787880;
+  --accent: #a0a0a8;
+  --accent-2: #5e5e66;
+  --accent-3: #121214;
+  --accent-subtle: #585860;
+  --accent-soft: #484850;
+  --line: rgba(224, 224, 236, 0.06);
+  --glass: rgba(10, 10, 12, 0.55);
+  --glass-strong: rgba(10, 10, 12, 0.72);
+  --glass-border: rgba(224, 224, 236, 0.08);
+  --glass-hover: rgba(224, 224, 236, 0.11);
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.32), 0 2px 6px rgba(0, 0, 0, 0.18);
+  --shadow-lift: 0 20px 48px rgba(0, 0, 0, 0.38), 0 4px 12px rgba(0, 0, 0, 0.22);
+  --shadow-strong: 0 24px 58px rgba(0, 0, 0, 0.48);
   --blur: 24px;
-  --radius: 20px;
-  --radius-lg: 28px;
+  --radius: 16px;
+  --radius-lg: 22px;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --font-body: "Manrope", "Helvetica Neue", Arial, sans-serif;
-  --font-display: "Sora", "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Instrument Serif", Georgia, serif;
 }
 
 * {
@@ -68,14 +68,15 @@ img {
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  padding: 0.85rem 1.8rem;
+  padding: 0.82rem 1.7rem;
   border-radius: 999px;
-  border: 1px solid rgba(200, 215, 240, 0.12);
-  background: rgba(20, 26, 36, 0.6);
-  color: var(--ink, #e8ecf2);
-  font-weight: 600;
-  font-size: 0.92rem;
-  letter-spacing: 0.01em;
+  border: 1px solid rgba(224, 224, 236, 0.1);
+  background: rgba(10, 10, 12, 0.6);
+  color: var(--ink, #f0f0f3);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.86rem;
+  letter-spacing: 0.02em;
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(10px);
@@ -87,64 +88,64 @@ img {
     border-color 0.22s ease,
     color 0.22s ease;
   box-shadow:
-    inset 0 1px 0 rgba(200, 215, 240, 0.06),
-    0 4px 14px rgba(0, 0, 0, 0.2),
-    0 10px 22px rgba(0, 0, 0, 0.15);
+    inset 0 1px 0 rgba(224, 224, 236, 0.06),
+    0 4px 14px rgba(0, 0, 0, 0.28),
+    0 10px 22px rgba(0, 0, 0, 0.2);
   will-change: transform;
 }
 
 .btn:hover {
   transform: translateY(-2px) scale(1.01);
-  background: rgba(30, 38, 52, 0.75);
-  border-color: rgba(200, 215, 240, 0.18);
+  background: rgba(20, 20, 24, 0.75);
+  border-color: rgba(224, 224, 236, 0.16);
   box-shadow:
-    inset 0 1px 0 rgba(200, 215, 240, 0.08),
-    0 8px 20px rgba(0, 0, 0, 0.28),
-    0 16px 30px rgba(0, 0, 0, 0.2);
+    inset 0 1px 0 rgba(224, 224, 236, 0.08),
+    0 8px 20px rgba(0, 0, 0, 0.36),
+    0 16px 30px rgba(0, 0, 0, 0.24);
 }
 
 .btn:active {
   transform: translateY(0) scale(0.985);
   box-shadow:
-    inset 0 1px 0 rgba(200, 215, 240, 0.05),
-    0 3px 10px rgba(0, 0, 0, 0.2);
+    inset 0 1px 0 rgba(224, 224, 236, 0.05),
+    0 3px 10px rgba(0, 0, 0, 0.24);
 }
 
 .btn.ghost {
-  background: rgba(200, 215, 240, 0.08);
-  color: #e8ecf2;
-  border: 1px solid rgba(200, 215, 240, 0.14);
+  background: rgba(224, 224, 236, 0.06);
+  color: #f0f0f3;
+  border: 1px solid rgba(224, 224, 236, 0.1);
   box-shadow:
-    inset 0 1px 0 rgba(200, 215, 240, 0.04),
-    0 4px 14px rgba(0, 0, 0, 0.18),
-    0 10px 22px rgba(0, 0, 0, 0.14);
+    inset 0 1px 0 rgba(224, 224, 236, 0.04),
+    0 4px 14px rgba(0, 0, 0, 0.22),
+    0 10px 22px rgba(0, 0, 0, 0.16);
 }
 
 .btn.ghost:hover {
-  background: rgba(200, 215, 240, 0.14);
-  border-color: rgba(200, 215, 240, 0.2);
+  background: rgba(224, 224, 236, 0.11);
+  border-color: rgba(224, 224, 236, 0.18);
   box-shadow:
-    inset 0 1px 0 rgba(200, 215, 240, 0.06),
-    0 8px 22px rgba(0, 0, 0, 0.24),
-    0 16px 30px rgba(0, 0, 0, 0.18);
+    inset 0 1px 0 rgba(224, 224, 236, 0.06),
+    0 8px 22px rgba(0, 0, 0, 0.32),
+    0 16px 30px rgba(0, 0, 0, 0.22);
 }
 
 .btn.small {
-  padding: 0.55rem 1.1rem;
-  font-size: 0.88rem;
+  padding: 0.52rem 1.05rem;
+  font-size: 0.82rem;
 }
 
 @media (max-width: 480px) {
   .btn {
-    padding: 0.72rem 1.4rem;
-    font-size: 0.88rem;
+    padding: 0.7rem 1.4rem;
+    font-size: 0.84rem;
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
   }
 
   .btn.small {
-    padding: 0.5rem 0.95rem;
-    font-size: 0.84rem;
+    padding: 0.48rem 0.9rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -160,7 +161,6 @@ img {
 }
 
 /* ── Shared noise texture ────────────────────────── */
-/* SVG feTurbulence noise as inline data URI */
 :root {
   --noise-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
@@ -170,7 +170,7 @@ img {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.03;
+  opacity: 0.025;
   background-image: var(--noise-texture);
   background-size: 200px 200px;
   background-repeat: repeat;

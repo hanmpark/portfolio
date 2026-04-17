@@ -58,34 +58,39 @@ const Card = ({ item, index, l, showMarker = true }) => (
       </span>
     )}
     <div className="exp-card-inner">
-      <div className="exp-card-top">
-        {item.image && (
-          <figure
-            className={`exp-logo${
-              item.logoVariant ? ` exp-logo--${item.logoVariant}` : ""
-            }`}
-          >
-            <img src={item.image} alt={item.imageAlt ?? ""} loading="lazy" />
-          </figure>
+      <div className="exp-card-meta">
+        {item.period && (
+          <time className="exp-period">{l(item, "period")}</time>
         )}
-        <div>
-          <p className="exp-role">{l(item, "role")}</p>
-          <p className="exp-company">{item.company}</p>
-          {item.period ? (
-            <p className="exp-period">{l(item, "period")}</p>
-          ) : null}
-        </div>
       </div>
-      <p className="exp-summary">{l(item, "focus")}</p>
-      {item.stack?.length ? (
-        <div className="tag-row exp-tags">
-          {item.stack.map((tag) => (
-            <span className="pill" key={tag}>
-              {tag}
-            </span>
-          ))}
+
+      <div className="exp-card-content">
+        <div className="exp-card-top">
+          {item.image && (
+            <figure
+              className={`exp-logo${
+                item.logoVariant ? ` exp-logo--${item.logoVariant}` : ""
+              }`}
+            >
+              <img src={item.image} alt={item.imageAlt ?? ""} loading="lazy" />
+            </figure>
+          )}
+          <div>
+            <p className="exp-role">{l(item, "role")}</p>
+            <p className="exp-company">{item.company}</p>
+          </div>
         </div>
-      ) : null}
+        <p className="exp-summary">{l(item, "focus")}</p>
+        {item.stack?.length ? (
+          <div className="tag-row exp-tags">
+            {item.stack.map((tag) => (
+              <span className="pill" key={tag}>
+                {tag}
+              </span>
+            ))}
+          </div>
+        ) : null}
+      </div>
     </div>
   </article>
 );

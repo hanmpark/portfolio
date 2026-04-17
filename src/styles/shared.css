@@ -19,25 +19,28 @@
 
 .section-title {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 4.5vw, 4rem);
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 400;
+  font-style: italic;
   margin: 0;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.03em;
   line-height: 0.95;
   background: linear-gradient(
     128deg,
-    #e8ecf2 0%,
-    #c8d0dc 30%,
-    #8a95a5 60%,
-    #6b7888 100%
+    #f0f0f3 0%,
+    #d0d0d8 35%,
+    #8a8a92 62%,
+    #606068 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  padding-bottom: 0.15em;
 }
 
 .section-subtitle {
   color: var(--muted);
-  font-size: clamp(0.95rem, 1.05vw, 1.08rem);
+  font-size: clamp(0.9rem, 1vw, 1.02rem);
   margin: 0.4rem 0 0;
   max-width: 48ch;
   line-height: 1.7;
@@ -45,11 +48,11 @@
 
 .eyebrow {
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-size: 0.66rem;
-  font-weight: 700;
-  color: var(--muted, #8a95a5);
-  opacity: 0.6;
+  letter-spacing: 0.2em;
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--muted, #787880);
+  opacity: 0.55;
   margin: 0 0 0.35rem;
 }
 
@@ -62,11 +65,11 @@
 .pill {
   padding: 0.22rem 0.6rem;
   border-radius: 999px;
-  border: 1px solid rgba(200, 215, 240, 0.07);
-  background: rgba(200, 215, 240, 0.03);
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--muted, #8a95a5);
+  border: 1px solid rgba(224, 224, 236, 0.07);
+  background: rgba(224, 224, 236, 0.03);
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--muted, #787880);
   backdrop-filter: blur(6px);
   transition:
     background 0.25s,
@@ -75,9 +78,9 @@
 }
 
 .pill:hover {
-  background: rgba(200, 215, 240, 0.06);
-  border-color: rgba(200, 215, 240, 0.12);
-  color: rgba(200, 215, 240, 0.8);
+  background: rgba(224, 224, 236, 0.06);
+  border-color: rgba(224, 224, 236, 0.12);
+  color: rgba(240, 240, 243, 0.8);
 }
 
 @media (max-width: 720px) {
@@ -92,15 +95,15 @@
   }
 
   .section-title {
-    font-size: clamp(1.8rem, 8vw, 2.6rem);
+    font-size: clamp(2rem, 9vw, 2.8rem);
   }
 
   .section-subtitle {
-    font-size: clamp(0.88rem, 3.8vw, 1rem);
+    font-size: clamp(0.86rem, 3.8vw, 0.98rem);
   }
 
   .pill {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     padding: 0.2rem 0.52rem;
   }
 }

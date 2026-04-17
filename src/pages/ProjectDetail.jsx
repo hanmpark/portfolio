@@ -44,7 +44,6 @@ const ProjectDetail = () => {
     window.scrollTo(0, 0);
   }, [slug]);
 
-  /* Close lightbox on Escape */
   const closeLightbox = useCallback(() => setLightbox(null), []);
   useEffect(() => {
     if (lightbox === null) return;
@@ -68,16 +67,20 @@ const ProjectDetail = () => {
         {t("projectDetail.back")}
       </button>
 
-      <div className="pj-hero">
+      {/* Hero with title overlaid at bottom */}
+      <header className="pj-hero">
         <img src={project.heroImage} alt={`${project.title} hero`} />
-      </div>
+        <div className="pj-hero-body">
+          <div className="pj-hero-inner">
+            <h1 className="pj-title">{project.title}</h1>
+            <p className="pj-subtitle">{l(project, "subtitle")}</p>
+          </div>
+        </div>
+      </header>
 
       <div className="pj-content">
-        {/* Header */}
-        <header className="pj-header">
-          <h1 className="pj-title">{project.title}</h1>
-          <p className="pj-subtitle">{l(project, "subtitle")}</p>
-
+        {/* Meta bar: tags + links + notice */}
+        <div className="pj-meta">
           {project.tags?.length ? (
             <div className="pj-tags">
               {project.tags.map((tag) => (
@@ -117,18 +120,18 @@ const ProjectDetail = () => {
               <span>{l(project, "demoNotice")}</span>
             </div>
           ) : null}
-        </header>
+        </div>
 
         {/* Description */}
         <section className="pj-desc">
-          <h3>{t("projectDetail.aboutProject")}</h3>
+          <p className="pj-section-label">{t("projectDetail.aboutProject")}</p>
           {(l(project, "description") ?? project.description).map((para, i) => (
             <p key={i} dangerouslySetInnerHTML={{ __html: para }} />
           ))}
 
           {(l(project, "features") ?? project.features)?.length ? (
             <>
-              <h3>{t("projectDetail.keyFeatures")}</h3>
+              <p className="pj-section-label">{t("projectDetail.keyFeatures")}</p>
               <ul className="pj-features">
                 {(l(project, "features") ?? project.features).map((feat, i) => (
                   <li key={i}>{feat}</li>
@@ -141,7 +144,7 @@ const ProjectDetail = () => {
         {/* Gallery */}
         {project.gallery?.length ? (
           <section className="pj-gallery">
-            <h3>{t("projectDetail.gallery")}</h3>
+            <p className="pj-section-label">{t("projectDetail.gallery")}</p>
             <div className="pj-gallery-grid">
               {project.gallery.map((item, i) =>
                 item.type === "video" ? (
