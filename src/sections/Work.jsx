@@ -20,10 +20,10 @@ const Work = () => {
           <h2 className="section-title reveal reveal-up">{t("work.title")}</h2>
         </header>
 
-        <div className="work-grid reveal-stagger">
+        <div className="work-grid">
           {projects.map((project, index) => {
             const isInternal = Boolean(project.slug);
-            const CardLink = isInternal ? Link : "a";
+            const Tag = isInternal ? Link : "a";
             const linkProps = isInternal
               ? { to: `/project/${project.slug}` }
               : {
@@ -31,16 +31,29 @@ const Work = () => {
                   target: "_blank",
                   rel: "noopener noreferrer",
                 };
-            const isFeatured = index === 0;
 
             return (
               <article
-                className={`work-card${isFeatured ? " work-card--featured" : ""} reveal reveal-up`}
-                style={{ "--reveal-i": index, "--card-index": index }}
+                className="work-card reveal reveal-up"
+                style={{ "--reveal-i": index }}
                 key={project.title}
               >
-                <CardLink
-                  className="work-card-main"
+                {/* Full background image */}
+                <div className="work-card-bg" aria-hidden="true">
+                  <img src={project.previewImage} alt="" loading="lazy" />
+                </div>
+
+                {/* Gradient overlay */}
+                <div className="work-card-overlay" aria-hidden="true" />
+
+                {/* Floating number */}
+                <span className="work-card-num" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+
+                {/* Content */}
+                <Tag
+                  className="work-card-link"
                   aria-label={
                     isInternal
                       ? `View ${project.title} project`
@@ -48,37 +61,14 @@ const Work = () => {
                   }
                   {...linkProps}
                 >
-                  <span className="work-card-cue" aria-hidden="true">
-                    {isInternal ? t("work.viewProject") : t("work.openRepo")}
-                    <span className="work-card-cue-arrow">{"->"}</span>
-                  </span>
-
-                  <figure className="work-card-img">
-                    <div className="work-card-img-overlay" aria-hidden="true" />
-                    <img
-                      src={project.previewImage}
-                      alt={`${project.title} preview`}
-                      loading="lazy"
-                    />
-                  </figure>
-
                   <div className="work-card-body">
-                    <span className="work-card-number">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
                     <h3 className="work-card-title">{project.title}</h3>
                     <p className="work-card-subtitle">
                       {l(project, "subtitle")}
                     </p>
 
-                    {project.description && (
-                      <p className="work-card-desc">
-                        {l(project, "description")}
-                      </p>
-                    )}
-
                     {project.tags?.length ? (
-                      <div className="tag-row">
+                      <div className="work-card-tags">
                         {project.tags.map((tag) => (
                           <span className="pill" key={tag}>
                             {tag}
@@ -87,20 +77,45 @@ const Work = () => {
                       </div>
                     ) : null}
                   </div>
-                </CardLink>
 
-                {project.links?.demo && !isInternal ? (
-                  <div className="work-card-actions">
-                    <a
-                      className="btn small work-card-demo"
-                      href={project.links.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {t("work.demo")}
-                    </a>
+                  <div className="work-card-footer">
+                    <span className="work-card-cta">
+                      {isInternal ? t("work.viewProject") : t("work.openRepo")}
+                      <svg
+                        className="work-card-arrow"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M3 8h10M9 4l4 4-4 4"
+                          stroke="currentColor"
+                          strokeWidth="1.2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </span>
+
+                    {project.links?.demo && !isInternal ? (
+                      <a
+                        className="work-card-demo"
+                        href={project.links.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <span
+                          className="work-card-demo-dot"
+                          aria-hidden="true"
+                        />
+                        {t("work.demo")}
+                      </a>
+                    ) : null}
                   </div>
-                ) : null}
+                </Tag>
               </article>
             );
           })}
