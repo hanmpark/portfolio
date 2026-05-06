@@ -49,8 +49,8 @@
 .hero-copy {
   display: grid;
   gap: 1.5rem;
-  justify-items: start;
-  text-align: left;
+  justify-items: center;
+  text-align: center;
   width: min(740px, 100%);
   padding: clamp(1.5rem, 6vh, 3.4rem) clamp(1rem, 2.2vw, 2rem)
     clamp(2rem, 6vh, 4rem);
@@ -105,7 +105,7 @@
   color: var(--muted, #787880);
   line-height: 1.82;
   padding: 0;
-  text-align: left;
+  text-align: center;
   text-wrap: pretty;
 }
 
@@ -124,7 +124,7 @@
   gap: 0.75rem;
   margin-top: 0.2rem;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 /* ── Scroll mouse cue ────────────────────────────── */
