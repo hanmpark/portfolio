@@ -64,8 +64,8 @@ const Experience = () => {
   const eduItems = experiences.filter((i) => i.category === "Education");
 
   const groups = [
-    { label: "Experience", items: expItems },
-    { label: "Education", items: eduItems },
+    { label: t("experience.experienceCol"), items: expItems },
+    { label: t("experience.educationCol"), items: eduItems },
   ];
 
   return (
