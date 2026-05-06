@@ -62,8 +62,8 @@ const Hero = () => {
     if (!hero || readyRef.current) return;
     // Add no-transition to prevent a flash when switching from animation to static styles
     hero.classList.add("hero-entered", "no-transition");
-    // Force a reflow so the browser applies the no-transition state first
-    hero.offsetHeight; // eslint-disable-line no-unused-expressions
+    // Force a reflow so the browser applies the no-transition state first.
+    void hero.offsetHeight;
     hero.classList.remove("no-transition");
     readyRef.current = true;
   }, []);
@@ -123,7 +123,7 @@ const Hero = () => {
       if (scrollRafRef.current)
         window.cancelAnimationFrame(scrollRafRef.current);
     };
-  }, []);
+  }, [enableParallax]);
 
   return (
     <header

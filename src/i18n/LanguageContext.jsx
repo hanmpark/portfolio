@@ -1,10 +1,9 @@
-import { createContext, useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { LanguageContext } from "./languageContext.js";
 import en from "./en.js";
 import fr from "./fr.js";
 
 const translations = { en, fr };
-
-export const LanguageContext = createContext();
 
 /**
  * Detects the preferred language from:
