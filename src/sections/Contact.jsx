@@ -177,7 +177,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="section ct-section">
+    <section className="section ct-section" id="contact">
       {/* Decorative glow accents */}
       <div className="ct-glow ct-glow--1" aria-hidden="true" />
       <div className="ct-glow ct-glow--2" aria-hidden="true" />

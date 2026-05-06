@@ -1,8 +1,6 @@
 .app {
-  --contact-reveal-space: 100lvh;
   --z-layer-hero: 10;
   --z-layer-main: 30;
-  --z-layer-contact: 40;
   min-height: 100svh;
   overflow-x: clip;
   background: #080809;
@@ -14,7 +12,6 @@
   position: relative;
   z-index: var(--z-layer-main);
   margin-top: 100svh;
-  padding-bottom: var(--contact-reveal-space);
   pointer-events: none;
   overflow: clip;
 }
@@ -32,7 +29,7 @@
 .app > main::before {
   content: "";
   position: absolute;
-  inset: 0 0 var(--contact-reveal-space) 0;
+  inset: 0;
   z-index: -1;
   pointer-events: none;
   background: #080809;
@@ -49,31 +46,6 @@
 .main-content-bg > .section {
   position: relative;
   z-index: 2;
-}
-
-/* Contact reveal wrapper */
-.contact-reveal {
-  position: relative;
-  margin-top: calc(-1 * var(--contact-reveal-space));
-  height: var(--contact-reveal-space);
-  z-index: var(--z-layer-contact);
-}
-
-.contact-reveal .ct-section {
-  position: fixed;
-  inset: 0;
-  z-index: calc(var(--z-layer-contact) - 1);
-  pointer-events: none;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 220ms ease;
-}
-
-.contact-reveal--front .ct-section {
-  z-index: var(--z-layer-contact);
-  pointer-events: auto;
-  opacity: 1;
-  visibility: visible;
 }
 
 .app > footer {
@@ -133,32 +105,6 @@
   .app::before,
   .app::after {
     display: none;
-  }
-}
-
-@media (max-width: 900px) {
-  .app > main {
-    padding-bottom: 0;
-  }
-
-  .app > main::before {
-    inset: 0;
-  }
-
-  .contact-reveal {
-    height: auto;
-    margin-top: 0;
-    z-index: var(--z-layer-main);
-  }
-
-  .contact-reveal .ct-section {
-    position: relative;
-    inset: auto;
-    z-index: 2;
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transition: none;
   }
 }
 
