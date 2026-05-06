@@ -21,7 +21,7 @@ export const projects = [
     },
   },
   {
-    title: "Tetris",
+    title: "Red Tetris",
     subtitle: "Real-Time Multiplayer Game",
     subtitle_fr: "Jeu multijoueur en temps réel",
     slug: "tetris",

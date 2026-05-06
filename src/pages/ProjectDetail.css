@@ -185,6 +185,27 @@
   font-weight: 500;
 }
 
+.pj-desc p a {
+  color: rgba(240, 240, 243, 0.86);
+  text-decoration: underline;
+  text-decoration-color: rgba(224, 224, 236, 0.32);
+  text-underline-offset: 0.18em;
+}
+
+.pj-desc p a:hover {
+  color: var(--ink, #f0f0f3);
+  text-decoration-color: rgba(224, 224, 236, 0.6);
+}
+
+.pj-desc p code {
+  padding: 0.08em 0.32em;
+  border-radius: 5px;
+  background: rgba(224, 224, 236, 0.06);
+  color: rgba(240, 240, 243, 0.82);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.92em;
+}
+
 .pj-features {
   list-style: none;
   padding: 0;

@@ -1,6 +1,6 @@
 export const projectDetails = {
   "scholarship-logtime": {
-    title: "Scholarship Logtime",
+    title: "Scholarship Time Tracker",
     subtitle:
       "A CLI tool for 42 Nice GEN scholarship students that calculates cumulative logtime from the 27th to the 26th, including bonus hours carried over from the previous month.",
     subtitle_fr:
@@ -94,7 +94,7 @@ export const projectDetails = {
     ],
   },
   miniraytracer: {
-    title: "RT",
+    title: "Mini Ray Tracer",
     subtitle:
       "A CPU ray tracer written in C for the 42 RT project — rendering spheres, planes, cylinders, and cones with lighting, shadows, reflections, and procedural textures.",
     subtitle_fr:

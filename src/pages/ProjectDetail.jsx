@@ -33,6 +33,45 @@ const InfoIcon = () => (
   </svg>
 );
 
+const ALLOWED_INLINE_TAGS = new Set(["A", "STRONG", "CODE"]);
+
+const isSafeUrl = (href) => {
+  try {
+    const url = new URL(href, window.location.origin);
+    return url.protocol === "http:" || url.protocol === "https:";
+  } catch {
+    return false;
+  }
+};
+
+const renderInlineNodes = (nodes, path = "node") =>
+  Array.from(nodes).flatMap((node, index) => {
+    const key = `${path}-${index}`;
+
+    if (node.nodeType === Node.TEXT_NODE) return node.textContent;
+    if (node.nodeType !== Node.ELEMENT_NODE) return null;
+
+    const children = renderInlineNodes(node.childNodes, key);
+    if (!ALLOWED_INLINE_TAGS.has(node.tagName)) return children;
+
+    if (node.tagName === "STRONG") return <strong key={key}>{children}</strong>;
+    if (node.tagName === "CODE") return <code key={key}>{children}</code>;
+
+    const href = node.getAttribute("href");
+    if (!href || !isSafeUrl(href)) return children;
+
+    return (
+      <a key={key} href={href} target="_blank" rel="noopener noreferrer">
+        {children}
+      </a>
+    );
+  });
+
+const renderRichText = (html, key) => {
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  return <p key={key}>{renderInlineNodes(doc.body.childNodes, `p-${key}`)}</p>;
+};
+
 const ProjectDetail = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
@@ -125,9 +164,9 @@ const ProjectDetail = () => {
         {/* Description */}
         <section className="pj-desc">
           <p className="pj-section-label">{t("projectDetail.aboutProject")}</p>
-          {(l(project, "description") ?? project.description).map((para, i) => (
-            <p key={i} dangerouslySetInnerHTML={{ __html: para }} />
-          ))}
+          {(l(project, "description") ?? project.description).map((para, i) =>
+            renderRichText(para, i),
+          )}
 
           {(l(project, "features") ?? project.features)?.length ? (
             <>
