@@ -59,6 +59,11 @@ const en = {
     success: "Message sent! I'll get back to you soon.",
     error:
       "Could not send your message right now. Please try again or use the direct email link.",
+    configError:
+      "The contact form is not configured yet. Please use the direct email link for now.",
+    configNotePrefix: "Configure",
+    configNoteAnd: "and",
+    configNoteSuffix: "to enable the form.",
   },
   projectDetail: {
     back: "Back",

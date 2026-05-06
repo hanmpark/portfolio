@@ -543,6 +543,11 @@
 
 /* ── Responsive: Tablet ──────────────────────────── */
 @media (max-width: 900px) {
+  .ct-section {
+    align-items: flex-start;
+    overflow-y: auto;
+  }
+
   .ct-figures {
     display: none;
   }

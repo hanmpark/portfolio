@@ -59,6 +59,11 @@ const fr = {
     success: "Message envoyé ! Je vous répondrai dès que possible.",
     error:
       "Impossible d'envoyer votre message pour le moment. Veuillez réessayer ou utiliser le lien email direct.",
+    configError:
+      "Le formulaire de contact n'est pas encore configuré. Utilisez le lien email direct pour le moment.",
+    configNotePrefix: "Configurez",
+    configNoteAnd: "et",
+    configNoteSuffix: "pour activer le formulaire.",
   },
   projectDetail: {
     back: "Retour",

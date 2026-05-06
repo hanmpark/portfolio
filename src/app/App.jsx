@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import Hero from "../sections/Hero.jsx";
 import Work from "../sections/Work.jsx";
 import Experience from "../sections/Experience.jsx";
@@ -12,6 +12,7 @@ import "./App.css";
 const App = () => {
   const [loaded, setLoaded] = useState(false);
   const [contactInFront, setContactInFront] = useState(false);
+  const contactRevealRef = useRef(null);
 
   const handleReady = useCallback(() => setLoaded(true), []);
 
@@ -28,14 +29,48 @@ const App = () => {
   }, [loaded]);
 
   useEffect(() => {
+    if (!loaded || window.location.hash !== "#contact") return;
+
+    const scrollToContact = () => {
+      const root = document.scrollingElement ?? document.documentElement;
+      setContactInFront(true);
+
+      if (window.matchMedia("(max-width: 900px)").matches) {
+        window.scrollTo({
+          top: root.scrollHeight,
+          behavior: "auto",
+        });
+        return;
+      }
+
+      window.scrollTo({
+        top: root.scrollHeight,
+        behavior: "auto",
+      });
+    };
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(scrollToContact);
+    });
+
+    const timeouts = [
+      window.setTimeout(scrollToContact, 250),
+      window.setTimeout(scrollToContact, 900),
+    ];
+    return () => timeouts.forEach((timeout) => window.clearTimeout(timeout));
+  }, [loaded]);
+
+  useEffect(() => {
     let raf = 0;
     let lastValue = null;
 
     const update = () => {
       raf = 0;
-      const doc = document.documentElement;
-      const maxScroll = Math.max(doc.scrollHeight - window.innerHeight, 1);
-      const nextValue = window.scrollY >= maxScroll * 0.5;
+      const contactReveal = contactRevealRef.current;
+      if (!contactReveal) return;
+
+      const rect = contactReveal.getBoundingClientRect();
+      const nextValue = rect.top <= window.innerHeight * 0.45;
 
       if (nextValue !== lastValue) {
         lastValue = nextValue;
@@ -72,6 +107,8 @@ const App = () => {
         </div>
       </main>
       <div
+        id="contact"
+        ref={contactRevealRef}
         className={`contact-reveal${contactInFront ? " contact-reveal--front" : ""}`}
       >
         <Contact />

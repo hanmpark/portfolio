@@ -124,8 +124,7 @@ const Contact = () => {
     if (!isEmailJsConfigured) {
       setSubmitState({
         type: "error",
-        message:
-          "Email form is not configured yet. Add VITE_APP_EMAILJS_SERVICE_ID, VITE_APP_EMAILJS_TEMPLATE_ID, and VITE_APP_EMAILJS_PUBLIC_KEY.",
+        message: t("contact.configError"),
       });
       return;
     }
@@ -178,7 +177,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="section ct-section" id="contact">
+    <section className="section ct-section">
       {/* Decorative glow accents */}
       <div className="ct-glow ct-glow--1" aria-hidden="true" />
       <div className="ct-glow ct-glow--2" aria-hidden="true" />
@@ -327,9 +326,12 @@ const Contact = () => {
 
             {!isEmailJsConfigured && (
               <p className="ct-config-note">
-                Configure <code>VITE_APP_EMAILJS_SERVICE_ID</code>,{" "}
-                <code>VITE_APP_EMAILJS_TEMPLATE_ID</code>, and{" "}
-                <code>VITE_APP_EMAILJS_PUBLIC_KEY</code> to enable the form.
+                {t("contact.configNotePrefix")}{" "}
+                <code>VITE_APP_EMAILJS_SERVICE_ID</code>,{" "}
+                <code>VITE_APP_EMAILJS_TEMPLATE_ID</code>,{" "}
+                {t("contact.configNoteAnd")}{" "}
+                <code>VITE_APP_EMAILJS_PUBLIC_KEY</code>{" "}
+                {t("contact.configNoteSuffix")}
               </p>
             )}
           </form>

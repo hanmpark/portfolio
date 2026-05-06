@@ -1,8 +1,8 @@
 .app {
   --contact-reveal-space: 100lvh;
   --z-layer-hero: 10;
-  --z-layer-contact: 20;
   --z-layer-main: 30;
+  --z-layer-contact: 40;
   min-height: 100svh;
   overflow-x: clip;
   background: #080809;
@@ -133,6 +133,32 @@
   .app::before,
   .app::after {
     display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .app > main {
+    padding-bottom: 0;
+  }
+
+  .app > main::before {
+    inset: 0;
+  }
+
+  .contact-reveal {
+    height: auto;
+    margin-top: 0;
+    z-index: var(--z-layer-main);
+  }
+
+  .contact-reveal .ct-section {
+    position: relative;
+    inset: auto;
+    z-index: 2;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: none;
   }
 }
 
