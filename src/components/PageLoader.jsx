@@ -4,40 +4,30 @@ import "./PageLoader.css";
 
 /**
  * Images that must be preloaded before revealing the page.
- * Add every critical src here (hero figures, project previews, logos, portrait).
+ * Keep this list limited to first-viewport imagery so the page does not wait
+ * on below-the-fold assets before it becomes usable.
  */
 const CRITICAL_IMAGES = [
-  // Hero chrome figures
   "https://assets.hpark.me/premium/fig1.webp",
   "https://assets.hpark.me/premium/fig2.webp",
   "https://assets.hpark.me/premium/fig3.webp",
   "https://assets.hpark.me/premium/fig4.webp",
-  // Contact chrome figures
-  "https://assets.hpark.me/premium/fig5.webp",
-  "https://assets.hpark.me/premium/fig6.webp",
-  // Project preview images
-  "/works/rt1.webp",
-  "/works/tetris-game.webp",
-  "/works/42 Logtime.webp",
-  "/works/so_long.webp",
-  // Experience & education logos
-  "/assets/experiences/thegoodcleaners.png",
-  "/assets/experiences/amadeus.svg",
-  "/assets/experiences/proptexx.webp",
-  "/assets/experiences/42logo.png",
-  "/assets/experiences/pantheon-sorbonne.svg",
-  "/assets/experiences/civlogo.png",
-  // About portrait
-  "/assets/self_image.jpg",
 ];
 
 function preloadImage(src) {
-  return new Promise((resolve) => {
+  const load = new Promise((resolve) => {
     const img = new Image();
     img.onload = () => resolve(true);
     img.onerror = () => resolve(false); // don't block on failure
     img.src = src;
   });
+
+  return Promise.race([
+    load,
+    new Promise((resolve) => {
+      window.setTimeout(() => resolve(false), 3500);
+    }),
+  ]);
 }
 
 const PageLoader = ({ onReady }) => {
