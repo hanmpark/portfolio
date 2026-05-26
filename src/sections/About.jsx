@@ -71,7 +71,7 @@ const About = () => {
           style={{ "--reveal-i": 4 }}
         >
           <div className="abt-portrait-glow" aria-hidden="true" />
-          <img src="/assets/self_image.jpg" alt="Hanmin Park" loading="lazy" />
+          <img src="/assets/self_image.jpg" alt="Hanmin Park" decoding="async" />
         </figure>
       </div>
     </section>

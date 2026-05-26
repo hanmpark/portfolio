@@ -46,6 +46,7 @@
   opacity: 1;
   transform: translate(0, 0) scale(1);
   filter: blur(0);
+  will-change: auto;
 }
 
 /* ── Stagger children ─────────────────────────────── */
@@ -114,6 +115,21 @@
   );
   box-shadow: 0 0 8px rgba(200, 200, 212, 0.12);
   transition: transform 0.12s linear;
+}
+
+@supports (animation-timeline: scroll()) {
+  @keyframes scroll-progress-fill {
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  .scroll-progress {
+    transform: scaleX(0);
+    animation: scroll-progress-fill linear both;
+    animation-timeline: scroll(root block);
+    transition: none;
+  }
 }
 
 /* ── Section divider line ─────────────────────────── */

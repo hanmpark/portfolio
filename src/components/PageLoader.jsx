@@ -1,23 +1,36 @@
 import { useState, useEffect, useCallback } from "react";
+import { experiences, projects } from "../data/home.js";
 import { useLanguage } from "../i18n/useLanguage.js";
 import "./PageLoader.css";
 
 /**
  * Images that must be preloaded before revealing the page.
- * Keep this list limited to first-viewport imagery so the page does not wait
- * on below-the-fold assets before it becomes usable.
+ * The home page keeps its sections mounted and ready, so below-the-fold
+ * visuals are warmed up before the first scroll reaches them.
  */
 const CRITICAL_IMAGES = [
   "https://assets.hpark.me/premium/fig1.webp",
   "https://assets.hpark.me/premium/fig2.webp",
   "https://assets.hpark.me/premium/fig3.webp",
   "https://assets.hpark.me/premium/fig4.webp",
+  "/assets/self_image.jpg",
+  ...projects.map((project) => project.previewImage),
+  ...experiences.map((experience) => experience.image).filter(Boolean),
 ];
 
 function preloadImage(src) {
   const load = new Promise((resolve) => {
     const img = new Image();
-    img.onload = () => resolve(true);
+    img.decoding = "async";
+    img.loading = "eager";
+    img.onload = async () => {
+      try {
+        await img.decode?.();
+      } catch {
+        // The browser may reject decode for SVGs or already decoded images.
+      }
+      resolve(true);
+    };
     img.onerror = () => resolve(false); // don't block on failure
     img.src = src;
   });
@@ -25,7 +38,7 @@ function preloadImage(src) {
   return Promise.race([
     load,
     new Promise((resolve) => {
-      window.setTimeout(() => resolve(false), 3500);
+      window.setTimeout(() => resolve(false), 5000);
     }),
   ]);
 }

@@ -40,7 +40,7 @@ const Work = () => {
               >
                 {/* Full background image */}
                 <div className="work-card-bg" aria-hidden="true">
-                  <img src={project.previewImage} alt="" loading="lazy" />
+                  <img src={project.previewImage} alt="" decoding="async" />
                 </div>
 
                 {/* Gradient overlay */}

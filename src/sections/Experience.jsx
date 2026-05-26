@@ -23,7 +23,7 @@ const Entry = ({ item, index, l }) => (
               item.logoVariant ? ` exp-logo--${item.logoVariant}` : ""
             }`}
           >
-            <img src={item.image} alt={item.imageAlt ?? ""} loading="lazy" />
+            <img src={item.image} alt={item.imageAlt ?? ""} decoding="async" />
           </figure>
         )}
         <div className="exp-entry-info">
