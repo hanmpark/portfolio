@@ -34,37 +34,25 @@ const Work = () => {
 
             return (
               <article
-                className="work-card reveal reveal-up"
+                className={`work-card reveal reveal-up${index === 0 ? " work-card--feature" : ""}`}
                 style={{ "--reveal-i": index }}
                 key={project.title}
               >
-                {/* Full background image */}
-                <div className="work-card-bg" aria-hidden="true">
-                  <img src={project.previewImage} alt="" decoding="async" />
-                </div>
+                <div className="work-card-shell">
+                  <div className="work-card-media" aria-hidden="true">
+                    <img src={project.previewImage} alt="" decoding="async" />
+                    <span className="work-card-index">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
 
-                {/* Gradient overlay */}
-                <div className="work-card-overlay" aria-hidden="true" />
-
-                {/* Floating number */}
-                <span className="work-card-num" aria-hidden="true">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-
-                {/* Content */}
-                <Tag
-                  className="work-card-link"
-                  aria-label={
-                    isInternal
-                      ? `View ${project.title} project`
-                      : `Open GitHub repository for ${project.title}`
-                  }
-                  {...linkProps}
-                >
-                  <div className="work-card-body">
+                  <div className="work-card-content">
                     <h3 className="work-card-title">{project.title}</h3>
                     <p className="work-card-subtitle">
                       {l(project, "subtitle")}
+                    </p>
+                    <p className="work-card-description">
+                      {l(project, "description")}
                     </p>
 
                     {project.tags?.length ? (
@@ -76,46 +64,53 @@ const Work = () => {
                         ))}
                       </div>
                     ) : null}
-                  </div>
 
-                  <div className="work-card-footer">
-                    <span className="work-card-cta">
-                      {isInternal ? t("work.viewProject") : t("work.openRepo")}
-                      <svg
-                        className="work-card-arrow"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        aria-hidden="true"
+                    <div className="work-card-actions">
+                      <Tag
+                        className="work-card-primary"
+                        aria-label={
+                          isInternal
+                            ? `View ${project.title} project`
+                            : `Open GitHub repository for ${project.title}`
+                        }
+                        {...linkProps}
                       >
-                        <path
-                          d="M3 8h10M9 4l4 4-4 4"
-                          stroke="currentColor"
-                          strokeWidth="1.2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </span>
-
-                    {project.links?.demo && !isInternal ? (
-                      <a
-                        className="work-card-demo"
-                        href={project.links.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <span
-                          className="work-card-demo-dot"
+                        {isInternal ? t("work.viewProject") : t("work.openRepo")}
+                        <svg
+                          className="work-card-arrow"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          fill="none"
                           aria-hidden="true"
-                        />
-                        {t("work.demo")}
-                      </a>
-                    ) : null}
+                        >
+                          <path
+                            d="M3 8h10M9 4l4 4-4 4"
+                            stroke="currentColor"
+                            strokeWidth="1.2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </Tag>
+
+                      {project.links?.demo && !isInternal ? (
+                        <a
+                          className="work-card-demo"
+                          href={project.links.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <span
+                            className="work-card-demo-dot"
+                            aria-hidden="true"
+                          />
+                          {t("work.demo")}
+                        </a>
+                      ) : null}
+                    </div>
                   </div>
-                </Tag>
+                </div>
               </article>
             );
           })}
