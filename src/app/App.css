@@ -1,7 +1,7 @@
 .app {
   --z-layer-hero: 10;
   --z-layer-main: 30;
-  min-height: 100svh;
+  min-height: var(--app-viewport-height);
   overflow-x: clip;
   background: #080809;
   position: relative;
@@ -11,9 +11,10 @@
 .app > main {
   position: relative;
   z-index: var(--z-layer-main);
-  margin-top: 100svh;
+  margin-top: var(--app-viewport-height);
   pointer-events: none;
-  overflow: clip;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 /* Re-enable interaction on the visible content wrapper */

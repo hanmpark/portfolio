@@ -1,7 +1,7 @@
 /* ── Contact ──────────────────────────────────────── */
 .ct-section {
   position: relative;
-  min-height: 100svh;
+  min-height: var(--app-viewport-height);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -585,7 +585,7 @@
   .ct-section {
     padding: 2rem 1.75rem calc(2rem + env(safe-area-inset-bottom, 0px));
     height: auto;
-    min-height: 100svh;
+    min-height: var(--app-viewport-height);
     align-items: center;
   }
 

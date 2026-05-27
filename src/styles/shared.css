@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: center;
   min-height: 100vh;
-  min-height: 100svh;
+  min-height: var(--app-viewport-height);
   padding: clamp(4rem, 8vh, 7rem) 0;
   scroll-margin-top: 80px;
 }

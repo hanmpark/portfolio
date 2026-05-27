@@ -25,6 +25,13 @@
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
   --font-display: "Instrument Serif", Georgia, serif;
+  --app-viewport-height: 100vh;
+}
+
+@supports (height: 100dvh) {
+  :root {
+    --app-viewport-height: 100dvh;
+  }
 }
 
 * {
@@ -34,12 +41,16 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
+  min-height: 100%;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body {
   margin: 0;
+  min-height: 100%;
   overflow-x: hidden;
+  overflow-y: auto;
   font-family: var(--font-body);
   color: var(--ink);
   background: var(--paper);
