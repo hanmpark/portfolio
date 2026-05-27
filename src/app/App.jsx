@@ -49,7 +49,9 @@ const App = () => {
       <PageLoader onReady={handleReady} />
       <ScrollProgress />
       <BackToTopButton />
-      <Hero />
+      <div className="hero-stage">
+        <Hero />
+      </div>
       <main>
         <div className="main-content-bg">
           <Work />

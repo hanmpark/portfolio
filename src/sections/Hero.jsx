@@ -13,6 +13,7 @@ const Hero = () => {
   const pointerRef = useRef({ x: 0, y: 0 });
   const readyRef = useRef(false);
   const scrollRafRef = useRef(0);
+  const releasedRef = useRef(false);
 
   const flushPointer = () => {
     frameRef.current = 0;
@@ -86,7 +87,21 @@ const Hero = () => {
     // The scroll range over which the figures fully disappear (px)
     const SCROLL_RANGE = window.innerHeight * 0.7;
 
+    const updateReleaseState = () => {
+      const hero = heroRef.current;
+      const stage = hero?.parentElement;
+      if (!hero || !stage) return;
+
+      const shouldRelease = stage.getBoundingClientRect().bottom <= 0;
+      if (shouldRelease !== releasedRef.current) {
+        releasedRef.current = shouldRelease;
+        hero.classList.toggle("hero--released", shouldRelease);
+      }
+    };
+
     const handleScroll = () => {
+      updateReleaseState();
+
       if (scrollRafRef.current) return;
       scrollRafRef.current = window.requestAnimationFrame(() => {
         scrollRafRef.current = 0;
@@ -114,11 +129,13 @@ const Hero = () => {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
     handleScroll();
 
     return () => {
       clearTimeout(timer);
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
       if (frameRef.current) window.cancelAnimationFrame(frameRef.current);
       if (scrollRafRef.current)
         window.cancelAnimationFrame(scrollRafRef.current);

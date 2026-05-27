@@ -2,16 +2,25 @@
   --z-layer-hero: 10;
   --z-layer-main: 30;
   min-height: var(--app-viewport-height);
-  overflow-x: clip;
+  overflow-x: visible;
   background: #080809;
   position: relative;
 }
 
-/* Main content slides over the fixed hero & covers contact */
+.hero-stage {
+  position: relative;
+  z-index: var(--z-layer-hero);
+  min-height: calc(
+    var(--app-viewport-height) + var(--app-viewport-height) +
+      var(--app-viewport-height)
+  );
+}
+
+/* Main content overlaps only the hero stage transition */
 .app > main {
   position: relative;
   z-index: var(--z-layer-main);
-  margin-top: var(--app-viewport-height);
+  margin-top: calc(0px - var(--app-viewport-height) - var(--app-viewport-height));
   pointer-events: none;
   overflow-x: clip;
   overflow-y: visible;
