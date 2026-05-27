@@ -1,0 +1,205 @@
+.so-long-playable {
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1rem, 2vw, 1.35rem);
+  border: 1px solid rgba(224, 224, 236, 0.08);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(88, 103, 56, 0.12), rgba(72, 44, 91, 0.1)),
+    rgba(10, 10, 14, 0.72);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+}
+
+.so-long-topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.so-long-status {
+  margin: 0;
+  color: rgba(240, 240, 243, 0.82);
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  line-height: 1.45;
+}
+
+.so-long-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.so-long-levels {
+  display: flex;
+  gap: 0.35rem;
+  padding: 0.25rem;
+  border: 1px solid rgba(224, 224, 236, 0.08);
+  border-radius: 999px;
+  background: rgba(8, 8, 10, 0.45);
+}
+
+.so-long-level {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(224, 224, 236, 0.55);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    transform 0.2s;
+}
+
+.so-long-level:hover {
+  color: rgba(240, 240, 243, 0.86);
+  background: rgba(224, 224, 236, 0.08);
+}
+
+.so-long-level.is-active {
+  color: #080809;
+  background: rgba(240, 240, 243, 0.86);
+}
+
+.so-long-shell {
+  position: relative;
+  width: 100%;
+  max-width: 832px;
+  margin: 0 auto;
+  aspect-ratio: 832 / 704;
+  overflow: hidden;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid rgba(224, 224, 236, 0.08);
+  background: #0d5307;
+}
+
+.so-long-shell:focus-visible {
+  border-color: rgba(240, 240, 243, 0.5);
+  box-shadow: 0 0 0 3px rgba(240, 240, 243, 0.12);
+}
+
+.so-long-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+.so-long-hud {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+  color: rgba(224, 224, 236, 0.62);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.so-long-controls {
+  display: none;
+  grid-template-columns: repeat(3, 2.75rem);
+  grid-template-areas:
+    ". up ."
+    "left down right";
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.so-long-control {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid rgba(224, 224, 236, 0.1);
+  border-radius: 8px;
+  background: rgba(224, 224, 236, 0.06);
+  color: rgba(240, 240, 243, 0.74);
+  cursor: pointer;
+  touch-action: none;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s,
+    transform 0.2s;
+}
+
+.so-long-control:hover,
+.so-long-control:active {
+  color: rgba(240, 240, 243, 0.96);
+  border-color: rgba(224, 224, 236, 0.2);
+  background: rgba(224, 224, 236, 0.11);
+}
+
+.so-long-control:active {
+  transform: translateY(1px);
+}
+
+.so-long-control svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.so-long-control--up {
+  grid-area: up;
+}
+
+.so-long-control--left {
+  grid-area: left;
+}
+
+.so-long-control--down {
+  grid-area: down;
+}
+
+.so-long-control--right {
+  grid-area: right;
+}
+
+@media (max-width: 760px) {
+  .so-long-topbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .so-long-actions {
+    justify-content: space-between;
+  }
+
+  .so-long-controls {
+    display: grid;
+  }
+}
+
+@media (max-width: 480px) {
+  .so-long-playable {
+    padding: 0.8rem;
+  }
+
+  .so-long-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .so-long-levels {
+    justify-content: center;
+  }
+}

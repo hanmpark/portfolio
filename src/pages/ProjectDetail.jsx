@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams, Navigate, useNavigate } from "react-router-dom";
+import SoLongPlayable from "../components/so-long/SoLongPlayable.jsx";
 import { projectDetails } from "../data/projectDetails.js";
 import { useLanguage } from "../i18n/useLanguage.js";
 import "./ProjectDetail.css";
@@ -160,6 +161,8 @@ const ProjectDetail = () => {
             </div>
           ) : null}
         </div>
+
+        {project.playable?.type === "so-long" ? <SoLongPlayable /> : null}
 
         {/* Description */}
         <section className="pj-desc">

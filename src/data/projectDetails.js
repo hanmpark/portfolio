@@ -57,6 +57,9 @@ export const projectDetails = {
     repo: "https://github.com/hanmpark/so_long",
     demo: null,
     demoNotice: null,
+    playable: {
+      type: "so-long",
+    },
     description: [
       "so_long is a <strong>2D tile-based game</strong> written in C as the first graphical project of the 42 Common Core. It introduces the fundamentals of window management, event handling (keyboard and mouse), and color and texture rendering using the MLX42 library.",
       "The player navigates a map filled with <strong>walls, collectibles, and an exit</strong>. A simple enemy AI patrols left to right, and collision with an enemy triggers a Game Over. The game parses and validates <code>.ber</code> map files to ensure correct layout before rendering.",
