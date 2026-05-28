@@ -1,136 +1,234 @@
-/* ── Work section — editorial project panels ─────── */
+/* ── Work section — sticky vertical project carousel ───── */
 
-.work-section {
+.section.work-section {
   position: relative;
+  display: block;
+  min-height: var(--work-scroll-height);
+  padding: 0;
+  scroll-margin-top: 0;
+  background:
+    linear-gradient(180deg, #080809 0%, #0a0a0d 38%, #080809 100%),
+    #080809;
+}
+
+.work-pin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--app-viewport-height);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: clamp(3.5rem, 6vh, 5.2rem) 0;
+}
+
+.work-section--pinned .work-pin {
+  position: fixed;
+  z-index: 40;
+}
+
+.work-section--after .work-pin {
+  top: auto;
+  bottom: 0;
 }
 
 .work-inner {
   position: relative;
   z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(230px, 0.68fr) minmax(0, 1.32fr);
+  align-items: center;
+  gap: clamp(1.6rem, 5vw, 5rem);
+  height: 100%;
 }
 
 .work-head {
-  margin-bottom: clamp(1.6rem, 3vh, 2.8rem);
-  padding-bottom: clamp(1.4rem, 2.5vh, 2rem);
-  border-bottom: 1px solid rgba(224, 224, 236, 0.08);
+  position: relative;
+  align-self: center;
 }
 
-/* Reveal pacing */
-.work-section .reveal {
-  transition-duration: 0.55s;
+.work-head .section-title {
+  max-width: 7ch;
 }
 
-.work-grid .reveal {
-  transition-delay: calc(var(--reveal-i, 0) * 0.09s);
+.work-counter {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.34rem;
+  margin-top: clamp(1.2rem, 3vh, 2rem);
+  color: rgba(224, 224, 236, 0.55);
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 5vw, 4.2rem);
+  font-style: italic;
+  line-height: 0.9;
 }
 
-/* ── Grid ────────────────────────────────────────── */
-
-.work-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(0.95rem, 1.6vw, 1.35rem);
+.work-counter span:nth-child(2),
+.work-counter span:nth-child(3) {
+  color: rgba(224, 224, 236, 0.22);
 }
 
-.work-card--feature {
-  grid-column: 1 / -1;
+.work-rail {
+  display: flex;
+  align-items: center;
+  gap: 0.42rem;
+  margin-top: clamp(1.1rem, 2.4vh, 1.8rem);
+}
+
+.work-rail-dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: rgba(224, 224, 236, 0.18);
+  transform-origin: left center;
+  transition:
+    width 0.28s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+    background 0.28s ease,
+    opacity 0.28s ease;
+}
+
+.work-rail-dot.is-active {
+  width: 2.1rem;
+  background: rgba(240, 240, 243, 0.76);
+}
+
+/* ── Stage ───────────────────────────────────────── */
+
+.work-stage {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+}
+
+.work-card-stack {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  overflow: hidden;
+  perspective: 1200px;
+  isolation: isolate;
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
 }
 
 /* ── Card shell ──────────────────────────────────── */
 
 .work-card {
-  position: relative;
-  min-height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: clamp(360px, 58vh, 560px);
+  max-height: calc(var(--app-viewport-height) - 7rem);
   overflow: hidden;
-  border: 1px solid rgba(224, 224, 236, 0.095);
+  border: 1px solid rgba(224, 224, 236, 0.105);
   border-radius: 8px;
   background:
-    radial-gradient(circle at 88% 0%, rgba(160, 175, 210, 0.085), transparent 34%),
-    linear-gradient(145deg, rgba(28, 29, 34, 0.9), rgba(10, 10, 12, 0.92));
+    linear-gradient(145deg, rgba(34, 35, 40, 0.94), rgba(13, 13, 16, 0.97)),
+    #111216;
   box-shadow:
-    0 16px 42px rgba(0, 0, 0, 0.24),
-    inset 0 1px 0 rgba(224, 224, 236, 0.045);
-  transition:
-    transform 0.35s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
-    border-color 0.35s ease,
-    box-shadow 0.35s ease,
-    background-color 0.35s ease;
+    0 24px 70px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(224, 224, 236, 0.055);
+  transform-origin: center center;
+  will-change: transform, opacity;
 }
 
 .work-card::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(200, 215, 240, 0.035) 50%,
-    transparent
-  );
+  z-index: 2;
+  background:
+    linear-gradient(90deg, transparent, rgba(240, 240, 243, 0.04), transparent),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 32%);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.35s ease;
 }
 
-.work-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(224, 224, 236, 0.14);
-  box-shadow:
-    0 22px 52px rgba(0, 0, 0, 0.32),
-    0 0 0 1px rgba(224, 224, 236, 0.045),
-    inset 0 1px 0 rgba(224, 224, 236, 0.06);
+.work-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.46);
+  opacity: var(--card-depth, 0);
+  pointer-events: none;
+  transition: opacity 0.12s linear;
 }
 
-.work-card:hover::before {
+.work-card.is-active {
+  border-color: rgba(224, 224, 236, 0.16);
+  box-shadow:
+    0 28px 90px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(224, 224, 236, 0.04),
+    inset 0 1px 0 rgba(224, 224, 236, 0.07);
+}
+
+.work-card.is-active:hover::before {
   opacity: 1;
 }
 
 .work-card-shell {
   position: relative;
-  display: grid;
-  grid-template-rows: auto 1fr;
-  min-height: 100%;
   z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.92fr) minmax(0, 1.08fr);
+  height: 100%;
+  min-height: 100%;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
 }
 
-.work-card--feature .work-card-shell {
-  grid-template-columns: minmax(0, 1.18fr) minmax(340px, 0.82fr);
-  grid-template-rows: none;
+.work-card-shell:focus-visible {
+  box-shadow: inset 0 0 0 2px rgba(240, 240, 243, 0.56);
+}
+
+.work-card:not(.is-active) .work-card-shell {
+  cursor: default;
 }
 
 /* ── Media ───────────────────────────────────────── */
 
 .work-card-media {
   position: relative;
-  min-height: 230px;
+  min-height: 0;
   overflow: hidden;
   background:
-    radial-gradient(circle at 20% 12%, rgba(160, 175, 210, 0.12), transparent 34%),
-    linear-gradient(145deg, rgba(24, 26, 31, 0.9), rgba(7, 8, 10, 0.95));
-}
-
-.work-card--feature .work-card-media {
-  min-height: 420px;
+    linear-gradient(145deg, rgba(28, 30, 36, 0.9), rgba(7, 8, 10, 0.95));
 }
 
 .work-card-media img {
   width: 100%;
   height: 100%;
-  min-height: inherit;
   object-fit: cover;
   object-position: center;
-  opacity: 0.97;
-  filter: saturate(0.98) brightness(1.06) contrast(1.02);
+  opacity: 0.98;
+  filter: saturate(1.02) brightness(1.06) contrast(1.02);
   transform: scale(1.02);
   transition:
-    transform 0.6s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
-    opacity 0.4s ease,
-    filter 0.4s ease;
+    transform 0.65s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+    filter 0.45s ease;
 }
 
-.work-card:hover .work-card-media img {
-  opacity: 1;
-  filter: saturate(1.06) brightness(1.12) contrast(1);
+.work-card.is-active:hover .work-card-media img {
+  filter: saturate(1.08) brightness(1.11) contrast(1.02);
   transform: scale(1.045);
 }
 
@@ -139,27 +237,23 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(8, 8, 10, 0) 34%, rgba(8, 8, 10, 0.26) 100%),
-    radial-gradient(circle at 78% 18%, rgba(224, 224, 236, 0.14), transparent 32%);
+    linear-gradient(180deg, rgba(8, 8, 10, 0.02) 30%, rgba(8, 8, 10, 0.28) 100%),
+    linear-gradient(90deg, transparent 48%, rgba(8, 8, 10, 0.28) 100%);
   pointer-events: none;
 }
 
 .work-card-index {
   position: absolute;
   left: 1rem;
-  bottom: 0.85rem;
+  bottom: 0.88rem;
   z-index: 1;
   font-family: var(--font-display);
-  font-size: 3.2rem;
+  font-size: clamp(3rem, 6vw, 5.4rem);
   font-style: italic;
-  line-height: 0.8;
-  color: rgba(240, 240, 243, 0.55);
-  text-shadow: 0 10px 28px rgba(0, 0, 0, 0.42);
+  line-height: 0.78;
+  color: rgba(240, 240, 243, 0.52);
+  text-shadow: 0 12px 30px rgba(0, 0, 0, 0.44);
   user-select: none;
-}
-
-.work-card--feature .work-card-index {
-  font-size: 5rem;
 }
 
 /* ── Content ─────────────────────────────────────── */
@@ -167,56 +261,42 @@
 .work-card-content {
   display: flex;
   flex-direction: column;
-  gap: 0.78rem;
-  padding: clamp(1.15rem, 2vw, 1.65rem);
-  border-top: 1px solid rgba(224, 224, 236, 0.06);
+  gap: clamp(0.72rem, 1.5vh, 1rem);
+  min-width: 0;
+  padding: clamp(1.2rem, 2.8vw, 2.25rem);
+  border-left: 1px solid rgba(224, 224, 236, 0.065);
   background:
-    radial-gradient(circle at 100% 0%, rgba(160, 175, 210, 0.055), transparent 28%),
-    linear-gradient(180deg, rgba(24, 25, 30, 0.86), rgba(13, 13, 16, 0.9));
-}
-
-.work-card--feature .work-card-content {
-  justify-content: center;
-  border-top: none;
-  border-left: 1px solid rgba(224, 224, 236, 0.06);
-  padding: clamp(1.6rem, 3vw, 2.4rem);
+    linear-gradient(180deg, rgba(28, 29, 34, 0.92), rgba(14, 14, 18, 0.95));
 }
 
 .work-card-title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  font-size: clamp(1.75rem, 3.2vw, 2.8rem);
   font-weight: 400;
   font-style: italic;
-  line-height: 1.05;
+  line-height: 0.98;
   letter-spacing: 0;
   color: var(--ink, #f0f0f3);
 }
 
-.work-card--feature .work-card-title {
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
-}
-
 .work-card-subtitle {
-  margin: 0;
-  color: rgba(224, 228, 236, 0.74);
-  font-size: 0.88rem;
+  margin: 0.5rem 0 0;
+  color: rgba(224, 228, 236, 0.72);
+  font-size: clamp(0.82rem, 1vw, 0.94rem);
   font-weight: 600;
   line-height: 1.45;
 }
 
 .work-card-description {
-  margin: 0;
-  color: rgba(194, 200, 212, 0.68);
-  font-size: 0.86rem;
-  line-height: 1.68;
-}
-
-.work-card:not(.work-card--feature) .work-card-description {
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
+  margin: 0;
+  color: rgba(194, 200, 212, 0.68);
+  font-size: clamp(0.84rem, 1vw, 0.95rem);
+  line-height: 1.68;
 }
 
 /* ── Tags ────────────────────────────────────────── */
@@ -229,8 +309,8 @@
 }
 
 .work-card-tags .pill {
-  font-size: 0.6rem;
-  padding: 0.16em 0.52em;
+  font-size: 0.62rem;
+  padding: 0.16em 0.54em;
   border-color: rgba(224, 224, 236, 0.1);
   background: rgba(224, 224, 236, 0.045);
   color: rgba(210, 218, 230, 0.64);
@@ -238,7 +318,7 @@
   -webkit-backdrop-filter: blur(6px);
 }
 
-.work-card:hover .work-card-tags .pill,
+.work-card.is-active:hover .work-card-tags .pill,
 .work-card-tags .pill:hover {
   border-color: rgba(224, 224, 236, 0.16);
   background: rgba(224, 224, 236, 0.06);
@@ -254,6 +334,11 @@
   gap: 0.62rem;
   margin-top: auto;
   padding-top: 0.25rem;
+  transition: opacity 0.2s ease;
+}
+
+.work-card:not(.is-active) .work-card-actions {
+  opacity: 0;
 }
 
 .work-card-primary,
@@ -288,7 +373,9 @@
 }
 
 .work-card-primary:hover,
-.work-card-primary:focus-visible {
+.work-card-primary:focus-visible,
+.work-card.is-active:hover .work-card-primary,
+.work-card-shell:focus-visible .work-card-primary {
   transform: translateY(-2px);
   color: #fff;
   border-color: rgba(224, 224, 236, 0.24);
@@ -315,7 +402,9 @@
 }
 
 .work-card-primary:hover .work-card-arrow,
-.work-card-primary:focus-visible .work-card-arrow {
+.work-card-primary:focus-visible .work-card-arrow,
+.work-card.is-active:hover .work-card-arrow,
+.work-card-shell:focus-visible .work-card-arrow {
   transform: translateX(3px);
 }
 
@@ -327,81 +416,233 @@
   box-shadow: 0 0 0 3px rgba(130, 220, 160, 0.12);
 }
 
-/* ── Sibling dimming ─────────────────────────────── */
-
-.work-grid:hover .work-card:not(:hover) {
-  filter: brightness(0.72) saturate(0.9);
-  transition:
-    filter 0.35s ease,
-    border-color 0.35s ease,
-    box-shadow 0.35s ease;
-}
-
 /* ── Responsive ──────────────────────────────────── */
 
-@media (max-width: 900px) {
-  .work-grid {
+@media (max-width: 920px) {
+  .work-pin {
+    padding: clamp(4.4rem, 7vh, 5.6rem) 0 clamp(1.3rem, 3vh, 2rem);
+  }
+
+  .work-inner {
+    display: grid;
     grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
+    align-items: stretch;
+    gap: clamp(0.75rem, 2vh, 1.15rem);
   }
 
-  .work-card--feature {
-    grid-column: 1;
+  .work-head {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 0.85rem 1rem;
+    pointer-events: auto;
   }
 
-  .work-card--feature .work-card-shell {
-    grid-template-columns: none;
-    grid-template-rows: auto 1fr;
+  .work-head .section-title {
+    max-width: none;
   }
 
-  .work-card--feature .work-card-media {
-    min-height: 300px;
+  .work-counter {
+    grid-row: 1 / span 2;
+    grid-column: 2;
+    margin-top: 0;
+    font-size: clamp(2rem, 8vw, 3.2rem);
   }
 
-  .work-card--feature .work-card-content {
-    border-top: 1px solid rgba(224, 224, 236, 0.06);
-    border-left: none;
+  .work-rail {
+    grid-column: 1 / -1;
+    margin-top: 0.2rem;
+  }
+
+  .work-stage {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .work-card-stack {
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .work-card {
+    height: min(520px, 78%);
+    max-height: none;
   }
 }
 
-@media (max-width: 640px) {
-  .work-card-media,
-  .work-card--feature .work-card-media {
-    min-height: 220px;
+@media (max-width: 720px) {
+  .work-pin {
+    padding: clamp(4rem, 7vh, 5rem) 0 1.15rem;
   }
 
-  .work-card-content,
-  .work-card--feature .work-card-content {
-    padding: 1rem;
+  .work-head {
+    gap: 0.6rem 0.8rem;
   }
 
-  .work-card-index {
-    font-size: 2.8rem;
+  .work-head .eyebrow {
+    font-size: 0.56rem;
   }
 
-  .work-card--feature .work-card-index {
-    font-size: 3.2rem;
+  .work-head .section-title {
+    font-size: clamp(2rem, 8.5vw, 2.8rem);
   }
 
-  .work-card-title,
-  .work-card--feature .work-card-title {
-    font-size: 1.45rem;
+  .work-counter {
+    font-size: clamp(1.75rem, 7.5vw, 2.3rem);
+  }
+
+  .work-rail {
+    gap: 0.32rem;
+  }
+
+  .work-rail-dot {
+    width: 0.34rem;
+    height: 0.34rem;
+  }
+
+  .work-rail-dot.is-active {
+    width: 1.55rem;
+  }
+
+  .work-card {
+    height: min(470px, 84%);
+  }
+
+  .work-card-shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: 41% 59%;
+  }
+
+  .work-card-content {
+    gap: 0.55rem;
+    padding: 0.95rem;
+    border-top: 1px solid rgba(224, 224, 236, 0.065);
+    border-left: none;
+  }
+
+  .work-card-title {
+    font-size: clamp(1.45rem, 8vw, 2.1rem);
   }
 
   .work-card-description {
-    font-size: 0.84rem;
+    -webkit-line-clamp: 2;
+    font-size: 0.8rem;
+    line-height: 1.48;
+  }
+
+  .work-card-tags {
+    gap: 0.28rem;
+  }
+
+  .work-card-tags .pill {
+    font-size: 0.58rem;
+  }
+
+  .work-card-primary,
+  .work-card-demo {
+    min-height: 2.06rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .work-pin {
+    padding: 3.9rem 0 1rem;
+  }
+
+  .work-head {
+    gap: 0.55rem 0.7rem;
+  }
+
+  .work-counter {
+    font-size: 2rem;
+  }
+
+  .work-card {
+    height: min(430px, 86%);
+  }
+
+  .work-card-index {
+    font-size: 2.45rem;
+  }
+
+  .work-card-content {
+    padding: 0.84rem;
+  }
+
+  .work-card-title {
+    font-size: clamp(1.28rem, 7.4vw, 1.75rem);
+  }
+
+  .work-card-subtitle {
+    margin-top: 0.32rem;
+    font-size: 0.76rem;
+  }
+
+  .work-card-description {
+    font-size: 0.76rem;
+    line-height: 1.42;
+  }
+
+  .work-card-tags .pill:nth-child(n + 4) {
+    display: none;
+  }
+
+  .work-card-actions {
+    gap: 0.45rem;
   }
 
   .work-card-primary,
   .work-card-demo {
     width: 100%;
   }
-
-  .work-grid:hover .work-card:not(:hover) {
-    filter: none;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .work-section {
+    min-height: auto;
+    padding: clamp(3rem, 6vh, 5rem) 0;
+  }
+
+  .work-pin {
+    position: relative;
+    height: auto;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .work-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .work-card-stack {
+    display: grid;
+    gap: 1rem;
+    height: auto;
+    overflow: visible;
+  }
+
+  .work-card {
+    position: relative;
+    top: auto;
+    height: auto;
+    max-height: none;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .work-card::after {
+    display: none;
+  }
+
   .work-card,
   .work-card::before,
   .work-card-media img,
