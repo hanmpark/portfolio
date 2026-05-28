@@ -24,9 +24,10 @@ const Navbar = () => {
   const { lang, setLang, t } = useLanguage();
   const navRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
+  const [compact, setCompact] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const lastY = useRef(0);
+  const scrolledRef = useRef(false);
+  const compactRef = useRef(false);
 
   useEffect(() => {
     let raf = 0;
@@ -34,29 +35,65 @@ const Navbar = () => {
     const update = () => {
       raf = 0;
       const y = window.scrollY;
-      setScrolled(y > 60);
-      setHidden(y > 300 && y > lastY.current);
-      lastY.current = y;
+      const nextScrolled = y > 60;
+      const nextCompact = y > 280;
+
+      if (nextScrolled !== scrolledRef.current) {
+        scrolledRef.current = nextScrolled;
+        setScrolled(nextScrolled);
+      }
+
+      if (nextCompact !== compactRef.current) {
+        compactRef.current = nextCompact;
+        setCompact(nextCompact);
+      }
     };
 
     const schedule = () => {
       if (!raf) raf = requestAnimationFrame(update);
     };
 
+    update();
+    const settleTimers = [
+      window.setTimeout(update, 250),
+      window.setTimeout(update, 800),
+    ];
     window.addEventListener("scroll", schedule, { passive: true });
     return () => {
       if (raf) cancelAnimationFrame(raf);
+      settleTimers.forEach((timer) => window.clearTimeout(timer));
       window.removeEventListener("scroll", schedule);
     };
   }, []);
 
-  /* Close menu on resize past mobile breakpoint */
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 721px)");
-    const close = () => mq.matches && setMenuOpen(false);
-    mq.addEventListener("change", close);
-    return () => mq.removeEventListener("change", close);
-  }, []);
+    if (!menuOpen) return;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+
+    const handlePointerDown = (event) => {
+      if (!navRef.current?.contains(event.target)) setMenuOpen(false);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (
+      !compact &&
+      menuOpen &&
+      window.matchMedia("(min-width: 721px)").matches
+    ) {
+      setMenuOpen(false);
+    }
+  }, [compact, menuOpen]);
 
   const handleScrollToBottom = (event) => {
     event.preventDefault();
@@ -70,73 +107,103 @@ const Navbar = () => {
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
+  const toggleMenu = useCallback((event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setMenuOpen((open) => !open);
+  }, []);
+
+  const handleMenuKeyDown = useCallback(
+    (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        toggleMenu(event);
+      }
+    },
+    [toggleMenu],
+  );
+
+  const renderNavLinks = () => (
+    <div className="nav-links">
+      {navLinks.map((link) => (
+        <a href={link.href} key={link.key} onClick={closeMenu}>
+          {t(`nav.${link.key}`)}
+        </a>
+      ))}
+    </div>
+  );
+
+  const renderNavActions = () => (
+    <div className="nav-actions">
+      <div className="nav-socials" aria-label="Social links">
+        {navbarSocials.map((link) => (
+          <a
+            className="nav-social"
+            href={link.href}
+            key={link.label}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={link.label}
+          >
+            {socialIcons[link.label]}
+          </a>
+        ))}
+      </div>
+      <button
+        className="lang-toggle"
+        onClick={() => setLang(lang === "en" ? "fr" : "en")}
+        aria-label={lang === "en" ? "Passer en français" : "Switch to English"}
+      >
+        <span className={lang === "en" ? "lang-toggle__active" : ""}>EN</span>
+        <span className="lang-toggle__sep">/</span>
+        <span className={lang === "fr" ? "lang-toggle__active" : ""}>FR</span>
+      </button>
+      <a className="btn small" href="#contact" onClick={handleScrollToBottom}>
+        {t("nav.letsTalk")}
+      </a>
+    </div>
+  );
+
+  const renderBurger = (className = "") => (
+    <button
+      className={`nav-burger${className ? ` ${className}` : ""}`}
+      aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+      aria-expanded={menuOpen}
+      onPointerDown={toggleMenu}
+      onKeyDown={handleMenuKeyDown}
+    >
+      <span />
+      <span />
+      <span />
+    </button>
+  );
+
   return (
     <nav
       ref={navRef}
-      className={`nav container${scrolled ? " nav--scrolled" : ""}${hidden ? " nav--hidden" : ""}${menuOpen ? " nav--open" : ""}`}
+      className={`nav${scrolled ? " nav--scrolled" : ""}${compact ? " nav--compact" : ""}${menuOpen ? " nav--open" : ""}`}
       aria-label="Primary"
     >
-      <a className="logo" href="#top">
-        Hanmin
-      </a>
+      <div className="nav-shell container">
+        <a className="logo" href="#top" onClick={closeMenu}>
+          Hanmin
+        </a>
+        {renderNavLinks()}
+        {renderNavActions()}
+      </div>
 
-      {/* Hamburger — visible only on mobile via CSS */}
-      <button
-        className="nav-burger"
-        aria-label={menuOpen ? "Close menu" : "Open menu"}
-        aria-expanded={menuOpen}
-        onClick={() => setMenuOpen((o) => !o)}
-      >
-        <span />
-        <span />
-        <span />
-      </button>
-
-      <div className="nav-drawer">
-        <div className="nav-links">
-          {navLinks.map((link) => (
-            <a href={link.href} key={link.key} onClick={closeMenu}>
-              {t(`nav.${link.key}`)}
+      <div className="nav-menu">
+        {renderBurger("nav-menu__button")}
+        <div className="nav-panel">
+          <div className="nav-panel__head">
+            <a className="logo" href="#top" onClick={closeMenu}>
+              Hanmin
             </a>
-          ))}
-        </div>
-        <div className="nav-actions">
-          <div className="nav-socials" aria-label="Social links">
-            {navbarSocials.map((link) => (
-              <a
-                className="nav-social"
-                href={link.href}
-                key={link.label}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={link.label}
-              >
-                {socialIcons[link.label]}
-              </a>
-            ))}
+            {renderBurger("nav-panel__button")}
           </div>
-          <button
-            className="lang-toggle"
-            onClick={() => setLang(lang === "en" ? "fr" : "en")}
-            aria-label={
-              lang === "en" ? "Passer en français" : "Switch to English"
-            }
-          >
-            <span className={lang === "en" ? "lang-toggle__active" : ""}>
-              EN
-            </span>
-            <span className="lang-toggle__sep">/</span>
-            <span className={lang === "fr" ? "lang-toggle__active" : ""}>
-              FR
-            </span>
-          </button>
-          <a
-            className="btn small"
-            href="#contact"
-            onClick={handleScrollToBottom}
-          >
-            {t("nav.letsTalk")}
-          </a>
+          <div className="nav-drawer">
+            {renderNavLinks()}
+            {renderNavActions()}
+          </div>
         </div>
       </div>
     </nav>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { projects } from "../data/home.js";
 import { useLanguage } from "../i18n/useLanguage.js";
@@ -15,12 +15,42 @@ const viewportHeightSum = (count) =>
 
 const cardIndexLabel = (index) => String(index + 1).padStart(2, "0");
 
+const getCardMotion = (index, projectProgress, viewport) => {
+  const offset = index - projectProgress;
+  const distance = Math.min(Math.abs(offset), 2);
+  const isNarrow = viewport.width <= 720;
+  const isMedium = viewport.width <= 920;
+  const spacing = isNarrow
+    ? clamp(viewport.height * 0.31, 180, 260)
+    : isMedium
+      ? clamp(viewport.height * 0.34, 205, 300)
+      : clamp(viewport.height * 0.36, 210, 330);
+  const translateY = offset * spacing;
+  const scale = 1 - Math.min(distance, 1.7) * (isNarrow ? 0.05 : 0.065);
+  const opacity = distance > 1.75 ? 0 : clamp(1 - distance * 0.32, 0.24, 1);
+  const depth = clamp(distance / 1.6, 0, 1);
+
+  return {
+    depth,
+    opacity,
+    transform: `translate3d(0, calc(-50% + ${translateY.toFixed(
+      2,
+    )}px), 0) scale(${scale.toFixed(4)})`,
+    zIndex: Math.round(100 - distance * 20),
+    pointerEvents: distance < 0.55 ? "auto" : "none",
+  };
+};
+
 const Work = () => {
   const { t, l } = useLanguage();
   const sectionRef = useRef(null);
-  const [progress, setProgress] = useState(0);
+  const cardRefs = useRef([]);
+  const activeIndexRef = useRef(0);
+  const progressRef = useRef(-1);
+  const pinStateRef = useRef("before");
+  const viewportRef = useRef({ width: 1280, height: 800 });
   const [pinState, setPinState] = useState("before");
-  const [viewport, setViewport] = useState({ width: 1280, height: 800 });
+  const [activeIndex, setActiveIndex] = useState(0);
   const headRef = useScrollReveal({
     threshold: 0.05,
     rootMargin: "0px 0px 100px 0px",
@@ -31,22 +61,41 @@ const Work = () => {
     () => viewportHeightSum(projects.length + 1),
     [],
   );
-  const projectProgress = progress * Math.max(projects.length - 1, 1);
-  const activeIndex = clamp(
-    Math.round(projectProgress),
-    0,
-    projects.length - 1,
-  );
 
   useEffect(() => {
     let frame = 0;
 
     const updateViewport = () => {
-      setViewport({
+      viewportRef.current = {
         width: window.innerWidth || document.documentElement.clientWidth || 1280,
         height:
           window.innerHeight || document.documentElement.clientHeight || 800,
+      };
+    };
+
+    const applyCardMotion = (nextProgress) => {
+      const projectProgress = nextProgress * Math.max(projects.length - 1, 1);
+      const viewport = viewportRef.current;
+      const nextActiveIndex = clamp(
+        Math.round(projectProgress),
+        0,
+        projects.length - 1,
+      );
+
+      cardRefs.current.forEach((card, index) => {
+        if (!card) return;
+        const motion = getCardMotion(index, projectProgress, viewport);
+        card.style.setProperty("--card-depth", motion.depth.toFixed(3));
+        card.style.opacity = motion.opacity.toFixed(3);
+        card.style.transform = motion.transform;
+        card.style.zIndex = `${motion.zIndex}`;
+        card.style.pointerEvents = motion.pointerEvents;
       });
+
+      if (activeIndexRef.current !== nextActiveIndex) {
+        activeIndexRef.current = nextActiveIndex;
+        setActiveIndex(nextActiveIndex);
+      }
     };
 
     const updateProgress = () => {
@@ -62,12 +111,15 @@ const Work = () => {
       const nextPinState =
         rect.top > 0 ? "before" : rect.bottom < viewHeight ? "after" : "pinned";
 
-      setProgress((current) =>
-        Math.abs(current - nextProgress) < 0.001 ? current : nextProgress,
-      );
-      setPinState((current) =>
-        current === nextPinState ? current : nextPinState,
-      );
+      if (Math.abs(progressRef.current - nextProgress) > 0.0005) {
+        progressRef.current = nextProgress;
+        applyCardMotion(nextProgress);
+      }
+
+      if (pinStateRef.current !== nextPinState) {
+        pinStateRef.current = nextPinState;
+        setPinState(nextPinState);
+      }
     };
 
     const requestProgress = () => {
@@ -92,36 +144,6 @@ const Work = () => {
       if (frame) window.cancelAnimationFrame(frame);
     };
   }, []);
-
-  const getCardStyle = useCallback(
-    (index) => {
-      const offset = index - projectProgress;
-      const distance = Math.min(Math.abs(offset), 2);
-      const isNarrow = viewport.width <= 720;
-      const isMedium = viewport.width <= 920;
-      const spacing = isNarrow
-        ? clamp(viewport.height * 0.31, 180, 260)
-        : isMedium
-          ? clamp(viewport.height * 0.34, 205, 300)
-          : clamp(viewport.height * 0.36, 210, 330);
-      const translateY = offset * spacing;
-      const scale = 1 - Math.min(distance, 1.7) * (isNarrow ? 0.05 : 0.065);
-      const opacity =
-        distance > 1.75 ? 0 : clamp(1 - distance * 0.32, 0.24, 1);
-      const dim = clamp(distance / 1.6, 0, 1);
-
-      return {
-        "--card-depth": dim.toFixed(3),
-        opacity,
-        transform: `translate3d(0, calc(-50% + ${translateY.toFixed(
-          2,
-        )}px), 0) scale(${scale.toFixed(4)})`,
-        zIndex: Math.round(100 - distance * 20),
-        pointerEvents: distance < 0.55 ? "auto" : "none",
-      };
-    },
-    [projectProgress, viewport.height, viewport.width],
-  );
 
   return (
     <section
@@ -175,7 +197,9 @@ const Work = () => {
                     className={
                       isActive ? "work-card is-active" : "work-card"
                     }
-                    style={getCardStyle(index)}
+                    ref={(element) => {
+                      cardRefs.current[index] = element;
+                    }}
                     aria-hidden={!isActive}
                     key={project.title}
                   >
@@ -194,7 +218,7 @@ const Work = () => {
                           src={project.previewImage}
                           alt=""
                           decoding="async"
-                          loading={index === 0 ? "eager" : "lazy"}
+                          loading="eager"
                         />
                         <span className="work-card-index">
                           {cardIndexLabel(index)}

@@ -7,6 +7,7 @@ import Contact from "../sections/Contact.jsx";
 import ScrollProgress from "../components/ScrollProgress.jsx";
 import BackToTopButton from "../components/BackToTopButton.jsx";
 import PageLoader from "../components/PageLoader.jsx";
+import Navbar from "../components/Navbar.jsx";
 import "./App.css";
 
 const App = () => {
@@ -49,6 +50,7 @@ const App = () => {
       <PageLoader onReady={handleReady} />
       <ScrollProgress />
       <BackToTopButton />
+      <Navbar />
       <div className="hero-stage">
         <Hero />
       </div>

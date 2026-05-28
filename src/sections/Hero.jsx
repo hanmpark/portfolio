@@ -1,5 +1,4 @@
 import { useEffect, useRef, useCallback } from "react";
-import Navbar from "../components/Navbar.jsx";
 import { useLanguage } from "../i18n/useLanguage.js";
 import "./Hero.css";
 
@@ -180,8 +179,6 @@ const Hero = () => {
           alt=""
         />
       </div>
-
-      <Navbar />
 
       <div className="hero-grid container">
         <div className="hero-copy">

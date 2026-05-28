@@ -107,22 +107,29 @@
   z-index: 1;
   height: 100%;
   overflow: hidden;
-  perspective: 1200px;
   isolation: isolate;
-  -webkit-mask-image: linear-gradient(
-    180deg,
-    transparent 0%,
-    #000 10%,
-    #000 90%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    180deg,
-    transparent 0%,
-    #000 10%,
-    #000 90%,
-    transparent 100%
-  );
+  transform: translateZ(0);
+}
+
+.work-card-stack::before,
+.work-card-stack::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 140;
+  height: 14%;
+  pointer-events: none;
+}
+
+.work-card-stack::before {
+  top: 0;
+  background: linear-gradient(180deg, #080809 0%, rgba(8, 8, 9, 0) 100%);
+}
+
+.work-card-stack::after {
+  bottom: 0;
+  background: linear-gradient(0deg, #080809 0%, rgba(8, 8, 9, 0) 100%);
 }
 
 /* ── Card shell ──────────────────────────────────── */
@@ -145,6 +152,8 @@
     inset 0 1px 0 rgba(224, 224, 236, 0.055);
   transform-origin: center center;
   will-change: transform, opacity;
+  backface-visibility: hidden;
+  contain: layout paint style;
 }
 
 .work-card::before {
@@ -168,7 +177,6 @@
   background: rgba(0, 0, 0, 0.46);
   opacity: var(--card-depth, 0);
   pointer-events: none;
-  transition: opacity 0.12s linear;
 }
 
 .work-card.is-active {
@@ -220,16 +228,12 @@
   object-fit: cover;
   object-position: center;
   opacity: 0.98;
-  filter: saturate(1.02) brightness(1.06) contrast(1.02);
   transform: scale(1.02);
-  transition:
-    transform 0.65s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
-    filter 0.45s ease;
+  transition: transform 0.65s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
 }
 
 .work-card.is-active:hover .work-card-media img {
-  filter: saturate(1.08) brightness(1.11) contrast(1.02);
-  transform: scale(1.045);
+  transform: scale(1.04);
 }
 
 .work-card-media::after {
@@ -314,8 +318,6 @@
   border-color: rgba(224, 224, 236, 0.1);
   background: rgba(224, 224, 236, 0.045);
   color: rgba(210, 218, 230, 0.64);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
 }
 
 .work-card.is-active:hover .work-card-tags .pill,
@@ -467,8 +469,11 @@
 
   .work-card-stack {
     overflow: visible;
-    -webkit-mask-image: none;
-    mask-image: none;
+  }
+
+  .work-card-stack::before,
+  .work-card-stack::after {
+    display: none;
   }
 
   .work-card {
