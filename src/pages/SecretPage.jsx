@@ -69,7 +69,7 @@ const AVANT_DEPART =
   "Pour l'instant, le goat est encore joignable. Reviens au départ : cette page deviendra utile dès que j'aurai perdu le réseau et mes jambes. Je t'emmène avec moi dans mes pensées, mais je ne peux pas encore te montrer les paysages que je vais découvrir.";
 
 const APRES_RETOUR =
-  "Je suis rentré — ou vraiment tout près de toi. Les montagnes étaient grandioses, mais rien ne vaut le moment de te retrouver.";
+  "Je suis rentré — ou vraiment tout près de toi. C'était sûrement superbe le voyage, mais rien ne vaut le moment de te retrouver.";
 
 const DAY_IN_MS = 24 * 60 * 60 * 1000;
 
