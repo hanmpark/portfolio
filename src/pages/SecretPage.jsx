@@ -10,7 +10,7 @@ const messages = [
     jour: 1,
     titre: "Tu me manques déjà",
     texte:
-      "Ce qui me manque, ce n'est pas seulement de te voir. C'est de pouvoir te raconter n'importe quoi, entendre ton rire et savoir que tu es juste là. J'aime tellement partager mes journées avec toi. J'en ai déjà marre de ce voyage avec mon père et mon frère, mais je me console en pensant à toi. Je t'aime. PS: ce que tu vois au-dessus, c'est la carte de mon trajet vers Bergen. PSS: regarde sous ton bureau, si tu ne l'as pas déjà vu.",
+      "Ce qui me manque, ce n'est pas seulement de te voir. C'est de pouvoir te raconter n'importe quoi, entendre ton rire et savoir que tu es juste là. J'aime tellement partager mes journées avec toi. J'en ai déjà marre de ce voyage avec mon père et mon frère, mais je me console en pensant à toi. Je t'aime. PS: ce que tu vois au-dessus, c'est la carte de mon trajet vers Bergen. PSS: regarde à gauche du classeur rouge dans ton armoire en face du lit, si tu ne l'as pas déjà vu.",
     image: "/images/secret/jour1.jpeg",
   },
   {
@@ -31,7 +31,7 @@ const messages = [
     jour: 4,
     titre: "Bientôt toi",
     texte:
-      "Je suis au bout de ma vie. Je me gratte sûrement les veines. Ton visage, ta voix, puis ce premier câlin que je compte bien faire durer beaucoup trop longtemps. Tu m'as manqué, Siloë, vraiment beaucoup. Je t'aime. On se revoit très bientôt. Fais vraiment attention à toi et profite bien de ta soirée ! PS: regarde à gauche du classeur rouge dans ton armoire en face du lit, si tu ne l'as pas déjà vu.",
+      "Je suis au bout de ma vie. Je me gratte sûrement les veines. Ton visage, ta voix, puis ce premier câlin que je compte bien faire durer beaucoup trop longtemps. Tu m'as manqué, Siloë, vraiment beaucoup. Je t'aime. On se revoit très bientôt. Fais vraiment attention à toi et profite bien de ta soirée !",
     image: "/images/secret/jour4.jpeg",
   },
 ];
