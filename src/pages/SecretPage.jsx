@@ -73,6 +73,12 @@ const APRES_RETOUR =
 
 const DAY_IN_MS = 24 * 60 * 60 * 1000;
 
+const getLocalDayTimestamp = (date) =>
+  Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+
+const getCalendarDayDifference = (from, to) =>
+  Math.floor((getLocalDayTimestamp(to) - getLocalDayTimestamp(from)) / DAY_IN_MS);
+
 const getTimeParts = (milliseconds) => {
   const totalMinutes = Math.floor(Math.max(0, milliseconds) / (60 * 1000));
 
@@ -271,10 +277,18 @@ const SecretPage = () => {
   const isAfterReturn = now > RETOUR;
   const isAway = !isBeforeDeparture && !isAfterReturn;
 
-  // Le jour 1 apparaît dès le départ. Chaque tranche de 24 h affiche ensuite
-  // le message suivant, sans jamais dépasser le dernier message configuré.
+  // Le jour 1 apparaît dès le départ jusqu'au prochain minuit local.
+  // Ensuite, le message change chaque jour à minuit.
+  const firstRefreshAtMidnight = new Date(DEPART);
+  firstRefreshAtMidnight.setHours(24, 0, 0, 0);
+  const dayAfterFirstRefresh = Math.min(
+    messages.length,
+    getCalendarDayDifference(firstRefreshAtMidnight, now) + 2,
+  );
   const currentDay = isAway
-    ? Math.min(messages.length, Math.floor((now - DEPART) / DAY_IN_MS) + 1)
+    ? now < firstRefreshAtMidnight
+      ? 1
+      : dayAfterFirstRefresh
     : messages.length;
   const currentMessage = messages[currentDay - 1];
   const flightPlan = flightPlans[currentMessage.jour];
