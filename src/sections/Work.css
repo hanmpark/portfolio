@@ -485,7 +485,7 @@
 @media (max-width: 720px) {
   .section.work-section {
     min-height: calc(
-      var(--work-viewport-height, var(--app-viewport-height)) + 115svh
+      var(--work-viewport-height, var(--app-viewport-height)) + 72svh
     );
     touch-action: pan-y;
   }
@@ -526,6 +526,7 @@
 
   .work-card {
     height: min(470px, 84%);
+    max-height: none;
     box-shadow:
       0 16px 38px rgba(0, 0, 0, 0.3),
       inset 0 1px 0 rgba(224, 224, 236, 0.05);
