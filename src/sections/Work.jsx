@@ -110,7 +110,22 @@ const Work = () => {
 
         const rect = card.getBoundingClientRect();
         const isVisible = rect.bottom > 0 && rect.top < viewport.height;
-        const distance = Math.abs(rect.top + rect.height * 0.45 - targetLine);
+        const cardFocusPoint = rect.top + rect.height * 0.45;
+        const progress = clamp(
+          (cardFocusPoint - targetLine) / viewport.height,
+          -1,
+          1,
+        );
+        const distance = Math.abs(progress);
+        const y = clamp(progress * -18, -18, 18);
+        const scale = 1 - Math.min(distance * 0.045, 0.045);
+        const opacity = clamp(1 - distance * 0.22, 0.78, 1);
+        const mediaY = clamp(progress * -24, -24, 24);
+
+        card.style.setProperty("--mobile-card-y", `${y.toFixed(2)}px`);
+        card.style.setProperty("--mobile-card-scale", scale.toFixed(4));
+        card.style.setProperty("--mobile-card-opacity", opacity.toFixed(3));
+        card.style.setProperty("--mobile-media-y", `${mediaY.toFixed(2)}px`);
 
         if (isVisible && distance < closestDistance) {
           closestDistance = distance;
