@@ -48,11 +48,9 @@ const Work = () => {
   const activeIndexRef = useRef(0);
   const progressRef = useRef(-1);
   const pinStateRef = useRef("before");
-  const mobileLayoutRef = useRef(false);
   const viewportRef = useRef({ width: 1280, height: 800 });
   const [pinState, setPinState] = useState("before");
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isMobileLayout, setIsMobileLayout] = useState(false);
   const headRef = useScrollReveal({
     threshold: 0.05,
     rootMargin: "0px 0px 100px 0px",
@@ -66,77 +64,34 @@ const Work = () => {
 
   useEffect(() => {
     let frame = 0;
+    let lockedMobileHeight = 0;
 
     const updateViewport = () => {
-      const visualViewportHeight = window.visualViewport?.height;
-      const fallbackHeight =
-        window.innerHeight || document.documentElement.clientHeight || 800;
-      const height = visualViewportHeight || fallbackHeight;
+      const width =
+        window.innerWidth || document.documentElement.clientWidth || 1280;
+      const measuredHeight = Math.max(
+        window.innerHeight || 0,
+        document.documentElement.clientHeight || 0,
+        window.visualViewport?.height || 0,
+        1,
+      );
+      const isMobile = width <= 720;
+      const previous = viewportRef.current;
+      const widthChanged = Math.abs(width - previous.width) > 24;
+      const height =
+        isMobile && !widthChanged
+          ? lockedMobileHeight || measuredHeight
+          : measuredHeight;
 
-      viewportRef.current = {
-        width: window.innerWidth || document.documentElement.clientWidth || 1280,
-        height,
-      };
+      if (isMobile) lockedMobileHeight = height;
+      else lockedMobileHeight = 0;
 
-      const nextIsMobileLayout = viewportRef.current.width <= 720;
-      if (mobileLayoutRef.current !== nextIsMobileLayout) {
-        mobileLayoutRef.current = nextIsMobileLayout;
-        progressRef.current = -1;
-        setIsMobileLayout(nextIsMobileLayout);
-      }
+      viewportRef.current = { width, height };
 
       sectionRef.current?.style.setProperty(
         "--work-viewport-height",
         `${height}px`,
       );
-    };
-
-    const updateMobileCardState = () => {
-      const viewport = viewportRef.current;
-      const targetLine = viewport.height * 0.55;
-      let nextActiveIndex = activeIndexRef.current;
-      let closestDistance = Number.POSITIVE_INFINITY;
-
-      cardRefs.current.forEach((card, index) => {
-        if (!card) return;
-
-        // Mobile uses the browser's native touch scroll. Clear the desktop
-        // transform stack so every project remains reachable and tappable.
-        card.style.removeProperty("--card-depth");
-        card.style.opacity = "";
-        card.style.transform = "";
-        card.style.zIndex = "";
-        card.style.pointerEvents = "";
-
-        const rect = card.getBoundingClientRect();
-        const isVisible = rect.bottom > 0 && rect.top < viewport.height;
-        const cardFocusPoint = rect.top + rect.height * 0.45;
-        const progress = clamp(
-          (cardFocusPoint - targetLine) / viewport.height,
-          -1,
-          1,
-        );
-        const distance = Math.abs(progress);
-        const y = clamp(progress * -18, -18, 18);
-        const scale = 1 - Math.min(distance * 0.045, 0.045);
-        const opacity = clamp(1 - distance * 0.22, 0.78, 1);
-        const mediaY = clamp(progress * -24, -24, 24);
-
-        card.style.setProperty("--mobile-card-y", `${y.toFixed(2)}px`);
-        card.style.setProperty("--mobile-card-scale", scale.toFixed(4));
-        card.style.setProperty("--mobile-card-opacity", opacity.toFixed(3));
-        card.style.setProperty("--mobile-media-y", `${mediaY.toFixed(2)}px`);
-
-        if (isVisible && distance < closestDistance) {
-          closestDistance = distance;
-          nextActiveIndex = index;
-        }
-      });
-
-      if (activeIndexRef.current !== nextActiveIndex) {
-        activeIndexRef.current = nextActiveIndex;
-        setActiveIndex(nextActiveIndex);
-      }
     };
 
     const applyCardMotion = (nextProgress) => {
@@ -155,7 +110,7 @@ const Work = () => {
         card.style.opacity = motion.opacity.toFixed(3);
         card.style.transform = motion.transform;
         card.style.zIndex = `${motion.zIndex}`;
-        card.style.pointerEvents = motion.pointerEvents;
+        card.style.pointerEvents = index === nextActiveIndex ? "auto" : "none";
       });
 
       if (activeIndexRef.current !== nextActiveIndex) {
@@ -176,9 +131,7 @@ const Work = () => {
       const nextPinState =
         rect.top > 0 ? "before" : rect.bottom < viewHeight ? "after" : "pinned";
 
-      if (mobileLayoutRef.current) {
-        updateMobileCardState();
-      } else if (Math.abs(progressRef.current - nextProgress) > 0.0005) {
+      if (Math.abs(progressRef.current - nextProgress) > 0.0005) {
         progressRef.current = nextProgress;
         applyCardMotion(nextProgress);
       }
@@ -205,24 +158,18 @@ const Work = () => {
     window.addEventListener("scroll", requestProgress, { passive: true });
     window.addEventListener("resize", handleResize);
     window.visualViewport?.addEventListener("resize", handleResize);
-    window.visualViewport?.addEventListener("scroll", requestProgress, {
-      passive: true,
-    });
 
     return () => {
       window.removeEventListener("scroll", requestProgress);
       window.removeEventListener("resize", handleResize);
       window.visualViewport?.removeEventListener("resize", handleResize);
-      window.visualViewport?.removeEventListener("scroll", requestProgress);
       if (frame) window.cancelAnimationFrame(frame);
     };
   }, []);
 
   return (
     <section
-      className={`section work-section work-section--${pinState}${
-        isMobileLayout ? " work-section--mobile-native" : ""
-      }`}
+      className={`section work-section work-section--${pinState}`}
       id="work"
       ref={sectionRef}
       style={{ "--work-scroll-height": scrollHeight }}
@@ -258,7 +205,6 @@ const Work = () => {
               {projects.map((project, index) => {
                 const isInternal = Boolean(project.slug);
                 const isActive = index === activeIndex;
-                const isAccessible = isMobileLayout || isActive;
                 const CardLink = isInternal ? Link : "a";
                 const linkProps = isInternal
                   ? { to: `/project/${project.slug}` }
@@ -276,7 +222,7 @@ const Work = () => {
                     ref={(element) => {
                       cardRefs.current[index] = element;
                     }}
-                    aria-hidden={!isAccessible}
+                    aria-hidden={!isActive}
                     aria-current={isActive ? "true" : undefined}
                     key={project.title}
                   >
@@ -287,7 +233,7 @@ const Work = () => {
                           ? `View ${project.title} project`
                           : `Open GitHub repository for ${project.title}`
                       }
-                      tabIndex={isAccessible ? 0 : -1}
+                      tabIndex={isActive ? 0 : -1}
                       {...linkProps}
                     >
                       <div className="work-card-media" aria-hidden="true">

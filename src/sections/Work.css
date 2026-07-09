@@ -16,7 +16,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: var(--app-viewport-height);
+  height: var(--work-viewport-height, var(--app-viewport-height));
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -421,10 +421,6 @@
 /* ── Responsive ──────────────────────────────────── */
 
 @media (max-width: 920px) {
-  .section.work-section {
-    min-height: calc(var(--work-scroll-height) + 18svh);
-  }
-
   .work-pin {
     padding: clamp(4.4rem, 7vh, 5.6rem) 0 clamp(1.3rem, 3vh, 2rem);
   }
@@ -483,39 +479,16 @@
   .work-card {
     height: min(520px, 78%);
     max-height: none;
-    transform: translate3d(0, -50%, 0);
   }
 }
 
 @media (max-width: 720px) {
-  .section.work-section {
-    min-height: auto;
-    padding: clamp(4.8rem, 12svh, 6.5rem) 0 clamp(3.6rem, 10svh, 5rem);
-  }
-
-  .work-pin,
-  .work-section--pinned .work-pin,
-  .work-section--after .work-pin {
-    position: relative;
-    top: auto;
-    right: auto;
-    bottom: auto;
-    left: auto;
-    z-index: 1;
-    height: auto;
-    overflow: visible;
-  }
-
   .work-pin {
-    padding: 0;
+    padding: clamp(4rem, 7vh, 5rem) 0 1.15rem;
   }
 
   .work-head {
     gap: 0.6rem 0.8rem;
-  }
-
-  .work-inner {
-    height: auto;
   }
 
   .work-head .eyebrow {
@@ -543,76 +516,13 @@
     width: 1.55rem;
   }
 
-  .work-stage,
-  .work-card-stack {
-    height: auto;
-    min-height: 0;
-    overflow: visible;
-  }
-
-  .work-card-stack {
-    display: grid;
-    gap: clamp(1.35rem, 5svh, 2.2rem);
-    padding-top: clamp(0.4rem, 1.5svh, 0.8rem);
-    transform: none;
-  }
-
   .work-card {
-    position: relative;
-    top: auto;
-    right: auto;
-    left: auto;
-    height: auto;
-    min-height: min(34rem, 78svh);
-    max-height: none;
-    opacity: var(--mobile-card-opacity, 1) !important;
-    transform: translate3d(0, var(--mobile-card-y, 0), 0)
-      scale(var(--mobile-card-scale, 1)) !important;
-    z-index: auto !important;
-    pointer-events: auto !important;
-    scroll-margin-top: 5rem;
-    transition:
-      border-color 0.35s ease,
-      box-shadow 0.35s ease,
-      opacity 0.35s ease;
-  }
-
-  .work-card::after {
-    opacity: 0 !important;
-  }
-
-  .work-card:not(.is-active) {
-    border-color: rgba(224, 224, 236, 0.08);
-    box-shadow:
-      0 18px 45px rgba(0, 0, 0, 0.28),
-      inset 0 1px 0 rgba(224, 224, 236, 0.045);
-  }
-
-  .work-card.is-active {
-    box-shadow:
-      0 30px 72px rgba(0, 0, 0, 0.38),
-      0 0 0 1px rgba(224, 224, 236, 0.045),
-      inset 0 1px 0 rgba(224, 224, 236, 0.08);
-  }
-
-  .work-card:not(.is-active) .work-card-actions {
-    opacity: 1;
-  }
-
-  .work-card:not(.is-active) .work-card-shell {
-    cursor: pointer;
+    height: min(470px, 84%);
   }
 
   .work-card-shell {
     grid-template-columns: 1fr;
-    grid-template-rows: minmax(12rem, 42svh) auto;
-    min-height: inherit;
-  }
-
-  .work-card-media img {
-    transform: translate3d(0, var(--mobile-media-y, 0), 0) scale(1.07);
-    transition: none;
-    will-change: transform;
+    grid-template-rows: 41% 59%;
   }
 
   .work-card-content {
@@ -648,7 +558,7 @@
 
 @media (max-width: 480px) {
   .work-pin {
-    padding: 0;
+    padding: 3.9rem 0 1rem;
   }
 
   .work-head {
@@ -660,7 +570,7 @@
   }
 
   .work-card {
-    min-height: min(32rem, 76svh);
+    height: min(430px, 86%);
   }
 
   .work-card-index {
