@@ -487,6 +487,7 @@
     min-height: auto;
     padding: clamp(4.8rem, 11svh, 6.4rem) 0 clamp(3.8rem, 9svh, 5rem);
     touch-action: pan-y;
+    overflow-x: clip;
   }
 
   .work-pin,
@@ -512,8 +513,27 @@
   }
 
   .work-inner {
+    width: 100%;
+    max-width: none;
     height: auto;
+    grid-template-columns: minmax(0, 1fr);
     gap: clamp(1.1rem, 4svh, 1.8rem);
+    margin: 0;
+    min-width: 0;
+  }
+
+  .work-section--mobile-showcase .work-inner.container {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+  }
+
+  .work-head {
+    width: 100%;
+    box-sizing: border-box;
+    grid-template-columns: minmax(0, 1fr) max-content;
+    min-width: 0;
+    padding-inline: clamp(1rem, 5vw, 1.35rem);
   }
 
   .work-head .eyebrow {
@@ -522,14 +542,19 @@
 
   .work-head .section-title {
     font-size: clamp(2rem, 8.5vw, 2.8rem);
+    min-width: 0;
   }
 
   .work-counter {
-    font-size: clamp(1.75rem, 7.5vw, 2.3rem);
+    justify-self: end;
+    min-width: max-content;
+    white-space: nowrap;
+    font-size: clamp(1.55rem, 6.4vw, 2.05rem);
   }
 
   .work-rail {
     gap: 0.32rem;
+    padding-inline: clamp(1rem, 5vw, 1.35rem);
   }
 
   .work-rail-dot {
@@ -542,7 +567,9 @@
   }
 
   .work-stage {
+    width: 100%;
     height: auto;
+    min-width: 0;
     min-height: 0;
     overflow: visible;
   }
@@ -566,14 +593,16 @@
   .work-card-stack {
     display: flex;
     gap: clamp(0.9rem, 4vw, 1.25rem);
-    width: 100vw;
+    width: 100%;
+    max-width: 100%;
     height: auto;
-    margin-inline: calc(50% - 50vw);
+    box-sizing: border-box;
+    margin-inline: 0;
     overflow-x: auto;
     overflow-y: visible;
     overscroll-behavior-x: contain;
-    padding: 0 clamp(1rem, 6vw, 1.5rem) 1.05rem;
-    scroll-padding-inline: clamp(1rem, 6vw, 1.5rem);
+    padding: 0 clamp(1rem, 5vw, 1.35rem) 1.05rem;
+    scroll-padding-inline: clamp(1rem, 5vw, 1.35rem);
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     transform: none;
@@ -597,7 +626,7 @@
     top: auto;
     right: auto;
     left: auto;
-    flex: 0 0 min(82vw, 24rem);
+    flex: 0 0 min(86vw, 24rem);
     height: min(34rem, 72svh);
     max-height: none;
     opacity: 1 !important;
@@ -695,11 +724,11 @@
   }
 
   .work-counter {
-    font-size: 2rem;
+    font-size: clamp(1.45rem, 6vw, 1.85rem);
   }
 
   .work-card {
-    flex-basis: min(84vw, 22.5rem);
+    flex-basis: min(88vw, 22.5rem);
     height: min(31.5rem, 70svh);
   }
 

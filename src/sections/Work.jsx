@@ -249,7 +249,7 @@ const Work = () => {
             <div className="work-counter reveal reveal-up" aria-hidden="true">
               <span>{cardIndexLabel(activeIndex)}</span>
               <span>/</span>
-              <span>{cardIndexLabel(projects.length - 1)}</span>
+              <span>{cardIndexLabel(projects.length)}</span>
             </div>
             <div className="work-rail" aria-hidden="true">
               {projects.map((project, index) => (
