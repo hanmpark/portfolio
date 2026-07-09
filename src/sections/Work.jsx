@@ -46,13 +46,16 @@ const getCardMotion = (index, projectProgress, viewport) => {
 const Work = () => {
   const { t, l } = useLanguage();
   const sectionRef = useRef(null);
+  const stackRef = useRef(null);
   const cardRefs = useRef([]);
   const activeIndexRef = useRef(0);
   const progressRef = useRef(-1);
   const pinStateRef = useRef("before");
+  const mobileShowcaseRef = useRef(false);
   const viewportRef = useRef({ width: 1280, height: 800 });
   const [pinState, setPinState] = useState("before");
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobileShowcase, setIsMobileShowcase] = useState(false);
   const headRef = useScrollReveal({
     threshold: 0.05,
     rootMargin: "0px 0px 100px 0px",
@@ -90,10 +93,50 @@ const Work = () => {
 
       viewportRef.current = { width, height };
 
+      if (mobileShowcaseRef.current !== isMobile) {
+        mobileShowcaseRef.current = isMobile;
+        progressRef.current = -1;
+        setIsMobileShowcase(isMobile);
+
+        cardRefs.current.forEach((card) => {
+          if (!card) return;
+          card.style.removeProperty("--card-depth");
+          card.style.opacity = "";
+          card.style.transform = "";
+          card.style.zIndex = "";
+          card.style.pointerEvents = "";
+        });
+      }
+
       sectionRef.current?.style.setProperty(
         "--work-viewport-height",
         `${height}px`,
       );
+    };
+
+    const updateMobileShowcase = () => {
+      const stack = stackRef.current;
+      if (!stack) return;
+
+      const center = stack.scrollLeft + stack.clientWidth / 2;
+      let nextActiveIndex = activeIndexRef.current;
+      let closestDistance = Number.POSITIVE_INFINITY;
+
+      cardRefs.current.forEach((card, index) => {
+        if (!card) return;
+        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+        const distance = Math.abs(cardCenter - center);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          nextActiveIndex = index;
+        }
+      });
+
+      if (activeIndexRef.current !== nextActiveIndex) {
+        activeIndexRef.current = nextActiveIndex;
+        setActiveIndex(nextActiveIndex);
+      }
     };
 
     const applyCardMotion = (nextProgress) => {
@@ -125,6 +168,17 @@ const Work = () => {
       frame = 0;
       const section = sectionRef.current;
       if (!section) return;
+
+      if (mobileShowcaseRef.current) {
+        updateMobileShowcase();
+
+        if (pinStateRef.current !== "before") {
+          pinStateRef.current = "before";
+          setPinState("before");
+        }
+
+        return;
+      }
 
       const rect = section.getBoundingClientRect();
       const viewHeight = viewportRef.current.height || 1;
@@ -160,12 +214,16 @@ const Work = () => {
     updateViewport();
     updateProgress();
 
+    const stack = stackRef.current;
+
     window.addEventListener("scroll", requestProgress, { passive: true });
+    stack?.addEventListener("scroll", requestProgress, { passive: true });
     window.addEventListener("resize", handleResize);
     window.visualViewport?.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("scroll", requestProgress);
+      stack?.removeEventListener("scroll", requestProgress);
       window.removeEventListener("resize", handleResize);
       window.visualViewport?.removeEventListener("resize", handleResize);
       if (frame) window.cancelAnimationFrame(frame);
@@ -174,7 +232,9 @@ const Work = () => {
 
   return (
     <section
-      className={`section work-section work-section--${pinState}`}
+      className={`section work-section work-section--${pinState}${
+        isMobileShowcase ? " work-section--mobile-showcase" : ""
+      }`}
       id="work"
       ref={sectionRef}
       style={{ "--work-scroll-height": scrollHeight }}
@@ -206,10 +266,11 @@ const Work = () => {
           </header>
 
           <div className="work-stage">
-            <div className="work-card-stack">
+            <div className="work-card-stack" ref={stackRef}>
               {projects.map((project, index) => {
                 const isInternal = Boolean(project.slug);
                 const isActive = index === activeIndex;
+                const isAccessible = isMobileShowcase || isActive;
                 const CardLink = isInternal ? Link : "a";
                 const linkProps = isInternal
                   ? { to: `/project/${project.slug}` }
@@ -227,7 +288,7 @@ const Work = () => {
                     ref={(element) => {
                       cardRefs.current[index] = element;
                     }}
-                    aria-hidden={!isActive}
+                    aria-hidden={!isAccessible}
                     aria-current={isActive ? "true" : undefined}
                     key={project.title}
                   >
@@ -238,7 +299,7 @@ const Work = () => {
                           ? `View ${project.title} project`
                           : `Open GitHub repository for ${project.title}`
                       }
-                      tabIndex={isActive ? 0 : -1}
+                      tabIndex={isAccessible ? 0 : -1}
                       {...linkProps}
                     >
                       <div className="work-card-media" aria-hidden="true">
