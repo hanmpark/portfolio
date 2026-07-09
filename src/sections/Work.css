@@ -485,10 +485,7 @@
 @media (max-width: 720px) {
   .section.work-section {
     min-height: calc(
-      var(--work-viewport-height, var(--app-viewport-height)) +
-      var(--work-viewport-height, var(--app-viewport-height)) +
-      var(--work-viewport-height, var(--app-viewport-height)) +
-      35svh
+      var(--work-viewport-height, var(--app-viewport-height)) + 115svh
     );
     touch-action: pan-y;
   }
