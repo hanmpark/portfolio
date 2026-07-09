@@ -22,7 +22,7 @@
   z-index: var(--z-layer-main);
   margin-top: calc(0px - var(--app-viewport-height) - var(--app-viewport-height));
   pointer-events: none;
-  overflow-x: clip;
+  overflow-x: visible;
   overflow-y: visible;
 }
 
@@ -49,7 +49,7 @@
 .main-content-bg {
   position: relative;
   z-index: 1;
-  overflow-x: clip;
+  overflow-x: visible;
   isolation: isolate;
 }
 
