@@ -26,7 +26,9 @@ const getCardMotion = (index, projectProgress, viewport) => {
       ? clamp(viewport.height * 0.34, 205, 300)
       : clamp(viewport.height * 0.36, 210, 330);
   const translateY = offset * spacing;
-  const scale = 1 - Math.min(distance, 1.7) * (isNarrow ? 0.05 : 0.065);
+  const scale = isNarrow
+    ? 1
+    : 1 - Math.min(distance, 1.7) * 0.065;
   const opacity = distance > 1.75 ? 0 : clamp(1 - distance * 0.32, 0.24, 1);
   const depth = clamp(distance / 1.6, 0, 1);
 
