@@ -131,7 +131,10 @@ const Work = () => {
       const nextPinState =
         rect.top > 0 ? "before" : rect.bottom < viewHeight ? "after" : "pinned";
 
-      if (Math.abs(progressRef.current - nextProgress) > 0.0005) {
+      const minProgressDelta =
+        viewportRef.current.width <= 720 ? 0.0018 : 0.0005;
+
+      if (Math.abs(progressRef.current - nextProgress) > minProgressDelta) {
         progressRef.current = nextProgress;
         applyCardMotion(nextProgress);
       }
