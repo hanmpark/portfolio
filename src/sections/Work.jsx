@@ -284,7 +284,9 @@ const Work = () => {
                 return (
                   <article
                     className={
-                      isActive ? "work-card is-active" : "work-card"
+                      `work-card work-card--${project.slug ?? "external"}${
+                        isActive ? " is-active" : ""
+                      }`
                     }
                     ref={(element) => {
                       cardRefs.current[index] = element;

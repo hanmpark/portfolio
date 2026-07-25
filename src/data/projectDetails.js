@@ -8,7 +8,7 @@ export const projectDetails = {
     category_fr: "Projet personnel · Application web full-stack",
     status: "Personal project currently evolving.",
     status_fr: "Projet personnel en cours d'évolution.",
-    heroImage: "/works/compass/trip-overview.webp",
+    heroImage: "/works/compass/social-preview-tropical.webp",
     tags: [
       "React",
       "TypeScript",

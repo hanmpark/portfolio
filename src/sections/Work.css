@@ -232,6 +232,10 @@
   transition: transform 0.65s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
 }
 
+.work-card--compass .work-card-media img {
+  object-position: left center;
+}
+
 .work-card-placeholder,
 .pj-hero-placeholder {
   width: 100%;
