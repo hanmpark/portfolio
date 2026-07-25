@@ -12,9 +12,9 @@ export const projects = [
     slug: "compass",
     featured: true,
     description:
-      "A private, mobile-first workspace for planning trips together, with shared itineraries, places, documents, checklists, and real-time updates.",
+      "A private, mobile-first workspace for planning trips together, with shared itineraries, places, notes, documents, and real-time updates.",
     description_fr:
-      "Compass centralise les itinéraires, lieux, documents et check-lists d'un voyage dans un espace privé et partagé, synchronisé en temps réel.",
+      "Compass centralise les itinéraires, lieux, notes et documents d'un voyage dans un espace privé et partagé, synchronisé en temps réel.",
     previewPlaceholder: "Compass — aperçu de l’application",
     tags: ["React", "TypeScript", "Supabase"],
     links: {
