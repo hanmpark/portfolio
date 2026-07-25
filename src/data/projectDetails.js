@@ -26,19 +26,19 @@ export const projectDetails = {
     demoLabel: "View the application",
     demoLabel_fr: "Voir l'application",
     description: [
-      "Compass brings trip itineraries, places, documents, notes, and checklists into one <strong>private shared space</strong>. Participants join with an invitation code and can organize their stay together in real time.",
+      "Compass brings trip itineraries, places, documents, and notes into one <strong>private shared space</strong>. Participants join with an invitation code and can organize their stay together in real time.",
       "Originally designed to prepare a trip to Prague, the application evolved into a reusable platform for creating, joining, and managing multiple collaborative trips.",
       "It is a <strong>personal full-stack project currently evolving</strong>, with a mobile-first interface designed to retain an application-like experience in the browser.",
     ],
     description_fr: [
-      "Compass centralise les itinéraires, lieux, documents et check-lists d'un voyage dans un <strong>espace privé et partagé</strong>. Les participants rejoignent le voyage grâce à un code d'invitation et peuvent organiser ensemble leur séjour en temps réel.",
+      "Compass centralise les itinéraires, lieux, notes et documents d'un voyage dans un <strong>espace privé et partagé</strong>. Les participants rejoignent le voyage grâce à un code d'invitation et peuvent organiser ensemble leur séjour en temps réel.",
       "Initialement conçue pour préparer un voyage à Prague, l'application a évolué vers une plateforme réutilisable permettant de créer, rejoindre et gérer plusieurs voyages collaboratifs.",
       "Il s'agit d'un <strong>projet personnel en cours d'évolution</strong>, pensé mobile-first pour conserver une expérience proche d'une application dans le navigateur.",
     ],
     features: [
       "Google authentication and private collaborative trips.",
       "Unique invitation codes for securely joining a trip.",
-      "Shared itineraries, places, notes, travel documents, and collaborative checklists.",
+      "Shared itineraries, places, notes, and travel documents.",
       "Real-time synchronization between authorized participants with Supabase Realtime.",
       "Mobile-first Progressive Web App with offline data handling and later synchronization.",
       "Private access enforced in PostgreSQL with Supabase Row Level Security.",
@@ -46,7 +46,7 @@ export const projectDetails = {
     features_fr: [
       "Authentification Google et création de voyages collaboratifs privés.",
       "Codes d'invitation uniques pour rejoindre un voyage de manière sécurisée.",
-      "Itinéraires, lieux, notes, documents de voyage et check-lists partagés.",
+      "Itinéraires, lieux, notes et documents de voyage partagés.",
       "Synchronisation en temps réel entre les participants autorisés avec Supabase Realtime.",
       "Progressive Web App mobile-first avec gestion hors ligne et synchronisation différée.",
       "Accès privé protégé dans PostgreSQL par les politiques Row Level Security de Supabase.",
@@ -99,12 +99,6 @@ export const projectDetails = {
         src: "/works/compass/itinerary.webp",
         label: "Collaborative itinerary",
         label_fr: "Itinéraire collaboratif",
-      },
-      {
-        type: "placeholder",
-        src: "/works/compass/checklist.webp",
-        label: "Collaborative checklist",
-        label_fr: "Check-list collaborative",
       },
       {
         type: "placeholder",
