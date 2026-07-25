@@ -1,0 +1,47 @@
+<svg width="1400" height="980" viewBox="0 0 1400 980" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1400" height="980" fill="#090A0C"/>
+  <rect x="72" y="70" width="1256" height="840" rx="18" fill="#12151A" stroke="#2B3038"/>
+  <rect x="112" y="112" width="1180" height="96" rx="12" fill="#171B21" stroke="#303641"/>
+  <text x="144" y="154" fill="#F2F4F7" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700">MoveWise</text>
+  <text x="144" y="184" fill="#8D96A6" font-family="Inter, Arial, sans-serif" font-size="18">City relocation dashboard powered by public APIs</text>
+  <rect x="954" y="132" width="134" height="44" rx="22" fill="#E7F6EE"/>
+  <text x="986" y="160" fill="#0D3B28" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">Lisbon</text>
+  <rect x="1104" y="132" width="134" height="44" rx="22" fill="#FFF1D8"/>
+  <text x="1138" y="160" fill="#58330B" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">Seoul</text>
+  <rect x="112" y="244" width="360" height="252" rx="14" fill="#182026" stroke="#303A43"/>
+  <text x="144" y="290" fill="#F2F4F7" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="700">78</text>
+  <text x="206" y="290" fill="#9CA6B4" font-family="Inter, Arial, sans-serif" font-size="18">remote work score</text>
+  <path d="M144 354C198 306 256 408 310 358C363 310 392 336 432 292" stroke="#8BE0B0" stroke-width="8" stroke-linecap="round"/>
+  <path d="M144 412C197 388 234 443 288 418C343 392 373 430 432 382" stroke="#E9B872" stroke-width="8" stroke-linecap="round"/>
+  <rect x="520" y="244" width="360" height="252" rx="14" fill="#161A22" stroke="#303641"/>
+  <text x="552" y="288" fill="#F2F4F7" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Live conditions</text>
+  <circle cx="610" cy="384" r="48" fill="#F5C76A"/>
+  <text x="684" y="368" fill="#F2F4F7" font-family="Inter, Arial, sans-serif" font-size="40" font-weight="700">21 C</text>
+  <text x="684" y="404" fill="#9CA6B4" font-family="Inter, Arial, sans-serif" font-size="18">AQI 34 - good</text>
+  <rect x="928" y="244" width="364" height="252" rx="14" fill="#171B21" stroke="#303641"/>
+  <text x="960" y="288" fill="#F2F4F7" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Economic signal</text>
+  <rect x="960" y="336" width="276" height="16" rx="8" fill="#2A3038"/>
+  <rect x="960" y="336" width="198" height="16" rx="8" fill="#8BE0B0"/>
+  <rect x="960" y="384" width="276" height="16" rx="8" fill="#2A3038"/>
+  <rect x="960" y="384" width="138" height="16" rx="8" fill="#E9B872"/>
+  <rect x="112" y="544" width="1180" height="300" rx="14" fill="#11151A" stroke="#303641"/>
+  <text x="144" y="592" fill="#F2F4F7" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Decision matrix</text>
+  <line x1="144" y1="642" x2="1248" y2="642" stroke="#2B3038"/>
+  <line x1="144" y1="704" x2="1248" y2="704" stroke="#2B3038"/>
+  <line x1="144" y1="766" x2="1248" y2="766" stroke="#2B3038"/>
+  <text x="144" y="682" fill="#A8B1BE" font-family="Inter, Arial, sans-serif" font-size="19">Weather comfort</text>
+  <text x="144" y="744" fill="#A8B1BE" font-family="Inter, Arial, sans-serif" font-size="19">Air quality</text>
+  <text x="144" y="806" fill="#A8B1BE" font-family="Inter, Arial, sans-serif" font-size="19">Budget pressure</text>
+  <rect x="520" y="662" width="280" height="14" rx="7" fill="#2A3038"/>
+  <rect x="520" y="662" width="232" height="14" rx="7" fill="#8BE0B0"/>
+  <rect x="520" y="724" width="280" height="14" rx="7" fill="#2A3038"/>
+  <rect x="520" y="724" width="210" height="14" rx="7" fill="#8BE0B0"/>
+  <rect x="520" y="786" width="280" height="14" rx="7" fill="#2A3038"/>
+  <rect x="520" y="786" width="158" height="14" rx="7" fill="#E9B872"/>
+  <rect x="920" y="662" width="280" height="14" rx="7" fill="#2A3038"/>
+  <rect x="920" y="662" width="196" height="14" rx="7" fill="#E9B872"/>
+  <rect x="920" y="724" width="280" height="14" rx="7" fill="#2A3038"/>
+  <rect x="920" y="724" width="150" height="14" rx="7" fill="#DF7B72"/>
+  <rect x="920" y="786" width="280" height="14" rx="7" fill="#2A3038"/>
+  <rect x="920" y="786" width="116" height="14" rx="7" fill="#DF7B72"/>
+</svg>
