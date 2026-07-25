@@ -18,6 +18,7 @@ const en = {
     viewProject: "View project",
     openRepo: "Open repo",
     demo: "Demo",
+    featured: "Featured project",
   },
   experience: {
     eyebrow: "Experience & Education",
@@ -72,6 +73,10 @@ const en = {
     aboutProject: "About the project",
     keyFeatures: "Key features",
     gallery: "Gallery",
+    responsibilities: "My role",
+    challenges: "Engineering challenges",
+    status: "Status",
+    imageComingSoon: "Screenshot coming soon",
   },
   soLong: {
     title: "Play so_long",

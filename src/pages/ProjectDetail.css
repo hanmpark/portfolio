@@ -65,6 +65,23 @@
   filter: saturate(0.58) brightness(0.7) contrast(1.1);
 }
 
+.pj-hero-placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 68% 30%, rgba(201, 176, 139, 0.18), transparent 30%),
+    linear-gradient(145deg, #28251f, #0a0a0c 70%);
+}
+
+.pj-hero-placeholder span {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 16vw, 13rem);
+  font-style: italic;
+  color: rgba(241, 233, 220, 0.12);
+}
+
 /* Gradient scrim for title readability */
 .pj-hero::after {
   content: "";
@@ -134,6 +151,14 @@
   gap: 0.85rem;
   padding-bottom: clamp(1.5rem, 3vh, 2.5rem);
   border-bottom: 1px solid rgba(224, 224, 236, 0.06);
+}
+
+.pj-category {
+  margin: 0;
+  color: rgba(224, 224, 236, 0.58);
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .pj-tags {
@@ -234,6 +259,26 @@
   background: rgba(224, 224, 236, 0.22);
 }
 
+.pj-status {
+  margin-top: 0.5rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(224, 224, 236, 0.07);
+  border-radius: var(--radius, 16px);
+  background: rgba(224, 224, 236, 0.025);
+}
+
+.pj-status span {
+  color: rgba(224, 224, 236, 0.42);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.pj-status p {
+  margin-top: 0.35rem !important;
+}
+
 /* ── Gallery ─────────────────────────────────────── */
 .pj-gallery {
   display: flex;
@@ -271,6 +316,32 @@
 
 .pj-gallery-item--image {
   cursor: zoom-in;
+}
+
+.pj-gallery-placeholder {
+  min-height: clamp(220px, 34vw, 360px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  background:
+    radial-gradient(circle at 70% 22%, rgba(201, 176, 139, 0.1), transparent 30%),
+    linear-gradient(145deg, rgba(31, 29, 26, 0.92), rgba(11, 11, 14, 0.96));
+}
+
+.pj-gallery-placeholder span {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.5vw, 2rem);
+  font-style: italic;
+  color: rgba(240, 235, 228, 0.78);
+}
+
+.pj-gallery-placeholder small {
+  color: rgba(224, 224, 236, 0.38);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .pj-gallery-item--video {

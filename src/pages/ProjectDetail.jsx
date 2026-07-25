@@ -108,8 +108,16 @@ const ProjectDetail = () => {
       </button>
 
       {/* Hero with title overlaid at bottom */}
-      <header className="pj-hero">
-        <img src={project.heroImage} alt={`${project.title} hero`} />
+      <header
+        className={`pj-hero${project.heroImage ? "" : " pj-hero--placeholder"}`}
+      >
+        {project.heroImage ? (
+          <img src={project.heroImage} alt={`${project.title} hero`} />
+        ) : (
+          <div className="pj-hero-placeholder" aria-hidden="true">
+            <span>{project.heroPlaceholder ?? project.title}</span>
+          </div>
+        )}
         <div className="pj-hero-body">
           <div className="pj-hero-inner">
             <h1 className="pj-title">{project.title}</h1>
@@ -121,6 +129,9 @@ const ProjectDetail = () => {
       <div className="pj-content">
         {/* Meta bar: tags + links + notice */}
         <div className="pj-meta">
+          {project.category ? (
+            <p className="pj-category">{l(project, "category")}</p>
+          ) : null}
           {project.tags?.length ? (
             <div className="pj-tags">
               {project.tags.map((tag) => (
@@ -138,6 +149,7 @@ const ProjectDetail = () => {
                 href={project.repo}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`${t("projectDetail.github")} — ${project.title}`}
               >
                 {t("projectDetail.github")}
               </a>
@@ -148,8 +160,9 @@ const ProjectDetail = () => {
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`${l(project, "demoLabel") ?? t("projectDetail.liveDemo")} — ${project.title}`}
               >
-                {t("projectDetail.liveDemo")}
+                {l(project, "demoLabel") ?? t("projectDetail.liveDemo")}
               </a>
             ) : null}
           </div>
@@ -181,6 +194,37 @@ const ProjectDetail = () => {
               </ul>
             </>
           ) : null}
+
+          {(l(project, "responsibilities") ?? project.responsibilities)?.length ? (
+            <>
+              <p className="pj-section-label">
+                {t("projectDetail.responsibilities")}
+              </p>
+              <ul className="pj-features">
+                {(l(project, "responsibilities") ?? project.responsibilities).map(
+                  (item, i) => <li key={i}>{item}</li>,
+                )}
+              </ul>
+            </>
+          ) : null}
+
+          {(l(project, "challenges") ?? project.challenges)?.length ? (
+            <>
+              <p className="pj-section-label">{t("projectDetail.challenges")}</p>
+              <ul className="pj-features">
+                {(l(project, "challenges") ?? project.challenges).map(
+                  (item, i) => <li key={i}>{item}</li>,
+                )}
+              </ul>
+            </>
+          ) : null}
+
+          {project.status ? (
+            <div className="pj-status">
+              <span>{t("projectDetail.status")}</span>
+              <p>{l(project, "status")}</p>
+            </div>
+          ) : null}
         </section>
 
         {/* Gallery */}
@@ -202,6 +246,16 @@ const ProjectDetail = () => {
                       playsInline
                       controls
                     />
+                  </div>
+                ) : item.type === "placeholder" ? (
+                  <div
+                    className="pj-gallery-item pj-gallery-placeholder"
+                    key={item.src}
+                    role="img"
+                    aria-label={`${l(item, "label")}. ${t("projectDetail.imageComingSoon")}.`}
+                  >
+                    <span>{l(item, "label")}</span>
+                    <small>{t("projectDetail.imageComingSoon")}</small>
                   </div>
                 ) : (
                   <div

@@ -14,6 +14,7 @@ const viewportHeightSum = (count) =>
   ).join(" + ")})`;
 
 const cardIndexLabel = (index) => String(index + 1).padStart(2, "0");
+const cardCountLabel = (count) => String(count).padStart(2, "0");
 
 const getCardMotion = (index, projectProgress, viewport) => {
   const offset = index - projectProgress;
@@ -249,7 +250,7 @@ const Work = () => {
             <div className="work-counter reveal reveal-up" aria-hidden="true">
               <span>{cardIndexLabel(activeIndex)}</span>
               <span>/</span>
-              <span>{cardIndexLabel(projects.length) - 1}</span>
+              <span>{cardCountLabel(projects.length)}</span>
             </div>
             <div className="work-rail" aria-hidden="true">
               {projects.map((project, index) => (
@@ -303,12 +304,19 @@ const Work = () => {
                       {...linkProps}
                     >
                       <div className="work-card-media" aria-hidden="true">
-                        <img
-                          src={project.previewImage}
-                          alt=""
-                          decoding="async"
-                          loading="eager"
-                        />
+                        {project.previewImage ? (
+                          <img
+                            src={project.previewImage}
+                            alt=""
+                            decoding="async"
+                            loading="eager"
+                          />
+                        ) : (
+                          <div className="work-card-placeholder">
+                            <span>Compass</span>
+                            <small>{project.previewPlaceholder}</small>
+                          </div>
+                        )}
                         <span className="work-card-index">
                           {cardIndexLabel(index)}
                         </span>
@@ -316,6 +324,11 @@ const Work = () => {
 
                       <div className="work-card-content">
                         <div>
+                          {project.featured ? (
+                            <span className="work-card-featured">
+                              {t("work.featured")}
+                            </span>
+                          ) : null}
                           <h3 className="work-card-title">{project.title}</h3>
                           <p className="work-card-subtitle">
                             {l(project, "subtitle")}

@@ -18,6 +18,7 @@ const fr = {
     viewProject: "Voir le projet",
     openRepo: "Ouvrir le dépôt",
     demo: "Démo",
+    featured: "Projet à la une",
   },
   experience: {
     eyebrow: "Expérience & Formation",
@@ -72,6 +73,10 @@ const fr = {
     aboutProject: "À propos du projet",
     keyFeatures: "Fonctionnalités clés",
     gallery: "Galerie",
+    responsibilities: "Mon rôle",
+    challenges: "Défis d'ingénierie",
+    status: "Statut",
+    imageComingSoon: "Capture à venir",
   },
   soLong: {
     title: "Jouer à so_long",
