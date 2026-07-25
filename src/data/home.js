@@ -15,7 +15,7 @@ export const projects = [
       "A private, mobile-first workspace for planning trips together, with shared itineraries, places, notes, documents, and real-time updates.",
     description_fr:
       "Compass centralise les itinéraires, lieux, notes et documents d'un voyage dans un espace privé et partagé, synchronisé en temps réel.",
-    previewImage: "/works/compass/trips-dashboard.webp",
+    previewImage: "/works/compass/social-preview-tropical.webp",
     tags: ["React", "TypeScript", "Supabase"],
     links: {
       demo: "https://compass.hpark.me",
