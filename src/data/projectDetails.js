@@ -8,7 +8,7 @@ export const projectDetails = {
     category_fr: "Projet personnel · Application web full-stack",
     status: "Personal project currently evolving.",
     status_fr: "Projet personnel en cours d'évolution.",
-    heroPlaceholder: "Compass",
+    heroImage: "/works/compass/trip-overview.webp",
     tags: [
       "React",
       "TypeScript",
@@ -77,31 +77,31 @@ export const projectDetails = {
     ],
     gallery: [
       {
-        type: "placeholder",
+        type: "image",
         src: "/works/compass/authentication.webp",
         label: "Authentication screen",
         label_fr: "Écran d'authentification",
       },
       {
-        type: "placeholder",
+        type: "image",
         src: "/works/compass/trips-dashboard.webp",
         label: "Trips dashboard",
         label_fr: "Tableau de bord des voyages",
       },
       {
-        type: "placeholder",
+        type: "image",
         src: "/works/compass/trip-overview.webp",
         label: "Trip overview",
         label_fr: "Vue d'ensemble du voyage",
       },
       {
-        type: "placeholder",
+        type: "image",
         src: "/works/compass/itinerary.webp",
         label: "Collaborative itinerary",
         label_fr: "Itinéraire collaboratif",
       },
       {
-        type: "placeholder",
+        type: "image",
         src: "/works/compass/invitation-code.webp",
         label: "Invitation code interface",
         label_fr: "Interface du code d'invitation",
