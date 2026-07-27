@@ -223,13 +223,18 @@
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
   color: var(--ink);
-  font-family: var(--font-display);
-  font-size: 1.08rem;
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
+  line-height: 0;
+}
+
+.logo__image {
+  display: block;
+  width: clamp(7.2rem, 8vw, 8rem);
+  height: auto;
+  object-fit: contain;
 }
 
 .nav-links {
@@ -532,6 +537,10 @@
     width: min(420px, calc(100vw - 2rem));
     padding: 0.6rem 1rem;
     border-radius: 20px;
+  }
+
+  .logo__image {
+    width: 6.2rem;
   }
 
   .nav-menu__button {

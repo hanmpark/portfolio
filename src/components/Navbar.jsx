@@ -7,6 +7,14 @@ const navbarSocials = socialLinks.filter(
   (link) => link.label === "LinkedIn" || link.label === "GitHub",
 );
 
+const BrandLogo = () => (
+  <img
+    className="logo__image"
+    src="/assets/LOGO_SECONDAIRE_HANMIN_BLANC.svg"
+    alt="Hanmin Park"
+  />
+);
+
 const socialIcons = {
   GitHub: (
     <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
@@ -184,8 +192,8 @@ const Navbar = () => {
       aria-label="Primary"
     >
       <div className="nav-shell container">
-        <a className="logo" href="#top" onClick={closeMenu}>
-          Hanmin
+        <a className="logo" href="#top" onClick={closeMenu} aria-label="Accueil">
+          <BrandLogo />
         </a>
         {renderNavLinks()}
         {renderNavActions()}
@@ -195,8 +203,13 @@ const Navbar = () => {
         {renderBurger("nav-menu__button")}
         <div className="nav-panel">
           <div className="nav-panel__head">
-            <a className="logo" href="#top" onClick={closeMenu}>
-              Hanmin
+            <a
+              className="logo"
+              href="#top"
+              onClick={closeMenu}
+              aria-label="Accueil"
+            >
+              <BrandLogo />
             </a>
             {renderBurger("nav-panel__button")}
           </div>

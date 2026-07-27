@@ -18,6 +18,15 @@
   pointer-events: none;
 }
 
+.page-loader__logo {
+  width: clamp(7.5rem, 12vw, 10rem);
+  height: auto;
+  margin-bottom: 1.75rem;
+  opacity: 0;
+  filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.22));
+  animation: loader-logo-in 0.8s var(--ease-out, ease) 0.08s forwards;
+}
+
 /* Thin spinning arc */
 .page-loader__spinner {
   width: 44px;
@@ -44,7 +53,24 @@
   }
 }
 
+@keyframes loader-logo-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+
+  to {
+    opacity: 0.92;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .page-loader__logo {
+    opacity: 0.92;
+    animation: none;
+  }
+
   .page-loader__spinner {
     animation: none;
     border-top-color: rgba(224, 224, 236, 0.35);
