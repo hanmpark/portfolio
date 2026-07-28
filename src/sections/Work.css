@@ -729,6 +729,10 @@
     transition: none;
   }
 
+  .work-card--compass .work-card-media img {
+    object-position: center;
+  }
+
   .work-card-content {
     gap: 0.55rem;
     padding: 0.95rem;
