@@ -6,6 +6,7 @@
   z-index: 140;
   height: 4.6rem;
   pointer-events: auto;
+  isolation: isolate;
 }
 
 .nav--open {
@@ -535,8 +536,59 @@
 
   .nav-panel {
     width: min(420px, calc(100vw - 2rem));
-    padding: 0.6rem 1rem;
+    padding: 0.85rem 1rem 1rem;
     border-radius: 20px;
+  }
+
+  .nav--open::before {
+    content: "";
+    position: fixed;
+    z-index: -1;
+    inset: calc(-0.75rem - env(safe-area-inset-top, 0px)) 0 0;
+    background: rgba(3, 3, 5, 0.76);
+    -webkit-backdrop-filter: blur(7px);
+    backdrop-filter: blur(7px);
+    pointer-events: none;
+    animation: nav-backdrop-in 0.24s ease both;
+  }
+
+  .nav--open .nav-panel {
+    border-color: rgba(224, 224, 236, 0.13);
+    background: #0b0b0e;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow:
+      0 24px 70px rgba(0, 0, 0, 0.62),
+      0 4px 16px rgba(0, 0, 0, 0.42),
+      inset 0 1px 0 rgba(224, 224, 236, 0.07);
+  }
+
+  .nav--open .nav-panel::before {
+    opacity: 0.3;
+  }
+
+  .nav--open .nav-panel::after {
+    display: none;
+  }
+
+  .nav-drawer {
+    gap: 0.95rem;
+    padding-top: 0.95rem;
+  }
+
+  .nav-drawer .nav-links {
+    gap: 0.25rem;
+  }
+
+  .nav-drawer .nav-links a {
+    padding: 0.68rem 0.85rem;
+    color: rgba(240, 240, 243, 0.86);
+    font-size: 0.96rem;
+  }
+
+  .nav-drawer .nav-actions {
+    padding-top: 0.75rem;
+    border-top-color: rgba(224, 224, 236, 0.1);
   }
 
   .logo__image {
@@ -554,11 +606,24 @@
   }
 }
 
+@keyframes nav-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .nav,
   .nav *,
   .nav::before,
   .nav::after {
     transition-duration: 0.01ms !important;
+  }
+
+  .nav--open::before {
+    animation: none;
   }
 }
