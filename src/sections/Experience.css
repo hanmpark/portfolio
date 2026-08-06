@@ -1,7 +1,9 @@
-/* ── Experience — Grouped Editorial ─────────────────── */
+/* ── Experience — interactive journey map ──────────── */
 
 .exp-section {
   position: relative;
+  /* Sticky descendants need every ancestor to remain vertically visible. */
+  overflow: visible;
 }
 
 .exp-inner {
@@ -9,201 +11,352 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: clamp(2.5rem, 5vh, 4rem);
-  max-width: 1100px;
+  gap: clamp(2.5rem, 6vh, 4.5rem);
+  max-width: 1280px;
 }
 
 .exp-head {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-  text-align: center;
-  align-items: center;
+  align-items: flex-start;
+  gap: 0.55rem;
+  text-align: left;
 }
 
-/* ── Reveal pacing ───────────────────────────────── */
+.exp-head .section-title {
+  max-width: 13ch;
+}
 
 .exp-section .reveal {
-  transition-duration: 0.55s;
+  transition-duration: 0.65s;
 }
 
-.exp-entries .reveal {
-  transition-delay: calc(var(--reveal-i, 0) * 0.1s);
+/* ── Journey shell ───────────────────────────────── */
+
+.exp-scroll-stage {
+  position: relative;
+  min-height: 0;
 }
 
-/* ── Groups ──────────────────────────────────────── */
-
-.exp-groups {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(2.5rem, 5vh, 4rem);
-}
-
-.exp-group-header {
-  display: flex;
-  align-items: center;
-  gap: clamp(0.8rem, 1.5vw, 1.2rem);
-  margin-bottom: clamp(0.5rem, 1vh, 0.8rem);
-}
-
-.exp-group-label {
-  font-family: var(--font-display);
-  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
-  font-weight: 400;
-  font-style: italic;
-  letter-spacing: -0.01em;
-  color: rgba(200, 215, 240, 0.5);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.exp-group-rule {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    rgba(224, 224, 236, 0.12),
-    rgba(224, 224, 236, 0.03)
-  );
-}
-
-/* ── Entries list ────────────────────────────────── */
-
-.exp-entries {
-  display: flex;
-  flex-direction: column;
-}
-
-/* ── Entry row ───────────────────────────────────── */
-
-.exp-entry {
+.exp-journey {
+  --route-progress: 0%;
   position: relative;
   display: grid;
-  grid-template-columns: clamp(56px, 7.5vw, 86px) 2px 1fr;
-  gap: clamp(0.8rem, 1.6vw, 1.5rem);
-  padding: clamp(1.4rem, 2.5vh, 2rem) 0;
-  border-top: 1px solid rgba(224, 224, 236, 0.06);
-  transition: border-color 0.35s ease;
+  grid-template-columns: minmax(270px, 0.8fr) minmax(0, 1.35fr);
+  grid-template-rows: 1fr;
+  column-gap: clamp(1rem, 2vw, 1.8rem);
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
 }
 
-.exp-entry:last-child {
-  border-bottom: 1px solid rgba(224, 224, 236, 0.06);
+.exp-journey::after {
+  display: none;
 }
 
-.exp-entry:hover {
-  border-color: rgba(224, 224, 236, 0.12);
+/* ── Route and stops ─────────────────────────────── */
+
+.exp-route {
+  position: relative;
+  z-index: 2;
+  grid-column: 1;
+  grid-row: 1;
+  min-height: 0;
+  padding: 0.65rem clamp(0.8rem, 1.6vw, 1.4rem) 0.65rem 0;
+  border-top: 0;
 }
 
-/* Ambient glow on hover */
-.exp-entry::before {
+.exp-route-line {
+  position: absolute;
+  z-index: 0;
+  left: 20px;
+  right: auto;
+  top: clamp(4.5rem, 11vh, 6.5rem);
+  bottom: clamp(4.5rem, 11vh, 6.5rem);
+  width: 1px;
+  height: auto;
+  background: rgba(224, 224, 236, 0.085);
+  transform: none;
+}
+
+.exp-route-line::before {
   content: "";
   position: absolute;
-  inset: -1px 0;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(200, 215, 240, 0.025) 15%,
-    rgba(200, 215, 240, 0.04) 50%,
-    rgba(200, 215, 240, 0.025) 85%,
-    transparent 100%
+  inset: 0 -3px;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0 9px,
+    rgba(224, 224, 236, 0.045) 9px 10px
   );
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
 }
 
-.exp-entry:hover::before {
-  opacity: 1;
+.exp-route-progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: var(--route-progress);
+  background: linear-gradient(
+    180deg,
+    rgba(160, 160, 170, 0.3),
+    rgba(240, 240, 243, 0.72)
+  );
+  box-shadow: 0 0 10px rgba(224, 224, 236, 0.16);
+  transition: height 0.12s linear;
 }
 
-/* ── Year column ─────────────────────────────────── */
-
-.exp-entry-year {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
-  font-weight: 400;
-  font-style: italic;
-  line-height: 1;
-  color: rgba(200, 215, 240, 0.35);
-  text-align: right;
-  padding-top: 0.15rem;
-  transition:
-    color 0.45s ease,
-    text-shadow 0.45s ease;
-  user-select: none;
+.exp-stops {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  height: 100%;
+  min-height: 0;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.exp-entry:hover .exp-entry-year {
-  color: rgba(200, 215, 240, 0.65);
-  text-shadow: 0 0 24px rgba(200, 215, 240, 0.15);
+.exp-stop-wrap {
+  display: flex;
+  flex: 0 0 auto;
+  min-width: 0;
 }
 
-/* ── Accent line ─────────────────────────────────── */
-
-.exp-entry-accent {
-  width: 2px;
-  align-self: stretch;
-  border-radius: 2px;
-  background: rgba(200, 215, 240, 0.08);
-  transition:
-    background 0.4s ease,
-    box-shadow 0.4s ease;
+.exp-mobile-detail {
+  display: none;
 }
 
-.exp-entry:hover .exp-entry-accent {
-  background: rgba(200, 215, 240, 0.32);
-  box-shadow: 0 0 14px rgba(200, 215, 240, 0.1);
+.exp-stop {
+  appearance: none;
+  width: 100%;
+  height: auto;
+  min-height: clamp(9rem, 22vh, 13rem);
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  grid-template-rows: 1fr;
+  justify-items: start;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
 }
 
-/* ── Content area ────────────────────────────────── */
-
-.exp-entry-content {
+.exp-stop-copy {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  grid-column: 2;
+  grid-row: 1;
+  align-items: flex-start;
+  align-self: center;
   min-width: 0;
+  padding: 0.4rem 0.35rem 0.4rem 0.65rem;
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s var(--ease-out);
 }
 
-.exp-entry-header {
+.exp-stop--study .exp-stop-copy {
+  grid-row: 1;
+  align-self: center;
+  padding: 0.4rem 0.35rem 0.4rem 0.65rem;
+}
+
+.exp-stop-year {
+  color: rgba(224, 224, 236, 0.35);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+.exp-stop-company {
+  max-width: 100%;
+  overflow: hidden;
+  color: rgba(224, 224, 236, 0.58);
+  font-family: var(--font-display);
+  font-size: clamp(0.86rem, 1.25vw, 1.02rem);
+  font-style: italic;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.exp-stop-category {
+  margin-top: 0.1rem;
+  color: rgba(160, 160, 168, 0.38);
+  font-size: 0.48rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.exp-stop-marker {
+  grid-column: 1;
+  grid-row: 1;
+  position: relative;
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+}
+
+.exp-stop-marker::before {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 1px solid rgba(224, 224, 236, 0.1);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0.6);
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s var(--ease-spring);
+}
+
+.exp-stop-marker span {
+  position: relative;
+  display: block;
+  width: 8px;
+  height: 8px;
+  border: 1px solid rgba(224, 224, 236, 0.4);
+  border-radius: 50%;
+  background: var(--paper, #080809);
+  box-shadow: 0 0 0 4px var(--paper, #080809);
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.45s var(--ease-spring),
+    box-shadow 0.35s ease;
+}
+
+.exp-stop--work .exp-stop-marker span {
+  background: rgba(224, 224, 236, 0.68);
+}
+
+.exp-stop:hover .exp-stop-copy,
+.exp-stop:focus-visible .exp-stop-copy,
+.exp-stop.is-active .exp-stop-copy {
+  transform: translateX(3px);
+}
+
+.exp-stop--study:hover .exp-stop-copy,
+.exp-stop--study:focus-visible .exp-stop-copy,
+.exp-stop--study.is-active .exp-stop-copy {
+  transform: translateX(3px);
+}
+
+.exp-stop:hover .exp-stop-company,
+.exp-stop:focus-visible .exp-stop-company,
+.exp-stop.is-active .exp-stop-company,
+.exp-stop.is-active .exp-stop-year {
+  color: #f2f3f6;
+}
+
+.exp-stop.is-active .exp-stop-marker::before {
+  opacity: 1;
+  transform: scale(1);
+  animation: exp-pulse 2.8s ease-out infinite;
+}
+
+.exp-stop.is-active .exp-stop-marker span {
+  border-color: rgba(236, 241, 248, 0.9);
+  background: #e5eaf2;
+  box-shadow:
+    0 0 0 4px var(--paper, #080809),
+    0 0 14px rgba(224, 224, 236, 0.3);
+  transform: scale(1.18);
+}
+
+/* ── Selected step ───────────────────────────────── */
+
+.exp-detail-track {
+  position: relative;
+  z-index: 2;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: stretch;
+  min-width: 0;
+  min-height: 100%;
+}
+
+.exp-detail {
+  --detail-offset: 0px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: clamp(320px, 44vh, 420px);
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  padding-right: clamp(2.5rem, 6vw, 5.5rem);
+  overflow: hidden;
+  border: 0;
+  border-left: 1px solid rgba(224, 224, 236, 0.07);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transform: translate3d(0, var(--detail-offset), 0);
+  transition: transform 0.12s linear;
+}
+
+.exp-detail-number {
+  position: absolute;
+  top: clamp(1rem, 2vw, 1.6rem);
+  right: clamp(1rem, 2vw, 1.6rem);
+  color: rgba(224, 224, 236, 0.11);
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 8vw, 7rem);
+  font-style: italic;
+  letter-spacing: -0.06em;
+  line-height: 0.8;
+}
+
+.exp-detail-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 620px;
+  animation: exp-detail-in 0.5s var(--ease-out) both;
+}
+
+.exp-detail-heading {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.9rem;
 }
-
-.exp-entry-info {
-  flex: 1;
-  min-width: 0;
-}
-
-/* ── Logo ─────────────────────────────────────────── */
 
 .exp-logo {
   flex-shrink: 0;
-  width: clamp(46px, 4.8vw, 60px);
-  height: clamp(36px, 3.8vw, 46px);
-  border-radius: 10px;
-  overflow: hidden;
-  background: rgba(235, 235, 238, 0.95);
-  border: 1px solid rgba(224, 224, 236, 0.12);
   display: grid;
-  place-items: center;
-  padding: 4px 6px;
+  width: 62px;
+  height: 46px;
   margin: 0;
-  transition:
-    border-color 0.3s,
-    transform 0.35s var(--ease-out);
-}
-
-.exp-entry:hover .exp-logo {
-  border-color: rgba(224, 224, 236, 0.28);
-  transform: scale(1.06);
+  padding: 5px 7px;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(224, 224, 236, 0.12);
+  border-radius: 6px;
+  background: #fff;
 }
 
 .exp-logo--square {
-  width: clamp(36px, 3.8vw, 46px);
-  height: clamp(36px, 3.8vw, 46px);
-  border-radius: 10px;
-  padding: 4px;
+  width: 46px;
+  padding: 5px;
 }
 
 .exp-logo img {
@@ -211,153 +364,369 @@
   height: 100%;
   object-fit: contain;
   object-position: center;
+  filter: none;
+  opacity: 1;
 }
 
-/* ── Typography ───────────────────────────────────── */
+.exp-detail-kicker {
+  margin: 0 0 0.18rem;
+  color: rgba(180, 180, 190, 0.5);
+  font-size: 0.57rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
 
-.exp-entry-role {
+.exp-detail-role {
   margin: 0;
+  color: var(--ink);
   font-family: var(--font-display);
-  font-size: clamp(0.95rem, 1.2vw, 1.12rem);
-  font-weight: 400;
+  font-size: clamp(1.65rem, 3vw, 2.7rem);
   font-style: italic;
-  line-height: 1.2;
-  color: var(--ink, #f0f0f3);
-  transition: color 0.3s;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.08;
 }
 
-.exp-entry:hover .exp-entry-role {
-  color: #fff;
-}
-
-.exp-entry-company {
+.exp-detail-company {
   margin: 0.12rem 0 0;
-  font-size: clamp(0.7rem, 0.84vw, 0.8rem);
-  color: rgba(200, 210, 225, 0.55);
-  line-height: 1.3;
+  color: rgba(224, 224, 236, 0.55);
+  font-size: 0.8rem;
 }
 
-.exp-entry-sep {
-  margin: 0 0.35rem;
-  opacity: 0.4;
+.exp-detail-summary {
+  max-width: 70ch;
+  margin: 0.85rem 0 0;
+  color: var(--muted, #787880);
+  font-size: clamp(0.84rem, 1vw, 0.96rem);
+  line-height: 1.72;
 }
 
-.exp-entry-period {
-  color: rgba(200, 215, 240, 0.4);
-  font-size: 0.95em;
-}
-
-.exp-entry-focus {
-  margin: 0;
-  font-size: clamp(0.76rem, 0.9vw, 0.86rem);
-  color: rgba(180, 185, 200, 0.6);
-  line-height: 1.55;
-  max-width: 56ch;
-}
-
-/* ── Tags ────────────────────────────────────────── */
-
-.exp-entry-tags {
+.exp-detail-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.3rem;
-  margin-top: 0.1rem;
+  gap: 0.34rem;
+  margin-top: 0.85rem;
 }
 
-.exp-entry-tags .pill {
-  font-size: 0.58rem;
-  padding: 0.14em 0.48em;
-  border-color: rgba(224, 224, 236, 0.08);
-  background: rgba(224, 224, 236, 0.03);
-  color: rgba(200, 210, 225, 0.5);
-  transition:
-    border-color 0.3s,
-    color 0.3s;
+.exp-detail-tags .pill {
+  padding: 0.16em 0.52em;
+  border-color: rgba(224, 224, 236, 0.09);
+  background: transparent;
+  color: rgba(180, 180, 190, 0.65);
+  font-size: 0.65rem;
 }
 
-.exp-entry:hover .exp-entry-tags .pill {
-  border-color: rgba(224, 224, 236, 0.16);
-  color: rgba(224, 224, 236, 0.72);
+/* ── Motion ──────────────────────────────────────── */
+
+@keyframes exp-detail-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
 }
 
-/* ── Sibling dimming ─────────────────────────────── */
-
-.exp-entries:hover .exp-entry:not(:hover) .exp-entry-content,
-.exp-entries:hover .exp-entry:not(:hover) .exp-entry-year {
-  filter: brightness(0.5);
-  transition: filter 0.35s ease;
+@keyframes exp-pulse {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.7);
+  }
+  75%,
+  100% {
+    opacity: 0;
+    transform: scale(1.55);
+  }
 }
 
-.exp-entries:hover .exp-entry:not(:hover) .exp-entry-accent {
-  background: rgba(200, 215, 240, 0.04);
+@keyframes exp-scan {
+  0%,
+  65% {
+    transform: translateY(-100%);
+  }
+  90%,
+  100% {
+    transform: translateY(100%);
+  }
 }
 
-/* ── Responsive ──────────────────────────────────── */
+/* ── Responsive: vertical route ──────────────────── */
 
-@media (max-width: 600px) {
-  .exp-entry {
-    grid-template-columns: 1fr;
-    gap: 0.25rem;
+@media (min-width: 761px) {
+  .exp-stop-copy,
+  .exp-stop--study .exp-stop-copy {
+    width: 100%;
+    padding: 0.75rem 0.6rem 0.75rem 0.95rem;
   }
 
-  .exp-entry-year {
-    text-align: left;
-    font-size: clamp(0.74rem, 3.5vw, 0.88rem);
-    color: rgba(200, 215, 240, 0.4);
-    font-style: normal;
-    font-weight: 600;
-    letter-spacing: 0.08em;
+  .exp-stop-year {
+    color: rgba(224, 224, 236, 0.52);
+    font-size: 0.74rem;
+  }
+
+  .exp-stop-company {
+    margin-top: 0.08rem;
+    color: rgba(240, 240, 243, 0.76);
+    font-size: clamp(1.18rem, 1.65vw, 1.42rem);
+    line-height: 1.15;
+  }
+
+  .exp-stop-category {
+    margin-top: 0.22rem;
+    color: rgba(180, 180, 190, 0.48);
+    font-size: 0.61rem;
+  }
+
+  .exp-stop:hover .exp-stop-copy,
+  .exp-stop:focus-visible .exp-stop-copy,
+  .exp-stop.is-active .exp-stop-copy,
+  .exp-stop--study:hover .exp-stop-copy,
+  .exp-stop--study:focus-visible .exp-stop-copy,
+  .exp-stop--study.is-active .exp-stop-copy {
+    transform: translateX(6px);
+  }
+}
+
+@media (max-width: 760px) {
+  .exp-scroll-stage {
+    min-height: 0;
+  }
+
+  .exp-inner {
+    gap: clamp(2.6rem, 8vh, 4rem);
+  }
+
+  .exp-head {
+    align-items: center;
+    width: 100%;
+    gap: 0.45rem;
+    padding-inline: 0.75rem;
+    text-align: center;
+  }
+
+  .exp-head .eyebrow {
+    margin-bottom: 0.15rem;
+  }
+
+  .exp-head .section-title {
+    max-width: 11ch;
+    font-size: clamp(2.25rem, 10vw, 3rem);
+    line-height: 0.98;
+  }
+
+  .exp-journey {
+    position: relative;
+    top: auto;
+    display: block;
+    height: auto;
+    min-height: 0;
+    padding: 0.9rem;
+  }
+
+  .exp-route {
+    min-height: 0;
+    padding: 0.45rem 0 0.8rem;
+  }
+
+  .exp-route-line {
+    left: 20px;
+    right: auto;
+    top: 30px;
+    bottom: 30px;
+    width: 1px;
+    height: auto;
+    transform: none;
+  }
+
+  .exp-route-line::before {
+    inset: 0 -3px;
+    background: repeating-linear-gradient(
+      180deg,
+      transparent 0 9px,
+      rgba(190, 204, 226, 0.06) 9px 10px
+    );
+  }
+
+  .exp-route-progress {
+    width: 1px;
+    height: var(--route-progress);
+    background: linear-gradient(
+      180deg,
+      rgba(150, 166, 190, 0.3),
+      rgba(216, 226, 240, 0.75)
+    );
+    transition: height 0.12s linear;
+  }
+
+  .exp-stops {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    gap: 0.22rem;
+  }
+
+  .exp-stop-wrap {
+    position: relative;
+    display: block;
+    min-height: clamp(460px, 64vh, 560px);
+    border-bottom: 1px solid rgba(224, 224, 236, 0.045);
+  }
+
+  .exp-stop-wrap:last-child {
+    border-bottom: 0;
+  }
+
+  .exp-stop {
+    height: auto;
+    min-height: clamp(88px, 14vh, 118px);
+    grid-template-columns: 40px minmax(0, 1fr);
+    grid-template-rows: 1fr;
+    justify-items: start;
     padding: 0;
+    border-radius: 8px;
+    text-align: left;
+    transition: opacity 0.35s ease;
   }
 
-  .exp-entry-accent {
+  .exp-stop-marker {
+    grid-column: 1;
+    grid-row: 1;
+    width: 40px;
+    height: 40px;
+  }
+
+  .exp-stop-copy,
+  .exp-stop--study .exp-stop-copy {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    align-items: flex-start;
+    padding: 0.45rem 0.4rem 0.45rem 0.65rem;
+  }
+
+  .exp-stop:hover .exp-stop-copy,
+  .exp-stop:focus-visible .exp-stop-copy,
+  .exp-stop.is-active .exp-stop-copy,
+  .exp-stop--study:hover .exp-stop-copy,
+  .exp-stop--study:focus-visible .exp-stop-copy,
+  .exp-stop--study.is-active .exp-stop-copy {
+    transform: translateX(3px);
+  }
+
+  .exp-stop-company {
+    overflow: visible;
+    font-size: 0.98rem;
+    text-overflow: clip;
+    white-space: normal;
+  }
+
+  .exp-detail-track {
     display: none;
   }
 
-  .exp-entry-header {
-    gap: 0.6rem;
+  .exp-mobile-detail {
+    position: absolute;
+    top: clamp(88px, 14vh, 118px);
+    right: 0;
+    left: 2.5rem;
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition:
+      opacity 0.42s ease,
+      visibility 0s linear 0.42s,
+      transform 0.62s var(--ease-out);
   }
 
-  .exp-logo {
-    width: 38px;
-    height: 30px;
+  .exp-mobile-detail.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition-delay: 0s;
   }
 
-  .exp-logo--square {
-    width: 30px;
-    height: 30px;
+  .exp-mobile-detail .exp-detail-main {
+    width: 100%;
+    padding: 0.9rem 0.8rem 1.15rem;
+    border-left: 1px solid rgba(224, 224, 236, 0.12);
+    border-radius: 0;
+    background: transparent;
+    animation: none;
   }
 
-  /* No sibling dimming on mobile */
-  .exp-entries:hover .exp-entry:not(:hover) .exp-entry-content,
-  .exp-entries:hover .exp-entry:not(:hover) .exp-entry-year {
-    filter: none;
-  }
 }
 
 @media (max-width: 480px) {
-  .exp-entry-role {
-    font-size: clamp(0.88rem, 4.5vw, 1rem);
+  .exp-head .section-title {
+    max-width: 11ch;
   }
 
-  .exp-entry-company {
-    font-size: 0.72rem;
+  .exp-logo {
+    width: 52px;
+    height: 40px;
   }
 
-  .exp-entry-focus {
-    font-size: 0.76rem;
+  .exp-logo--square {
+    width: 40px;
   }
 
-  .exp-group-label {
-    font-size: 1rem;
+  .exp-detail-heading {
+    align-items: flex-start;
+    gap: 0.7rem;
   }
+
+  .exp-detail-role {
+    font-size: 1.2rem;
+  }
+
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .exp-entry,
-  .exp-entry-year,
-  .exp-entry-accent,
-  .exp-logo {
-    transition: none !important;
+  .exp-scroll-stage {
+    min-height: 0;
+  }
+
+  .exp-journey {
+    position: relative;
+    top: auto;
+    height: auto;
+  }
+
+  .exp-journey::after,
+  .exp-stop.is-active .exp-stop-marker::before {
+    animation: none;
+  }
+
+  .exp-route-progress,
+  .exp-detail,
+  .exp-stop-copy,
+  .exp-stop-marker::before,
+  .exp-stop-marker span {
+    transition: none;
+  }
+
+  .exp-detail-main {
+    animation: none;
+  }
+
+  .exp-mobile-detail {
+    transition: none;
+  }
+
+  .exp-mobile-detail .exp-detail-main {
+    transition: none;
+  }
+
+  .exp-mobile-detail.is-visible {
+    opacity: 1;
+    transform: none;
   }
 }

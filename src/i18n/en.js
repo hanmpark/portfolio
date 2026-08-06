@@ -25,6 +25,8 @@ const en = {
     title: "A timeline of work and studies.",
     experienceCol: "Experience",
     educationCol: "Education",
+    timelineLabel: "Interactive career timeline",
+    themes: "Technologies and topics",
   },
   about: {
     eyebrow: "About",

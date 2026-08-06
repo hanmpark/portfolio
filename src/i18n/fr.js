@@ -25,6 +25,8 @@ const fr = {
     title: "Parcours professionnel et académique",
     experienceCol: "Expérience",
     educationCol: "Formation",
+    timelineLabel: "Chronologie interactive du parcours",
+    themes: "Technologies et thèmes",
   },
   about: {
     eyebrow: "À propos",
