@@ -148,9 +148,15 @@ const Experience = () => {
           0,
           route.offsetHeight - detail.offsetHeight,
         );
+        const centeredTop =
+          window.innerHeight / 2 - detail.offsetHeight / 2;
+        const centeredOffset = Math.min(
+          detailTravel,
+          Math.max(0, centeredTop - rect.top),
+        );
         detail.style.setProperty(
           "--detail-offset",
-          `${clampedProgress * detailTravel}px`,
+          `${centeredOffset}px`,
         );
       }
 
