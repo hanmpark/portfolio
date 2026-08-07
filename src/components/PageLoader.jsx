@@ -16,7 +16,11 @@ const CRITICAL_IMAGES = [
   "https://assets.hpark.me/premium/fig3.webp",
   "https://assets.hpark.me/premium/fig4.webp",
   "/assets/self_image.jpg",
-  ...projects.map((project) => project.previewImage),
+  ...projects.flatMap((project) =>
+    project.previewImages?.length
+      ? project.previewImages
+      : [project.previewImage],
+  ),
   ...experiences.map((experience) => experience.image).filter(Boolean),
 ];
 

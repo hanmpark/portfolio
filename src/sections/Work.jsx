@@ -307,12 +307,40 @@ const Work = () => {
                     >
                       <div className="work-card-media" aria-hidden="true">
                         {project.previewImage ? (
-                          <img
-                            src={project.previewImage}
-                            alt=""
-                            decoding="async"
-                            loading="eager"
-                          />
+                          project.slug === "compass" ? (
+                            <img
+                              src={project.previewImage}
+                              alt=""
+                              decoding="async"
+                              loading="eager"
+                            />
+                          ) : (
+                            <div className="work-preview">
+                              <span className="work-preview-glow" />
+                              {(project.previewImages ?? [project.previewImage])
+                                .slice(0, 3)
+                                .map((image, previewIndex) => (
+                                  <div
+                                    className={`work-preview-frame work-preview-frame--${
+                                      previewIndex + 1
+                                    }`}
+                                    key={image}
+                                  >
+                                    <span className="work-preview-bar">
+                                      <i />
+                                      <i />
+                                      <i />
+                                    </span>
+                                    <img
+                                      src={image}
+                                      alt=""
+                                      decoding="async"
+                                      loading="eager"
+                                    />
+                                  </div>
+                                ))}
+                            </div>
+                          )
                         ) : (
                           <div className="work-card-placeholder">
                             <span>Compass</span>

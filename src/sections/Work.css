@@ -232,6 +232,208 @@
   transition: transform 0.65s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
 }
 
+/* Project previews use their real screens as layered interface objects. */
+.work-preview {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.work-preview-glow {
+  position: absolute;
+  inset: 14% 8%;
+  border-radius: 50%;
+  filter: blur(42px);
+  opacity: 0.72;
+}
+
+.work-preview-frame {
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 7px;
+  background: #090a0d;
+  box-shadow:
+    0 22px 55px rgba(0, 0, 0, 0.52),
+    0 0 0 1px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+  transition:
+    transform 0.65s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+    border-color 0.35s ease;
+}
+
+.work-preview-frame img,
+.work-card.is-active:hover .work-preview-frame img {
+  display: block;
+  width: 100%;
+  height: calc(100% - 16px);
+  object-fit: cover;
+  transform: none;
+  transition: none;
+}
+
+.work-preview-bar {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 16px;
+  padding: 0 6px;
+  background: linear-gradient(180deg, rgba(42, 43, 49, 0.98), rgba(23, 24, 28, 0.98));
+}
+
+.work-preview-bar i {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.33);
+}
+
+.work-preview-frame--1 {
+  z-index: 3;
+}
+
+.work-preview-frame--2 {
+  z-index: 2;
+}
+
+.work-preview-frame--3 {
+  z-index: 1;
+}
+
+/* Ray tracer: a gallery of rendered scenes floating in depth. */
+.work-card--miniraytracer .work-card-media {
+  background:
+    radial-gradient(circle at 42% 46%, rgba(74, 45, 118, 0.26), transparent 36%),
+    radial-gradient(circle at 82% 16%, rgba(34, 135, 119, 0.18), transparent 32%),
+    #08090b;
+}
+
+.work-card--miniraytracer .work-preview-frame--1 {
+  inset: 18% 10% 19% 9%;
+  transform: rotate(-2.5deg);
+}
+
+.work-card--miniraytracer .work-preview-frame--2 {
+  width: 47%;
+  height: 34%;
+  right: -5%;
+  top: 7%;
+  transform: rotate(5deg);
+}
+
+.work-card--miniraytracer .work-preview-frame--3 {
+  width: 44%;
+  height: 31%;
+  right: -2%;
+  bottom: 5%;
+  transform: rotate(3deg);
+}
+
+.work-card--miniraytracer .work-preview-glow {
+  background: linear-gradient(135deg, rgba(226, 53, 97, 0.3), rgba(45, 190, 155, 0.25));
+}
+
+/* Tetris: neon screens layered like a multiplayer dashboard. */
+.work-card--tetris .work-card-media {
+  background:
+    linear-gradient(rgba(126, 75, 207, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(126, 75, 207, 0.055) 1px, transparent 1px),
+    #0b0911;
+  background-size: 22px 22px;
+}
+
+.work-card--tetris .work-preview-frame--1 {
+  inset: 16% 7% 17% 8%;
+  transform: rotate(1deg);
+}
+
+.work-card--tetris .work-preview-frame--2 {
+  width: 43%;
+  height: 48%;
+  right: -4%;
+  bottom: 2%;
+  transform: rotate(-3deg);
+}
+
+.work-card--tetris .work-preview-frame--3 {
+  width: 39%;
+  height: 32%;
+  left: -5%;
+  top: 4%;
+  transform: rotate(-4deg);
+}
+
+.work-card--tetris .work-preview-glow {
+  background: rgba(146, 70, 255, 0.42);
+}
+
+/* Logtime: the terminal is the product, with its identity card behind it. */
+.work-card--scholarship-logtime .work-card-media {
+  background:
+    radial-gradient(circle at 76% 22%, rgba(118, 126, 232, 0.3), transparent 38%),
+    #151626;
+}
+
+.work-card--scholarship-logtime .work-preview-frame--1 {
+  inset: 9% 19% 8% 12%;
+  transform: rotate(-1.5deg);
+}
+
+.work-card--scholarship-logtime .work-preview-frame--1 img {
+  object-position: top center;
+}
+
+.work-card--scholarship-logtime .work-preview-frame--2 {
+  width: 47%;
+  height: 44%;
+  right: -5%;
+  bottom: 4%;
+  transform: rotate(4deg);
+}
+
+.work-card--scholarship-logtime .work-preview-frame--3 {
+  width: 54%;
+  height: 29%;
+  right: -8%;
+  top: 3%;
+  transform: rotate(5deg);
+}
+
+.work-card--scholarship-logtime .work-preview-glow {
+  background: rgba(108, 121, 255, 0.34);
+}
+
+/* so_long: a single game window presented like a playable desktop app. */
+.work-card--so_long .work-card-media {
+  background:
+    radial-gradient(circle at 50% 45%, rgba(105, 125, 89, 0.35), transparent 48%),
+    linear-gradient(145deg, #292838, #11121a);
+}
+
+.work-card--so_long .work-preview-frame--1 {
+  inset: 11% 7% 12% 7%;
+  transform: rotate(-1deg);
+  border-color: rgba(217, 218, 231, 0.24);
+  box-shadow:
+    0 25px 65px rgba(0, 0, 0, 0.55),
+    14px 16px 0 rgba(92, 88, 113, 0.18);
+}
+
+.work-card--so_long .work-preview-frame--1 img {
+  object-position: center;
+}
+
+.work-card.is-active:hover .work-preview-frame--1 {
+  transform: translateY(-3px) rotate(0deg);
+}
+
+.work-card.is-active:hover .work-preview-frame--2,
+.work-card.is-active:hover .work-preview-frame--3 {
+  transform: translateY(-5px) rotate(0deg);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
 .work-card--compass .work-card-media img {
   object-position: right center;
 }
@@ -727,6 +929,54 @@
   .work-card.is-active:hover .work-card-media img {
     transform: none;
     transition: none;
+  }
+
+  .work-preview-frame img,
+  .work-card.is-active:hover .work-preview-frame img {
+    height: calc(100% - 12px);
+  }
+
+  .work-preview-bar {
+    height: 12px;
+  }
+
+  .work-preview-frame {
+    border-radius: 5px;
+  }
+
+  .work-card--miniraytracer .work-preview-frame--1,
+  .work-card--tetris .work-preview-frame--1 {
+    inset: 13% 8% 14% 8%;
+  }
+
+  .work-card--miniraytracer .work-preview-frame--2,
+  .work-card--tetris .work-preview-frame--2 {
+    right: -8%;
+  }
+
+  .work-card--miniraytracer .work-preview-frame--3,
+  .work-card--tetris .work-preview-frame--3 {
+    left: -8%;
+    right: auto;
+    top: 4%;
+    bottom: auto;
+  }
+
+  .work-card--scholarship-logtime .work-preview-frame--1 {
+    inset: 7% 13% 7% 9%;
+  }
+
+  .work-card--scholarship-logtime .work-preview-frame--2 {
+    width: 45%;
+    right: -7%;
+  }
+
+  .work-card--scholarship-logtime .work-preview-frame--3 {
+    display: none;
+  }
+
+  .work-card--so_long .work-preview-frame--1 {
+    inset: 9% 5% 10%;
   }
 
   .work-card--compass .work-card-media img {

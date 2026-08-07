@@ -31,6 +31,11 @@ export const projects = [
     description_fr:
       "Un moteur de ray tracing minimal implémentant éclairage, ombres, réflexions et rendu 3D de scènes à partir de zéro. Conçu pour explorer l'infographie et les principes mathématiques de rendu.",
     previewImage: "/works/rt1.webp",
+    previewImages: [
+      "/works/rt1.webp",
+      "/works/rt2.webp",
+      "/works/rt3.webp",
+    ],
     tags: ["C", "Ray Tracing", "Computer Graphics"],
     links: {
       repo: "https://github.com/hanmpark/miniraytracer",
@@ -46,6 +51,11 @@ export const projects = [
     description_fr:
       "Un jeu Tetris multijoueur compétitif avec synchronisation en temps réel, gestion d'état et architecture réseau.",
     previewImage: "/works/tetris-game.webp",
+    previewImages: [
+      "/works/tetris-game.webp",
+      "/works/tetris-lobby.webp",
+      "/works/tetris-history.webp",
+    ],
     tags: ["TypeScript", "Multiplayer", "WebSockets"],
     links: {
       repo: "https://github.com/okbrandon/red-tetris",
@@ -62,6 +72,11 @@ export const projects = [
     description_fr:
       "Un outil qui suit et calcule les heures cumulées des étudiants de 42 Nice, les aidant à enregistrer les heures mensuelles requises pour l'éligibilité à la bourse. Il automatise le suivi, réduit les tâches administratives et offre une vue claire de la progression.",
     previewImage: "/works/42 Logtime.webp",
+    previewImages: [
+      "/works/logtime1.webp",
+      "/works/logtime2.webp",
+      "/works/42 Logtime.webp",
+    ],
     tags: ["Time Tracking", "Productivity Tool", "42 Nice"],
     links: {
       repo: "https://github.com/hanmpark/scholarship_logtime",
@@ -77,6 +92,7 @@ export const projects = [
     description_fr:
       "Un jeu 2D léger construit en C avec une boucle de rendu personnalisée, gestion des sprites et des événements. Axé sur le contrôle mémoire, la logique de jeu et la programmation graphique bas niveau.",
     previewImage: "/works/so_long.webp",
+    previewImages: ["/works/so_long.webp"],
     tags: ["C", "2D Graphics", "Game Development"],
     links: {
       repo: "https://github.com/hanmpark/so_long",
