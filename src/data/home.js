@@ -22,21 +22,6 @@ export const projects = [
     },
   },
   {
-    title: "MoveWise",
-    subtitle: "Public API City Comparator",
-    subtitle_fr: "Comparateur de villes via APIs publiques",
-    slug: "movewise",
-    description:
-      "An interactive relocation dashboard that compares two cities using public APIs for weather, air quality, country data, and economic indicators, then turns them into a practical decision score.",
-    description_fr:
-      "Un dashboard interactif de mobilité qui compare deux villes via des APIs publiques pour la météo, la qualité de l'air, les données pays et les indicateurs économiques, puis les transforme en score d'aide à la décision.",
-    previewImage: "/works/movewise.svg",
-    tags: ["React", "Public APIs", "Data UX"],
-    links: {
-      demo: "/project/movewise/demo",
-    },
-  },
-  {
     title: "Mini Ray Tracer",
     subtitle: "Ray Tracing Engine in C",
     subtitle_fr: "Moteur de Ray Tracing en C",

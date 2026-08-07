@@ -108,58 +108,6 @@ export const projectDetails = {
       },
     ],
   },
-  movewise: {
-    title: "MoveWise",
-    subtitle:
-      "A public API-powered city comparison tool that helps users evaluate where to live or work using live weather, air quality, country data, and economic indicators.",
-    subtitle_fr:
-      "Un comparateur de villes basé sur des APIs publiques pour aider à évaluer où vivre ou travailler avec météo, qualité de l'air, données pays et indicateurs économiques.",
-    heroImage: "/works/movewise.svg",
-    tags: ["React", "Public APIs", "Data Visualization", "UX", "Open Data"],
-    repo: null,
-    demo: "/project/movewise/demo",
-    demoNotice:
-      "The live tool uses public APIs from Open-Meteo and World Bank. Cost-of-living values are estimated locally because reliable free browser APIs are limited.",
-    demoNotice_fr:
-      "L'outil utilise les APIs publiques Open-Meteo et World Bank. Les valeurs de coût de vie sont estimées localement car les APIs gratuites fiables côté navigateur sont limitées.",
-    description: [
-      "MoveWise is an <strong>interactive relocation dashboard</strong> designed around three workflows: ranking cities, inspecting one city, and comparing two destinations. Users can pick a profile and get a concise score based on live conditions and open data.",
-      "The project aggregates several public APIs: <strong>Open-Meteo</strong> for geocoding, forecast, and air quality, plus <strong>World Bank Open Data</strong> for GDP per capita. It then normalizes those signals into weather comfort, air quality, affordability, and economic scores.",
-      "The goal is to show practical frontend engineering beyond static pages: asynchronous data fetching, partial-failure handling, scoring logic, responsive data visualization, and a usable decision-oriented interface.",
-    ],
-    description_fr: [
-      "MoveWise est un <strong>dashboard interactif de mobilité</strong> organisé autour de trois usages : classer des villes, inspecter une ville précise et comparer deux destinations. L'utilisateur choisit un profil et obtient un score lisible basé sur des conditions en temps réel et de l'open data.",
-      "Le projet agrège plusieurs APIs publiques : <strong>Open-Meteo</strong> pour le géocodage, la météo et la qualité de l'air, ainsi que <strong>World Bank Open Data</strong> pour le PIB par habitant. Ces signaux sont ensuite normalisés en scores météo, air, budget et économie.",
-      "L'objectif est de montrer de l'ingénierie frontend utile au-delà d'une page statique : fetch asynchrone, gestion des échecs partiels, logique de scoring, visualisation responsive et interface orientée décision.",
-    ],
-    features: [
-      "Compares any two searchable cities using Open-Meteo geocoding.",
-      "Ranks a curated set of cities by profile before the user searches anything.",
-      "Provides a focused city-search view for one destination at a time.",
-      "Fetches live weather and air-quality indicators from public APIs.",
-      "Adds country metadata from Open-Meteo geocoding and GDP per capita from World Bank Open Data.",
-      "Supports several decision profiles with different scoring weights.",
-      "Handles partial API failures with clear fallback behavior.",
-      "Displays scores through responsive city cards and metric bars.",
-    ],
-    features_fr: [
-      "Compare deux villes recherchables via le géocodage Open-Meteo.",
-      "Classe une sélection de villes par profil avant toute recherche utilisateur.",
-      "Propose une vue de recherche centrée sur une destination à la fois.",
-      "Récupère la météo et la qualité de l'air en temps réel via des APIs publiques.",
-      "Ajoute les données pays via le géocodage Open-Meteo et le PIB par habitant via World Bank Open Data.",
-      "Propose plusieurs profils de décision avec des pondérations différentes.",
-      "Gère les échecs partiels d'API avec un comportement de secours explicite.",
-      "Affiche les scores via des cartes et barres de métriques responsives.",
-    ],
-    gallery: [
-      {
-        type: "image",
-        src: "/works/movewise.svg",
-        alt: "MoveWise city comparison dashboard",
-      },
-    ],
-  },
   "scholarship-logtime": {
     title: "Scholarship Time Tracker",
     subtitle:
