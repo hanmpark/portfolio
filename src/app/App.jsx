@@ -3,11 +3,12 @@ import Hero from "../sections/Hero.jsx";
 import Work from "../sections/Work.jsx";
 import Experience from "../sections/Experience.jsx";
 import About from "../sections/About.jsx";
-import Contact from "../sections/Contact.jsx";
+import ProjectCTA from "../sections/ProjectCTA.jsx";
 import ScrollProgress from "../components/ScrollProgress.jsx";
 import BackToTopButton from "../components/BackToTopButton.jsx";
 import PageLoader from "../components/PageLoader.jsx";
 import Navbar from "../components/Navbar.jsx";
+import SiteFooter from "../components/SiteFooter.jsx";
 import "./App.css";
 
 const App = () => {
@@ -30,17 +31,19 @@ const App = () => {
   useEffect(() => {
     if (!loaded || window.location.hash !== "#contact") return;
 
-    const scrollToContactEnd = () => {
-      window.scrollTo({ top: Number.MAX_SAFE_INTEGER, behavior: "auto" });
+    const scrollToContact = () => {
+      const section = document.getElementById("contact");
+      if (!section) return;
+      window.scrollTo({ top: section.getBoundingClientRect().top + window.scrollY, behavior: "instant" });
     };
 
     window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(scrollToContactEnd);
+      window.requestAnimationFrame(scrollToContact);
     });
 
     const timeouts = [
-      window.setTimeout(scrollToContactEnd, 400),
-      window.setTimeout(scrollToContactEnd, 1200),
+      window.setTimeout(scrollToContact, 400),
+      window.setTimeout(scrollToContact, 1200),
     ];
     return () => timeouts.forEach((timeout) => window.clearTimeout(timeout));
   }, [loaded]);
@@ -51,17 +54,20 @@ const App = () => {
       <ScrollProgress />
       <BackToTopButton />
       <Navbar />
-      <div className="hero-stage">
+      <div className="hero-scroll-stage">
         <Hero />
       </div>
       <main>
         <div className="main-content-bg">
+          <div className="about-scroll-stage">
+            <About />
+          </div>
           <Work />
           <Experience />
-          <About />
-          <Contact />
+          <ProjectCTA />
         </div>
       </main>
+      <SiteFooter />
     </div>
   );
 };

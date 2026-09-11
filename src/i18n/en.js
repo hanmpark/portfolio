@@ -1,16 +1,15 @@
 const en = {
   nav: {
-    work: "Work",
-    experience: "Experience",
     about: "About",
-    letsTalk: "Let's talk",
+    work: "Projects",
+    experience: "Experience",
+    letsTalk: "Get in touch",
   },
   hero: {
     role: "Software Developer",
     description:
-      "I design and build scalable web applications and intelligent systems, from frontend interfaces to backend architecture, with a focus on performance, clarity, and real-world impact.",
-    viewWork: "View work",
-    getInTouch: "Get in touch",
+      "I design and build thoughtful digital products, from interface to architecture.",
+    viewAbout: "About me",
   },
   work: {
     eyebrow: "Selected work",
@@ -19,6 +18,28 @@ const en = {
     openRepo: "Open repo",
     demo: "Demo",
     featured: "Featured project",
+    intro:
+      "Digital products, creative tools and low-level experiments—built with equal attention to the system and the surface.",
+    caseStudy: "Case study",
+  },
+  testimonials: {
+    label: "Testimonials",
+    previous: "Previous testimonial",
+    next: "Next testimonial",
+    items: [
+      {
+        quote:
+          "During his internship at PropTexx, Hanmin stood out for his autonomy, commitment, and ability to learn quickly. His contributions across machine learning and full-stack development demonstrated his versatility, technical skill, and reliability.",
+        name: "Mehdi Mirzapour",
+        role: "Head of Machine Learning · PropTexx",
+      },
+      {
+        quote:
+          "Hanmin removed key points of friction from our forms and booking system, significantly improving user experience and conversion. His work contributed to our annual revenue growing from $600,000 to $1.2 million. Autonomous, fast, and proactive, he anticipates issues and delivers effective, durable solutions.",
+        name: "Isaac Ifergan",
+        role: "Co-founder · The Good Cleaners",
+      },
+    ],
   },
   experience: {
     eyebrow: "Experience & Education",
@@ -30,43 +51,42 @@ const en = {
   },
   about: {
     eyebrow: "About",
-    title: "Hey there !",
+    approach: "Approach",
+    expertise: "Selected expertise",
+    bandOne: "PROGRAMMING · SYSTEMS · FULL-STACK · AI TOOLING · PROGRAMMING · SYSTEMS · FULL-STACK · AI TOOLING ·",
+    bandTwo: "FRAME · FILM · EDIT · PACE · IMAGE · FRAME · FILM · EDIT · PACE · IMAGE ·",
+    portraitCaption: "Hanmin Park — Developer & visual thinker",
+    coordinates: "Selected coordinates",
     paragraphs: [
-      "I am Hanmin Park. I'm a software developer who enjoys building reliable, well-structured products with a strong focus on clarity and long-term maintainability.",
-      "My background at 42 shaped the way I work: I like understanding systems deeply before abstracting them into clean architectures. I've worked across systems programming, graphics, full-stack web applications, and AI-driven tooling.",
-      "I also studied cinema, which influences how I think about composition, rhythm, and user experience. I bring that perspective into my engineering work to build products that feel both solid and thoughtful.",
+      "I turn complex problems into products that are easy to understand, enjoyable to use, and solid under the hood.",
+      "At 42, I learned to take systems apart before rebuilding them with intent. From low-level programming and full-stack products to AI tooling, I look for the structure that feels right—not only the one that works.",
+      "My background in film added another dimension to that approach: rhythm, composition, and close attention to experience. I enjoy framing, filming, and shaping the story through editing. That intersection of engineering and visual sensitivity is what guides my work.",
     ],
     highlights: {
       systems: "Systems",
       fullStack: "Full-Stack",
-      graphics: "Graphics",
+      graphics: "Video & editing",
       aiTooling: "AI Tooling",
     },
   },
-  contact: {
-    eyebrow: "Get in touch",
-    title: "Let's talk",
-    subtitle:
-      "Have a project in mind or just want to connect? Drop me a message or reach out through any of the channels below.",
+  cta: {
+    eyebrow: "An idea, a project, a conversation",
+    title: "Let's build something that matters.",
+    lineOne: "Let’s build",
+    lineTwo: "something",
+    lineThree: "that",
+    lineFour: "matters.",
+    action: "Tell me about your project",
+    caption: "From the first idea to the final detail.",
+  },
+  footer: {
     available: "Available for new projects",
-    sendMessage: "Send a message",
-    fullName: "Full name",
-    email: "Email",
-    yourMessage: "Your message",
-    namePlaceholder: "John Doe",
-    emailPlaceholder: "you@example.com",
-    messagePlaceholder:
-      "Tell me about your project, what you need, and your goals...",
-    send: "Send message",
-    sending: "Sending...",
-    success: "Message sent! I'll get back to you soon.",
-    error:
-      "Could not send your message right now. Please try again or use the direct email link.",
-    configError:
-      "The contact form is not configured yet. Please use the direct email link for now.",
-    configNotePrefix: "Configure",
-    configNoteAnd: "and",
-    configNoteSuffix: "to enable the form.",
+    credit: "Designed & developed with intention",
+    navigation: "Explore",
+    details: "Stay in touch",
+    socials: "Find me online",
+    time: "Paris time",
+    signature: "Code with intention.",
   },
   projectDetail: {
     back: "Back",

@@ -1,122 +1,64 @@
 .app {
   --z-layer-hero: 10;
   --z-layer-main: 30;
-  min-height: var(--app-viewport-height);
-  overflow-x: visible;
-  background: #080809;
   position: relative;
+  min-height: var(--app-viewport-height);
+  background: var(--paper);
 }
 
-.hero-stage {
+.hero-scroll-stage {
   position: relative;
   z-index: var(--z-layer-hero);
   min-height: calc(
     var(--app-viewport-height) + var(--app-viewport-height) +
       var(--app-viewport-height)
   );
+  background: #080807;
 }
 
-/* Main content overlaps only the hero stage transition */
 .app > main {
   position: relative;
   z-index: var(--z-layer-main);
-  margin-top: calc(0px - var(--app-viewport-height) - var(--app-viewport-height));
-  pointer-events: none;
-  overflow-x: visible;
-  overflow-y: visible;
+  margin-top: calc(
+    0px - var(--app-viewport-height) - var(--app-viewport-height)
+  );
+  background: #080807;
 }
-
-/* Re-enable interaction on the visible content wrapper */
-.app > main > .main-content-bg {
-  pointer-events: auto;
-}
-
-.app > main > .main-content-bg > .section {
-  pointer-events: auto;
-}
-
-/* Paint the main background only behind content */
-.app > main::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: #080809;
-}
-
-/* ── Unified background for Work + Experience + About ─── */
 .main-content-bg {
+  --font-body: var(--font-creative);
+  --font-display: var(--font-creative);
   position: relative;
-  z-index: 1;
-  overflow-x: visible;
-  isolation: isolate;
+  font-family: var(--font-creative);
 }
-
-.main-content-bg > .section {
+.about-scroll-stage {
   position: relative;
-  z-index: 2;
+  z-index: 20;
+  padding-bottom: var(--app-viewport-height);
+  background: #080807;
 }
-
-.app > footer {
-  position: relative;
-  z-index: 2;
-  background: #080809;
+.about-scroll-stage .abt-section {
+  position: sticky;
+  bottom: 0;
 }
-
-/* Subtle ambient noise — two very faint neutral glows */
-.app::before,
-.app::after {
+.about-scroll-stage + .work-section {
+  z-index: 30;
+  margin-top: calc(0px - var(--app-viewport-height));
+}
+.main-content-bg::before {
   content: "";
   position: absolute;
-  width: min(700px, 100vw);
-  height: min(700px, 100vw);
+  top: 24%;
+  right: -18rem;
+  width: 40rem;
+  height: 40rem;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(80, 80, 88, 0.07),
-    rgba(60, 60, 68, 0.02) 60%,
-    transparent 72%
-  );
-  top: -320px;
-  left: -180px;
-  filter: blur(60px);
-  animation: float 28s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(233, 232, 227, 0.055), transparent 68%);
+  filter: blur(40px);
   pointer-events: none;
-  z-index: 0;
-}
-
-.app::after {
-  width: min(600px, 90vw);
-  height: min(600px, 90vw);
-  top: 45%;
-  left: auto;
-  right: -240px;
-  background: radial-gradient(
-    circle,
-    rgba(64, 64, 72, 0.05),
-    rgba(48, 48, 56, 0.015) 60%,
-    transparent 68%
-  );
-  animation-delay: -14s;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(30px);
-  }
-}
-
-@media (max-width: 720px) {
-  .app::before,
-  .app::after {
-    display: none;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .about-scroll-stage { padding-bottom: 0; }
+  .about-scroll-stage .abt-section { position: relative; bottom: auto; }
+  .about-scroll-stage + .work-section { margin-top: 0; }
 }

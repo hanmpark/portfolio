@@ -1,7 +1,7 @@
 export const navLinks = [
+  { key: "about", href: "#about" },
   { key: "work", href: "#work" },
   { key: "experience", href: "#experience" },
-  { key: "about", href: "#about" },
 ];
 
 export const projects = [
@@ -16,6 +16,11 @@ export const projects = [
     description_fr:
       "Compass centralise les itinéraires, lieux, notes et documents d'un voyage dans un espace privé et partagé, synchronisé en temps réel.",
     previewImage: "/works/compass/social-preview-tropical.webp",
+    previewImages: [
+      "/works/compass/trip-overview.webp",
+      "/works/compass/itinerary.webp",
+      "/works/compass/trips-dashboard.webp",
+    ],
     tags: ["React", "TypeScript", "Supabase"],
     links: {
       demo: "https://compass.hpark.me",
@@ -50,7 +55,7 @@ export const projects = [
       "A competitive multiplayer Tetris game featuring real-time synchronization, state management, and networked gameplay architecture.",
     description_fr:
       "Un jeu Tetris multijoueur compétitif avec synchronisation en temps réel, gestion d'état et architecture réseau.",
-    previewImage: "/works/tetris-game.webp",
+    previewImage: "/works/tetris-lobby.webp",
     previewImages: [
       "/works/tetris-game.webp",
       "/works/tetris-lobby.webp",

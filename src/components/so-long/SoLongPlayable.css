@@ -2,12 +2,10 @@
   display: grid;
   gap: 1rem;
   padding: clamp(1rem, 2vw, 1.35rem);
-  border: 1px solid rgba(224, 224, 236, 0.08);
-  border-radius: 8px;
-  background:
-    linear-gradient(135deg, rgba(88, 103, 56, 0.12), rgba(72, 44, 91, 0.1)),
-    rgba(10, 10, 14, 0.72);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--surface);
+  box-shadow: none;
 }
 
 .so-long-topbar {
@@ -19,7 +17,7 @@
 
 .so-long-status {
   margin: 0;
-  color: rgba(240, 240, 243, 0.82);
+  color: var(--ink);
   font-family: var(--font-body);
   font-size: clamp(0.9rem, 1vw, 1rem);
   line-height: 1.45;
@@ -37,9 +35,9 @@
   display: flex;
   gap: 0.35rem;
   padding: 0.25rem;
-  border: 1px solid rgba(224, 224, 236, 0.08);
-  border-radius: 999px;
-  background: rgba(8, 8, 10, 0.45);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--paper-deep);
 }
 
 .so-long-level {
@@ -51,9 +49,9 @@
   width: 2rem;
   height: 2rem;
   border: 0;
-  border-radius: 999px;
+  border-radius: 0;
   background: transparent;
-  color: rgba(224, 224, 236, 0.55);
+  color: var(--muted);
   cursor: pointer;
   font: inherit;
   font-size: 0.78rem;
@@ -66,12 +64,12 @@
 
 .so-long-level:hover {
   color: rgba(240, 240, 243, 0.86);
-  background: rgba(224, 224, 236, 0.08);
+  background: rgba(233, 232, 227, 0.09);
 }
 
 .so-long-level.is-active {
-  color: #080809;
-  background: rgba(240, 240, 243, 0.86);
+  color: var(--paper-deep);
+  background: var(--coral);
 }
 
 .so-long-shell {
@@ -81,9 +79,9 @@
   margin: 0 auto;
   aspect-ratio: 832 / 704;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 0;
   outline: none;
-  border: 1px solid rgba(224, 224, 236, 0.08);
+  border: 1px solid var(--line);
   background: #0d5307;
 }
 
@@ -104,7 +102,7 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 0.65rem 1rem;
-  color: rgba(224, 224, 236, 0.62);
+  color: var(--muted);
   font-size: 0.76rem;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -129,10 +127,10 @@
   justify-content: center;
   width: 2.75rem;
   height: 2.75rem;
-  border: 1px solid rgba(224, 224, 236, 0.1);
-  border-radius: 8px;
-  background: rgba(224, 224, 236, 0.06);
-  color: rgba(240, 240, 243, 0.74);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
   cursor: pointer;
   touch-action: none;
   transition:
@@ -144,9 +142,9 @@
 
 .so-long-control:hover,
 .so-long-control:active {
-  color: rgba(240, 240, 243, 0.96);
-  border-color: rgba(224, 224, 236, 0.2);
-  background: rgba(224, 224, 236, 0.11);
+  color: var(--paper-deep);
+  border-color: var(--coral);
+  background: var(--coral);
 }
 
 .so-long-control:active {

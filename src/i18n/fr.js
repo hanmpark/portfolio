@@ -1,16 +1,15 @@
 const fr = {
   nav: {
+    about: "À propos",
     work: "Projets",
     experience: "Expérience",
-    about: "À propos",
-    letsTalk: "Discutons",
+    letsTalk: "Me contacter",
   },
   hero: {
     role: "Développeur Logiciel",
     description:
-      "Je conçois et développe des applications web évolutives et des systèmes intelligents, des interfaces frontend à l'architecture backend, en mettant l'accent sur la performance, la clarté et l'impact concret.",
-    viewWork: "Voir mes projets",
-    getInTouch: "Me contacter",
+      "Je conçois des produits numériques soignés, de l'interface à l'architecture.",
+    viewAbout: "Me découvrir",
   },
   work: {
     eyebrow: "Projets sélectionnés",
@@ -19,6 +18,28 @@ const fr = {
     openRepo: "Ouvrir le dépôt",
     demo: "Démo",
     featured: "Projet à la une",
+    intro:
+      "Produits numériques, outils créatifs et expérimentations bas niveau — conçus avec la même attention pour le système et la surface.",
+    caseStudy: "Étude de cas",
+  },
+  testimonials: {
+    label: "Témoignages",
+    previous: "Témoignage précédent",
+    next: "Témoignage suivant",
+    items: [
+      {
+        quote:
+          "Lors de son stage chez PropTexx, Hanmin s’est distingué par son autonomie, son implication et sa capacité à apprendre rapidement. Ses contributions en machine learning comme en développement full-stack ont démontré sa polyvalence, ses compétences techniques et sa fiabilité.",
+        name: "Mehdi Mirzapour",
+        role: "Head of Machine Learning · PropTexx",
+      },
+      {
+        quote:
+          "Hanmin a éliminé plusieurs points de friction dans nos formulaires et notre système de réservation, améliorant nettement l’expérience utilisateur et notre taux de conversion. Son travail a contribué à notre croissance, notre chiffre d’affaires annuel passant de 600 000 $ à 1,2 million $. Autonome, rapide et proactif, il anticipe les enjeux et livre des solutions durables.",
+        name: "Isaac Ifergan",
+        role: "Cofondateur · The Good Cleaners",
+      },
+    ],
   },
   experience: {
     eyebrow: "Expérience & Formation",
@@ -30,43 +51,42 @@ const fr = {
   },
   about: {
     eyebrow: "À propos",
-    title: "Salut !",
+    approach: "Démarche",
+    expertise: "Expertises choisies",
+    bandOne: "PROGRAMMATION · SYSTÈMES · FULL-STACK · OUTILS IA · PROGRAMMATION · SYSTÈMES · FULL-STACK · OUTILS IA ·",
+    bandTwo: "CADRER · FILMER · MONTER · RYTHMER · IMAGE · CADRER · FILMER · MONTER · RYTHMER · IMAGE ·",
+    portraitCaption: "Hanmin Park — Développeur & penseur visuel",
+    coordinates: "Repères choisis",
     paragraphs: [
-      "Je m'appelle Hanmin Park, développeur logiciel passionné par la conception de produits fiables et bien structurés, avec un souci constant de clarté et de maintenabilité à long terme.",
-      "Mon parcours à 42 a façonné ma façon de travailler : j'aime comprendre les systèmes en profondeur avant de les abstraire en architectures propres. J'ai travaillé en programmation système, programmation graphique, applications web full-stack et outils basés sur l'IA.",
-      "J'ai également étudié le cinéma, ce qui influence ma façon de penser la composition, le rythme et l'expérience utilisateur. J'apporte cette perspective dans mon travail d'ingénierie pour créer des produits à la fois solides et réfléchis.",
+      "Je transforme des problèmes complexes en produits simples à comprendre, agréables à utiliser et solides sous le capot.",
+      "À 42, j'ai appris à démonter les systèmes pour mieux les reconstruire. De la programmation bas niveau aux produits full-stack, en passant par les outils d'IA, je cherche toujours la structure la plus juste — pas seulement celle qui fonctionne.",
+      "Mes études de cinéma ont ajouté une autre dimension à cette approche : le rythme, la composition et l'attention portée à l'expérience. J'aime cadrer, filmer puis construire le récit au montage. C'est ce croisement entre ingénierie et sensibilité visuelle qui guide mon travail.",
     ],
     highlights: {
       systems: "Systèmes",
       fullStack: "Full-Stack",
-      graphics: "Programmation graphique",
+      graphics: "Vidéo & montage",
       aiTooling: "Outils IA",
     },
   },
-  contact: {
-    eyebrow: "Me contacter",
-    title: "Discutons",
-    subtitle:
-      "Vous avez un projet en tête ou souhaitez simplement échanger ? Envoyez-moi un message ou contactez-moi via l'un des canaux ci-dessous.",
+  cta: {
+    eyebrow: "Une idée, un projet, une rencontre",
+    title: "Créons des projets qui ont du sens.",
+    lineOne: "Créons",
+    lineTwo: "des projets",
+    lineThree: "qui ont",
+    lineFour: "du sens.",
+    action: "Parlez-moi de votre projet",
+    caption: "De la première idée au dernier détail.",
+  },
+  footer: {
     available: "Disponible pour de nouveaux projets",
-    sendMessage: "Envoyer un message",
-    fullName: "Nom complet",
-    email: "Email",
-    yourMessage: "Votre message",
-    namePlaceholder: "Jean Dupont",
-    emailPlaceholder: "vous@exemple.com",
-    messagePlaceholder:
-      "Parlez-moi de votre projet, de vos besoins et de vos objectifs...",
-    send: "Envoyer le message",
-    sending: "Envoi en cours...",
-    success: "Message envoyé ! Je vous répondrai dès que possible.",
-    error:
-      "Impossible d'envoyer votre message pour le moment. Veuillez réessayer ou utiliser le lien email direct.",
-    configError:
-      "Le formulaire de contact n'est pas encore configuré. Utilisez le lien email direct pour le moment.",
-    configNotePrefix: "Configurez",
-    configNoteAnd: "et",
-    configNoteSuffix: "pour activer le formulaire.",
+    credit: "Conçu & développé avec intention",
+    navigation: "Explorer",
+    details: "Restons en contact",
+    socials: "Retrouvez-moi",
+    time: "Heure de Paris",
+    signature: "Du code, du sens.",
   },
   projectDetail: {
     back: "Retour",

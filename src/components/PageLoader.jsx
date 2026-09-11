@@ -10,11 +10,6 @@ import "./PageLoader.css";
  */
 const CRITICAL_IMAGES = [
   "/assets/LOGO_PRINCIPAL_HANMIN_BLANC.svg",
-  "/assets/LOGO_SECONDAIRE_HANMIN_BLANC.svg",
-  "https://assets.hpark.me/premium/fig1.webp",
-  "https://assets.hpark.me/premium/fig2.webp",
-  "https://assets.hpark.me/premium/fig3.webp",
-  "https://assets.hpark.me/premium/fig4.webp",
   "/assets/self_image.jpg",
   ...projects.flatMap((project) =>
     project.previewImages?.length
