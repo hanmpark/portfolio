@@ -29,21 +29,22 @@ const App = () => {
   }, [loaded]);
 
   useEffect(() => {
-    if (!loaded || window.location.hash !== "#contact") return;
+    const sectionId = window.location.hash.slice(1);
+    if (!loaded || !["contact", "work"].includes(sectionId)) return;
 
-    const scrollToContact = () => {
-      const section = document.getElementById("contact");
+    const scrollToSection = () => {
+      const section = document.getElementById(sectionId);
       if (!section) return;
       window.scrollTo({ top: section.getBoundingClientRect().top + window.scrollY, behavior: "instant" });
     };
 
     window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(scrollToContact);
+      window.requestAnimationFrame(scrollToSection);
     });
 
     const timeouts = [
-      window.setTimeout(scrollToContact, 400),
-      window.setTimeout(scrollToContact, 1200),
+      window.setTimeout(scrollToSection, 400),
+      window.setTimeout(scrollToSection, 1200),
     ];
     return () => timeouts.forEach((timeout) => window.clearTimeout(timeout));
   }, [loaded]);

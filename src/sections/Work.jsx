@@ -10,13 +10,16 @@ const clamp = (value, min = 0, max = 1) => Math.min(Math.max(value, min), max);
 const Work = () => {
   const { t, l } = useLanguage();
   const sectionRef = useRef(null);
-  useImageDepth(sectionRef);
+  useImageDepth(sectionRef, { pointer: false });
   const title = t("work.title");
 
   useEffect(() => {
     const section = sectionRef.current;
     const opening = section.querySelector(".work-opening");
     const openingFrame = section.querySelector(".work-opening-frame");
+    const splitTitle = section.querySelector(".work-split-title");
+    const leftWord = section.querySelector(".work-split-word--left");
+    const rightWord = section.querySelector(".work-split-word--right");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
 
@@ -24,16 +27,22 @@ const Work = () => {
       frame = 0;
       const rect = opening.getBoundingClientRect();
       const frameHeight = openingFrame.getBoundingClientRect().height;
+      const pinDistance = Math.max(rect.height - frameHeight, 0);
       const hold = frameHeight * 0.12;
-      const travel = Math.max(rect.height - frameHeight - hold, 1);
+      const travel = Math.max(pinDistance - hold, 1);
       const progress = reducedMotion.matches ? 0 : clamp((-rect.top - hold) / travel);
       const eased = progress * progress * (3 - 2 * progress);
-      // Keep only the opening in view; the project list stays in normal flow.
-      const frameOffset = reducedMotion.matches ? 0 : clamp(-rect.top, 0, Math.max(rect.height - frameHeight, 0));
-      section.style.setProperty("--work-opening-y", `${frameOffset.toFixed(2)}px`);
-      section.style.setProperty("--work-split-x", `${(eased * 65).toFixed(3)}vw`);
-      section.style.setProperty("--work-split-opacity", String(1 - clamp((progress - 0.65) / 0.35)));
-
+      // Pin the viewport itself; only the letters respond to scroll inside this interval.
+      openingFrame.dataset.pin = reducedMotion.matches || rect.top > 0
+        ? "before"
+        : -rect.top < pinDistance ? "active" : "after";
+      const titleLeft = splitTitle.getBoundingClientRect().left;
+      const splitDistance = Math.max(
+        titleLeft + leftWord.offsetLeft + leftWord.offsetWidth,
+        document.documentElement.clientWidth - titleLeft - rightWord.offsetLeft,
+      ) + 2;
+      section.style.setProperty("--work-split-x", `${(eased * splitDistance).toFixed(2)}px`);
+      section.style.setProperty("--work-split-opacity", String(1 - clamp((progress - 0.85) / 0.15)));
     };
     const schedule = () => {
       if (!frame) frame = window.requestAnimationFrame(update);
@@ -53,7 +62,7 @@ const Work = () => {
       reducedMotion.removeEventListener("change", schedule);
       if (frame) window.cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [title]);
 
   return (
     <section className="work-section" id="work" ref={sectionRef} aria-labelledby="work-title">
@@ -67,10 +76,7 @@ const Work = () => {
         </div>
       </header>
       <div className="container work-inner">
-        <aside className="work-label">
-          <p className="eyebrow">{t("work.eyebrow")}</p>
-          <p className="work-intro">{t("work.intro")}</p>
-        </aside>
+        <p className="eyebrow work-label">{t("work.eyebrow")}</p>
 
         <div className="work-project-list">
           {projects.map((project, index) => (

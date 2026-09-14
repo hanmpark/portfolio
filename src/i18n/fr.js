@@ -18,8 +18,6 @@ const fr = {
     openRepo: "Ouvrir le dépôt",
     demo: "Démo",
     featured: "Projet à la une",
-    intro:
-      "Produits numériques, outils créatifs et expérimentations bas niveau — conçus avec la même attention pour le système et la surface.",
     caseStudy: "Étude de cas",
   },
   testimonials: {
@@ -43,7 +41,7 @@ const fr = {
   },
   experience: {
     eyebrow: "Expérience & Formation",
-    title: "Parcours professionnel et académique",
+    title: "Mon parcours",
     experienceCol: "Expérience",
     educationCol: "Formation",
     timelineLabel: "Chronologie interactive du parcours",
@@ -77,18 +75,19 @@ const fr = {
     lineThree: "qui ont",
     lineFour: "du sens.",
     action: "Parlez-moi de votre projet",
-    caption: "De la première idée au dernier détail.",
   },
   footer: {
-    available: "Disponible pour de nouveaux projets",
     credit: "Conçu & développé avec intention",
     navigation: "Explorer",
     details: "Restons en contact",
     socials: "Retrouvez-moi",
     time: "Heure de Paris",
-    signature: "Du code, du sens.",
   },
   projectDetail: {
+    allProjects: "Tous les projets",
+    projectLabel: "Projet",
+    technologies: "Technologies",
+    enlargeImage: "Agrandir l'image",
     back: "Retour",
     github: "GitHub",
     liveDemo: "Démo en ligne",

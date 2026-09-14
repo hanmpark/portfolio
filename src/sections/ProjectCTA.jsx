@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { contact } from "../data/home.js";
 import { useLanguage } from "../i18n/useLanguage.js";
 import useImageDepth from "../hooks/useImageDepth.js";
 import "./ProjectCTA.css";
@@ -7,7 +6,7 @@ import "./ProjectCTA.css";
 const ProjectCTA = () => {
   const { t } = useLanguage();
   const sectionRef = useRef(null);
-  useImageDepth(sectionRef);
+  useImageDepth(sectionRef, { pointer: false });
 
   return (
     <section className="project-cta" id="contact" ref={sectionRef} data-image-depth="full" aria-labelledby="project-cta-title">
@@ -20,12 +19,11 @@ const ProjectCTA = () => {
           <span aria-hidden="true">{t("cta.lineThree")}</span>
           <span aria-hidden="true"><i>→</i> {t("cta.lineFour")}</span>
         </h2>
-        <a className="project-cta-button" href={`mailto:${contact.email}`}>
+        <a className="project-cta-button" href="https://calendly.com/hanmin-hpark/one-on-one" target="_blank" rel="noopener noreferrer">
           <span>{t("cta.action")}</span><span aria-hidden="true">↗</span>
         </a>
         <div className="project-cta-caption">
           <span>Hanmin Park / {t("hero.role")}</span>
-          <span>{t("cta.caption")}</span>
         </div>
       </div>
     </section>

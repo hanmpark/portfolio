@@ -14,14 +14,30 @@
 
 .work-opening {
   position: relative;
-  height: 230svh;
+  height: calc(var(--app-viewport-height) * 2.3);
 }
 
 .work-opening-frame {
-  position: relative;
-  height: 100svh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--app-viewport-height);
   overflow: clip;
-  transform: translate3d(0, var(--work-opening-y, 0px), 0);
+  background: var(--work-bg);
+}
+
+.work-opening-frame[data-pin="active"] {
+  position: fixed;
+}
+
+.work-opening-frame[data-pin="after"] {
+  top: auto;
+  bottom: 0;
+}
+
+.work-split-word {
+  will-change: transform;
 }
 
 .work-split-title {
@@ -70,24 +86,19 @@
 }
 
 .work-inner {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 4fr);
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 70rem;
   gap: clamp(1.5rem, 3vw, 3rem);
-  padding-top: clamp(2rem, 5vw, 4rem);
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
 }
 
-.work-label .eyebrow {
+.work-label.eyebrow {
+  margin: 0;
   color: var(--work-text);
   font-size: 0.58rem;
   line-height: 1.5;
-}
-
-.work-intro {
-  max-width: 48ch;
-  margin: 1.5rem 0 0;
-  color: var(--work-muted);
-  font-size: 0.74rem;
-  line-height: 1.7;
 }
 
 .work-project-list {
@@ -135,11 +146,6 @@
   background: #080807;
   transform: rotateX(var(--depth-rotate-x, 0deg)) rotateY(var(--depth-rotate-y, 0deg)) translateZ(calc(var(--depth-active, 0) * 18px));
   box-shadow: 0 16px 30px -16px rgba(10, 10, 10, 0.35);
-  transition: box-shadow 350ms ease;
-}
-
-.work-project-visual:hover .work-project-media {
-  box-shadow: 0 32px 48px -18px rgba(10, 10, 10, 0.38);
 }
 
 .work-project-media::after {
@@ -303,44 +309,27 @@
   transform-origin: 50% 35%;
 }
 
-@media (max-width: 1000px) {
-  .work-inner {
-    grid-template-columns: 1fr;
-  }
-
-  .work-label {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 2rem;
-  }
-
-  .work-intro {
-    margin: 0;
-  }
-}
-
-@media (max-width: 700px) {
-  .work-opening {
-    height: 210svh;
-  }
-
-  .work-opening-frame {
-    height: 85svh;
-  }
-
-  .work-label,
+@media (max-width: 900px) {
   .work-project-card {
     grid-template-columns: 1fr;
     gap: 1.25rem;
   }
 
   .work-inner {
-    gap: 2.5rem;
+    gap: 2rem;
   }
 
   .work-project-heading h3 {
-    font-size: clamp(1.8rem, 7vw, 2.4rem);
+    font-size: clamp(2rem, 6vw, 3rem);
   }
+  .work-project-copy { gap: 0.875rem; }
+  .work-project-heading p, .work-project-description { font-size: 0.9375rem; line-height: 1.7; }
+  .work-project-meta, .work-project-tags, .work-project-action, .work-label.eyebrow, .work-opening-caption { font-size: 0.6875rem; }
+  .work-project-description { max-width: 65ch; }
+  .work-project-footer { gap: 0.75rem; padding-top: 0.75rem; }
+  .work-project-action { min-height: 2.75rem; }
+  .work-project-card { padding-bottom: 2rem; }
+  .work-project-list { gap: 2rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -348,8 +337,11 @@
     height: auto;
   }
 
-  .work-opening-frame {
+  .work-opening-frame,
+  .work-opening-frame[data-pin] {
     position: relative;
+    top: auto;
+    bottom: auto;
     height: auto;
     padding: 7rem 1rem 3rem;
     transform: none;

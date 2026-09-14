@@ -3,7 +3,7 @@ import { useEffect } from "react";
 const clamp = (value, min = -1, max = 1) => Math.min(Math.max(value, min), max);
 
 // Measure the stable wrapper so tilting an image never feeds back into the pointer position.
-export default function useImageDepth(rootRef) {
+export default function useImageDepth(rootRef, { pointer = true } = {}) {
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return undefined;
@@ -63,7 +63,7 @@ export default function useImageDepth(rootRef) {
         frame = window.requestAnimationFrame(render);
       }
     };
-    const listeners = items.map((item) => {
+    const listeners = (pointer ? items : []).map((item) => {
       const move = (event) => {
         if (reduced.matches || !finePointer.matches || event.pointerType === "touch") return;
         const rect = item.element.getBoundingClientRect();
@@ -102,5 +102,5 @@ export default function useImageDepth(rootRef) {
         element.removeEventListener("pointercancel", reset);
       });
     };
-  }, [rootRef]);
+  }, [rootRef, pointer]);
 }

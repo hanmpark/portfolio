@@ -18,8 +18,6 @@ const en = {
     openRepo: "Open repo",
     demo: "Demo",
     featured: "Featured project",
-    intro:
-      "Digital products, creative tools and low-level experiments—built with equal attention to the system and the surface.",
     caseStudy: "Case study",
   },
   testimonials: {
@@ -77,18 +75,19 @@ const en = {
     lineThree: "that",
     lineFour: "matters.",
     action: "Tell me about your project",
-    caption: "From the first idea to the final detail.",
   },
   footer: {
-    available: "Available for new projects",
     credit: "Designed & developed with intention",
     navigation: "Explore",
     details: "Stay in touch",
     socials: "Find me online",
     time: "Paris time",
-    signature: "Code with intention.",
   },
   projectDetail: {
+    allProjects: "All projects",
+    projectLabel: "Project",
+    technologies: "Technologies",
+    enlargeImage: "Enlarge image",
     back: "Back",
     github: "GitHub",
     liveDemo: "Live Demo",

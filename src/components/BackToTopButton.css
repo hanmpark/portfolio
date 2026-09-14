@@ -1,4 +1,4 @@
-.back-top { position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 80; visibility: hidden; opacity: 0; transform: translateY(1rem); transition: opacity 250ms ease, transform 250ms ease, visibility 250ms ease; }
+.back-top { position: fixed; right: max(1rem, env(safe-area-inset-right, 0px)); bottom: max(1rem, env(safe-area-inset-bottom, 0px)); z-index: 80; visibility: hidden; opacity: 0; transform: translateY(1rem); transition: opacity 250ms ease, transform 250ms ease, visibility 250ms ease; }
 .back-top.is-visible { visibility: visible; opacity: 1; transform: translateY(0); }
 .back-top-button { display: grid; place-items: center; width: 3rem; height: 3rem; padding: 0; border: 1px solid var(--line); border-radius: 50%; color: var(--ink); background: rgba(17, 20, 16, 0.86); backdrop-filter: blur(12px); cursor: pointer; transition: color 220ms ease, background 220ms ease; }
 .back-top-button:hover { color: var(--paper-deep); background: var(--coral); }

@@ -57,7 +57,6 @@ const SiteFooter = () => {
                 <a href={link.href} target="_blank" rel="noopener noreferrer" key={link.label}>{link.label} <span aria-hidden="true">↗</span></a>
               ))}
             </div>
-            <p className="sf-availability"><span aria-hidden="true" />{t("footer.available")}</p>
           </div>
         </div>
         <div className="sf-bottomline">
@@ -76,7 +75,6 @@ const SiteFooter = () => {
             </span>
             <span className="sf-wordmark-arrow" aria-hidden="true">↗</span>
           </a>
-          <p>{t("footer.signature")}</p>
         </div>
       </div>
     </footer>

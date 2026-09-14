@@ -1,7 +1,8 @@
 import { useEffect, useState, useCallback } from "react";
-import { useParams, Navigate, useNavigate } from "react-router-dom";
+import { useParams, Navigate, Link } from "react-router-dom";
 import SoLongPlayable from "../components/so-long/SoLongPlayable.jsx";
 import { projectDetails } from "../data/projectDetails.js";
+import { projects } from "../data/home.js";
 import { useLanguage } from "../i18n/useLanguage.js";
 import "./ProjectDetail.css";
 
@@ -75,7 +76,6 @@ const renderRichText = (html, key) => {
 
 const ProjectDetail = () => {
   const { slug } = useParams();
-  const navigate = useNavigate();
   const { t, l } = useLanguage();
   const project = projectDetails[slug];
   const [lightbox, setLightbox] = useState(null);
@@ -101,34 +101,39 @@ const ProjectDetail = () => {
   if (!project) return <Navigate to="/" replace />;
 
   return (
-    <div className="pj">
-      <button type="button" className="pj-back" onClick={() => navigate(-1)}>
-        <ArrowLeft />
-        {t("projectDetail.back")}
-      </button>
+    <div className={`pj pj--${slug}`}>
+      <nav className="pj-topbar" aria-label={t("footer.navigation")}>
+        <Link className="pj-back" to="/#work">
+          <ArrowLeft />
+          {t("projectDetail.allProjects")}
+        </Link>
+        <Link className="pj-brand" to="/">Hanmin Park <span aria-hidden="true">↗</span></Link>
+      </nav>
 
-      {/* Hero with title overlaid at bottom */}
-      <header
-        className={`pj-hero${project.heroImage ? "" : " pj-hero--placeholder"}`}
-      >
-        {project.heroImage ? (
-          <img src={project.heroImage} alt={`${project.title} hero`} />
-        ) : (
-          <div className="pj-hero-placeholder" aria-hidden="true">
-            <span>{project.heroPlaceholder ?? project.title}</span>
-          </div>
-        )}
-        <div className="pj-hero-body">
-          <div className="pj-hero-inner">
-            <h1 className="pj-title">{project.title}</h1>
-            <p className="pj-subtitle">{l(project, "subtitle")}</p>
-          </div>
+      <header className="pj-hero">
+        <p className="pj-kicker">
+          <span>{t("projectDetail.projectLabel")} / {String(projects.findIndex((item) => item.slug === slug) + 1).padStart(2, "0")}</span>
+          <span>{project.tags?.slice(0, 2).join(" / ")}</span>
+        </p>
+        <div className="pj-hero-heading">
+          <h1 className="pj-title">{project.title}</h1>
+          <p className="pj-subtitle">{l(project, "subtitle")}</p>
+        </div>
+        <div className="pj-hero-media">
+          {project.heroImage ? (
+            <img src={project.heroImage} alt={project.title} fetchPriority="high" />
+          ) : (
+            <div className="pj-hero-placeholder" aria-hidden="true">
+              <span>{project.heroPlaceholder ?? project.title}</span>
+            </div>
+          )}
         </div>
       </header>
 
       <div className="pj-content">
         {/* Meta bar: tags + links + notice */}
         <div className="pj-meta">
+          <p className="pj-section-label">{t("projectDetail.technologies")}</p>
           {project.category ? (
             <p className="pj-category">{l(project, "category")}</p>
           ) : null}
@@ -175,18 +180,16 @@ const ProjectDetail = () => {
           ) : null}
         </div>
 
-        {project.playable?.type === "so-long" ? <SoLongPlayable /> : null}
-
         {/* Description */}
         <section className="pj-desc">
-          <p className="pj-section-label">{t("projectDetail.aboutProject")}</p>
+          <h2 className="pj-section-label">{t("projectDetail.aboutProject")}</h2>
           {(l(project, "description") ?? project.description).map((para, i) =>
             renderRichText(para, i),
           )}
 
           {(l(project, "features") ?? project.features)?.length ? (
             <>
-              <p className="pj-section-label">{t("projectDetail.keyFeatures")}</p>
+              <h2 className="pj-section-label">{t("projectDetail.keyFeatures")}</h2>
               <ul className="pj-features">
                 {(l(project, "features") ?? project.features).map((feat, i) => (
                   <li key={i}>{feat}</li>
@@ -197,9 +200,9 @@ const ProjectDetail = () => {
 
           {(l(project, "responsibilities") ?? project.responsibilities)?.length ? (
             <>
-              <p className="pj-section-label">
+              <h2 className="pj-section-label">
                 {t("projectDetail.responsibilities")}
-              </p>
+              </h2>
               <ul className="pj-features">
                 {(l(project, "responsibilities") ?? project.responsibilities).map(
                   (item, i) => <li key={i}>{item}</li>,
@@ -210,7 +213,7 @@ const ProjectDetail = () => {
 
           {(l(project, "challenges") ?? project.challenges)?.length ? (
             <>
-              <p className="pj-section-label">{t("projectDetail.challenges")}</p>
+              <h2 className="pj-section-label">{t("projectDetail.challenges")}</h2>
               <ul className="pj-features">
                 {(l(project, "challenges") ?? project.challenges).map(
                   (item, i) => <li key={i}>{item}</li>,
@@ -227,10 +230,12 @@ const ProjectDetail = () => {
           ) : null}
         </section>
 
+        {project.playable?.type === "so-long" ? <SoLongPlayable /> : null}
+
         {/* Gallery */}
         {project.gallery?.length ? (
           <section className="pj-gallery">
-            <p className="pj-section-label">{t("projectDetail.gallery")}</p>
+            <h2 className="pj-section-label">{t("projectDetail.gallery")}</h2>
             <div className="pj-gallery-grid">
               {project.gallery.map((item, i) =>
                 item.type === "video" ? (
@@ -258,28 +263,34 @@ const ProjectDetail = () => {
                     <small>{t("projectDetail.imageComingSoon")}</small>
                   </div>
                 ) : (
-                  <div
+                  <button
+                    type="button"
                     className="pj-gallery-item pj-gallery-item--image"
                     key={i}
                     onClick={() => setLightbox(item.src)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") setLightbox(item.src);
-                    }}
+                    aria-label={`${t("projectDetail.enlargeImage")} — ${l(item, "label") || item.alt || `${project.title} ${i + 1}`}`}
                   >
                     <img
                       src={item.src}
-                      alt={item.alt || `Screenshot ${i + 1}`}
+                      alt={l(item, "label") || item.alt || `${project.title} ${i + 1}`}
                       loading="lazy"
                     />
-                  </div>
+                    <span className="pj-gallery-caption" aria-hidden="true">
+                      <span>{String(i + 1).padStart(2, "0")} / {l(item, "label") || item.alt || project.title}</span>
+                      <span>↗</span>
+                    </span>
+                  </button>
                 ),
               )}
             </div>
           </section>
         ) : null}
       </div>
+
+      <footer className="pj-footer">
+        <Link to="/#work">{t("projectDetail.allProjects")} <span aria-hidden="true">↗</span></Link>
+        <span>Hanmin Park / Portfolio</span>
+      </footer>
 
       {/* Lightbox */}
       {lightbox !== null && (

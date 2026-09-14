@@ -22,10 +22,8 @@
   height: var(--app-viewport-height);
   overflow: hidden;
   background:
-    radial-gradient(circle at 24% 22%, rgba(195, 199, 195, 0.34), transparent 38%),
-    radial-gradient(circle at 68% 32%, rgba(113, 123, 118, 0.27), transparent 44%),
-    radial-gradient(circle at 54% 82%, rgba(137, 127, 127, 0.15), transparent 38%),
-    linear-gradient(135deg, #3a3d3c 0%, #1e2020 48%, #080807 100%);
+    radial-gradient(ellipse at 70% 26%, rgba(128, 128, 128, 0.12), transparent 55%),
+    linear-gradient(145deg, #141414 0%, #0e0e0e 52%, #080807 100%);
   isolation: isolate;
   opacity: var(--hero-stack-opacity);
   transform: translate3d(0, var(--hero-stack-y), 0);
@@ -38,7 +36,7 @@
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  opacity: 0.2;
+  opacity: 0.13;
   background-image: radial-gradient(
     circle,
     rgba(235, 233, 224, 0.38) 0 0.55px,
@@ -63,7 +61,8 @@
   z-index: 1;
   pointer-events: none;
   background:
-    radial-gradient(circle at 60% 38%, rgba(225, 226, 221, 0.085), transparent 34%),
+    radial-gradient(ellipse at 72% 25%, rgba(178, 178, 178, 0.02), transparent 52%),
+    linear-gradient(180deg, rgba(8, 8, 7, 0.18), transparent 24%, transparent 55%, rgba(8, 8, 7, 0.50)),
     linear-gradient(90deg, rgba(8, 8, 8, 0.1), transparent 52%, rgba(8, 8, 8, 0.14));
 }
 .hero-frame {
@@ -140,8 +139,8 @@
 }
 
 @media (max-width: 640px) {
-  .hero-frame { padding-top: 6rem; padding-bottom: 1.2rem; }
-  .hero-copy { padding: 3rem 0 2.5rem; }
+  .hero-frame { padding-top: max(5.5rem, calc(4.5rem + env(safe-area-inset-top, 0px))); padding-bottom: max(1.25rem, env(safe-area-inset-bottom, 0px)); }
+  .hero-copy { padding: 2rem 0 1.75rem; }
   .hero-title-name { font-size: clamp(4rem, 20vw, 6.3rem); line-height: 0.79; }
   .hero-title-role {
     justify-self: start;
@@ -151,6 +150,16 @@
   }
   .hero-bottom { grid-template-columns: 1fr; gap: 1.25rem; }
   .hero-bottom .btn { justify-self: start; }
+  .hero-description { font-size: 0.875rem; line-height: 1.65; }
+}
+
+@media (max-height: 600px) and (min-width: 641px) {
+  .hero-frame { padding-top: 5rem; padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px)); }
+  .hero-copy { padding: 0.75rem 0; }
+  .hero-title-name { font-size: clamp(3rem, min(11vw, 19dvh), 7rem); }
+  .hero-title-role { font-size: clamp(1.6rem, min(5vw, 9dvh), 3.5rem); margin-top: 0.3em; }
+  .hero-bottom { grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem; padding-top: 0.75rem; }
+  .hero-description { max-width: 52ch; font-size: 0.8125rem; line-height: 1.5; }
 }
 
 @media (prefers-reduced-motion: reduce) {

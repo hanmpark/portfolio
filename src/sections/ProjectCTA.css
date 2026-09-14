@@ -79,6 +79,7 @@
 
 .project-cta-button {
   display: inline-flex;
+  max-width: 100%;
   align-items: center;
   gap: 2rem;
   min-height: 3.25rem;
@@ -93,6 +94,7 @@
 }
 
 .project-cta-button > span:last-child {
+  flex-shrink: 0;
   display: grid;
   place-items: center;
   width: 2.25rem;
@@ -142,7 +144,7 @@
   }
 
   .project-cta-title {
-    font-size: clamp(2rem, 10.2vw, 4.5rem);
+    font-size: clamp(2rem, 11.2vw, 4.5rem);
     line-height: 1;
   }
 
@@ -150,7 +152,18 @@
     align-items: start;
     flex-direction: column;
     gap: 0.5rem;
+    padding-right: 0;
+    font-size: 0.6875rem;
   }
+  .project-cta-eyebrow { font-size: 0.6875rem; line-height: 1.6; letter-spacing: 0.1em; }
+  .project-cta-button { gap: 1rem; font-size: 0.8125rem; }
+  .project-cta-inner { padding-bottom: max(2rem, env(safe-area-inset-bottom, 0px)); }
+}
+
+@media (max-height: 600px) and (min-width: 701px) {
+  .project-cta-inner { padding-top: 4rem; }
+  .project-cta-title { font-size: clamp(2rem, 10svh, 4rem); width: min(100%, 36rem); }
+  .project-cta-eyebrow { margin-bottom: 1.5rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

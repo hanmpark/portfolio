@@ -21,7 +21,8 @@
   --font-creative: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --app-viewport-height: 100vh;
-  --container: min(1440px, calc(100vw - clamp(2rem, 6vw, 7rem)));
+  --page-gutter: max(clamp(1rem, 2.2vw, 2.5rem), env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+  --container: min(1440px, calc(100vw - var(--page-gutter) - var(--page-gutter)));
 }
 
 @supports (height: 100dvh) {
@@ -113,7 +114,6 @@ img { display: block; max-width: 100%; }
 :focus-visible { outline: 2px solid var(--coral); outline-offset: 4px; }
 
 @media (max-width: 640px) {
-  :root { --container: calc(100vw - 2rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {

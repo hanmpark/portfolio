@@ -173,6 +173,7 @@
 }
 
 @media (max-width: 760px) {
+  .so-long-level { width: 2.75rem; height: 2.75rem; }
   .so-long-topbar {
     align-items: stretch;
     flex-direction: column;

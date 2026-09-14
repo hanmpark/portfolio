@@ -5,6 +5,12 @@ import "./About.css";
 
 const highlightKeys = ["systems", "fullStack", "graphics", "aiTooling"];
 
+const testimonialWords = (quote) => quote.split(" ").map((word, index) => (
+  <span className="abt-testimonial-word" key={`${word}-${index}`}>
+    <span style={{ "--word-index": index }}>{word}</span>
+  </span>
+));
+
 const About = () => {
   const { t } = useLanguage();
   const revealRef = useScrollReveal({ threshold: 0.04, rootMargin: "0px 0px 80px 0px", selector: ".reveal" });
@@ -41,6 +47,8 @@ const About = () => {
     );
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
+    let measureCharacters = true;
+    let characterOffsets = [];
 
     const clamp = (value) => Math.min(Math.max(value, 0), 1);
     const smoothstep = (value) => value * value * (3 - 2 * value);
@@ -56,14 +64,24 @@ const About = () => {
       }
 
       const rect = heading.getBoundingClientRect();
+      if (measureCharacters) {
+        // Follow the rendered lines so the light travels from top left to bottom right.
+        const positions = characters.map((character) => {
+          const characterRect = character.getBoundingClientRect();
+          return (characterRect.left - rect.left) / Math.max(rect.width, 1)
+            + (characterRect.top - rect.top) / Math.max(rect.height, 1);
+        });
+        const first = Math.min(...positions);
+        const distance = Math.max(Math.max(...positions) - first, 1e-6);
+        characterOffsets = positions.map((position) => (position - first) / distance * 0.58);
+        measureCharacters = false;
+      }
       const viewportHeight = Math.max(window.innerHeight, 1);
-      const endTop = viewportHeight * 0.4 - rect.height * 0.5;
-      const travel = Math.max(viewportHeight - endTop, 1);
-      const progress = clamp((viewportHeight - rect.top) / travel);
-      const lastCharacter = Math.max(characters.length - 1, 1);
-
+      // Begin slightly above the viewport center and finish at the top edge.
+      const startTop = viewportHeight * 0.6;
+      const progress = clamp((startTop - rect.top) / Math.max(startTop, 1));
       characters.forEach((character, index) => {
-        const characterOffset = (index / lastCharacter) * 0.58;
+        const characterOffset = characterOffsets[index];
         const reveal = smoothstep(clamp((progress - characterOffset) / 0.42));
         character.style.setProperty(
           "--char-opacity",
@@ -76,15 +94,24 @@ const About = () => {
       if (frame) return;
       frame = window.requestAnimationFrame(updateHighlight);
     };
+    const requestMeasure = () => {
+      measureCharacters = true;
+      requestUpdate();
+    };
+    const resizeObserver = new ResizeObserver(requestMeasure);
+    resizeObserver.observe(heading);
 
     updateHighlight();
     window.addEventListener("scroll", requestUpdate, { passive: true });
-    window.addEventListener("resize", requestUpdate);
+    window.addEventListener("resize", requestMeasure);
+    document.fonts.addEventListener("loadingdone", requestMeasure);
     reducedMotion.addEventListener("change", requestUpdate);
 
     return () => {
       window.removeEventListener("scroll", requestUpdate);
-      window.removeEventListener("resize", requestUpdate);
+      window.removeEventListener("resize", requestMeasure);
+      document.fonts.removeEventListener("loadingdone", requestMeasure);
+      resizeObserver.disconnect();
       reducedMotion.removeEventListener("change", requestUpdate);
       if (frame) window.cancelAnimationFrame(frame);
     };
@@ -209,22 +236,31 @@ const About = () => {
               >
                 <blockquote aria-label={currentTestimonial.quote}>
                   <span aria-hidden="true">
-                    {currentTestimonial.quote.split(" ").map((word, index) => (
-                      <span className="abt-testimonial-word" key={`${word}-${index}`}>
-                        <span style={{ "--word-index": index }}>{word}</span>
-                      </span>
-                    ))}
+                    {testimonialWords(currentTestimonial.quote)}
                   </span>
                 </blockquote>
+                {testimonialItems.map((item) => (
+                  <blockquote className="abt-testimonial-sizer" aria-hidden="true" key={item.name}>
+                    <span>{testimonialWords(item.quote)}</span>
+                  </blockquote>
+                ))}
               </div>
 
               <div
                 className="abt-testimonial-footer"
                 key={`${activeTestimonial}-${currentTestimonial.name}-footer`}
               >
-                <div className="abt-testimonial-author">
-                  <strong>{currentTestimonial.name}</strong>
-                  <span>{currentTestimonial.role}</span>
+                <div className="abt-testimonial-authors">
+                  <div className="abt-testimonial-author">
+                    <strong>{currentTestimonial.name}</strong>
+                    <span>{currentTestimonial.role}</span>
+                  </div>
+                  {testimonialItems.map((item) => (
+                    <div className="abt-testimonial-author abt-testimonial-sizer" aria-hidden="true" key={item.name}>
+                      <strong>{item.name}</strong>
+                      <span>{item.role}</span>
+                    </div>
+                  ))}
                 </div>
 
                 <div className="abt-testimonial-controls">

@@ -57,17 +57,22 @@ const atmosphereFragmentShader = `
     float cloud = fbm(point * 1.15 + vec2(time, -time * 0.72));
     float softCloud = fbm(point * 0.62 + vec2(-time * 0.42, time * 0.35) + 4.7);
     float bloom = exp(-length(point - vec2(-aspect * 0.22, 0.18)) * 1.55);
+    vec2 drift = vec2(sin(time * 0.6), cos(time * 0.45)) * 0.035;
+    vec2 lightPosition = (vUv - vec2(0.70, 0.74) - drift) * vec2(1.15, 1.55);
+    lightPosition += vec2(softCloud - 0.5, cloud - 0.5) * 0.22;
+    float mistLight = exp(-dot(lightPosition, lightPosition) * 5.0);
 
-    vec3 charcoal = vec3(0.031, 0.031, 0.027);
-    vec3 graphite = vec3(0.125, 0.132, 0.130);
-    vec3 smoke = vec3(0.260, 0.272, 0.265);
-    vec3 pearl = vec3(0.590, 0.600, 0.580);
+    vec3 charcoal = vec3(0.022);
+    vec3 slate = vec3(0.070);
+    vec3 smoke = vec3(0.250);
+    vec3 mist = vec3(0.500);
 
-    vec3 color = mix(charcoal, graphite, smoothstep(0.18, 0.82, cloud));
-    color = mix(color, smoke, smoothstep(0.44, 0.94, softCloud) * 0.38);
-    color = mix(color, pearl, bloom * 0.075);
+    vec3 color = mix(charcoal, slate, smoothstep(0.18, 0.82, cloud));
+    color = mix(color, smoke, smoothstep(0.44, 0.94, softCloud) * 0.20);
+    color = mix(color, mist, bloom * 0.025);
+    color = mix(color, mist, mistLight * (0.12 + softCloud * 0.04));
 
-    float vignette = smoothstep(1.1, 0.18, length((vUv - 0.5) * vec2(0.82, 1.0)));
+    float vignette = 1.0 - smoothstep(0.18, 1.1, length((vUv - 0.5) * vec2(0.82, 1.0)));
     color *= mix(0.62, 1.02, vignette);
     color += (hash21(gl_FragCoord.xy) - 0.5) * 0.012;
 
@@ -174,7 +179,11 @@ const dotVertexShader = `
     displaced.x += (warpB - 0.5) * 0.002;
 
     vTone = clamp(ridge * 0.72 + crest * 0.28, 0.0, 1.0);
-    vOpacity = mix(0.12, 0.82, ridge) + crest * 0.12;
+    // Leave a quieter area behind the name, with softer edges around the field.
+    float titleQuiet = exp(-pow((uv.y - 0.48) * 5.0, 2.0));
+    float edgeFade = smoothstep(0.0, 0.16, uv.y) * (1.0 - smoothstep(0.88, 1.0, uv.y));
+    vOpacity = (mix(0.09, 0.72, ridge) + crest * 0.10)
+      * (1.0 - titleQuiet * 0.28) * mix(0.45, 1.0, edgeFade);
     gl_PointSize = uPixelRatio * aSize * (0.78 + ridge * 1.15 + crest * 0.26);
     gl_Position = vec4(displaced, 0.0, 1.0);
   }
