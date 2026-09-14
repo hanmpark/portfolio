@@ -29,20 +29,22 @@
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: clamp(1rem, 2vw, 2rem);
   align-items: start;
+  padding-right: clamp(1.5rem, 4vw, 4rem);
 }
 .abt-statement-copy {
-  grid-column: 6 / -1;
+  grid-column: 1 / span 7;
+  align-self: center;
   display: grid;
-  gap: clamp(0.9rem, 1.4vw, 1.3rem);
+  gap: clamp(1.5rem, 3vw, 3rem);
 }
 .abt-statement-copy > .eyebrow { margin: 0; }
 .abt-testimonial-carousel {
   --testimonial-progress: 50%;
-  grid-column: 1 / span 4;
+  grid-column: 9 / -1;
   display: flex;
-  min-height: clamp(22rem, 30vw, 26rem);
+  min-width: 0;
   flex-direction: column;
-  padding: 1rem 0 1.15rem;
+  padding: 1.25rem 0;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
@@ -52,7 +54,7 @@
   gap: 1rem;
   padding-bottom: 0.9rem;
   color: var(--muted);
-  font-size: 0.54rem;
+  font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -97,7 +99,7 @@
   margin: 0;
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: clamp(0.88rem, 0.98vw, 1rem);
+  font-size: clamp(0.9375rem, 1.05vw, 1.0625rem);
   letter-spacing: 0;
   line-height: 1.65;
 }
@@ -137,14 +139,22 @@
 }
 .abt-testimonial-author strong {
   color: var(--ink-bright);
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
+.abt-testimonial-logo {
+  width: 7rem;
+  height: 2.25rem;
+  margin-bottom: 0.65rem;
+  object-fit: contain;
+  object-position: left center;
+}
+.abt-testimonial-logo--proptexx { filter: brightness(0) invert(0.9); }
 .abt-testimonial-author span {
   color: var(--muted);
-  font-size: 0.61rem;
+  font-size: 0.75rem;
   line-height: 1.4;
 }
 .abt-testimonial-controls {
@@ -186,17 +196,17 @@
   to { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 .abt-scroll-heading {
-  max-width: 18ch;
+  max-width: 25ch;
   margin: 0;
   color: var(--ink-bright);
-  font-size: clamp(2rem, 3.35vw, 3.65rem);
+  font-size: clamp(2rem, 3.4vw, 3.65rem);
   font-weight: 500;
   letter-spacing: -0.045em;
-  line-height: 1.07;
+  line-height: 1.14;
 }
 .abt-highlight-word { display: inline-block; white-space: nowrap; }
 .abt-highlight-char {
-  --char-opacity: 0.18;
+  --char-opacity: 0.35;
   display: inline-block;
   opacity: var(--char-opacity);
   will-change: opacity;
@@ -208,7 +218,7 @@
   display: grid;
   width: 100vw;
   gap: 0.5rem;
-  margin: clamp(5rem, 9vw, 9rem) 0 clamp(5rem, 8vw, 8rem);
+  margin: clamp(3.5rem, 6vw, 6rem) 0;
   padding: 0.95rem 0;
   transform: translateX(-50%);
 }
@@ -264,128 +274,140 @@
   gap: clamp(1rem, 2vw, 2rem);
   align-items: start;
 }
-.abt-filmstrip {
-  position: absolute;
-  top: clamp(2.5rem, 5vw, 5rem);
-  left: -9vw;
-  z-index: 0;
-  display: flex;
-  width: min(68vw, 62rem);
-  height: clamp(5.5rem, 9vw, 8.5rem);
-  gap: 0.5rem;
-  padding: 1.15rem 0.55rem;
-  overflow: hidden;
-  border-block: 1px solid rgba(233, 232, 227, 0.2);
-  background:
-    radial-gradient(ellipse, var(--paper) 58%, transparent 62%) 0 0.26rem / 1.2rem 0.55rem repeat-x,
-    radial-gradient(ellipse, var(--paper) 58%, transparent 62%) 0 calc(100% - 0.26rem) / 1.2rem 0.55rem repeat-x,
-    rgba(233, 232, 227, 0.045);
-  opacity: 0.42;
-  pointer-events: none;
-  transform: rotate(-4.2deg);
-  transform-origin: center;
-  animation: abt-filmstrip-drift 12s ease-in-out infinite alternate;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 86%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 86%, transparent);
-}
-.abt-filmstrip span {
-  flex: 0 0 clamp(4.5rem, 8vw, 7.5rem);
-  border: 1px solid rgba(233, 232, 227, 0.17);
-  background: rgba(233, 232, 227, 0.025);
-}
-.abt-story,
-.abt-portrait { position: relative; z-index: 1; }
-.abt-portrait { position: sticky; top: 7rem; grid-column: 8 / -1; justify-self: end; width: min(100%, 30rem); margin: 0; }
-.abt-portrait-media { position: relative; isolation: isolate; }
-.abt-portrait-media::before { content: ""; position: absolute; inset: 0.85rem -0.85rem -0.85rem 0.85rem; z-index: -1; border: 1px solid var(--coral); opacity: 0.72; }
-.abt-portrait img { width: 100%; aspect-ratio: 0.82; object-fit: cover; object-position: 50% 28%; filter: none; }
-.abt-portrait figcaption { position: relative; z-index: 2; display: flex; justify-content: space-between; gap: 1.5rem; margin-top: 1.85rem; color: var(--muted); font-size: 0.56rem; font-weight: 600; letter-spacing: 0.12em; line-height: 1.55; text-transform: uppercase; }
-.abt-portrait figcaption span:first-child { color: var(--ink); }
-.abt-portrait figcaption span:last-child { max-width: 18ch; text-align: right; }
-.abt-story {
-  grid-column: 1 / span 6;
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 0 clamp(1rem, 2vw, 2rem);
+.abt-portrait {
+  grid-column: 9 / -1;
+  align-self: center;
   width: 100%;
-  padding-top: 0.25rem;
-}
-.abt-story-label {
-  grid-column: 1;
+  max-width: 25rem;
   margin: 0;
-  color: var(--coral);
-  font-size: 0.58rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
+  justify-self: end;
+}
+.abt-portrait-media { position: relative; }
+.abt-portrait img { width: 100%; aspect-ratio: 0.9; object-fit: cover; object-position: 50% 28%; }
+.abt-portrait figcaption {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
-.abt-story-copy { grid-column: 2 / -1; }
-.abt-story-copy p { max-width: 56ch; margin: 0 0 1.5rem; color: var(--muted); font-size: clamp(0.92rem, 1vw, 1rem); line-height: 1.8; }
-.abt-story-copy p:first-child { max-width: 42ch; margin-bottom: clamp(2.3rem, 3.5vw, 3.5rem); color: var(--ink); font-family: var(--font-display); font-size: clamp(1.4rem, 1.9vw, 2rem); letter-spacing: -0.02em; line-height: 1.25; }
-.abt-highlights {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: 1fr 5fr;
-  gap: clamp(1rem, 2vw, 2rem);
-  margin-top: clamp(2.5rem, 4vw, 4rem);
-  padding-top: 1rem;
+.abt-portrait figcaption span:first-child { color: var(--ink); }
+.abt-story {
+  grid-column: 1 / span 7;
+  min-width: 0;
+  padding-top: 1.25rem;
   border-top: 1px solid var(--line);
 }
-.abt-highlights > p { margin: 0; color: var(--muted); font-size: 0.54rem; font-weight: 600; letter-spacing: 0.13em; line-height: 1.4; text-transform: uppercase; }
-.abt-highlights > div { display: grid; grid-template-columns: repeat(2, 1fr); column-gap: clamp(1.5rem, 3vw, 3rem); }
-.abt-highlights span { display: flex; min-height: 3.6rem; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--line); font-size: 0.64rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
-.abt-highlights i { color: var(--muted); font-family: var(--font-body); font-size: 0.55rem; font-style: normal; }
-.abt-credentials { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 2rem); margin-top: clamp(5rem, 9vw, 9rem); padding-top: 1.2rem; border-top: 1px solid var(--line); }
-.abt-credentials > p { margin: 0; color: var(--coral); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; }
-.abt-credentials > p { grid-column: 1 / span 4; }
-.abt-credentials dl { grid-column: 6 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 0; }
-.abt-credentials dt { font-family: var(--font-display); font-size: clamp(1.5rem, 2.3vw, 2.5rem); }
-.abt-credentials dd { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.abt-story-label,
+.abt-highlights > p,
+.abt-credentials > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+.abt-story-copy { margin-top: 1.75rem; }
+.abt-story-copy p {
+  max-width: 58ch;
+  margin: 0 0 1.5rem;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+.abt-story-copy p:first-child {
+  color: var(--ink);
+  font-size: clamp(1.2rem, 1.65vw, 1.65rem);
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+}
+.abt-story-copy p:last-child { margin-bottom: 0; }
+.abt-highlights { margin-top: 2.5rem; }
+.abt-highlights > div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 2rem;
+  margin-top: 0.75rem;
+}
+.abt-highlights span {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.abt-highlights i {
+  color: var(--muted);
+  font-size: 0.625rem;
+  font-style: normal;
+}
+.abt-credentials {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 2rem);
+  margin-top: clamp(3.5rem, 6vw, 6rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+.abt-credentials > p { grid-column: 1 / span 3; }
+.abt-credentials dl {
+  grid-column: 4 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin: 0;
+}
+.abt-credentials dl > div { padding-left: 1.5rem; border-left: 1px solid var(--line-soft); }
+.abt-credentials dt { font-size: clamp(1.4rem, 2.1vw, 2rem); letter-spacing: -0.04em; }
+.abt-credentials dd { margin: 0.5rem 0 0; color: var(--muted); font-size: 0.6875rem; letter-spacing: 0.04em; text-transform: uppercase; }
 
-@media (max-width: 920px) {
-  .abt-statement-copy { grid-column: 6 / -1; }
-  .abt-testimonial-carousel { grid-column: 1 / span 4; }
-  .abt-story { grid-column: 1 / span 7; }
-  .abt-portrait { grid-column: 9 / -1; }
+@media (max-width: 1100px) {
+  .abt-statement-copy, .abt-story { grid-column: 1 / span 7; }
+  .abt-portrait, .abt-testimonial-carousel { grid-column: 9 / -1; }
+  .abt-testimonial-footer { flex-wrap: wrap; gap: 1rem; }
+  .abt-testimonial-authors { flex-basis: 100%; }
 }
 
-@media (max-width: 900px) {
-  .abt-statement { grid-template-columns: 1fr; gap: 1.75rem; }
-  .abt-statement-copy { grid-column: auto; }
-  .abt-testimonial-carousel { order: 2; width: 100%; max-width: 40rem; justify-self: end; min-height: 22rem; margin-top: 1.5rem; }
-  .abt-testimonial-carousel { grid-column: auto; }
-  .abt-scroll-heading { max-width: none; font-size: clamp(1.75rem, 7.4vw, 2.6rem); }
-  .abt-motion-bands { margin: 5rem 0 4.5rem; }
-  .abt-layout { grid-template-columns: 1fr; gap: 3.5rem; }
-  .abt-portrait { position: relative; top: auto; grid-column: auto; justify-self: end; width: min(82vw, 28rem); margin-top: 0; }
-  .abt-story { grid-column: auto; grid-template-columns: 1fr; gap: 1.5rem; width: 100%; padding-top: 0; }
-  .abt-story-label, .abt-story-copy, .abt-highlights { grid-column: auto; }
-  .abt-highlights { grid-template-columns: 1fr; }
-  .abt-testimonial-body blockquote { max-width: 60ch; font-size: 0.9375rem; }
-  .abt-testimonial-head, .abt-story-label, .abt-highlights > p { font-size: 0.6875rem; }
-  .abt-testimonial-author strong, .abt-highlights span { font-size: 0.75rem; }
-  .abt-testimonial-author span, .abt-portrait figcaption, .abt-credentials dd { font-size: 0.6875rem; }
-  .abt-story-copy p { font-size: 0.9375rem; }
-  .abt-portrait-media::before { inset: 0.5rem -0.5rem -0.5rem 0.5rem; }
-  .abt-filmstrip { top: 3.5rem; left: -16vw; width: 110vw; opacity: 0.3; }
-  .abt-credentials { grid-template-columns: 1fr; }
-  .abt-credentials > p,
-  .abt-credentials dl { grid-column: auto; }
-  .abt-credentials dl { grid-template-columns: 1fr; gap: 1.5rem; }
+@media (max-width: 760px) {
+  .abt-statement { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 2rem; }
+  .abt-statement-copy, .abt-portrait { grid-column: auto; }
+  .abt-scroll-heading { font-size: clamp(1.8rem, 4.4vw, 2.5rem); }
+  .abt-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .abt-story, .abt-testimonial-carousel { grid-column: auto; }
+  .abt-testimonial-body { padding: 1.75rem 0; }
+  .abt-testimonial-body blockquote { max-width: 65ch; }
+  .abt-testimonial-footer { flex-wrap: nowrap; }
+  .abt-testimonial-authors { flex-basis: auto; }
+  .abt-credentials { grid-template-columns: 1fr; gap: 1.5rem; }
+  .abt-credentials > p, .abt-credentials dl { grid-column: auto; }
+  .abt-credentials dl > div { padding-left: 1rem; }
 }
 
 @media (max-width: 520px) {
-  .abt-testimonial-footer { align-items: flex-start; }
-  .abt-story { grid-template-columns: 1fr; }
-  .abt-story-label,
-  .abt-story-copy,
-  .abt-highlights { grid-column: auto; }
-  .abt-story-label { margin-bottom: 1.5rem; }
-  .abt-highlights { grid-template-columns: 1fr; }
-  .abt-highlights > div { grid-template-columns: 1fr; }
-  .abt-portrait figcaption { gap: 1rem; }
-  .abt-testimonial-footer { gap: 0.75rem; }
-  .abt-portrait { width: min(88%, 26rem); margin-right: 0.5rem; }
+  .abt-statement { grid-template-columns: 1fr; gap: 2rem; padding-right: 0; }
+  .abt-scroll-heading { max-width: none; font-size: clamp(1.85rem, 7.4vw, 2.5rem); }
+  .abt-portrait { width: calc(100% - 2rem); max-width: none; justify-self: center; }
+  .abt-portrait img { aspect-ratio: 1.15; object-position: 50% 35%; }
+  .abt-motion-bands { margin: 3rem 0; }
+  .abt-highlights > div { column-gap: 1.25rem; }
+  .abt-highlights span { gap: 0.65rem; font-size: 0.6875rem; }
+  .abt-credentials dl { grid-template-columns: 1fr; gap: 1.25rem; }
+  .abt-credentials dl > div { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+  .abt-credentials dd { margin: 0; text-align: right; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -394,8 +416,7 @@
   .abt-testimonial-body { animation: none; }
   .abt-testimonial-word > span,
   .abt-testimonial-footer,
-  .abt-motion-band-track,
-  .abt-filmstrip { animation: none; }
+  .abt-motion-band-track { animation: none; }
 }
 
 @keyframes abt-band-forward {
@@ -406,9 +427,4 @@
 @keyframes abt-band-reverse {
   from { transform: translate3d(-50%, 0, 0); }
   to { transform: translate3d(0, 0, 0); }
-}
-
-@keyframes abt-filmstrip-drift {
-  from { transform: translate3d(-1.5rem, 0, 0) rotate(-4.2deg); }
-  to { transform: translate3d(1.5rem, -0.35rem, 0) rotate(-3.5deg); }
 }

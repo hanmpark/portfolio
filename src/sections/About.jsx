@@ -5,6 +5,28 @@ import "./About.css";
 
 const highlightKeys = ["systems", "fullStack", "graphics", "aiTooling"];
 
+const testimonialCompanies = {
+  proptexx: { logo: "/assets/experiences/proptexx.webp", name: "PropTexx" },
+  theGoodCleaners: { logo: "/assets/experiences/thegoodcleaners.png", name: "The Good Cleaners" },
+};
+
+const testimonialLogo = (company) => {
+  const details = testimonialCompanies[company];
+  if (!details) return null;
+
+  return (
+    <img
+      className={`abt-testimonial-logo abt-testimonial-logo--${company}`}
+      src={details.logo}
+      alt={details.name}
+      width="112"
+      height="36"
+      loading="lazy"
+      decoding="async"
+    />
+  );
+};
+
 const testimonialWords = (quote) => quote.split(" ").map((word, index) => (
   <span className="abt-testimonial-word" key={`${word}-${index}`}>
     <span style={{ "--word-index": index }}>{word}</span>
@@ -85,7 +107,7 @@ const About = () => {
         const reveal = smoothstep(clamp((progress - characterOffset) / 0.42));
         character.style.setProperty(
           "--char-opacity",
-          (0.18 + reveal * 0.82).toFixed(3),
+          (0.35 + reveal * 0.65).toFixed(3),
         );
       });
     };
@@ -202,12 +224,98 @@ const About = () => {
   };
 
   return (
-    <section className="section abt-section" id="about" ref={revealRef}>
+    <section className="section abt-section" id="about" aria-labelledby="about-title" ref={revealRef}>
       <div className="container abt-depth-content">
         <div className="abt-statement">
+
+          <div className="abt-statement-copy">
+            <p className="eyebrow reveal reveal-up">{t("about.eyebrow")}</p>
+            <h2
+              id="about-title"
+              className="abt-scroll-heading"
+              ref={highlightRef}
+              aria-label={leadParagraph}
+            >
+              <span className="abt-highlight-words" aria-hidden="true">
+                {leadParagraph.split(" ").map((word, wordIndex, words) => (
+                  <span key={`${word}-${wordIndex}`}>
+                    <span className="abt-highlight-word">
+                      {Array.from(word).map((character, characterIndex) => (
+                        <span
+                          className="abt-highlight-char"
+                          key={`${character}-${characterIndex}`}
+                        >
+                          {character}
+                        </span>
+                      ))}
+                    </span>
+                    {wordIndex < words.length - 1 ? " " : null}
+                  </span>
+                ))}
+              </span>
+            </h2>
+          </div>
+          <figure className="abt-portrait reveal reveal-up">
+            <div className="abt-portrait-media">
+              <img src="/assets/self_image.jpg" alt="Hanmin Park" decoding="async" loading="lazy" />
+            </div>
+            <figcaption>
+              <span>{portraitName}</span>
+              {portraitRole ? <span>{portraitRole}</span> : null}
+            </figcaption>
+          </figure>
+        </div>
+
+        <div className="abt-motion-bands" aria-hidden="true">
+          <div className="abt-motion-band abt-motion-band--forward">
+            <div className="abt-motion-band-track">
+              {[0, 1].map((groupIndex) => (
+                <div className="abt-motion-band-group" key={groupIndex}>
+                  {Array.from({ length: 4 }, (_, itemIndex) => (
+                    <span key={itemIndex}>{t("about.bandOne")}</span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="abt-motion-band abt-motion-band--reverse">
+            <div className="abt-motion-band-track">
+              {[0, 1].map((groupIndex) => (
+                <div className="abt-motion-band-group" key={groupIndex}>
+                  {Array.from({ length: 4 }, (_, itemIndex) => (
+                    <span key={itemIndex}>{t("about.bandTwo")}</span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="abt-layout">
+          <div className="abt-story">
+            <p className="abt-story-label reveal reveal-up">
+              {t("about.approach")}
+            </p>
+
+            <div className="abt-story-copy">
+              {bodyParagraphs.map((paragraph) => (
+                <p className="reveal reveal-up" key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+
+            <div className="abt-highlights reveal reveal-up">
+              <p>{t("about.expertise")}</p>
+              <div>
+                {highlightKeys.map((key, index) => (
+                  <span key={key}><i>{String(index + 1).padStart(2, "0")}</i>{t(`about.highlights.${key}`)}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {currentTestimonial ? (
             <aside
-              className="abt-testimonial-carousel"
+              className="abt-testimonial-carousel reveal reveal-up"
               aria-label={t("testimonials.label")}
               style={{
                 "--testimonial-progress": `${((activeTestimonial + 1) / testimonialItems.length) * 100}%`,
@@ -252,11 +360,13 @@ const About = () => {
               >
                 <div className="abt-testimonial-authors">
                   <div className="abt-testimonial-author">
+                    {testimonialLogo(currentTestimonial.company)}
                     <strong>{currentTestimonial.name}</strong>
                     <span>{currentTestimonial.role}</span>
                   </div>
                   {testimonialItems.map((item) => (
                     <div className="abt-testimonial-author abt-testimonial-sizer" aria-hidden="true" key={item.name}>
+                      {testimonialLogo(item.company)}
                       <strong>{item.name}</strong>
                       <span>{item.role}</span>
                     </div>
@@ -282,95 +392,6 @@ const About = () => {
               </div>
             </aside>
           ) : null}
-
-          <div className="abt-statement-copy">
-            <p className="eyebrow reveal reveal-up">{t("about.eyebrow")}</p>
-            <p
-              className="abt-scroll-heading"
-              ref={highlightRef}
-              aria-label={leadParagraph}
-            >
-              <span className="abt-highlight-words" aria-hidden="true">
-                {leadParagraph.split(" ").map((word, wordIndex, words) => (
-                  <span key={`${word}-${wordIndex}`}>
-                    <span className="abt-highlight-word">
-                      {Array.from(word).map((character, characterIndex) => (
-                        <span
-                          className="abt-highlight-char"
-                          key={`${character}-${characterIndex}`}
-                        >
-                          {character}
-                        </span>
-                      ))}
-                    </span>
-                    {wordIndex < words.length - 1 ? " " : null}
-                  </span>
-                ))}
-              </span>
-            </p>
-          </div>
-        </div>
-
-        <div className="abt-motion-bands" aria-hidden="true">
-          <div className="abt-motion-band abt-motion-band--forward">
-            <div className="abt-motion-band-track">
-              {[0, 1].map((groupIndex) => (
-                <div className="abt-motion-band-group" key={groupIndex}>
-                  {Array.from({ length: 4 }, (_, itemIndex) => (
-                    <span key={itemIndex}>{t("about.bandOne")}</span>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="abt-motion-band abt-motion-band--reverse">
-            <div className="abt-motion-band-track">
-              {[0, 1].map((groupIndex) => (
-                <div className="abt-motion-band-group" key={groupIndex}>
-                  {Array.from({ length: 4 }, (_, itemIndex) => (
-                    <span key={itemIndex}>{t("about.bandTwo")}</span>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="abt-layout">
-          <div className="abt-filmstrip" aria-hidden="true">
-            {Array.from({ length: 10 }, (_, index) => <span key={index} />)}
-          </div>
-
-          <div className="abt-story">
-            <p className="abt-story-label reveal reveal-up">
-              {t("about.approach")}
-            </p>
-
-            <div className="abt-story-copy">
-              {bodyParagraphs.map((paragraph) => (
-                <p className="reveal reveal-up" key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
-
-            <div className="abt-highlights reveal reveal-up">
-              <p>{t("about.expertise")}</p>
-              <div>
-                {highlightKeys.map((key, index) => (
-                  <span key={key}><i>{String(index + 1).padStart(2, "0")}</i>{t(`about.highlights.${key}`)}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <figure className="abt-portrait reveal reveal-up">
-            <div className="abt-portrait-media">
-              <img src="/assets/self_image.jpg" alt="Hanmin Park" decoding="async" loading="lazy" />
-            </div>
-            <figcaption>
-              <span>{portraitName}</span>
-              {portraitRole ? <span>{portraitRole}</span> : null}
-            </figcaption>
-          </figure>
         </div>
 
         <div className="abt-credentials reveal reveal-up">

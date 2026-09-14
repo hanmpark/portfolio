@@ -29,12 +29,14 @@ const en = {
         quote:
           "During his internship at PropTexx, Hanmin stood out for his autonomy, commitment, and ability to learn quickly. His contributions across machine learning and full-stack development demonstrated his versatility, technical skill, and reliability.",
         name: "Mehdi Mirzapour",
+        company: "proptexx",
         role: "Head of Machine Learning · PropTexx",
       },
       {
         quote:
           "Hanmin removed key points of friction from our forms and booking system, significantly improving user experience and conversion. His work contributed to our annual revenue growing from $600,000 to $1.2 million. Autonomous, fast, and proactive, he anticipates issues and delivers effective, durable solutions.",
         name: "Isaac Ifergan",
+        company: "theGoodCleaners",
         role: "Co-founder · The Good Cleaners",
       },
     ],
@@ -56,7 +58,7 @@ const en = {
     portraitCaption: "Hanmin Park — Developer",
     coordinates: "My background",
     paragraphs: [
-      "I like figuring out how things work and making things of my own. Usually with code, sometimes with a camera.",
+      "I like understanding what goes on behind an interface. From the first prototype to the details that make a difference, I build tools that are easy to use and thoughtfully engineered.",
       "At 42 Nice, I learned to code by working on projects and learning from other students. What I enjoy about development is trying things out, working through problems, and watching an idea gradually take shape.",
       "I also studied film at the Sorbonne. I enjoy filming, finding a good shot, and spending time on an edit. Video is another way for me to make things outside of coding.",
     ],
