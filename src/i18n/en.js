@@ -43,7 +43,7 @@ const en = {
   },
   experience: {
     eyebrow: "Experience & Education",
-    title: "A timeline of work and studies.",
+    title: "My journey",
     experienceCol: "Experience",
     educationCol: "Education",
     timelineLabel: "Interactive career timeline",
@@ -53,10 +53,7 @@ const en = {
     eyebrow: "About",
     approach: "A bit about me",
     expertise: "What I do",
-    bandOne: "PROGRAMMING · SYSTEMS · FULL-STACK · AI TOOLING · PROGRAMMING · SYSTEMS · FULL-STACK · AI TOOLING ·",
-    bandTwo: "FRAME · FILM · EDIT · PACE · IMAGE · FRAME · FILM · EDIT · PACE · IMAGE ·",
     portraitCaption: "Hanmin Park — Developer",
-    coordinates: "My background",
     paragraphs: [
       "I like understanding what goes on behind an interface. From the first prototype to the details that make a difference, I build tools that are easy to use and thoughtfully engineered.",
       "At 42 Nice, I learned to code by working on projects and learning from other students. What I enjoy about development is trying things out, working through problems, and watching an idea gradually take shape.",

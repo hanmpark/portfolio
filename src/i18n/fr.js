@@ -53,10 +53,7 @@ const fr = {
     eyebrow: "À propos",
     approach: "Quelques mots sur moi",
     expertise: "Ce que je fais",
-    bandOne: "PROGRAMMATION · SYSTÈMES · FULL-STACK · OUTILS IA · PROGRAMMATION · SYSTÈMES · FULL-STACK · OUTILS IA ·",
-    bandTwo: "CADRER · FILMER · MONTER · RYTHMER · IMAGE · CADRER · FILMER · MONTER · RYTHMER · IMAGE ·",
     portraitCaption: "Hanmin Park — Développeur",
-    coordinates: "Mon parcours",
     paragraphs: [
       "J’aime comprendre ce qui se cache derrière une interface. Du premier prototype aux détails qui font la différence, je développe des outils simples à utiliser et solides dans leur conception.",
       "À 42 Nice, j’ai appris à coder en faisant des projets et en échangeant avec les autres. Ce que j’aime dans le développement, c’est chercher, tester et voir une idée prendre forme petit à petit.",
