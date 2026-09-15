@@ -21,7 +21,6 @@
   transform-origin: center bottom;
   will-change: transform, opacity;
 }
-.abt-section::after { content: ""; position: absolute; right: -18vw; bottom: -24vw; width: 52vw; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 40% 40%, rgba(233, 232, 227, 0.07), rgba(233, 232, 227, 0.025) 45%, transparent 70%); filter: blur(20px); pointer-events: none; }
 .abt-statement {
   position: relative;
   z-index: 1;
@@ -29,7 +28,7 @@
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: clamp(1rem, 2vw, 2rem);
   align-items: start;
-  padding-right: clamp(1.5rem, 4vw, 4rem);
+  padding-inline: clamp(0rem, 2vw, 2rem);
 }
 .abt-statement-copy {
   grid-column: 1 / span 7;
@@ -40,13 +39,13 @@
 .abt-statement-copy > .eyebrow { margin: 0; }
 .abt-testimonial-carousel {
   --testimonial-progress: 50%;
-  grid-column: 9 / -1;
+  grid-column: 1 / span 6;
   display: flex;
   min-width: 0;
   flex-direction: column;
-  padding: 1.25rem 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  padding: clamp(1.5rem, 3vw, 3rem);
+  background: rgba(233, 232, 227, 0.035);
+  border: 1px solid var(--line-soft);
 }
 .abt-testimonial-head {
   display: flex;
@@ -95,11 +94,11 @@
 }
 .abt-testimonial-body blockquote {
   grid-area: 1 / 1;
-  max-width: 42ch;
+  max-width: 48ch;
   margin: 0;
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: clamp(0.9375rem, 1.05vw, 1.0625rem);
+  font-size: clamp(1.0625rem, 1.4vw, 1.3rem);
   letter-spacing: 0;
   line-height: 1.65;
 }
@@ -196,10 +195,10 @@
   to { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 .abt-scroll-heading {
-  max-width: 25ch;
+  max-width: 27ch;
   margin: 0;
   color: var(--ink-bright);
-  font-size: clamp(2rem, 3.4vw, 3.65rem);
+  font-size: clamp(2rem, 3.1vw, 3.4rem);
   font-weight: 500;
   letter-spacing: -0.045em;
   line-height: 1.14;
@@ -211,62 +210,8 @@
   opacity: var(--char-opacity);
   will-change: opacity;
 }
-.abt-motion-bands {
-  position: relative;
-  left: 50%;
-  z-index: 1;
-  display: grid;
-  width: 100vw;
-  gap: 0.5rem;
-  margin: clamp(3.5rem, 6vw, 6rem) 0;
-  padding: 0.95rem 0;
-  transform: translateX(-50%);
-}
-.abt-motion-band {
-  position: relative;
-  left: 50%;
-  width: calc(100vw + 3rem);
-  overflow: hidden;
-  border-block: 1px solid rgba(233, 232, 227, 0.24);
-  transform-origin: center;
-}
-.abt-motion-band--forward {
-  color: var(--paper-deep);
-  background: #d7d6d0;
-  transform: translateX(-50%) rotate(-0.75deg);
-}
-.abt-motion-band--reverse {
-  color: var(--ink);
-  background: #202020;
-  transform: translateX(-50%) rotate(0.7deg);
-}
-.abt-motion-band-track {
-  display: flex;
-  width: max-content;
-  will-change: transform;
-}
-.abt-motion-band-group {
-  display: flex;
-  flex: 0 0 auto;
-  min-width: 100vw;
-}
-.abt-motion-band-group span {
-  flex: 0 0 auto;
-  padding: 1.05rem 2rem 0.98rem 0;
-  font-size: clamp(0.8rem, 1.08vw, 1rem);
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  line-height: 1;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-.abt-motion-band--forward .abt-motion-band-track {
-  animation: abt-band-forward 72s linear infinite;
-}
-.abt-motion-band--reverse .abt-motion-band-track {
-  animation: abt-band-reverse 80s linear infinite;
-}
 .abt-layout {
+  margin-top: clamp(4rem, 8vw, 8rem);
   position: relative;
   z-index: 1;
   display: grid;
@@ -298,15 +243,7 @@
   text-transform: uppercase;
 }
 .abt-portrait figcaption span:first-child { color: var(--ink); }
-.abt-story {
-  grid-column: 1 / span 7;
-  min-width: 0;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--line);
-}
-.abt-story-label,
-.abt-highlights > p,
-.abt-credentials > p {
+.abt-highlights > p {
   margin: 0;
   color: var(--muted);
   font-size: 0.6875rem;
@@ -315,25 +252,10 @@
   line-height: 1.5;
   text-transform: uppercase;
 }
-.abt-story-copy { margin-top: 1.75rem; }
-.abt-story-copy p {
-  max-width: 58ch;
-  margin: 0 0 1.5rem;
-  color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.8;
-}
-.abt-story-copy p:first-child {
-  color: var(--ink);
-  font-size: clamp(1.2rem, 1.65vw, 1.65rem);
-  letter-spacing: -0.02em;
-  line-height: 1.5;
-}
-.abt-story-copy p:last-child { margin-bottom: 0; }
-.abt-highlights { margin-top: 2.5rem; }
+.abt-highlights { grid-column: 8 / -1; position: relative; z-index: 1; padding-top: 1.5rem; border-top: 1px solid var(--line); }
 .abt-highlights > div {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   column-gap: 2rem;
   margin-top: 0.75rem;
 }
@@ -341,9 +263,9 @@
   display: flex;
   align-items: baseline;
   gap: 1rem;
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--line);
-  font-size: 0.75rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: clamp(0.875rem, 1.3vw, 1.2rem);
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -353,31 +275,9 @@
   font-size: 0.625rem;
   font-style: normal;
 }
-.abt-credentials {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: clamp(1rem, 2vw, 2rem);
-  margin-top: clamp(3.5rem, 6vw, 6rem);
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--line);
-}
-.abt-credentials > p { grid-column: 1 / span 3; }
-.abt-credentials dl {
-  grid-column: 4 / -1;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.5rem;
-  margin: 0;
-}
-.abt-credentials dl > div { padding-left: 1.5rem; border-left: 1px solid var(--line-soft); }
-.abt-credentials dt { font-size: clamp(1.4rem, 2.1vw, 2rem); letter-spacing: -0.04em; }
-.abt-credentials dd { margin: 0.5rem 0 0; color: var(--muted); font-size: 0.6875rem; letter-spacing: 0.04em; text-transform: uppercase; }
-
 @media (max-width: 1100px) {
-  .abt-statement-copy, .abt-story { grid-column: 1 / span 7; }
-  .abt-portrait, .abt-testimonial-carousel { grid-column: 9 / -1; }
+  .abt-statement-copy { grid-column: 1 / span 7; }
+  .abt-portrait { grid-column: 9 / -1; }
   .abt-testimonial-footer { flex-wrap: wrap; gap: 1rem; }
   .abt-testimonial-authors { flex-basis: 100%; }
 }
@@ -387,27 +287,20 @@
   .abt-statement-copy, .abt-portrait { grid-column: auto; }
   .abt-scroll-heading { font-size: clamp(1.8rem, 4.4vw, 2.5rem); }
   .abt-layout { grid-template-columns: 1fr; gap: 3rem; }
-  .abt-story, .abt-testimonial-carousel { grid-column: auto; }
+  .abt-highlights, .abt-testimonial-carousel { grid-column: auto; }
   .abt-testimonial-body { padding: 1.75rem 0; }
   .abt-testimonial-body blockquote { max-width: 65ch; }
   .abt-testimonial-footer { flex-wrap: nowrap; }
   .abt-testimonial-authors { flex-basis: auto; }
-  .abt-credentials { grid-template-columns: 1fr; gap: 1.5rem; }
-  .abt-credentials > p, .abt-credentials dl { grid-column: auto; }
-  .abt-credentials dl > div { padding-left: 1rem; }
 }
 
 @media (max-width: 520px) {
-  .abt-statement { grid-template-columns: 1fr; gap: 2rem; padding-right: 0; }
+  .abt-statement { grid-template-columns: 1fr; gap: 2rem; padding-inline: 0; }
   .abt-scroll-heading { max-width: none; font-size: clamp(1.85rem, 7.4vw, 2.5rem); }
   .abt-portrait { width: calc(100% - 2rem); max-width: none; justify-self: center; }
   .abt-portrait img { aspect-ratio: 1.15; object-position: 50% 35%; }
-  .abt-motion-bands { margin: 3rem 0; }
   .abt-highlights > div { column-gap: 1.25rem; }
   .abt-highlights span { gap: 0.65rem; font-size: 0.6875rem; }
-  .abt-credentials dl { grid-template-columns: 1fr; gap: 1.25rem; }
-  .abt-credentials dl > div { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
-  .abt-credentials dd { margin: 0; text-align: right; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -415,16 +308,5 @@
   .abt-highlight-char { opacity: 1; }
   .abt-testimonial-body { animation: none; }
   .abt-testimonial-word > span,
-  .abt-testimonial-footer,
-  .abt-motion-band-track { animation: none; }
-}
-
-@keyframes abt-band-forward {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-50%, 0, 0); }
-}
-
-@keyframes abt-band-reverse {
-  from { transform: translate3d(-50%, 0, 0); }
-  to { transform: translate3d(0, 0, 0); }
+  .abt-testimonial-footer { animation: none; }
 }

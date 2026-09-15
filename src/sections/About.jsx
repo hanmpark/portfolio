@@ -38,7 +38,7 @@ const About = () => {
   const revealRef = useScrollReveal({ threshold: 0.04, rootMargin: "0px 0px 80px 0px", selector: ".reveal" });
   const paragraphs = t("about.paragraphs");
   const safeParagraphs = Array.isArray(paragraphs) ? paragraphs : [];
-  const [leadParagraph = "", ...bodyParagraphs] = safeParagraphs;
+  const [leadParagraph = ""] = safeParagraphs;
   const testimonials = t("testimonials.items");
   const testimonialItems = Array.isArray(testimonials) ? testimonials : [];
   const [activeTestimonial, setActiveTestimonial] = useState(0);
@@ -266,53 +266,7 @@ const About = () => {
           </figure>
         </div>
 
-        <div className="abt-motion-bands" aria-hidden="true">
-          <div className="abt-motion-band abt-motion-band--forward">
-            <div className="abt-motion-band-track">
-              {[0, 1].map((groupIndex) => (
-                <div className="abt-motion-band-group" key={groupIndex}>
-                  {Array.from({ length: 4 }, (_, itemIndex) => (
-                    <span key={itemIndex}>{t("about.bandOne")}</span>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="abt-motion-band abt-motion-band--reverse">
-            <div className="abt-motion-band-track">
-              {[0, 1].map((groupIndex) => (
-                <div className="abt-motion-band-group" key={groupIndex}>
-                  {Array.from({ length: 4 }, (_, itemIndex) => (
-                    <span key={itemIndex}>{t("about.bandTwo")}</span>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
         <div className="abt-layout">
-          <div className="abt-story">
-            <p className="abt-story-label reveal reveal-up">
-              {t("about.approach")}
-            </p>
-
-            <div className="abt-story-copy">
-              {bodyParagraphs.map((paragraph) => (
-                <p className="reveal reveal-up" key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
-
-            <div className="abt-highlights reveal reveal-up">
-              <p>{t("about.expertise")}</p>
-              <div>
-                {highlightKeys.map((key, index) => (
-                  <span key={key}><i>{String(index + 1).padStart(2, "0")}</i>{t(`about.highlights.${key}`)}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-
           {currentTestimonial ? (
             <aside
               className="abt-testimonial-carousel reveal reveal-up"
@@ -392,15 +346,15 @@ const About = () => {
               </div>
             </aside>
           ) : null}
-        </div>
 
-        <div className="abt-credentials reveal reveal-up">
-          <p>{t("about.coordinates")}</p>
-          <dl>
-            <div><dt>42 Nice</dt><dd>Engineering · 2022—Now</dd></div>
-            <div><dt>Amadeus</dt><dd>Software · 2025—Now</dd></div>
-            <div><dt>Sorbonne</dt><dd>Cinema · 2019—2021</dd></div>
-          </dl>
+          <div className="abt-highlights reveal reveal-up">
+              <p>{t("about.expertise")}</p>
+              <div>
+                {highlightKeys.map((key, index) => (
+                  <span key={key}><i>{String(index + 1).padStart(2, "0")}</i>{t(`about.highlights.${key}`)}</span>
+                ))}
+              </div>
+            </div>
         </div>
       </div>
     </section>
