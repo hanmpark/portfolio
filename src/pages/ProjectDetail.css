@@ -33,7 +33,7 @@
 }
 .pj-back svg { width: 1rem; height: 1rem; transition: transform 200ms ease; }
 .pj-back:hover svg { transform: translateX(-0.2rem); }
-.pj-brand span { color: var(--muted); }
+.pj-brand svg { width: 0.9rem; height: 0.9rem; color: var(--muted); }
 .pj a:focus-visible, .pj button:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
 
 .pj-hero { padding-top: clamp(2.5rem, 6vw, 5rem); }
@@ -128,7 +128,7 @@
 .pj-gallery-item--image { cursor: zoom-in; transition: border-color 200ms ease; }
 .pj-gallery-item--image:hover { border-color: var(--muted); }
 .pj-gallery-caption { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 1.2rem; border-top: 1px solid var(--line-soft); color: var(--muted); font-size: 0.65rem; line-height: 1.5; }
-.pj-gallery-caption > span:last-child { color: var(--ink); font-size: 1rem; }
+.pj-gallery-caption > .arrow-up-right { width: 1rem; height: 1rem; flex: 0 0 auto; color: var(--ink); }
 .pj-gallery-item video { display: block; width: 100%; }
 .pj-gallery-placeholder { display: flex; min-height: 20rem; flex-direction: column; justify-content: end; gap: 0.5rem; padding: 2rem; }
 .pj-gallery-placeholder span { font-size: 1.5rem; letter-spacing: -0.04em; }
@@ -136,7 +136,7 @@
 
 .pj-footer { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 2rem; padding-block: 2rem 3rem; border-top: 1px solid var(--line); }
 .pj-footer > a { display: inline-flex; align-items: center; gap: 2rem; font-size: clamp(1.8rem, 4vw, 3.5rem); letter-spacing: -0.055em; line-height: 1.2; }
-.pj-footer > a span { font-size: 0.7em; }
+.pj-footer > a .arrow-up-right { width: 0.7em; height: 0.7em; }
 .pj-footer > span { color: var(--muted); font-size: 0.6rem; letter-spacing: 0.05em; }
 
 .pj-lightbox { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 4rem; background: rgba(8, 8, 8, 0.96); cursor: zoom-out; animation: pj-fade 220ms ease; }

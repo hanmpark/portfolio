@@ -65,14 +65,16 @@
   line-height: 1.15;
 }
 
-.sf-navigation a > span:last-child {
-  font-size: 0.7em;
+.sf-external-arrow {
+  width: 0.7em;
+  height: 0.7em;
+  flex: 0 0 auto;
   opacity: 0.35;
   transition: transform 250ms ease, opacity 250ms ease;
 }
 
-.sf-navigation a:hover > span:last-child,
-.sf-navigation a:focus-visible > span:last-child {
+.sf-navigation a:hover .sf-external-arrow,
+.sf-navigation a:focus-visible .sf-external-arrow {
   opacity: 1;
   transform: translate(0.15em, -0.1em);
 }
@@ -94,9 +96,7 @@
   letter-spacing: -0.05em;
 }
 
-.sf-email span {
-  font-size: 0.7em;
-}
+.sf-email .sf-external-arrow { width: 0.7em; height: 0.7em; }
 
 .sf-role {
   margin: 0.4rem 0 0;
@@ -172,8 +172,9 @@
 }
 
 .sf-wordmark-arrow {
-  font-size: 0.55em;
-  letter-spacing: 0;
+  width: 0.55em;
+  height: 0.55em;
+  flex: 0 0 auto;
   transition: transform 300ms ease;
 }
 
@@ -210,6 +211,22 @@
 
 .sf-wordmark:hover .sf-wordmark-arrow {
   transform: translate(0.08em, -0.08em);
+}
+
+.sf-back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.sf-back-to-top svg {
+  width: 0.85rem;
+  height: 0.85rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
 }
 
 @media (max-width: 900px) {
@@ -279,7 +296,7 @@
     transition: none;
   }
 
-  .sf-navigation a > span:last-child,
+  .sf-external-arrow,
   .sf-wordmark-arrow {
     transition: none;
   }

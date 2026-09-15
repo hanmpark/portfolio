@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useLanguage } from "../i18n/useLanguage.js";
 import useImageDepth from "../hooks/useImageDepth.js";
+import ArrowUpRight from "../components/ArrowUpRight.jsx";
 import "./ProjectCTA.css";
 
 const ProjectCTA = () => {
@@ -20,7 +21,7 @@ const ProjectCTA = () => {
           <span aria-hidden="true"><i>→</i> {t("cta.lineFour")}</span>
         </h2>
         <a className="project-cta-button" href="https://calendly.com/hanmin-hpark/one-on-one" target="_blank" rel="noopener noreferrer">
-          <span>{t("cta.action")}</span><span aria-hidden="true">↗</span>
+          <span>{t("cta.action")}</span><ArrowUpRight className="project-cta-arrow" />
         </a>
         <div className="project-cta-caption">
           <span>Hanmin Park / {t("hero.role")}</span>

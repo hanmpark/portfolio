@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { contact, navLinks, socialLinks } from "../data/home.js";
 import { useLanguage } from "../i18n/useLanguage.js";
 import useScrollReveal from "../hooks/useScrollReveal.js";
+import ArrowUpRight from "./ArrowUpRight.jsx";
 import "./SiteFooter.css";
 
 const SiteFooter = () => {
@@ -41,20 +42,20 @@ const SiteFooter = () => {
             <p className="sf-label">{t("footer.navigation")}</p>
             {[...navLinks, { key: "letsTalk", href: "#contact" }].map((link) => (
               <a href={link.href} key={link.key}>
-                <span>{t(`nav.${link.key}`)}</span><span aria-hidden="true">↗</span>
+                <span>{t(`nav.${link.key}`)}</span><ArrowUpRight className="sf-external-arrow" />
               </a>
             ))}
           </nav>
           <div className="sf-details">
             <div className="sf-contact">
               <p className="sf-label">{t("footer.details")}</p>
-              <a className="sf-email" href={`mailto:${contact.email}`}>{contact.email}<span aria-hidden="true">↗</span></a>
+              <a className="sf-email" href={`mailto:${contact.email}`}>{contact.email}<ArrowUpRight className="sf-external-arrow" /></a>
               <p className="sf-role">{t("hero.role")}</p>
             </div>
             <div className="sf-socials">
               <p className="sf-label">{t("footer.socials")}</p>
               {socialLinks.filter((link) => /github|linkedin/i.test(link.label)).map((link) => (
-                <a href={link.href} target="_blank" rel="noopener noreferrer" key={link.label}>{link.label} <span aria-hidden="true">↗</span></a>
+                <a href={link.href} target="_blank" rel="noopener noreferrer" key={link.label}>{link.label}<ArrowUpRight className="sf-external-arrow" /></a>
               ))}
             </div>
           </div>
@@ -62,7 +63,12 @@ const SiteFooter = () => {
         <div className="sf-bottomline">
           <span>© {now.getFullYear()} Hanmin Park</span>
           <span>{t("footer.credit")}</span>
-          <a href="#top" onClick={returnToTop}>{t("backToTop")} <span aria-hidden="true">↑</span></a>
+          <a className="sf-back-to-top" href="#top" onClick={returnToTop}>
+            {t("backToTop")}
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 19V5M6.5 10.5 12 5l5.5 5.5" />
+            </svg>
+          </a>
         </div>
       </div>
       <div className="sf-signature" ref={signatureRef}>
@@ -73,7 +79,7 @@ const SiteFooter = () => {
                 <span className="sf-letter" style={{ "--letter-index": index }} key={index}>{letter}</span>
               ))}
             </span>
-            <span className="sf-wordmark-arrow" aria-hidden="true">↗</span>
+            <ArrowUpRight className="sf-wordmark-arrow" />
           </a>
         </div>
       </div>

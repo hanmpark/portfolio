@@ -93,7 +93,7 @@
   transition: background 200ms ease;
 }
 
-.project-cta-button > span:last-child {
+.project-cta-arrow {
   flex-shrink: 0;
   display: grid;
   place-items: center;
@@ -109,7 +109,7 @@
   background: #fff;
 }
 
-.project-cta-button:hover > span:last-child {
+.project-cta-button:hover .project-cta-arrow {
   transform: rotate(45deg);
 }
 
@@ -172,7 +172,7 @@
   }
 
   .project-cta-button,
-  .project-cta-button > span:last-child {
+  .project-cta-arrow {
     transition: none;
   }
 }

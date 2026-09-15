@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { projects } from "../data/home.js";
 import { useLanguage } from "../i18n/useLanguage.js";
+import ArrowUpRight from "../components/ArrowUpRight.jsx";
 import useImageDepth from "../hooks/useImageDepth.js";
 import "./Work.css";
 
@@ -118,7 +119,7 @@ const Work = () => {
                   </div>
                   <span className="work-project-action">
                     <span>{t("work.viewProject")}</span>
-                    <span className="work-project-arrow" aria-hidden="true">↗</span>
+                    <ArrowUpRight className="work-project-arrow" />
                   </span>
                 </div>
               </div>

@@ -106,7 +106,7 @@ img { display: block; max-width: 100%; }
   transition: color 280ms ease, background 280ms ease, transform 280ms var(--ease-out);
 }
 
-.btn::after { content: "↗"; font-size: 1rem; line-height: 0; }
+.btn::after { content: ""; width: 0.7rem; height: 0.7rem; background: linear-gradient(currentColor, currentColor) 50% 50% / 100% 1px no-repeat, linear-gradient(currentColor, currentColor) 100% 0 / 1px 55% no-repeat, linear-gradient(currentColor, currentColor) 100% 0 / 55% 1px no-repeat; transform: rotate(-45deg); }
 .btn:hover { color: var(--ink); background: transparent; transform: translateY(-2px); }
 .btn.ghost { color: var(--ink); background: transparent; border-color: var(--line); }
 .btn.ghost:hover { color: var(--paper-deep); background: var(--coral); border-color: var(--coral); }

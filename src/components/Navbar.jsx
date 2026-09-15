@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { navLinks, socialLinks } from "../data/home.js";
 import { useLanguage } from "../i18n/useLanguage.js";
+import ArrowUpRight from "./ArrowUpRight.jsx";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -64,7 +65,7 @@ const Navbar = () => {
           <button className="lang-toggle" type="button" onClick={() => setLang(lang === "en" ? "fr" : "en")} aria-label={lang === "en" ? "Passer en français" : "Switch to English"}>
             {lang.toUpperCase()} <span>/</span> {lang === "en" ? "FR" : "EN"}
           </button>
-          <a className="nav-contact" href="#contact">{t("nav.letsTalk")} <span>↗</span></a>
+          <a className="nav-contact" href="#contact">{t("nav.letsTalk")} <ArrowUpRight /></a>
         </div>
 
         <button className="nav-toggle" type="button" aria-controls="mobile-navigation" aria-expanded={menuOpen} aria-label={menuOpen ? "Close menu" : "Open menu"} onClick={() => setMenuOpen((open) => !open)}>
@@ -82,7 +83,7 @@ const Navbar = () => {
             <a href="#contact" onClick={closeMenu}><span>{t("nav.letsTalk")}</span></a>
           </div>
           <div className="nav-overlay-foot">
-            <div>{socialLinks.filter((link) => /github|linkedin/i.test(link.label)).map((link) => <a href={link.href} target="_blank" rel="noopener noreferrer" key={link.label}>{link.label} ↗</a>)}</div>
+            <div>{socialLinks.filter((link) => /github|linkedin/i.test(link.label)).map((link) => <a href={link.href} target="_blank" rel="noopener noreferrer" key={link.label}>{link.label}<ArrowUpRight /></a>)}</div>
             <button type="button" onClick={() => setLang(lang === "en" ? "fr" : "en")}>{lang === "en" ? "Français" : "English"}</button>
           </div>
         </div>

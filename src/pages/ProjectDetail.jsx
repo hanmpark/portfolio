@@ -4,6 +4,7 @@ import SoLongPlayable from "../components/so-long/SoLongPlayable.jsx";
 import { projectDetails } from "../data/projectDetails.js";
 import { projects } from "../data/home.js";
 import { useLanguage } from "../i18n/useLanguage.js";
+import ArrowUpRight from "../components/ArrowUpRight.jsx";
 import "./ProjectDetail.css";
 
 const ArrowLeft = () => (
@@ -107,7 +108,7 @@ const ProjectDetail = () => {
           <ArrowLeft />
           {t("projectDetail.allProjects")}
         </Link>
-        <Link className="pj-brand" to="/">Hanmin Park <span aria-hidden="true">↗</span></Link>
+        <Link className="pj-brand" to="/">Hanmin Park <ArrowUpRight /></Link>
       </nav>
 
       <header className="pj-hero">
@@ -277,7 +278,7 @@ const ProjectDetail = () => {
                     />
                     <span className="pj-gallery-caption" aria-hidden="true">
                       <span>{String(i + 1).padStart(2, "0")} / {l(item, "label") || item.alt || project.title}</span>
-                      <span>↗</span>
+                      <ArrowUpRight />
                     </span>
                   </button>
                 ),
@@ -288,7 +289,7 @@ const ProjectDetail = () => {
       </div>
 
       <footer className="pj-footer">
-        <Link to="/#work">{t("projectDetail.allProjects")} <span aria-hidden="true">↗</span></Link>
+        <Link to="/#work">{t("projectDetail.allProjects")} <ArrowUpRight /></Link>
         <span>Hanmin Park / Portfolio</span>
       </footer>
 
