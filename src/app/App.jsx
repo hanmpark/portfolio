@@ -55,9 +55,7 @@ const App = () => {
       <ScrollProgress />
       <BackToTopButton />
       <Navbar />
-      <div className="hero-scroll-stage">
-        <Hero />
-      </div>
+      <Hero />
       <main>
         <div className="main-content-bg">
           <div className="about-scroll-stage">

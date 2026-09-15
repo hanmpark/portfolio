@@ -6,22 +6,9 @@
   background: var(--paper);
 }
 
-.hero-scroll-stage {
-  position: relative;
-  z-index: var(--z-layer-hero);
-  min-height: calc(
-    var(--app-viewport-height) + var(--app-viewport-height) +
-      var(--app-viewport-height)
-  );
-  background: #080807;
-}
-
 .app > main {
   position: relative;
   z-index: var(--z-layer-main);
-  margin-top: calc(
-    0px - var(--app-viewport-height) - var(--app-viewport-height)
-  );
   background: #080807;
 }
 .main-content-bg {
@@ -44,18 +31,7 @@
   z-index: 30;
   margin-top: calc(0px - var(--app-viewport-height));
 }
-.main-content-bg::before {
-  content: "";
-  position: absolute;
-  top: 24%;
-  right: -18rem;
-  width: 40rem;
-  height: 40rem;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(233, 232, 227, 0.055), transparent 68%);
-  filter: blur(40px);
-  pointer-events: none;
-}
+
 
 @media (prefers-reduced-motion: reduce) {
   .about-scroll-stage { padding-bottom: 0; }
