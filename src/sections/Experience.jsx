@@ -20,7 +20,6 @@ const Experience = () => {
         <header className="exp-head">
           <p className="eyebrow">{t("experience.eyebrow")}</p>
           <h2 id="experience-title"><span>{t("experience.title")}</span></h2>
-          <span className="exp-count">{String(selected + 1).padStart(2, "0")} / {String(journey.length).padStart(2, "0")}</span>
         </header>
         <div className="exp-browser">
           <div className="exp-list" role="group" aria-label={t("experience.timelineLabel")}>
