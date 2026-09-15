@@ -13,6 +13,7 @@ const Work = () => {
   const sectionRef = useRef(null);
   useImageDepth(sectionRef, { pointer: false });
   const title = t("work.title");
+  const titleMidpoint = Math.floor(title.length / 2);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -21,6 +22,7 @@ const Work = () => {
     const splitTitle = section.querySelector(".work-split-title");
     const leftWord = section.querySelector(".work-split-word--left");
     const rightWord = section.querySelector(".work-split-word--right");
+    const letters = Array.from(section.querySelectorAll(".work-split-letter"));
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
 
@@ -43,7 +45,13 @@ const Work = () => {
         document.documentElement.clientWidth - titleLeft - rightWord.offsetLeft,
       ) + 2;
       section.style.setProperty("--work-split-x", `${(eased * splitDistance).toFixed(2)}px`);
-      section.style.setProperty("--work-split-opacity", String(1 - clamp((progress - 0.85) / 0.15)));
+      section.style.setProperty("--work-split-opacity", String(1 - eased));
+      letters.forEach((letter, index) => {
+        const distanceFromEdge = Math.min(index, letters.length - 1 - index);
+        const delay = distanceFromEdge * 0.1;
+        const fade = clamp((progress - delay) / 0.45);
+        letter.style.opacity = String(1 - fade * fade * (3 - 2 * fade));
+      });
     };
     const schedule = () => {
       if (!frame) frame = window.requestAnimationFrame(update);
@@ -70,8 +78,16 @@ const Work = () => {
       <header className="work-opening">
         <div className="work-opening-frame">
           <h2 className="work-split-title" id="work-title" aria-label={title}>
-            <span className="work-split-word work-split-word--left" aria-hidden="true">{title.slice(0, 3)}</span>
-            <span className="work-split-word work-split-word--right" aria-hidden="true">{title.slice(3)}</span>
+            <span className="work-split-word work-split-word--left" aria-hidden="true">
+              {Array.from(title.slice(0, titleMidpoint)).map((letter, index) => (
+                <span className="work-split-letter" key={index}>{letter}</span>
+              ))}
+            </span>
+            <span className="work-split-word work-split-word--right" aria-hidden="true">
+              {Array.from(title.slice(titleMidpoint)).map((letter, index) => (
+                <span className="work-split-letter" key={index}>{letter}</span>
+              ))}
+            </span>
           </h2>
           <p className="work-opening-caption">{t("work.eyebrow")} <span aria-hidden="true">↓</span></p>
         </div>
