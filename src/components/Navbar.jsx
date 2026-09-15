@@ -49,10 +49,9 @@ const Navbar = () => {
       aria-label="Primary"
       inert={hidden ? "" : undefined}
     >
-      <div className="nav-shell container">
+      <div className="nav-shell">
         <a className="nav-brand" href="#top" onClick={closeMenu} aria-label="Hanmin Park — home">
           <img src="/assets/LOGO_PRINCIPAL_HANMIN_BLANC.svg" alt="" />
-          <span className="nav-brand-name">Hanmin<br />Park</span>
         </a>
 
         <div className="nav-links">
