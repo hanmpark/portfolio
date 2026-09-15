@@ -23,9 +23,6 @@ const ProjectCTA = () => {
         <a className="project-cta-button" href="https://calendly.com/hanmin-hpark/one-on-one" target="_blank" rel="noopener noreferrer">
           <span>{t("cta.action")}</span><ArrowUpRight className="project-cta-arrow" />
         </a>
-        <div className="project-cta-caption">
-          <span>Hanmin Park / {t("hero.role")}</span>
-        </div>
       </div>
     </section>
   );

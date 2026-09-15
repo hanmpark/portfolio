@@ -47,7 +47,6 @@
 
 .project-cta-title {
   width: min(100%, 62rem);
-  margin: auto 0 0;
   font-family: var(--font-display);
   font-size: clamp(3rem, min(8.6vw, 12svh), 8.5rem);
   font-weight: 500;
@@ -118,20 +117,6 @@
   outline-offset: 6px;
 }
 
-.project-cta-caption {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  width: 100%;
-  margin-top: auto;
-  padding-top: clamp(2rem, 5vh, 4rem);
-  padding-right: 3.5rem;
-  color: rgba(244, 243, 237, 0.8);
-  font-size: 0.55rem;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-}
-
 @media (max-width: 700px) {
   .project-cta-photo {
     object-position: 50% 58%;
@@ -148,13 +133,6 @@
     line-height: 1;
   }
 
-  .project-cta-caption {
-    align-items: start;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding-right: 0;
-    font-size: 0.6875rem;
-  }
   .project-cta-eyebrow { font-size: 0.6875rem; line-height: 1.6; letter-spacing: 0.1em; }
   .project-cta-button { gap: 1rem; font-size: 0.8125rem; }
   .project-cta-inner { padding-bottom: max(2rem, env(safe-area-inset-bottom, 0px)); }
