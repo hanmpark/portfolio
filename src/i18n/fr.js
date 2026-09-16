@@ -4,6 +4,7 @@ const fr = {
     work: "Projets",
     experience: "Expérience",
     letsTalk: "Me contacter",
+    downloadCv: "Télécharger mon CV",
   },
   hero: {
     role: "Développeur Logiciel",

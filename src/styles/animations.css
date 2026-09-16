@@ -95,39 +95,6 @@
 .hero-reveal-d3 { animation-delay: 0.55s; }
 .hero-reveal-d4 { animation-delay: 0.75s; }
 
-/* ── Scroll progress bar ──────────────────────────── */
-
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  z-index: 9999;
-  pointer-events: none;
-  transform-origin: left;
-  transform: scaleX(var(--scroll-progress, 0));
-  background: #fff;
-  mix-blend-mode: difference;
-  box-shadow: none;
-  transition: transform 0.12s linear;
-}
-
-@supports (animation-timeline: scroll()) {
-  @keyframes scroll-progress-fill {
-    to {
-      transform: scaleX(1);
-    }
-  }
-
-  .scroll-progress {
-    transform: scaleX(0);
-    animation: scroll-progress-fill linear both;
-    animation-timeline: scroll(root block);
-    transition: none;
-  }
-}
-
 /* ── Section divider line ─────────────────────────── */
 
 .section-divider {
@@ -154,9 +121,6 @@
     animation: none !important;
   }
 
-  .scroll-progress {
-    display: none;
-  }
 }
 
 /* ── Mobile: disable scroll-reveal hidden state ───── */

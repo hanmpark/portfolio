@@ -4,6 +4,17 @@ import { useLanguage } from "../i18n/useLanguage.js";
 import ArrowUpRight from "./ArrowUpRight.jsx";
 import "./Navbar.css";
 
+const CvLink = ({ label, compact = false, onClick }) => (
+  <a className="nav-cv" href="/downloads/Hanmin-Park-CV.pdf" download="Hanmin-Park-CV.pdf"
+    aria-label={`${label} (PDF)`} title={`${label} (PDF)`} onClick={onClick}>
+    <span>{compact ? "CV" : label}</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
+      strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 3v12m-5-5 5 5 5-5M5 17v4h14v-4" />
+    </svg>
+  </a>
+);
+
 const Navbar = () => {
   const { lang, setLang, t } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -69,6 +80,7 @@ const Navbar = () => {
         </div>
 
         <div className="nav-actions">
+          <CvLink label={t("nav.downloadCv")} compact />
           <button className="lang-toggle" type="button" onClick={() => setLang(lang === "en" ? "fr" : "en")} aria-label={lang === "en" ? "Passer en français" : "Switch to English"}>
             {lang.toUpperCase()} <span>/</span> {lang === "en" ? "FR" : "EN"}
           </button>
@@ -89,6 +101,7 @@ const Navbar = () => {
             ))}
             <a href="#contact" onClick={closeMenu}><span>{t("nav.letsTalk")}</span></a>
           </div>
+          <CvLink label={t("nav.downloadCv")} onClick={closeMenu} />
           <div className="nav-overlay-foot">
             <div>{socialLinks.filter((link) => /github|linkedin/i.test(link.label)).map((link) => <a href={link.href} target="_blank" rel="noopener noreferrer" key={link.label}>{link.label}<ArrowUpRight /></a>)}</div>
             <button type="button" onClick={() => setLang(lang === "en" ? "fr" : "en")}>{lang === "en" ? "Français" : "English"}</button>

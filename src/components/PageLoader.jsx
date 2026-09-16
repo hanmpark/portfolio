@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { experiences, projects } from "../data/home.js";
 import { useLanguage } from "../i18n/useLanguage.js";
 import "./PageLoader.css";
@@ -8,18 +8,19 @@ import "./PageLoader.css";
  * The home page keeps its sections mounted and ready, so below-the-fold
  * visuals are warmed up before the first scroll reaches them.
  */
-const CRITICAL_IMAGES = [
+const PAGE_IMAGES = [
   "/assets/LOGO_PRINCIPAL_HANMIN_BLANC.svg",
   "/assets/self_image.jpg",
-  ...projects.flatMap((project) =>
-    project.previewImages?.length
-      ? project.previewImages
-      : [project.previewImage],
-  ),
+  "/assets/photo.webp",
+  ...projects.flatMap((project) => [project.previewImage, ...(project.previewImages ?? [])]),
   ...experiences.map((experience) => experience.image).filter(Boolean),
 ];
 
+const imageLoads = new Map();
+
 function preloadImage(src) {
+  const url = new URL(src, document.baseURI).href;
+  if (imageLoads.has(url)) return imageLoads.get(url);
   const load = new Promise((resolve) => {
     const img = new Image();
     img.decoding = "async";
@@ -33,32 +34,41 @@ function preloadImage(src) {
       resolve(true);
     };
     img.onerror = () => resolve(false); // don't block on failure
-    img.src = src;
+    img.src = url;
   });
-
-  return Promise.race([
-    load,
-    new Promise((resolve) => {
-      window.setTimeout(() => resolve(false), 5000);
-    }),
-  ]);
+  imageLoads.set(url, load);
+  return load;
 }
 
 const PageLoader = ({ onReady }) => {
   const { t } = useLanguage();
   const [hidden, setHidden] = useState(false);
 
-  const load = useCallback(async () => {
-    await Promise.all(CRITICAL_IMAGES.map(preloadImage));
-    // Small delay so the transition doesn't feel abrupt
-    setHidden(true);
-    // Wait for fade-out transition, then signal parent
-    setTimeout(() => onReady?.(), 600);
-  }, [onReady]);
-
   useEffect(() => {
+    let cancelled = false;
+    let fadeTimer;
+    const load = async () => {
+      // Include mounted images plus assets used by inactive slides and experiences.
+      const images = [...document.querySelectorAll(".app img")];
+      images.forEach((image) => { image.loading = "eager"; });
+      const sources = new Set([
+        ...PAGE_IMAGES,
+        ...images.map((image) => image.currentSrc || image.src),
+      ].filter(Boolean));
+      await Promise.all([
+        ...[...sources].map(preloadImage),
+        ...images.map((image) => image.decode().catch(() => {})),
+      ]);
+      if (cancelled) return;
+      setHidden(true);
+      fadeTimer = window.setTimeout(() => onReady?.(), 600);
+    };
     load();
-  }, [load]);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(fadeTimer);
+    };
+  }, [onReady]);
 
   return (
     <div className={`page-loader${hidden ? " page-loader--hidden" : ""}`}>

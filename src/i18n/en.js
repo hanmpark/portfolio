@@ -4,6 +4,7 @@ const en = {
     work: "Projects",
     experience: "Experience",
     letsTalk: "Get in touch",
+    downloadCv: "Download my CV",
   },
   hero: {
     role: "Software Developer",

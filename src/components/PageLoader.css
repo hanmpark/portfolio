@@ -1,8 +1,8 @@
-.page-loader { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; color: var(--paper-deep); background: var(--coral); transition: opacity 600ms var(--ease-out), visibility 600ms ease; }
-.page-loader::before { content: ""; position: absolute; inset: 1rem; border: 1px solid rgba(8, 8, 8, 0.24); pointer-events: none; }
+.page-loader { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; color: #e9e8e3; background: #080807; transition: opacity 600ms var(--ease-out), visibility 600ms ease; }
+.page-loader::before { content: ""; position: absolute; inset: 1rem; border: 1px solid rgba(233, 232, 227, 0.16); pointer-events: none; }
 .page-loader--hidden { visibility: hidden; opacity: 0; pointer-events: none; }
-.page-loader__logo { display: block; width: clamp(9rem, 20vw, 15rem); height: auto; filter: brightness(0); }
-.page-loader__spinner { position: absolute; left: 50%; bottom: 3rem; width: min(18rem, 70vw); height: 1px; overflow: hidden; background: rgba(17, 20, 16, 0.22); transform: translateX(-50%); }
-.page-loader__spinner::after { content: ""; display: block; width: 40%; height: 100%; background: var(--paper-deep); animation: loader-line 1.1s ease-in-out infinite; }
-.page-loader__label { position: absolute; right: 2rem; bottom: 2.6rem; color: var(--paper-deep); font-size: 0.58rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
+.page-loader__logo { display: block; width: clamp(9rem, 20vw, 15rem); height: auto; filter: brightness(0) invert(0.92); }
+.page-loader__spinner { position: absolute; left: 50%; bottom: 3rem; width: min(18rem, 70vw); height: 1px; overflow: hidden; background: rgba(233, 232, 227, 0.16); transform: translateX(-50%); }
+.page-loader__spinner::after { content: ""; display: block; width: 40%; height: 100%; background: #e9e8e3; animation: loader-line 1.1s ease-in-out infinite; }
+.page-loader__label { position: absolute; right: 2rem; bottom: 2.6rem; color: #aaa9a3; font-size: 0.58rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
 @keyframes loader-line { from { transform: translateX(-110%); } to { transform: translateX(360%); } }

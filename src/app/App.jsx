@@ -4,7 +4,6 @@ import Work from "../sections/Work.jsx";
 import Experience from "../sections/Experience.jsx";
 import About from "../sections/About.jsx";
 import ProjectCTA from "../sections/ProjectCTA.jsx";
-import ScrollProgress from "../components/ScrollProgress.jsx";
 import BackToTopButton from "../components/BackToTopButton.jsx";
 import PageLoader from "../components/PageLoader.jsx";
 import Navbar from "../components/Navbar.jsx";
@@ -54,7 +53,6 @@ const App = () => {
   return (
     <div className={`app${loaded ? " app--loaded" : ""}`}>
       <PageLoader onReady={handleReady} />
-      <ScrollProgress />
       <BackToTopButton />
       <Navbar />
       <Hero />
