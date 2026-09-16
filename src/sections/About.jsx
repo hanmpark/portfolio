@@ -45,20 +45,45 @@ const About = () => {
   const [carouselPaused, setCarouselPaused] = useState(false);
   const highlightRef = useRef(null);
 
+  const progressRef = useRef(null);
+  const elapsedRef = useRef(0);
+
   useEffect(() => {
-    if (testimonialItems.length < 2 || carouselPaused) return undefined;
+    elapsedRef.current = 0;
+    progressRef.current?.style.setProperty("transform", "scaleX(0)");
+  }, [activeTestimonial]);
 
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reducedMotion.matches) return undefined;
-
-    const interval = window.setInterval(() => {
-      setActiveTestimonial((current) =>
-        (current + 1) % testimonialItems.length,
-      );
-    }, 6500);
-
-    return () => window.clearInterval(interval);
-  }, [carouselPaused, testimonialItems.length]);
+  useEffect(() => {
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frame = 0;
+    let previous = null;
+    const tick = (now) => {
+      if (previous !== null) elapsedRef.current += now - previous;
+      previous = now;
+      const progress = Math.min(elapsedRef.current / 6500, 1);
+      progressRef.current?.style.setProperty("transform", `scaleX(${progress})`);
+      if (progress === 1) {
+        setActiveTestimonial(current => (current + 1) % testimonialItems.length);
+        return;
+      }
+      frame = window.requestAnimationFrame(tick);
+    };
+    const update = () => {
+      window.cancelAnimationFrame(frame);
+      previous = null;
+      if (testimonialItems.length > 1 && !carouselPaused && !document.hidden && !motion.matches) {
+        frame = window.requestAnimationFrame(tick);
+      }
+    };
+    update();
+    document.addEventListener("visibilitychange", update);
+    motion.addEventListener("change", update);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      document.removeEventListener("visibilitychange", update);
+      motion.removeEventListener("change", update);
+    };
+  }, [activeTestimonial, carouselPaused, testimonialItems.length]);
 
   useEffect(() => {
     const heading = highlightRef.current;
@@ -271,9 +296,6 @@ const About = () => {
             <aside
               className="abt-testimonial-carousel reveal reveal-up"
               aria-label={t("testimonials.label")}
-              style={{
-                "--testimonial-progress": `${((activeTestimonial + 1) / testimonialItems.length) * 100}%`,
-              }}
               onMouseEnter={() => setCarouselPaused(true)}
               onMouseLeave={() => setCarouselPaused(false)}
               onFocusCapture={() => setCarouselPaused(true)}
@@ -287,9 +309,11 @@ const About = () => {
                 </span>
               </div>
 
-              <div className="abt-testimonial-progress" aria-hidden="true">
-                <span />
+              <div className="abt-testimonial-progress" aria-hidden="true" hidden={testimonialItems.length < 2}>
+                <span ref={progressRef} />
               </div>
+
+              <span className="abt-testimonial-quote-mark" aria-hidden="true">“</span>
 
               <div
                 className="abt-testimonial-body"

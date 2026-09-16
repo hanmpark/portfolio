@@ -2,12 +2,23 @@
   --font-body: var(--font-creative);
   --font-display: var(--font-creative);
   position: relative;
-  z-index: 30;
+  transform: translateY(var(--sf-reveal-y, 0px));
+  z-index: 10;
+  overflow: clip;
   padding-top: clamp(2.5rem, 5vw, 4rem);
   border-top: 1px solid var(--line);
   color: var(--ink);
   background: #080808;
   font-family: var(--font-body);
+}
+
+.sf-reveal-content {
+  opacity: var(--sf-reveal-opacity, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-footer { transform: none; }
+  .sf-reveal-content { opacity: 1; }
 }
 
 .sf-topline,

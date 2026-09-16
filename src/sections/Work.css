@@ -14,7 +14,7 @@
 
 .work-opening {
   position: relative;
-  height: calc(var(--app-viewport-height) * 2.3);
+  height: calc(var(--app-viewport-height) * 2);
 }
 
 .work-opening-frame {
@@ -86,6 +86,7 @@
 
 .work-inner {
   position: relative;
+  margin-top: calc(var(--app-viewport-height) * -0.3);
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   width: calc(100% - var(--page-gutter) - var(--page-gutter));
@@ -334,6 +335,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .work-inner { margin-top: 0; }
   .work-opening {
     height: auto;
   }

@@ -12,7 +12,7 @@ export default function useImageDepth(rootRef, { pointer = true } = {}) {
     const elements = root.matches("[data-image-depth]")
       ? [root]
       : [...root.querySelectorAll("[data-image-depth]")];
-    const items = elements.map((element) => ({ element, x: 0, y: 0, targetX: 0, targetY: 0, progress: null, active: 0, lift: 0 }));
+    const items = elements.map((element) => ({ element, x: 0, y: 0, targetX: 0, targetY: 0, active: 0, lift: 0 }));
     let frame = 0;
     let previousTime = 0;
 
@@ -22,37 +22,39 @@ export default function useImageDepth(rootRef, { pointer = true } = {}) {
       previousTime = time;
       const ease = 1 - Math.exp(-elapsed / 85);
       let moving = false;
+      const viewportHeight = window.innerHeight;
+      // Read every wrapper before changing styles to avoid layout read/write cycles.
+      const rects = items.map(({ element }) => element.getBoundingClientRect());
 
-      items.forEach((item) => {
+      items.forEach((item, index) => {
         const { element } = item;
-        const rect = element.getBoundingClientRect();
-        const visible = rect.bottom > -100 && rect.top < window.innerHeight + 100;
+        const rect = rects[index];
+        const visible = rect.bottom > -100 && rect.top < viewportHeight + 100;
         if (!visible && !reduced.matches) {
           item.x = item.y = item.targetX = item.targetY = item.active = item.lift = 0;
-          item.progress = null;
           element.style.setProperty("--depth-active", "0");
           return;
         }
-        const targetProgress = reduced.matches ? 0 : clamp(
-          (window.innerHeight / 2 - rect.top - rect.height / 2) / ((window.innerHeight + rect.height) / 2),
+        const progress = reduced.matches ? 0 : clamp(
+          (viewportHeight / 2 - rect.top - rect.height / 2) / ((viewportHeight + rect.height) / 2),
         );
         if (reduced.matches || !finePointer.matches) item.targetX = item.targetY = item.active = 0;
         item.x += (item.targetX - item.x) * ease;
         item.y += (item.targetY - item.y) * ease;
         item.lift = reduced.matches ? 0 : item.lift + (item.active - item.lift) * ease;
-        item.progress = item.progress === null ? targetProgress : item.progress + (targetProgress - item.progress) * ease;
+        // Scroll follows the current position exactly; only pointer movement eases.
         const full = element.dataset.imageDepth === "full";
         const travel = Math.min(full ? 110 : 70, rect.height * Number(element.dataset.depthTravel || (full ? 0.11 : 0.12)));
         const pointerTilt = full ? 2.5 : 8;
         const value = (name, number, unit = "") => element.style.setProperty(name, `${number.toFixed(3)}${unit}`);
-        value("--depth-rotate-x", reduced.matches ? 0 : item.progress * (full ? 2 : 5) - item.y * pointerTilt, "deg");
+        value("--depth-rotate-x", reduced.matches ? 0 : progress * (full ? 2 : 5) - item.y * pointerTilt, "deg");
         value("--depth-rotate-y", reduced.matches ? 0 : item.x * pointerTilt, "deg");
         value("--depth-image-x", reduced.matches ? 0 : -item.x * (full ? 20 : 12), "px");
-        value("--depth-image-y", reduced.matches ? 0 : item.progress * travel - item.y * 12, "px");
+        value("--depth-image-y", reduced.matches ? 0 : progress * travel - item.y * 12, "px");
         value("--depth-light-x", 50 + item.x * 35, "%");
         value("--depth-light-y", 50 + item.y * 35, "%");
         value("--depth-active", item.lift);
-        moving ||= Math.abs(item.targetX - item.x) + Math.abs(item.targetY - item.y) + Math.abs(item.active - item.lift) + Math.abs(targetProgress - item.progress) > 0.002;
+        moving ||= Math.abs(item.targetX - item.x) + Math.abs(item.targetY - item.y) + Math.abs(item.active - item.lift) > 0.002;
       });
       if (moving && !reduced.matches) frame = window.requestAnimationFrame(render);
     };

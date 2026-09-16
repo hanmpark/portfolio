@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { lazy, Suspense, useEffect, useState, useCallback } from "react";
 import Hero from "../sections/Hero.jsx";
 import Work from "../sections/Work.jsx";
 import Experience from "../sections/Experience.jsx";
@@ -10,6 +10,8 @@ import PageLoader from "../components/PageLoader.jsx";
 import Navbar from "../components/Navbar.jsx";
 import SiteFooter from "../components/SiteFooter.jsx";
 import "./App.css";
+
+const LogoShowcase = lazy(() => import("../components/LogoShowcase.jsx"));
 
 const App = () => {
   const [loaded, setLoaded] = useState(false);
@@ -62,6 +64,9 @@ const App = () => {
             <About />
           </div>
           <Work />
+          <Suspense fallback={<div style={{ height: "100dvh", background: "#080807" }} />}>
+            <LogoShowcase />
+          </Suspense>
           <Experience />
           <ProjectCTA />
         </div>

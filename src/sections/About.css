@@ -38,14 +38,12 @@
 }
 .abt-statement-copy > .eyebrow { margin: 0; }
 .abt-testimonial-carousel {
-  --testimonial-progress: 50%;
   grid-column: 1 / span 6;
   display: flex;
   min-width: 0;
   flex-direction: column;
-  padding: clamp(1.5rem, 3vw, 3rem);
-  background: rgba(233, 232, 227, 0.035);
-  border: 1px solid var(--line-soft);
+  padding: 1.5rem 0 0;
+  border-top: 1px solid var(--line);
 }
 .abt-testimonial-head {
   display: flex;
@@ -72,16 +70,18 @@
 }
 .abt-testimonial-progress {
   width: 100%;
-  height: 1px;
+  height: 2px;
   overflow: hidden;
   background: var(--line-soft);
 }
 .abt-testimonial-progress span {
   display: block;
-  width: var(--testimonial-progress);
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
   height: 100%;
   background: var(--muted);
-  transition: width 500ms var(--ease-out);
+
 }
 .abt-testimonial-body {
   display: grid;
@@ -89,18 +89,27 @@
   grid-template-columns: minmax(0, 1fr);
   align-content: center;
   align-items: center;
-  padding: clamp(1.8rem, 3vw, 2.7rem) 0;
+  padding: clamp(1rem, 1.8vw, 1.5rem) 0;
   animation: abt-testimonial-in 500ms var(--ease-out) both;
+}
+.abt-testimonial-quote-mark {
+  display: block;
+  height: 1.5rem;
+  margin-top: 1.25rem;
+  color: var(--muted);
+  font-family: var(--font-creative);
+  font-size: 3.5rem;
+  line-height: 1;
 }
 .abt-testimonial-body blockquote {
   grid-area: 1 / 1;
   max-width: 48ch;
   margin: 0;
   color: var(--ink);
-  font-family: var(--font-body);
-  font-size: clamp(1.0625rem, 1.4vw, 1.3rem);
-  letter-spacing: 0;
-  line-height: 1.65;
+  font-family: var(--font-creative);
+  font-size: clamp(1rem, 1.35vw, 1.25rem);
+  letter-spacing: -0.015em;
+  line-height: 1.55;
 }
 .abt-testimonial-sizer { visibility: hidden; pointer-events: none; }
 .abt-testimonial-sizer .abt-testimonial-word > span { animation: none; }
@@ -288,7 +297,7 @@
   .abt-scroll-heading { font-size: clamp(1.8rem, 4.4vw, 2.5rem); }
   .abt-layout { grid-template-columns: 1fr; gap: 3rem; }
   .abt-highlights, .abt-testimonial-carousel { grid-column: auto; }
-  .abt-testimonial-body { padding: 1.75rem 0; }
+  .abt-testimonial-body { padding: 1.25rem 0; }
   .abt-testimonial-body blockquote { max-width: 65ch; }
   .abt-testimonial-footer { flex-wrap: nowrap; }
   .abt-testimonial-authors { flex-basis: auto; }
@@ -304,6 +313,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .abt-testimonial-progress { display: none; }
   .abt-depth-content { opacity: 1; transform: none; }
   .abt-highlight-char { opacity: 1; }
   .abt-testimonial-body { animation: none; }

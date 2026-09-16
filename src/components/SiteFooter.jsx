@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { contact, navLinks, socialLinks } from "../data/home.js";
 import { useLanguage } from "../i18n/useLanguage.js";
 import useScrollReveal from "../hooks/useScrollReveal.js";
@@ -8,6 +8,7 @@ import "./SiteFooter.css";
 const SiteFooter = () => {
   const { t, lang } = useLanguage();
   const [now, setNow] = useState(() => new Date());
+  const footerRef = useRef(null);
   const signatureRef = useScrollReveal({ threshold: 0.15, rootMargin: "0px", once: false, selector: ".sf-signature" });
   const returnToTop = (event) => {
     event.preventDefault();
@@ -22,6 +23,37 @@ const SiteFooter = () => {
     return () => window.clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    const footer = footerRef.current;
+    const main = footer.previousElementSibling;
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const height = window.innerHeight;
+      const mainBottom = main.getBoundingClientRect().bottom;
+      const overlap = Math.min(height * 0.2, 180);
+      const progress = motion.matches ? 1 : Math.min(Math.max((height - mainBottom) / Math.max(height, 1), 0), 1);
+      // Keep a shallow overlap, but release it across the entire viewport crossing.
+      footer.style.setProperty("--sf-reveal-y", `${-(1 - progress) * overlap}px`);
+      footer.style.setProperty("--sf-reveal-opacity", String(0.6 + progress * 0.4));
+    };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    const observer = new ResizeObserver(schedule);
+    observer.observe(footer);
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    motion.addEventListener("change", schedule);
+    update();
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      motion.removeEventListener("change", schedule);
+    };
+  }, []);
+
   const parisTime = new Intl.DateTimeFormat(lang === "fr" ? "fr-FR" : "en-GB", {
     timeZone: "Europe/Paris",
     hour: "2-digit",
@@ -31,7 +63,8 @@ const SiteFooter = () => {
   }).format(now);
 
   return (
-    <footer className="site-footer">
+    <footer className="site-footer" ref={footerRef}>
+      <div className="sf-reveal-content">
       <div className="container sf-inner">
         <div className="sf-topline">
           <span>Portfolio / Hanmin Park</span>
@@ -82,6 +115,7 @@ const SiteFooter = () => {
             <ArrowUpRight className="sf-wordmark-arrow" />
           </a>
         </div>
+      </div>
       </div>
     </footer>
   );

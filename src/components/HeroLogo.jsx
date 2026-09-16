@@ -21,7 +21,7 @@ const cleanContour = (path) => {
   });
 };
 
-const HeroLogo = ({ hostRef }) => {
+const HeroLogo = ({ hostRef, showcase = false }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -75,27 +75,28 @@ const HeroLogo = ({ hostRef }) => {
     geometry.rotateX(Math.PI);
     if (geometry !== extrusion) extrusion.dispose();
     const material = new THREE.MeshPhysicalMaterial({
-      color: 0xffffff,
-      metalness: 0,
-      roughness: 0.035,
-      transmission: 1,
+      color: 0xbfc2c5,
+      metalness: 0.38,
+      roughness: 0.09,
+      transmission: 0.92,
       thickness: 1.65,
       ior: 1.5,
       dispersion: 2.8,
+      envMapIntensity: 0.85,
     });
     const logo = new THREE.Mesh(geometry, material);
     scene.add(logo);
 
-    // Soft colored surroundings keep the glass visible behind the HTML title.
+    // Broad neutral reflections give the transmissive surface a silver finish.
     const environmentCanvas = document.createElement("canvas");
     environmentCanvas.width = 512;
     environmentCanvas.height = 256;
     const context = environmentCanvas.getContext("2d");
     const gradient = context.createLinearGradient(0, 0, 512, 256);
     gradient.addColorStop(0, "#080807");
-    gradient.addColorStop(0.25, "#46687d");
-    gradient.addColorStop(0.45, "#151318");
-    gradient.addColorStop(0.7, "#77604d");
+    gradient.addColorStop(0.25, "#c1c4c7");
+    gradient.addColorStop(0.45, "#444648");
+    gradient.addColorStop(0.7, "#b4b7bb");
     gradient.addColorStop(1, "#080807");
     context.fillStyle = gradient;
     context.fillRect(0, 0, 512, 256);
@@ -103,6 +104,28 @@ const HeroLogo = ({ hostRef }) => {
     environmentTexture.colorSpace = THREE.SRGBColorSpace;
     environmentTexture.mapping = THREE.EquirectangularReflectionMapping;
     scene.environment = environmentTexture;
+
+    // A real backdrop lets the glass refract the lettering.
+    let backdrop;
+    let backdropTexture;
+    if (showcase) {
+      const backdropCanvas = document.createElement("canvas");
+      backdropCanvas.width = 1600;
+      backdropCanvas.height = 1200;
+      const paint = backdropCanvas.getContext("2d");
+      paint.fillStyle = "#080807";
+      paint.fillRect(0, 0, 1600, 1200);
+      paint.textAlign = "center";
+      paint.textBaseline = "middle";
+      paint.font = "500 180px Arial, sans-serif";
+      paint.fillStyle = "#d7d6d0";
+      for (const y of [370, 600, 830]) paint.fillText("build and repeat", 800, y);
+      backdropTexture = new THREE.CanvasTexture(backdropCanvas);
+      backdropTexture.colorSpace = THREE.SRGBColorSpace;
+      backdrop = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: backdropTexture, toneMapped: false }));
+      backdrop.position.z = -3;
+      scene.add(backdrop);
+    }
 
     const pointer = new THREE.Vector2();
     const tilt = new THREE.Vector2();
@@ -153,6 +176,11 @@ const HeroLogo = ({ hostRef }) => {
       camera.updateProjectionMatrix();
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobile.matches ? 1.5 : 2));
       renderer.setSize(Math.max(width, 1), Math.max(height, 1), false);
+      if (backdrop) {
+        const backdropHeight = 2 * fieldOfView * (camera.position.z - backdrop.position.z);
+        const backdropWidth = backdropHeight * camera.aspect;
+        backdrop.scale.set(backdropWidth, backdropHeight, 1);
+      }
       requestRender();
     };
     const onPointerMove = (event) => {
@@ -207,9 +235,14 @@ const HeroLogo = ({ hostRef }) => {
       geometry.dispose();
       material.dispose();
       environmentTexture.dispose();
+      if (backdrop) {
+        backdrop.geometry.dispose();
+        backdrop.material.dispose();
+        backdropTexture.dispose();
+      }
       renderer.dispose();
     };
-  }, [hostRef]);
+  }, [hostRef, showcase]);
 
   return (
     <>

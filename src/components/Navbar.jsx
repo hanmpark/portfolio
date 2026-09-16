@@ -20,14 +20,22 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    const footer = document.querySelector(".site-footer");
-    if (!footer) return undefined;
-
-    const observer = new IntersectionObserver(([entry]) => {
-      setFooterVisible(entry.isIntersecting);
-    });
-    observer.observe(footer);
-    return () => observer.disconnect();
+    const main = document.querySelector(".app > main");
+    if (!main) return undefined;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      setFooterVisible(main.getBoundingClientRect().bottom < window.innerHeight - 1);
+    };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    update();
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
   }, []);
 
   useEffect(() => {
