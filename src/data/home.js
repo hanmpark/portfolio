@@ -64,7 +64,6 @@ export const projects = [
     tags: ["TypeScript", "Multiplayer", "WebSockets"],
     links: {
       repo: "https://github.com/okbrandon/red-tetris",
-      demo: "https://tetris.brandoncodes.dev/",
     },
   },
   {

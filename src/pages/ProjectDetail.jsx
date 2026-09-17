@@ -173,7 +173,7 @@ const ProjectDetail = () => {
             ) : null}
           </div>
 
-          {project.demoNotice ? (
+          {project.demo && project.demoNotice ? (
             <div className="pj-demo-notice">
               <InfoIcon />
               <span>{l(project, "demoNotice")}</span>

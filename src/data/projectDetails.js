@@ -288,11 +288,7 @@ export const projectDetails = {
       "WebSockets",
     ],
     repo: "https://github.com/okbrandon/red-tetris",
-    demo: "https://tetris.brandoncodes.dev/",
-    demoNotice:
-      "The live demo is designed for desktop browsers only and is not optimized for mobile devices.",
-    demoNotice_fr:
-      "La démo en ligne est conçue pour les navigateurs de bureau uniquement et n'est pas optimisée pour les appareils mobiles.",
+    demo: null,
     description: [
       'Red Tetris is a <strong>full-stack remake</strong> of the classic game with a strong focus on social play. Players can spin up private lobbies, spectate friends, or speed-run solo "journeys." The backend implements the game engine, line-clear logic, and a persistence layer, while the Vite/React frontend handles routing, lobby UX, notifications, and the arena views.',
       "MongoDB stores the latest five results per player so the <strong>history view</strong> can recap recent runs. The project is built as a 42 School project and is still evolving, but the gameplay loop, lobby flow, stats storage, and CI checks are already in place.",
