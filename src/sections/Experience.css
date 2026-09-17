@@ -46,7 +46,7 @@
   .exp-choice time { font-size: 0.65rem; }
   .exp-company { font-size: clamp(1.5rem, 6vw, 2.5rem); }
   .exp-detail { padding: 0.25rem 0 1.5rem 3.15rem; }
-  .exp-inline-logo { display: block; width: 4rem; height: 3rem; object-fit: contain; padding: 0.4rem; margin-bottom: 1rem; background: #e9e8e3; filter: grayscale(1); }
+  .exp-inline-logo { display: block; width: 4rem; height: 3rem; object-fit: contain; padding: 0.4rem; margin-bottom: 1rem; background: #e9e8e3; }
   .exp-period { font-size: 0.6rem; }
 }
 @media (prefers-reduced-motion: reduce) {
