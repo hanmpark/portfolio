@@ -129,8 +129,8 @@ export const experiences = [
     role: "Software Developer",
     role_fr: "Développeur logiciel",
     company: "Amadeus",
-    period: "Sep 2025 - Present",
-    period_fr: "Sep. 2025 - Présent",
+    period: "Sep 2025 - Sep 2026",
+    period_fr: "Sep. 2025 - Sep. 2026",
     image: "/assets/experiences/amadeus.svg",
     imageAlt: "Amadeus logo",
     focus:
