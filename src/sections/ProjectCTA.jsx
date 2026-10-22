@@ -11,7 +11,7 @@ const ProjectCTA = () => {
 
   return (
     <section className="project-cta" id="contact" ref={sectionRef} data-image-depth="full" aria-labelledby="project-cta-title">
-      <img className="project-cta-photo" src="/assets/photo.webp" alt="" loading="lazy" decoding="async" />
+      <img className="project-cta-photo" src="/assets/photo.webp" alt="" loading="eager" decoding="async" />
       <div className="container project-cta-inner">
         <p className="project-cta-eyebrow">{t("cta.eyebrow")}</p>
         <h2 className="project-cta-title" id="project-cta-title" aria-label={t("cta.title")}>

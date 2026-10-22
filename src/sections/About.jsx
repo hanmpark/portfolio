@@ -21,7 +21,7 @@ const testimonialLogo = (company) => {
       alt={details.name}
       width="112"
       height="36"
-      loading="lazy"
+      loading="eager"
       decoding="async"
     />
   );
@@ -96,6 +96,7 @@ const About = () => {
     let frame = 0;
     let measureCharacters = true;
     let characterOffsets = [];
+    let previousProgress = null;
 
     const clamp = (value) => Math.min(Math.max(value, 0), 1);
     const smoothstep = (value) => value * value * (3 - 2 * value);
@@ -104,6 +105,7 @@ const About = () => {
       frame = 0;
 
       if (reducedMotion.matches) {
+        previousProgress = null;
         characters.forEach((character) => {
           character.style.setProperty("--char-opacity", "1");
         });
@@ -127,6 +129,9 @@ const About = () => {
       // Begin slightly above the viewport center and finish at the top edge.
       const startTop = viewportHeight * 0.6;
       const progress = clamp((startTop - rect.top) / Math.max(startTop, 1));
+      // Outside the heading's animation interval, its letters no longer change.
+      if (progress === previousProgress) return;
+      previousProgress = progress;
       characters.forEach((character, index) => {
         const characterOffset = characterOffsets[index];
         const reveal = smoothstep(clamp((progress - characterOffset) / 0.42));
@@ -143,6 +148,7 @@ const About = () => {
     };
     const requestMeasure = () => {
       measureCharacters = true;
+      previousProgress = null;
       requestUpdate();
     };
     const resizeObserver = new ResizeObserver(requestMeasure);
@@ -170,6 +176,7 @@ const About = () => {
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
+    let previousProgress = null;
 
     const clamp = (value) => Math.min(Math.max(value, 0), 1);
     const smoothstep = (value) => value * value * (3 - 2 * value);
@@ -178,6 +185,7 @@ const About = () => {
       frame = 0;
 
       if (reducedMotion.matches) {
+        previousProgress = null;
         section.style.removeProperty("--abt-depth-y");
         section.style.removeProperty("--abt-depth-scale");
         section.style.removeProperty("--abt-depth-opacity");
@@ -190,6 +198,8 @@ const About = () => {
       const viewportHeight = Math.max(window.innerHeight, 1);
       const workTop = work.getBoundingClientRect().top;
       const progress = clamp((viewportHeight - workTop) / viewportHeight);
+      if (progress === previousProgress) return;
+      previousProgress = progress;
       const easedProgress = smoothstep(progress);
       const fade = 1 - smoothstep(clamp((progress - 0.08) / 0.82));
 
@@ -280,9 +290,9 @@ const About = () => {
               </span>
             </h2>
           </div>
-          <figure className="abt-portrait reveal reveal-up">
+          <figure className="abt-portrait">
             <div className="abt-portrait-media">
-              <img src="/assets/self_image.jpg" alt="Hanmin Park" decoding="async" loading="lazy" />
+              <img src="/assets/self_image.jpg" alt="Hanmin Park" decoding="async" loading="eager" />
             </div>
             <figcaption>
               <span>{portraitName}</span>
@@ -294,7 +304,7 @@ const About = () => {
         <div className="abt-layout">
           {currentTestimonial ? (
             <aside
-              className="abt-testimonial-carousel reveal reveal-up"
+              className="abt-testimonial-carousel"
               aria-label={t("testimonials.label")}
               onMouseEnter={() => setCarouselPaused(true)}
               onMouseLeave={() => setCarouselPaused(false)}

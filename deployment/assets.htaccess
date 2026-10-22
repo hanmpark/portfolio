@@ -1,0 +1,11 @@
+# Merge these directives into the .htaccess at the document root of
+# assets.hpark.me, before any existing rewrite rules. This is NOT the
+# portfolio's .htaccess and must not replace its React routing rules.
+Options -Indexes
+
+RewriteEngine On
+
+# Media URLs remain accessible, but directories (including / and /premium/)
+# return 404, whether or not a query string such as ?NA is present.
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [R=404,L]

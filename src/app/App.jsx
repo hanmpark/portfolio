@@ -11,23 +11,13 @@ import SiteFooter from "../components/SiteFooter.jsx";
 import "./App.css";
 
 const LogoShowcase = lazy(() => import("../components/LogoShowcase.jsx"));
+// Keep the showcase available without loading or mounting its 3D scene.
+const SHOW_LOGO_SHOWCASE = false;
 
 const App = () => {
   const [loaded, setLoaded] = useState(false);
 
   const handleReady = useCallback(() => setLoaded(true), []);
-
-  // Lock scrolling while loading
-  useEffect(() => {
-    if (!loaded) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [loaded]);
 
   useEffect(() => {
     const sectionId = window.location.hash.slice(1);
@@ -62,9 +52,11 @@ const App = () => {
             <About />
           </div>
           <Work />
-          <Suspense fallback={<div style={{ height: "100dvh", background: "#080807" }} />}>
-            <LogoShowcase />
-          </Suspense>
+          {SHOW_LOGO_SHOWCASE && (
+            <Suspense fallback={<div style={{ height: "100dvh", background: "#080807" }} />}>
+              <LogoShowcase />
+            </Suspense>
+          )}
           <Experience />
           <ProjectCTA />
         </div>

@@ -5,6 +5,7 @@ import { projectDetails } from "../data/projectDetails.js";
 import { projects } from "../data/home.js";
 import { useLanguage } from "../i18n/useLanguage.js";
 import ArrowUpRight from "../components/ArrowUpRight.jsx";
+import PageLoader from "../components/PageLoader.jsx";
 import "./ProjectDetail.css";
 
 const ArrowLeft = () => (
@@ -103,6 +104,7 @@ const ProjectDetail = () => {
 
   return (
     <div className={`pj pj--${slug}`}>
+      <PageLoader key={slug} />
       <nav className="pj-topbar" aria-label={t("footer.navigation")}>
         <Link className="pj-back" to="/#work">
           <ArrowLeft />
@@ -274,7 +276,8 @@ const ProjectDetail = () => {
                     <img
                       src={item.src}
                       alt={l(item, "label") || item.alt || `${project.title} ${i + 1}`}
-                      loading="lazy"
+                      loading="eager"
+                      decoding="async"
                     />
                     <span className="pj-gallery-caption" aria-hidden="true">
                       <span>{String(i + 1).padStart(2, "0")} / {l(item, "label") || item.alt || project.title}</span>

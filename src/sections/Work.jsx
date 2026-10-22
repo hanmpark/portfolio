@@ -114,7 +114,7 @@ const Work = () => {
                     className="work-project-visual-image"
                     src={project.previewImage}
                     alt=""
-                    loading="lazy"
+                    loading="eager"
                     decoding="async"
                   />
                 </div>
