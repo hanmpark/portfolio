@@ -9,7 +9,7 @@ const en = {
   hero: {
     role: "Software Developer",
     description:
-      "I design and build thoughtful digital products, from interface to architecture.",
+      "I build web applications and projects in C, with particular attention to the interface and how people use it.",
     viewAbout: "About me",
   },
   work: {
@@ -56,7 +56,7 @@ const en = {
     expertise: "What I do",
     portraitCaption: "Hanmin Park — Developer",
     paragraphs: [
-      "I like understanding what goes on behind an interface. From the first prototype to the details that make a difference, I build tools that are easy to use and thoughtfully engineered.",
+      "I like understanding how an application works and making it pleasant to use. I care about the code as much as how people find their way around an interface.",
       "At 42 Nice, I learned to code by working on projects and learning from other students. What I enjoy about development is trying things out, working through problems, and watching an idea gradually take shape.",
       "I also studied film at the Sorbonne. I enjoy filming, finding a good shot, and spending time on an edit. Video is another way for me to make things outside of coding.",
     ],
@@ -77,7 +77,7 @@ const en = {
     action: "Tell me about your project",
   },
   footer: {
-    credit: "Designed & developed with intention",
+    credit: "Designed and developed by Hanmin Park",
     navigation: "Explore",
     details: "Stay in touch",
     socials: "Find me online",
@@ -95,7 +95,6 @@ const en = {
     keyFeatures: "Key features",
     gallery: "Gallery",
     responsibilities: "My role",
-    challenges: "Engineering challenges",
     status: "Status",
     imageComingSoon: "Screenshot coming soon",
   },

@@ -214,17 +214,6 @@ const ProjectDetail = () => {
             </>
           ) : null}
 
-          {(l(project, "challenges") ?? project.challenges)?.length ? (
-            <>
-              <h2 className="pj-section-label">{t("projectDetail.challenges")}</h2>
-              <ul className="pj-features">
-                {(l(project, "challenges") ?? project.challenges).map(
-                  (item, i) => <li key={i}>{item}</li>,
-                )}
-              </ul>
-            </>
-          ) : null}
-
           {project.status ? (
             <div className="pj-status">
               <span>{t("projectDetail.status")}</span>

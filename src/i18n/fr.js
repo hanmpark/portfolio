@@ -7,9 +7,9 @@ const fr = {
     downloadCv: "Télécharger mon CV",
   },
   hero: {
-    role: "Développeur Logiciel",
+    role: "Développeur logiciel",
     description:
-      "Je conçois des produits numériques soignés, de l'interface à l'architecture.",
+      "Je développe des applications web et des projets en C, avec une attention particulière à l’interface et à son utilisation.",
     viewAbout: "Me découvrir",
   },
   work: {
@@ -56,7 +56,7 @@ const fr = {
     expertise: "Ce que je fais",
     portraitCaption: "Hanmin Park — Développeur",
     paragraphs: [
-      "J’aime comprendre ce qui se cache derrière une interface. Du premier prototype aux détails qui font la différence, je développe des outils simples à utiliser et solides dans leur conception.",
+      "J’aime comprendre comment fonctionne une application et la rendre agréable à utiliser. Je m’intéresse autant au code qu’à la façon dont on se repère dans une interface.",
       "À 42 Nice, j’ai appris à coder en faisant des projets et en échangeant avec les autres. Ce que j’aime dans le développement, c’est chercher, tester et voir une idée prendre forme petit à petit.",
       "J’ai aussi étudié le cinéma à la Sorbonne. J’aime filmer, chercher un cadrage et passer du temps au montage. La vidéo reste une autre façon pour moi de créer, en dehors du code.",
     ],
@@ -77,7 +77,7 @@ const fr = {
     action: "Parlez-moi de votre projet",
   },
   footer: {
-    credit: "Conçu & développé avec intention",
+    credit: "Conçu et développé par Hanmin Park",
     navigation: "Explorer",
     details: "Restons en contact",
     socials: "Retrouvez-moi",
@@ -95,7 +95,6 @@ const fr = {
     keyFeatures: "Fonctionnalités clés",
     gallery: "Galerie",
     responsibilities: "Mon rôle",
-    challenges: "Défis d'ingénierie",
     status: "Statut",
     imageComingSoon: "Capture à venir",
   },

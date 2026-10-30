@@ -7,14 +7,14 @@ export const navLinks = [
 export const projects = [
   {
     title: "Compass",
-    subtitle: "Collaborative Travel Planning Application",
-    subtitle_fr: "Application collaborative de planification de voyages",
+    subtitle: "Plan trips together",
+    subtitle_fr: "Préparer ses voyages à plusieurs",
     slug: "compass",
     featured: true,
     description:
-      "A private, mobile-first workspace for planning trips together, with shared itineraries, places, notes, documents, and real-time updates.",
+      "An application born from a trip to Prague, bringing itineraries, places, notes, and documents together to plan a stay with others.",
     description_fr:
-      "Compass centralise les itinéraires, lieux, notes et documents d'un voyage dans un espace privé et partagé, synchronisé en temps réel.",
+      "Une application née d’un voyage à Prague, qui réunit itinéraires, lieux, notes et documents pour préparer un séjour à plusieurs.",
     previewImage: "/works/compass/social-preview-tropical.webp",
     previewImages: [
       "/works/compass/trip-overview.webp",
@@ -28,13 +28,13 @@ export const projects = [
   },
   {
     title: "Mini Ray Tracer",
-    subtitle: "Ray Tracing Engine in C",
-    subtitle_fr: "Moteur de Ray Tracing en C",
+    subtitle: "Ray tracing in C",
+    subtitle_fr: "Rendu par lancer de rayons en C",
     slug: "miniraytracer",
     description:
-      "A minimal ray tracing engine implementing lighting, shadows, reflections, and 3D scene rendering from scratch. Built to explore computer graphics and mathematical rendering principles.",
+      "A renderer developed as a team project at 42 to explore how 3D images are calculated: shapes, lighting, shadows, and reflections.",
     description_fr:
-      "Un moteur de ray tracing minimal implémentant éclairage, ombres, réflexions et rendu 3D de scènes à partir de zéro. Conçu pour explorer l'infographie et les principes mathématiques de rendu.",
+      "Un moteur de rendu développé en équipe à 42 pour explorer le calcul d’images 3D : formes, éclairage, ombres et réflexions.",
     previewImage: "/works/rt1.webp",
     previewImages: [
       "/works/rt1.webp",
@@ -48,13 +48,13 @@ export const projects = [
   },
   {
     title: "Red Tetris",
-    subtitle: "Real-Time Multiplayer Game",
-    subtitle_fr: "Jeu multijoueur en temps réel",
+    subtitle: "Online multiplayer Tetris",
+    subtitle_fr: "Tetris multijoueur en ligne",
     slug: "tetris",
     description:
-      "A competitive multiplayer Tetris game featuring real-time synchronization, state management, and networked gameplay architecture.",
+      "A Tetris game with private rooms, several game modes, and a spectator view. Built as a pair at 42 with React and Socket.IO.",
     description_fr:
-      "Un jeu Tetris multijoueur compétitif avec synchronisation en temps réel, gestion d'état et architecture réseau.",
+      "Un Tetris avec des salons privés, plusieurs modes de jeu et une vue spectateur. Développé en binôme à 42 avec React et Socket.IO.",
     previewImage: "/works/tetris-lobby.webp",
     previewImages: [
       "/works/tetris-game.webp",
@@ -68,13 +68,13 @@ export const projects = [
   },
   {
     title: "Scholarship Time Tracker",
-    subtitle: "Hour Tracking Tool for 42 Nice Students",
-    subtitle_fr: "Outil de suivi des heures pour les étudiants de 42 Nice",
+    subtitle: "Attendance tracking for 42 Nice students",
+    subtitle_fr: "Suivi des heures de présence à 42 Nice",
     slug: "scholarship-logtime",
     description:
-      "A tool that tracks and calculates cumulative hours for 42 Nice students, helping them log required monthly hours for scholarship eligibility. It automates hour tracking, reduces admin overhead, and gives a clear view of progress and time management.",
+      "A command-line tool that calculates attendance hours and a daily target for 42 Nice GEN scholarship students.",
     description_fr:
-      "Un outil qui suit et calcule les heures cumulées des étudiants de 42 Nice, les aidant à enregistrer les heures mensuelles requises pour l'éligibilité à la bourse. Il automatise le suivi, réduit les tâches administratives et offre une vue claire de la progression.",
+      "Un outil en ligne de commande qui calcule les heures de présence et un objectif quotidien pour les étudiants boursiers GEN de 42 Nice.",
     previewImage: "/works/42 Logtime.webp",
     previewImages: [
       "/works/logtime1.webp",
@@ -88,13 +88,13 @@ export const projects = [
   },
   {
     title: "so_long",
-    subtitle: "2D Game Engine in C",
-    subtitle_fr: "Moteur de jeu 2D en C",
+    subtitle: "A 2D game in C",
+    subtitle_fr: "Un jeu 2D en C",
     slug: "so_long",
     description:
-      "A lightweight 2D game built in C using a custom rendering loop, sprite management, and event handling. Focused on memory control, game logic, and low-level graphics programming.",
+      "A game made at 42 to learn how to display sprites, handle keyboard input, and manage memory in C. Collect the items and reach the exit while avoiding enemies.",
     description_fr:
-      "Un jeu 2D léger construit en C avec une boucle de rendu personnalisée, gestion des sprites et des événements. Axé sur le contrôle mémoire, la logique de jeu et la programmation graphique bas niveau.",
+      "Un jeu réalisé à 42 pour apprendre à afficher des sprites, gérer les commandes au clavier et manipuler la mémoire en C. Il faut ramasser les objets et atteindre la sortie en évitant les ennemis.",
     previewImage: "/works/so_long.webp",
     previewImages: ["/works/so_long.webp"],
     tags: ["C", "2D Graphics", "Game Development"],
@@ -115,12 +115,11 @@ export const experiences = [
     image: "/assets/experiences/thegoodcleaners.png",
     imageAlt: "The Good Cleaners logo",
     logoVariant: "square",
-    focus: "Freelance product and web development support.",
-    focus_fr: "Support freelance en développement produit et web.",
-    summary:
-      "Providing freelance support for The Good Cleaners, helping build and refine reliable web experiences.",
+    focus: "Web development and improvements to the booking process.",
+    focus_fr: "Développement web et amélioration du parcours de réservation.",
+    summary: "I work on the website’s forms and booking process to make them easier to use.",
     summary_fr:
-      "Support freelance pour The Good Cleaners, aidant à construire et affiner des expériences web fiables.",
+      "J’interviens sur les formulaires et le parcours de réservation du site pour en faciliter l’utilisation.",
     stack: ["Freelance", "Web Development", "Product Support"],
   },
   {
@@ -132,15 +131,13 @@ export const experiences = [
     period_fr: "Sep. 2025 - Sep. 2026",
     image: "/assets/experiences/amadeus.svg",
     imageAlt: "Amadeus logo",
-    focus:
-      "Building internal tooling to streamline developer workflows across the team and beyond.",
-    focus_fr:
-      "Développement d'outils internes pour fluidifier les workflows des développeurs au sein et au-delà de l'équipe.",
+    focus: "Internal tools for developers.",
+    focus_fr: "Outils internes pour les développeurs.",
     summary:
-      "Apprenticeship focused on delivering tangible product impact through high-quality implementation and reliable execution.",
+      "During my apprenticeship, I worked on internal tools to help developers with their day-to-day work, within my team and beyond.",
     summary_fr:
-      "Alternance axée sur un impact produit concret à travers une implémentation de qualité et une exécution fiable.",
-    stack: ["Software Engineering", "Product Impact"],
+      "Pendant mon alternance, j’ai contribué à des outils internes destinés à faciliter le travail quotidien des développeurs, dans mon équipe et au-delà.",
+    stack: ["Software Development", "Internal Tools"],
   },
   {
     category: "Experience",
@@ -151,12 +148,12 @@ export const experiences = [
     period_fr: "Déc. 2024 - Avr. 2025",
     image: "/assets/experiences/proptexx.webp",
     imageAlt: "Proptexx logo",
-    focus: "Full-stack and ML workflow tooling.",
-    focus_fr: "Outils full-stack et workflows de Machine Learning.",
+    focus: "Web applications and tools for machine learning projects.",
+    focus_fr: "Applications web et outils pour des projets de machine learning.",
     summary:
-      "Contributed to full-stack products and internal tools supporting machine-learning workflows, improving day-to-day iteration and team efficiency.",
+      "During this internship, I contributed to web applications and internal tools used by the machine learning team.",
     summary_fr:
-      "Contribution à des produits full-stack et des outils internes pour les workflows de machine learning, améliorant l'itération quotidienne et l'efficacité de l'équipe.",
+      "Lors de ce stage, j’ai participé au développement d’applications web et d’outils internes utilisés par l’équipe de machine learning.",
     stack: ["Full-stack", "ML Workflow Tools"],
   },
   {
@@ -169,14 +166,12 @@ export const experiences = [
     image: "/assets/experiences/42logo.png",
     imageAlt: "42 School logo",
     logoVariant: "square",
-    focus:
-      "Intensive project-based training with a strong engineering mindset and collaborative problem solving.",
-    focus_fr:
-      "Formation intensive par projets avec un esprit d'ingénierie fort et une résolution collaborative de problèmes.",
+    focus: "Learning to code through projects and peer collaboration.",
+    focus_fr: "Apprentissage du code par projets et échanges entre étudiants.",
     summary:
-      "Built a rigorous foundation through peer-driven, project-based software engineering with emphasis on systems thinking and practical implementation.",
+      "The curriculum has given me practice with C programming, algorithms, networking, and graphics through individual and team projects.",
     summary_fr:
-      "Construction d'une base rigoureuse à travers l'ingénierie logicielle par projets et par pairs, avec un accent sur la pensée systémique et l'implémentation pratique.",
+      "Le cursus m’a permis de pratiquer la programmation en C, les algorithmes, le réseau et le graphisme à travers des projets individuels et collectifs.",
     stack: ["Systems Programming", "Algorithms", "Networking", "Graphics"],
   },
   {
@@ -188,13 +183,12 @@ export const experiences = [
     image: "/assets/experiences/pantheon-sorbonne.svg",
     imageAlt: "Sorbonne logo",
     logoVariant: "square",
-    focus: "Focus on visual storytelling, analysis, and artistic direction.",
-    focus_fr:
-      "Axé sur la narration visuelle, l'analyse et la direction artistique.",
+    focus: "Film studies and visual storytelling.",
+    focus_fr: "Études du cinéma et de la narration visuelle.",
     summary:
-      "Studied cinema with an emphasis on narrative construction, visual language, critical analysis, and direction sensibility.",
+      "I studied film analysis, visual language, and storytelling. This interest continues through filming and editing.",
     summary_fr:
-      "Études cinématographiques avec un accent sur la construction narrative, le langage visuel, l'analyse critique et la sensibilité de mise en scène.",
+      "J’y ai étudié l’analyse de films, le langage des images et la construction d’un récit. Je prolonge cet intérêt à travers la vidéo et le montage.",
     stack: ["Visual Storytelling", "Analysis", "Artistic Direction"],
   },
   {
@@ -205,12 +199,11 @@ export const experiences = [
     period: "2016 - 2019",
     image: "/assets/experiences/civlogo.png",
     imageAlt: "Centre International de Valbonne logo",
-    focus: "International curriculum in a multicultural environment.",
-    focus_fr: "Cursus international dans un environnement multiculturel.",
+    focus: "An international school environment.",
+    focus_fr: "Une scolarité dans un environnement international.",
     summary:
-      "Developed academic and interpersonal foundations in an international setting shaped by multicultural collaboration and adaptability.",
-    summary_fr:
-      "Développement de bases académiques et interpersonnelles dans un cadre international façonné par la collaboration multiculturelle et l'adaptabilité.",
+      "I followed an international curriculum alongside students from different cultural backgrounds.",
+    summary_fr: "J’ai suivi un cursus international aux côtés d’élèves de différentes cultures.",
     stack: ["International Curriculum", "Multicultural Environment"],
   },
 ];
